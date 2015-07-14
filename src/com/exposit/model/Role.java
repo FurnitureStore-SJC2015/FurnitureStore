@@ -1,9 +1,12 @@
 package com.exposit.model;
 
+import java.util.List;
+
 public class Role {
 
 	private int id;
-	private String name;
+	private RoleType name;
+	private List<User> users;
 
 	public int getId() {
 		return id;
@@ -13,12 +16,20 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
+	public RoleType getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(RoleType name) {
 		this.name = name;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

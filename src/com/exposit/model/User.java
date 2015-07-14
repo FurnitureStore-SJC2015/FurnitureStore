@@ -1,5 +1,7 @@
 package com.exposit.model;
 
+import java.util.List;
+
 public class User {
 
 	private int id;
@@ -9,7 +11,9 @@ public class User {
 	private String password;
 	private String email;
 
+	private List<Order> orders;
 	private Role role;
+	private List<Feedback> feedbacks;
 
 	public int getId() {
 		return id;
@@ -59,12 +63,28 @@ public class User {
 		this.email = email;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
 	}
 
 }
