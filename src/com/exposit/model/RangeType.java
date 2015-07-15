@@ -1,6 +1,6 @@
 package com.exposit.model;
 
-public enum Range {
+public enum RangeType {
 	ONE, TWO, THREE, FOUR, FIVE
 
 }

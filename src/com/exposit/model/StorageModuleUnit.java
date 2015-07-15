@@ -1,41 +1,35 @@
 package com.exposit.model;
 
 public class StorageModuleUnit {
-	private Integer id;
+	private int id;
 	private Module module;
-	private Integer count;
-	private Double cost;
-
-	public Integer getId() {
+	private int count;
+	private double cost;
+	public int getId() {
 		return id;
 	}
-
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-
 	public Module getModule() {
 		return module;
 	}
-
 	public void setModule(Module module) {
 		this.module = module;
 	}
-
-	public Integer getCount() {
+	public int getCount() {
 		return count;
 	}
-
-	public void setCount(Integer count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
-
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
-
-	public void setCost(Double cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
+	
+	
 
 }

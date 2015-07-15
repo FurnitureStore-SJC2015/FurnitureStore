@@ -7,6 +7,8 @@ public class PaymentScheme {
 
 	private int id;
 	private Date term;
+	private PaymentForm paymentType;
+	private List<PaymentContract> paymentContracts;
 
 	public int getId() {
 		return id;
@@ -40,6 +42,5 @@ public class PaymentScheme {
 		this.paymentContracts = paymentContracts;
 	}
 
-	private PaymentForm paymentType;
-	private List<PaymentContract> paymentContracts;
+	
 }

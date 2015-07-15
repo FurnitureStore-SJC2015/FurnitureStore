@@ -6,7 +6,7 @@ public class Payment {
 
 	private int id;
 	private Date date;
-	private Double sum;
+	private double sum;
 	private PaymentContract paymentContract;
 
 	public int getId() {
@@ -25,11 +25,11 @@ public class Payment {
 		this.date = date;
 	}
 
-	public Double getSum() {
+	public double getSum() {
 		return sum;
 	}
 
-	public void setSum(Double sum) {
+	public void setSum(double sum) {
 		this.sum = sum;
 	}
 

@@ -3,18 +3,18 @@ package com.exposit.model;
 import java.util.Date;
 
 public class Feedback {
-	private Integer id;
+	private int id;
 	private User user;
 	private String text;
 	private Date date;
-	private Range range;
+	private RangeType range;
 	private CommodityCatalogUnit commodityCatalogUnit;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -42,11 +42,11 @@ public class Feedback {
 		this.date = date;
 	}
 
-	public Range getRange() {
+	public RangeType getRange() {
 		return range;
 	}
 
-	public void setRange(Range range) {
+	public void setRange(RangeType range) {
 		this.range = range;
 	}
 
@@ -58,4 +58,5 @@ public class Feedback {
 			CommodityCatalogUnit commodityCatalogUnit) {
 		this.commodityCatalogUnit = commodityCatalogUnit;
 	}
+
 }

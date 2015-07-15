@@ -1,26 +1,17 @@
 package com.exposit.model;
 
 public class CommodityTemplate {
-	private Integer id;
+	private int id;
 	private Module module;
-	private Integer count;
+	private int count;
 	private CommodityCatalogUnit commodityCatalogUnit;
 
-	public CommodityCatalogUnit getCommodityCatalogUnit() {
-		return commodityCatalogUnit;
+	public int getId() {
+		return id;
 	}
 
-	public void setCommodityCatalogUnit(
-			CommodityCatalogUnit commodityCatalogUnit) {
-		this.commodityCatalogUnit = commodityCatalogUnit;
-	}
-
-	public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Module getModule() {
@@ -31,12 +22,21 @@ public class CommodityTemplate {
 		this.module = module;
 	}
 
-	public Integer getId() {
-		return id;
+	public int getCount() {
+		return count;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public CommodityCatalogUnit getCommodityCatalogUnit() {
+		return commodityCatalogUnit;
+	}
+
+	public void setCommodityCatalogUnit(
+			CommodityCatalogUnit commodityCatalogUnit) {
+		this.commodityCatalogUnit = commodityCatalogUnit;
 	}
 
 }
