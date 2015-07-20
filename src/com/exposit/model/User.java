@@ -11,9 +11,20 @@ public class User {
 	private String password;
 	private String email;
 
+	
 	private List<Order> orders;
 	private Role role;
 	private List<Feedback> feedbacks;
+	private Bonus bonus;
+
+	
+	public Bonus getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(Bonus bonus) {
+		this.bonus = bonus;
+	}
 
 	public int getId() {
 		return id;

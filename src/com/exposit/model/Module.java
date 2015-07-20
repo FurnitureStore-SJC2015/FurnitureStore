@@ -7,22 +7,16 @@ public class Module {
 	private Provider provider;
 	private ModuleType moduleType;
 	private StorageModuleUnit storageModuleUnit;
-	private List<CommodityTemplate> commodityTemplate;
+	private List<ProductTemplate> productTemplates;
+	private List<CargoUnit> cargoUnits;
+	private RequestUnit requestUnit;
 
-	public List<CommodityTemplate> getCommodityTemplate() {
-		return commodityTemplate;
+	public RequestUnit getRequestUnit() {
+		return requestUnit;
 	}
 
-	public void setCommodityTemplate(List<CommodityTemplate> commodityTemplate) {
-		this.commodityTemplate = commodityTemplate;
-	}
-
-	public StorageModuleUnit getStorageModuleUnit() {
-		return storageModuleUnit;
-	}
-
-	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
-		this.storageModuleUnit = storageModuleUnit;
+	public void setRequestUnit(RequestUnit requestUnit) {
+		this.requestUnit = requestUnit;
 	}
 
 	public int getId() {
@@ -47,6 +41,30 @@ public class Module {
 
 	public void setModuleType(ModuleType moduleType) {
 		this.moduleType = moduleType;
+	}
+
+	public StorageModuleUnit getStorageModuleUnit() {
+		return storageModuleUnit;
+	}
+
+	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
+		this.storageModuleUnit = storageModuleUnit;
+	}
+
+	public List<ProductTemplate> getProductTemplates() {
+		return productTemplates;
+	}
+
+	public void setProductTemplates(List<ProductTemplate> productTemplates) {
+		this.productTemplates = productTemplates;
+	}
+
+	public List<CargoUnit> getCargoUnits() {
+		return cargoUnits;
+	}
+
+	public void setCargoUnits(List<CargoUnit> cargoUnits) {
+		this.cargoUnits = cargoUnits;
 	}
 
 }
