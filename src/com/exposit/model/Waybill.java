@@ -5,7 +5,7 @@ import java.util.Date;
 public class Waybill {
 
 	private int id;
-	private Cargo cargo;
+	private Shipment shipment;
 	private Date departureDate;
 	private Date deliveryDate;
 	private double deliveryCost;
@@ -18,12 +18,12 @@ public class Waybill {
 		this.id = id;
 	}
 
-	public Cargo getCargo() {
-		return cargo;
+	public Shipment getShipment() {
+		return shipment;
 	}
 
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+	public void setShipment(Shipment shipment) {
+		this.shipment = shipment;
 	}
 
 	public Date getDepartureDate() {

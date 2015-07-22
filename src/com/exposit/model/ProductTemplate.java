@@ -4,7 +4,7 @@ public class ProductTemplate {
 	private int id;
 	private Module module;
 	private int count;
-	private ProductCatalogUnit commodityCatalogUnit;
+	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {
 		return id;
@@ -30,13 +30,12 @@ public class ProductTemplate {
 		this.count = count;
 	}
 
-	public ProductCatalogUnit getCommodityCatalogUnit() {
-		return commodityCatalogUnit;
+	public ProductCatalogUnit getProductCatalogUnit() {
+		return productCatalogUnit;
 	}
 
-	public void setCommodityCatalogUnit(
-			ProductCatalogUnit commodityCatalogUnit) {
-		this.commodityCatalogUnit = commodityCatalogUnit;
+	public void setProductCatalogUnit(ProductCatalogUnit productCatalogUnit) {
+		this.productCatalogUnit = productCatalogUnit;
 	}
 
 }

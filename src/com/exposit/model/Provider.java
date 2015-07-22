@@ -11,24 +11,8 @@ public class Provider {
 	private String zipCode;
 	private List<Module> modules;
 	private List<Request> requests;
-	private List<Cargo> cargos;
+	private List<Shipment> shipments;
 	private String login;
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public List<Cargo> getCargos() {
-		return cargos;
-	}
-
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
-	}
 
 	public int getId() {
 		return id;
@@ -85,4 +69,21 @@ public class Provider {
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
+
+	public List<Shipment> getShipments() {
+		return shipments;
+	}
+
+	public void setShipments(List<Shipment> shipments) {
+		this.shipments = shipments;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 }

@@ -8,7 +8,7 @@ public class Feedback {
 	private String text;
 	private Date date;
 	private RangeType range;
-	private ProductCatalogUnit commodityCatalogUnit;
+	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {
 		return id;
@@ -50,13 +50,12 @@ public class Feedback {
 		this.range = range;
 	}
 
-	public ProductCatalogUnit getCommodityCatalogUnit() {
-		return commodityCatalogUnit;
+	public ProductCatalogUnit getProductCatalogUnit() {
+		return productCatalogUnit;
 	}
 
-	public void setCommodityCatalogUnit(
-			ProductCatalogUnit commodityCatalogUnit) {
-		this.commodityCatalogUnit = commodityCatalogUnit;
+	public void setProductCatalogUnit(ProductCatalogUnit productCatalogUnit) {
+		this.productCatalogUnit = productCatalogUnit;
 	}
 
 }

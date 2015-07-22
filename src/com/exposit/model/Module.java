@@ -8,16 +8,8 @@ public class Module {
 	private ModuleType moduleType;
 	private StorageModuleUnit storageModuleUnit;
 	private List<ProductTemplate> productTemplates;
-	private List<CargoUnit> cargoUnits;
+	private List<ShipmentUnit> shipmentUnits;
 	private RequestUnit requestUnit;
-
-	public RequestUnit getRequestUnit() {
-		return requestUnit;
-	}
-
-	public void setRequestUnit(RequestUnit requestUnit) {
-		this.requestUnit = requestUnit;
-	}
 
 	public int getId() {
 		return id;
@@ -59,12 +51,20 @@ public class Module {
 		this.productTemplates = productTemplates;
 	}
 
-	public List<CargoUnit> getCargoUnits() {
-		return cargoUnits;
+	public List<ShipmentUnit> getShipmentUnits() {
+		return shipmentUnits;
 	}
 
-	public void setCargoUnits(List<CargoUnit> cargoUnits) {
-		this.cargoUnits = cargoUnits;
+	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
+		this.shipmentUnits = shipmentUnits;
+	}
+
+	public RequestUnit getRequestUnit() {
+		return requestUnit;
+	}
+
+	public void setRequestUnit(RequestUnit requestUnit) {
+		this.requestUnit = requestUnit;
 	}
 
 }

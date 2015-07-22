@@ -2,14 +2,14 @@ package com.exposit.model;
 
 import java.util.List;
 
-public class Cargo {
+public class Shipment {
 
 	private int id;
 	// Coefficient
 	private double marginRate;
 	private Waybill waybill;
 	private Provider provider;
-	private List<CargoUnit> cargoUnits;
+	private List<ShipmentUnit> shipmentUnits;
 
 	public Provider getProvider() {
 		return provider;
@@ -43,11 +43,12 @@ public class Cargo {
 		this.waybill = waybill;
 	}
 
-	public List<CargoUnit> getCargoUnits() {
-		return cargoUnits;
+	public List<ShipmentUnit> getShipmentUnits() {
+		return shipmentUnits;
 	}
 
-	public void setCargoUnits(List<CargoUnit> cargoUnits) {
-		this.cargoUnits = cargoUnits;
+	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
+		this.shipmentUnits = shipmentUnits;
 	}
+
 }

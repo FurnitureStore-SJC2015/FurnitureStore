@@ -9,6 +9,33 @@ public class PaymentScheme {
 	private Date term;
 	private PaymentForm paymentType;
 	private List<PaymentContract> paymentContracts;
+	private Date cycle;
+	private double penalty;
+	private double percentage;
+
+	public Date getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(Date cycle) {
+		this.cycle = cycle;
+	}
+
+	public double getPenalty() {
+		return penalty;
+	}
+
+	public void setPenalty(double penalty) {
+		this.penalty = penalty;
+	}
+
+	public double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
+	}
 
 	public int getId() {
 		return id;
@@ -42,5 +69,4 @@ public class PaymentScheme {
 		this.paymentContracts = paymentContracts;
 	}
 
-	
 }

@@ -6,7 +6,6 @@ import java.util.List;
 public class PaymentContract {
 
 	private int id;
-	private Date cycle; // time between 2 payments?
 
 	private Order order;
 	private PaymentScheme paymentScheme;
@@ -18,14 +17,6 @@ public class PaymentContract {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Date getCycle() {
-		return cycle;
-	}
-
-	public void setCycle(Date cycle) {
-		this.cycle = cycle;
 	}
 
 	public Order getOrder() {
