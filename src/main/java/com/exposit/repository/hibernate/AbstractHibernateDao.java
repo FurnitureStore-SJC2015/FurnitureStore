@@ -12,7 +12,7 @@ import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository()
 public class AbstractHibernateDao<T, PK extends Serializable> implements
 		HibernateDao<T, PK> {
 

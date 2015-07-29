@@ -7,7 +7,7 @@ public class Payment {
 	private int id;
 	private Date date;
 	private double sum;
-	private PaymentContract paymentContract;
+	private Order order;
 
 	public int getId() {
 		return id;
@@ -33,12 +33,12 @@ public class Payment {
 		this.sum = sum;
 	}
 
-	public PaymentContract getPaymentContract() {
-		return paymentContract;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setPaymentContract(PaymentContract paymentContract) {
-		this.paymentContract = paymentContract;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

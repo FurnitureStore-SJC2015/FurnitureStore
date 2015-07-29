@@ -8,7 +8,7 @@ public class PaymentScheme {
 	private int id;
 	private Date term;
 	private PaymentForm paymentType;
-	private List<PaymentContract> paymentContracts;
+	private List<Order> orders;
 	private Date cycle;
 	private double penalty;
 	private double percentage;
@@ -61,12 +61,12 @@ public class PaymentScheme {
 		this.paymentType = paymentType;
 	}
 
-	public List<PaymentContract> getPaymentContracts() {
-		return paymentContracts;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setPaymentContracts(List<PaymentContract> paymentContracts) {
-		this.paymentContracts = paymentContracts;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 }

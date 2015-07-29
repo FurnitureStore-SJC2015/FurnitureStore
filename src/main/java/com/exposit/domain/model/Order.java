@@ -12,8 +12,8 @@ public class Order {
 	private Date executionDate;
 
 	private User user;
-	private PaymentContract paymentContract;
-	private List<OrderUnit> orderUnits;
+	private List<Payment> payments;
+	private PaymentScheme paymentScheme;
 
 	public int getId() {
 		return id;
@@ -63,20 +63,20 @@ public class Order {
 		this.user = user;
 	}
 
-	public PaymentContract getPaymentContract() {
-		return paymentContract;
+	public List<Payment> getPayments() {
+		return payments;
 	}
 
-	public void setPaymentContract(PaymentContract paymentContract) {
-		this.paymentContract = paymentContract;
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
 	}
 
-	public List<OrderUnit> getOrderUnits() {
-		return orderUnits;
+	public PaymentScheme getPaymentScheme() {
+		return paymentScheme;
 	}
 
-	public void setOrderUnits(List<OrderUnit> orderUnits) {
-		this.orderUnits = orderUnits;
+	public void setPaymentScheme(PaymentScheme paymentScheme) {
+		this.paymentScheme = paymentScheme;
 	}
 
 }
