@@ -2,18 +2,34 @@ package com.exposit.domain.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payment")
 public class Payment {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "payment_id")
+	private Integer id;
+
+	@Column(name = "payment_date")
 	private Date date;
+
+	@Column(name = "payment_sum")
 	private double sum;
 	private Order order;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

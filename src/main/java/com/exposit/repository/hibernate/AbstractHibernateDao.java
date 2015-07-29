@@ -10,13 +10,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository()
+@Transactional
 public class AbstractHibernateDao<T, PK extends Serializable> implements
 		HibernateDao<T, PK> {
 
 	@Autowired
+	@Qualifier("sessionFactory2")
 	private SessionFactory sessionFactory;
 
 	protected Session getSession() {

@@ -14,13 +14,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<tx:annotation-driven />
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="sessionFactory" ref="sessionFactory2" />
 	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/test_hibernate" />
+		<property name="url" value="jdbc:mysql://localhost:3306/store" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -28,11 +28,28 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.example.domain.model"></property>
+		<property name="packagesToScan" value="com.exposit.domain.model.Role"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 			</props>
 		</property>
 	</bean>
+
+
+	<bean id="sessionFactory2"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.exposit.domain.model.Role</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+
 </beans>

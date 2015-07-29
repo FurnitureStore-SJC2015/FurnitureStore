@@ -1,18 +1,32 @@
 package com.exposit.domain.model;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "role")
 public class Role {
 
-	private int id;
-	private RoleType name;
-	private List<User> users;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "role_id")
+	private Integer id;
 
-	public int getId() {
+	@Column(name = "role_type")
+	@Enumerated(EnumType.STRING)
+	private RoleType name;
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -22,14 +36,6 @@ public class Role {
 
 	public void setName(RoleType name) {
 		this.name = name;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 }

@@ -2,35 +2,48 @@ package com.exposit.domain.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
+	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "surname")
 	private String surname;
+
+	@Column(name = "login")
 	private String login;
+
+	@Column(name = "password")
 	private String password;
+
+	@Column(name = "email")
 	private String email;
 
-	
 	private List<Order> orders;
 	private Role role;
 	private List<Feedback> feedbacks;
+
 	private Bonus bonus;
 
-	
-	public Bonus getBonus() {
-		return bonus;
-	}
-
-	public void setBonus(Bonus bonus) {
-		this.bonus = bonus;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -96,6 +109,14 @@ public class User {
 
 	public void setFeedbacks(List<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
+	}
+
+	public Bonus getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(Bonus bonus) {
+		this.bonus = bonus;
 	}
 
 }

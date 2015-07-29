@@ -3,46 +3,53 @@ package com.exposit.domain.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payment_scheme")
 public class PaymentScheme {
 
-	private int id;
-	private Date term;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "payment_scheme_id")
+	private Integer id;
+
+	@Column(name = "payment_type_id")
 	private PaymentForm paymentType;
-	private List<Order> orders;
-	private Date cycle;
+
+	@Column(name = "term")
+	private Date term;
+
+	@Column(name = "penalty")
 	private double penalty;
+
+	@Column(name = "cycle")
+	private Date cycle;
+
+	@Column(name = "interest_rate")
 	private double percentage;
 
-	public Date getCycle() {
-		return cycle;
-	}
+	private List<Order> orders;
 
-	public void setCycle(Date cycle) {
-		this.cycle = cycle;
-	}
-
-	public double getPenalty() {
-		return penalty;
-	}
-
-	public void setPenalty(double penalty) {
-		this.penalty = penalty;
-	}
-
-	public double getPercentage() {
-		return percentage;
-	}
-
-	public void setPercentage(double percentage) {
-		this.percentage = percentage;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public PaymentForm getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(PaymentForm paymentType) {
+		this.paymentType = paymentType;
 	}
 
 	public Date getTerm() {
@@ -53,12 +60,28 @@ public class PaymentScheme {
 		this.term = term;
 	}
 
-	public PaymentForm getPaymentType() {
-		return paymentType;
+	public double getPenalty() {
+		return penalty;
 	}
 
-	public void setPaymentType(PaymentForm paymentType) {
-		this.paymentType = paymentType;
+	public void setPenalty(double penalty) {
+		this.penalty = penalty;
+	}
+
+	public Date getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(Date cycle) {
+		this.cycle = cycle;
+	}
+
+	public double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
 	}
 
 	public List<Order> getOrders() {

@@ -3,23 +3,36 @@ package com.exposit.domain.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "order")
 public class Order {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "order_id")
+	private Integer id;
+
+	@Column(name = "order_date")
 	private Date orderDate;
-	private Double fullCost;
-	private boolean status;
+	@Column(name = "execution_date")
 	private Date executionDate;
 
 	private User user;
 	private List<Payment> payments;
 	private PaymentScheme paymentScheme;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -29,22 +42,6 @@ public class Order {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
-	}
-
-	public Double getFullCost() {
-		return fullCost;
-	}
-
-	public void setFullCost(Double fullCost) {
-		this.fullCost = fullCost;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
 	}
 
 	public Date getExecutionDate() {
