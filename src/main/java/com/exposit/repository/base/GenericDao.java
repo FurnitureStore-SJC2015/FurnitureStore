@@ -1,4 +1,4 @@
-package com.esposit.repository.base;
+package com.exposit.repository.base;
 
 import java.io.Serializable;
 import java.util.List;

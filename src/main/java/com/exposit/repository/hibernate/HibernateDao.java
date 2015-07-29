@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.hibernate.criterion.Criterion;
 
-import com.esposit.repository.base.GenericDao;
+import com.exposit.repository.base.GenericDao;
 
-public interface HibernateDao<T, PK extends Serializable> extends GenericDao<T, PK> {
-	
+public interface HibernateDao<T, PK extends Serializable> extends
+		GenericDao<T, PK> {
+
 	List<T> findByCriteria(Criterion criterion);
 
 }
