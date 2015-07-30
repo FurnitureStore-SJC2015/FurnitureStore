@@ -3,7 +3,7 @@ package com.exposit.console.starter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.exposit.repository.dao.RoleDao;
+import com.exposit.repository.dao.UserDao;
 
 public class Starter {
 
@@ -11,7 +11,8 @@ public class Starter {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
-		RoleDao repo = (RoleDao) context.getBean("roleRepository");
-		System.out.println(repo.findById(2).getName().toString()); // it works!
+		UserDao userDao = (UserDao) context.getBean("userRepository");
+		System.out.println(userDao.findById(1).getRole().getName());
+
 	}
 }

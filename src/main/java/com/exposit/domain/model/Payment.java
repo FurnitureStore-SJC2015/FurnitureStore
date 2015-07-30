@@ -23,7 +23,17 @@ public class Payment {
 
 	@Column(name = "payment_sum")
 	private double sum;
-	private Order order;
+
+	@Column(name = "payment_status")
+	private Boolean paymentStatus;
+
+	public Boolean getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(Boolean paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 
 	public Integer getId() {
 		return id;
@@ -47,14 +57,6 @@ public class Payment {
 
 	public void setSum(double sum) {
 		this.sum = sum;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.exposit.domain.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +21,6 @@ public class PaymentForm {
 	@Column(name = "payment_type")
 	@Enumerated(EnumType.STRING)
 	private PaymentType name;
-	private List<PaymentScheme> paymentSchemes;
 
 	public Integer getId() {
 		return id;
@@ -39,14 +36,6 @@ public class PaymentForm {
 
 	public void setName(PaymentType name) {
 		this.name = name;
-	}
-
-	public List<PaymentScheme> getPaymentSchemes() {
-		return paymentSchemes;
-	}
-
-	public void setPaymentSchemes(List<PaymentScheme> paymentSchemes) {
-		this.paymentSchemes = paymentSchemes;
 	}
 
 }

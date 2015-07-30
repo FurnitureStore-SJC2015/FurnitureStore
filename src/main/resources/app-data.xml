@@ -25,31 +25,27 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="password" value="root" />
 	</bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.exposit.domain.model.Role"></property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-			</props>
-		</property>
-	</bean>
-
-
 	<bean id="sessionFactory2"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
 				<value>com.exposit.domain.model.Role</value>
+				<value>com.exposit.domain.model.User</value>
+				<value>com.exposit.domain.model.Bonus</value>
+				<value>com.exposit.domain.model.Order</value>
+				<value>com.exposit.domain.model.Payment</value>
+				<value>com.exposit.domain.model.PaymentForm</value>
+				<value>com.exposit.domain.model.PaymentScheme</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
+
 
 </beans>
