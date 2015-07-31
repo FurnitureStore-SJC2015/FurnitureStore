@@ -1,4 +1,4 @@
-package com.exposit.domain.model;
+package com.exposit.domain.model.sorokin;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

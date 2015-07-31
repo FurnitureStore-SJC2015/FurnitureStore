@@ -3,7 +3,7 @@ package com.exposit.console.starter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.exposit.repository.dao.UserDao;
+import com.exposit.repository.dao.sorokin.UserDao;
 
 public class Starter {
 
