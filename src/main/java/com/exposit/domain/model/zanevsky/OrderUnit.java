@@ -1,14 +1,33 @@
 package com.exposit.domain.model.zanevsky;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.exposit.domain.model.sorokin.Order;
 
+@Entity
+@Table(name = "order_unit")
 public class OrderUnit {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "order_unit_id")
 	private int id;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "order_unit_cost", scale = 2, nullable = false)
+	private double cost;
+	
+	private Status status;	
 	private ProductCatalogUnit productCatalogUnit;
 	private Order order;
-	private Status status;
-	private double cost;
 
 	public int getId() {
 		return id;

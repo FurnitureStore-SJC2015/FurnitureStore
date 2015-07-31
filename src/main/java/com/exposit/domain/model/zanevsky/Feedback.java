@@ -2,14 +2,46 @@ package com.exposit.domain.model.zanevsky;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import com.exposit.domain.model.sorokin.User;
 
+@Entity
+@Table(name = "feedback")
 public class Feedback {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "feedback_id")
 	private int id;
-	private User user;
+	
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name = "text", length = 512, nullable = false)
 	private String text;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "feedback_date", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "`range`")
+	@Enumerated(EnumType.ORDINAL)
 	private RangeType range;
+	
+	private User user;
 	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {

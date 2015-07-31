@@ -2,15 +2,38 @@ package com.exposit.domain.model.zanevsky;
 
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 
+@Entity
+@Table(name = "module")
 public class Module {
-	private int id;
-	private Provider provider;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "module_id")
+	private int id;	
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "module_type")
+	@Enumerated(EnumType.STRING)
 	private ModuleType moduleType;
+	
+	private Provider provider;
 	private StorageModuleUnit storageModuleUnit;
 	private List<ProductTemplate> productTemplates;
 	private List<ShipmentUnit> shipmentUnits;

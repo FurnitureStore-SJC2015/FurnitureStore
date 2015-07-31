@@ -2,15 +2,41 @@ package com.exposit.domain.model.zanevsky;
 
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "product_catalog_unit")
 public class ProductCatalogUnit {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "product_catalog_unit_id")
 	private int id;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "product_cost", scale = 2)
 	private double cost;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "margin_coefficient", scale = 2)
 	private double coefficient;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "product_name", length = 50)
+	private String name;
+	
 	private List<Feedback> feedbacks;
 	private Sale sale;
 	private List<ProductTemplate> productTemplates;
 	private List<OrderUnit> orderUnits;
-	private String name;
 
 	public int getId() {
 		return id;

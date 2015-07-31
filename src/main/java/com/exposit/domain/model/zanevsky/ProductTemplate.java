@@ -1,9 +1,29 @@
 package com.exposit.domain.model.zanevsky;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "product_template")
 public class ProductTemplate {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "product_template_id")
 	private int id;
-	private Module module;
+
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "modules_number", nullable = false)
 	private int count;
+	
+	private Module module;
 	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {
