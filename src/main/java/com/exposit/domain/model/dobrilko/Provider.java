@@ -7,14 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import com.exposit.domain.model.zanevsky.Module;
 
@@ -33,15 +27,8 @@ public class Provider {
 	@Column(name = "zip_code")
 	private String zipCode;
 	/*
-	 * @ManyToMany(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinTable(name = "provider_module", joinColumns = { @JoinColumn( name =
-	 * "provider_id", nullable = false) }, inverseJoinColumns = {
-	 * 
-	 * @JoinColumn(name = "module_id", nullable = false) })
-	 * 
-	 * @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.DELETE }) private
-	 * List<Module> modules;
+	 * @OneToMany(fetch=FetchType.LAZY, mappedBy="provider", orphanRemoval =
+	 * true) private List<Module> modules;
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
 			orphanRemoval = true)
