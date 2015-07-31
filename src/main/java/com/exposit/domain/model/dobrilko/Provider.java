@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapKeyColumn;
+
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
@@ -37,20 +37,17 @@ public class Provider {
 	 * 
 	 * @JoinTable(name = "provider_module", joinColumns = { @JoinColumn( name =
 	 * "provider_id", nullable = false) }, inverseJoinColumns = {
+	 * 
 	 * @JoinColumn(name = "module_id", nullable = false) })
 	 * 
 	 * @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.DELETE }) private
 	 * List<Module> modules;
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider"/*
-															 * ,orphanRemoval=true
-															 */)
-	@MapKeyColumn(name = "request_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+			orphanRemoval = true)
 	private List<Request> requests;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider"/*
-															 * ,orphanRemoval=true
-															 */)
-	@MapKeyColumn(name = "shipment_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+			orphanRemoval = true)
 	private List<Shipment> shipments;
 	@Column(name = "login")
 	private String login;
@@ -94,14 +91,12 @@ public class Provider {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-/*
-	public List<Module> getModules() {
-		return modules;
-	}
 
-	public void setModules(List<Module> modules) {
-		this.modules = modules;
-	}*/
+	/*
+	 * public List<Module> getModules() { return modules; }
+	 * 
+	 * public void setModules(List<Module> modules) { this.modules = modules; }
+	 */
 
 	public List<Request> getRequests() {
 		return requests;
