@@ -9,46 +9,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"login", "password", "email" }) })
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Integer id;
-
 	@Column(name = "name")
 	private String name;
-
 	@Column(name = "surname")
 	private String surname;
-
 	@Column(name = "login")
 	private String login;
-
 	@Column(name = "password")
 	private String password;
-
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "role_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "role_id", referencedColumnName = "role_id",
+			columnDefinition = "int default 4")
 	private Role role;
 
 	// private List<Feedback> feedbacks;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "bonus_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "bonus_id", columnDefinition = "int default 4")
 	private Bonus bonus;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@OneToMany
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
 	private List<Order> orders;
 
 	public Integer getId() {

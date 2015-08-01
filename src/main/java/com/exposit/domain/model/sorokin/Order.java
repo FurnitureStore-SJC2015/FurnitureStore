@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "orders")
@@ -32,18 +32,26 @@ public class Order {
 	@Column(name = "execution_date")
 	private Date executionDate;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "order_id")
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany
+	@JoinColumn(name = "order_id", nullable = false)
+	@Cascade(CascadeType.ALL)
 	private List<Payment> payments;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "payment_scheme_id")
 	private PaymentScheme paymentScheme;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Integer getId() {
 		return id;
@@ -68,14 +76,6 @@ public class Order {
 	public void setExecutionDate(Date executionDate) {
 		this.executionDate = executionDate;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	/*
-	 * public void setUser(User user) { this.user = user; }
-	 */
 
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;

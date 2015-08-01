@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +28,18 @@ public class Payment {
 
 	@Column(name = "payment_status")
 	private Boolean paymentStatus;
+
+	@ManyToOne
+	@JoinColumn(name = "order_id", insertable = false, updatable = false)
+	private Order order;
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
 	public Boolean getPaymentStatus() {
 		return paymentStatus;

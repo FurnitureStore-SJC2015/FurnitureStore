@@ -38,7 +38,7 @@ public class PaymentScheme {
 	@Column(name = "interest_rate")
 	private double percentage;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	@JoinColumn(name = "payment_scheme_id")
 	private List<Order> orders;
 

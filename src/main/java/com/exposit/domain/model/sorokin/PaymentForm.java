@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "payment_form")
+@Table(name = "payment_form", uniqueConstraints = { @UniqueConstraint(
+		columnNames = { "payment_type" }) })
 public class PaymentForm {
 
 	@Id
