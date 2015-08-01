@@ -16,8 +16,9 @@ public class RequestUnit {
 	@Column(name = "request_unit_id")
 	private int id;
 	@OneToOne
-	@JoinColumn(name = "module_id")
-	private Module module;
+	/*
+	 * @JoinColumn(name = "module_id") private Module module;
+	 */
 	@Column(name = "count")
 	private int count;
 
