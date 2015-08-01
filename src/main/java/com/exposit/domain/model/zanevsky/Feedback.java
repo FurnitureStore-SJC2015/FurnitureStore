@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,7 +42,9 @@ public class Feedback {
 	@Enumerated(EnumType.ORDINAL)
 	private RangeType range;
 	
-	private User user;
+	//private User user;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {
@@ -52,13 +55,13 @@ public class Feedback {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	public String getText() {
 		return text;

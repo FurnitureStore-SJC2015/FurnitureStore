@@ -11,6 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.exposit.domain.model.dobrilko.Provider;
@@ -33,11 +37,24 @@ public class Module {
 	@Enumerated(EnumType.STRING)
 	private ModuleType moduleType;
 	
-	private Provider provider;
-	private StorageModuleUnit storageModuleUnit;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	private Provider provider;
+	
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "module_id", nullable = true)
+//	private StorageModuleUnit storageModuleUnit;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "module_id", nullable = false)
 	private List<ProductTemplate> productTemplates;
-	private List<ShipmentUnit> shipmentUnits;
-	private RequestUnit requestUnit;
+	
+//	@OneToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "module_id", nullable = false)
+//	private List<ShipmentUnit> shipmentUnits;
+	
+//	@OneToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = )
+//	private List<RequestUnit> requestUnit;
 
 	public int getId() {
 		return id;
@@ -47,13 +64,13 @@ public class Module {
 		this.id = id;
 	}
 
-	public Provider getProvider() {
-		return provider;
-	}
-
-	public void setProvider(Provider provider) {
-		this.provider = provider;
-	}
+//	public Provider getProvider() {
+//		return provider;
+//	}
+//
+//	public void setProvider(Provider provider) {
+//		this.provider = provider;
+//	}
 
 	public ModuleType getModuleType() {
 		return moduleType;
@@ -63,13 +80,13 @@ public class Module {
 		this.moduleType = moduleType;
 	}
 
-	public StorageModuleUnit getStorageModuleUnit() {
-		return storageModuleUnit;
-	}
-
-	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
-		this.storageModuleUnit = storageModuleUnit;
-	}
+//	public StorageModuleUnit getStorageModuleUnit() {
+//		return storageModuleUnit;
+//	}
+//
+//	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
+//		this.storageModuleUnit = storageModuleUnit;
+//	}
 
 	public List<ProductTemplate> getProductTemplates() {
 		return productTemplates;
@@ -79,20 +96,20 @@ public class Module {
 		this.productTemplates = productTemplates;
 	}
 
-	public List<ShipmentUnit> getShipmentUnits() {
-		return shipmentUnits;
-	}
+//	public List<ShipmentUnit> getShipmentUnits() {
+//		return shipmentUnits;
+//	}
+//
+//	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
+//		this.shipmentUnits = shipmentUnits;
+//	}
 
-	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
-		this.shipmentUnits = shipmentUnits;
-	}
-
-	public RequestUnit getRequestUnit() {
-		return requestUnit;
-	}
-
-	public void setRequestUnit(RequestUnit requestUnit) {
-		this.requestUnit = requestUnit;
-	}
+//	public RequestUnit getRequestUnit() {
+//		return requestUnit;
+//	}
+//
+//	public void setRequestUnit(RequestUnit requestUnit) {
+//		this.requestUnit = requestUnit;
+//	}
 
 }

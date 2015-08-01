@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.exposit.domain.model.sorokin.Order;
@@ -25,9 +27,14 @@ public class OrderUnit {
 	@Column(name = "order_unit_cost", scale = 2, nullable = false)
 	private double cost;
 	
-	private Status status;	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Status status;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ProductCatalogUnit productCatalogUnit;
-	private Order order;
+	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	private Order order;
 
 	public int getId() {
 		return id;
@@ -45,13 +52,13 @@ public class OrderUnit {
 		this.productCatalogUnit = productCatalogUnit;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+//	public Order getOrder() {
+//		return order;
+//	}
+//
+//	public void setOrder(Order order) {
+//		this.order = order;
+//	}
 
 	public Status getStatus() {
 		return status;

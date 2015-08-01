@@ -10,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,6 +41,8 @@ public class Sale {
 	@Column(name = "percentage_sale", nullable = false, scale = 2)
 	private double percentageSale;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sale")
+	@JoinColumn(name = "sale_id")
 	private List<ProductCatalogUnit> productCatalogUnits;
 
 	public Sale(){
