@@ -24,7 +24,7 @@ public class RequestUnit {
 	@Column(name = "request_module_count")
 	private int count;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "request_id", nullable = false)
 	private Request request;
 	

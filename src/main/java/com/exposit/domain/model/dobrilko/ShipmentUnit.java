@@ -2,13 +2,11 @@ package com.exposit.domain.model.dobrilko;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.exposit.domain.model.zanevsky.Module;
@@ -28,11 +26,11 @@ public class ShipmentUnit {
 	@Column(name = "cost")
 	private double cost;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "module_id")
 	private Module module;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "shipment_id")
 	private Shipment shipment;
 
@@ -42,10 +40,6 @@ public class ShipmentUnit {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Module getModule() {
-		return module;
 	}
 
 	public void setModule(Module module) {
@@ -66,10 +60,6 @@ public class ShipmentUnit {
 
 	public void setCost(double cost) {
 		this.cost = cost;
-	}
-
-	public Shipment getShipment() {
-		return shipment;
 	}
 
 	public void setShipment(Shipment shipment) {

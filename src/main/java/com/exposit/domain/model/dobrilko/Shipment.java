@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,29 +24,24 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "shipment_id")
 	private int id;
-	
+
 	@Column(name = "cargo_margin_coefficient")
 	private double marginCoefficient;
-	
+
 	@Column(name = "is_processed")
 	private boolean isProcessed;
-	
+
 	@OneToOne
 	@JoinColumn(name = "way_bill_id")
 	private Waybill waybill;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shipment",
-			orphanRemoval = true)
+
+	@OneToMany(mappedBy = "shipment", orphanRemoval = true)
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.DELETE })
 	private List<ShipmentUnit> shipmentUnits;
-
-	public Provider getProvider() {
-		return provider;
-	}
 
 	public void setProvider(Provider provider) {
 		this.provider = provider;
@@ -69,16 +63,8 @@ public class Shipment {
 		this.marginCoefficient = marginCoefficient;
 	}
 
-	public Waybill getWaybill() {
-		return waybill;
-	}
-
 	public void setWaybill(Waybill waybill) {
 		this.waybill = waybill;
-	}
-
-	public List<ShipmentUnit> getShipmentUnits() {
-		return shipmentUnits;
 	}
 
 	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {

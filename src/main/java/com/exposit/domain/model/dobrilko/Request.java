@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,15 +21,15 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "request_id")
 	private int id;
-	
+
 	@Column(name = "request_date")
 	private Date requestDate;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
-	
-	@OneToMany(fetch = FetchType.LAZY)
+
+	@OneToMany
 	@JoinColumn(name = "request_id")
 	private List<RequestUnit> requestUnits;
 
@@ -50,16 +49,8 @@ public class Request {
 		this.requestDate = requestDate;
 	}
 
-	public Provider getProvider() {
-		return provider;
-	}
-
 	public void setProvider(Provider provider) {
 		this.provider = provider;
-	}
-
-	public List<RequestUnit> getRequestUnits() {
-		return requestUnits;
 	}
 
 	public void setRequestUnits(List<RequestUnit> requestUnits) {

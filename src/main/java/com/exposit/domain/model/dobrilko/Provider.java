@@ -30,16 +30,14 @@ public class Provider {
 	@Column(name = "zip_code")
 	private String zipCode;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "provider",
 			orphanRemoval = true)
 	private List<Module> modules;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
-			orphanRemoval = true)
+	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Request> requests;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
-			orphanRemoval = true)
+	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
 
 	@Column(name = "provider_login", unique = true)
@@ -93,16 +91,8 @@ public class Provider {
 		this.modules = modules;
 	}
 
-	public List<Request> getRequests() {
-		return requests;
-	}
-
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
-	}
-
-	public List<Shipment> getShipments() {
-		return shipments;
 	}
 
 	public void setShipments(List<Shipment> shipments) {
