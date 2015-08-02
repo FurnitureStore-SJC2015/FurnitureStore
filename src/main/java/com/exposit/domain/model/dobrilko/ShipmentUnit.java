@@ -33,7 +33,7 @@ public class ShipmentUnit {
 	private Module module;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "shipment_id")
+	@JoinColumn(name = "shipment_id")
 	private Shipment shipment;
 
 	public int getId() {
