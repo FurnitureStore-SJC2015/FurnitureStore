@@ -21,7 +21,7 @@ public class Provider {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "provider_id")
 	private int id;
-	@Column(name = "provider_name", unique=true)
+	@Column(name = "provider_name", unique = true)
 	private String name;
 	@Column(name = "provider_email")
 	private String email;
@@ -42,7 +42,7 @@ public class Provider {
 			orphanRemoval = true)
 	private List<Shipment> shipments;
 
-	@Column(name = "login")
+	@Column(name = "provider_login", unique = true)
 	private String login;
 
 	public int getId() {
