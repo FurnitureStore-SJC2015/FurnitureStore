@@ -26,16 +26,16 @@ public class Provider {
 	private String phone;
 	@Column(name = "zip_code")
 	private String zipCode;
-	/*
-	 * @OneToMany(fetch=FetchType.LAZY, mappedBy="provider", orphanRemoval =
-	 * true) private List<Module> modules;
-	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
-			orphanRemoval = true)
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="provider", orphanRemoval = true) 
+	private List<Module> modules;
+	 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", orphanRemoval = true)
 	private List<Request> requests;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
-			orphanRemoval = true)
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
+	
 	@Column(name = "login")
 	private String login;
 
@@ -79,11 +79,15 @@ public class Provider {
 		this.zipCode = zipCode;
 	}
 
-	/*
-	 * public List<Module> getModules() { return modules; }
-	 * 
-	 * public void setModules(List<Module> modules) { this.modules = modules; }
-	 */
+	
+	public List<Module> getModules() { 
+		return modules; 
+	}
+	
+	public void setModules(List<Module> modules) { 
+		this.modules = modules; 
+	}
+	 
 
 	public List<Request> getRequests() {
 		return requests;

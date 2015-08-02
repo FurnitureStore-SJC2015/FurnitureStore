@@ -21,14 +21,21 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "shipment_id")
 	private int id;
+	
 	@Column(name = "cargo_margin_coefficient")
 	private double marginCoefficient;
+	
+	@Column(name = "is_processed")
+	private boolean isProcessed;
+	
 	@OneToOne
 	@JoinColumn(name = "way_bill_id")
 	private Waybill waybill;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shipment",
 			orphanRemoval = true)
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.DELETE })
@@ -72,6 +79,14 @@ public class Shipment {
 
 	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
 		this.shipmentUnits = shipmentUnits;
+	}
+
+	public boolean isProcessed() {
+		return isProcessed;
+	}
+
+	public void setProcessed(boolean isProcessed) {
+		this.isProcessed = isProcessed;
 	}
 
 }

@@ -17,15 +17,17 @@ public class ShipmentUnit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "shipment_id")
 	private int id;
-	/*
-	 * @OneToOne
-	 * 
-	 * @JoinColumn(name = "module_id") private Module module;
-	 */
+	 
 	@Column(name = "count")
 	private int count;
+	
 	@Column(name = "cost")
 	private double cost;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "module_id") 
+	private Module module;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@Column(name = "shipment_id")
 	private Shipment shipment;
@@ -38,11 +40,15 @@ public class ShipmentUnit {
 		this.id = id;
 	}
 
-	/*
-	 * public Module getModule() { return module; }
-	 * 
-	 * public void setModule(Module module) { this.module = module; }
-	 */
+	
+	public Module getModule() { 
+		return module; 
+	}
+	
+	public void setModule(Module module) { 
+		this.module = module; 
+	}
+	 
 
 	public int getCount() {
 		return count;

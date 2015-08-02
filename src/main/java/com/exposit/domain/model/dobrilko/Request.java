@@ -18,11 +18,14 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "request_id")
 	private int id;
+	
 	@Column(name = "request_date")
 	private Date requestDate;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
+	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "request_id")
 	private List<RequestUnit> requestUnits;

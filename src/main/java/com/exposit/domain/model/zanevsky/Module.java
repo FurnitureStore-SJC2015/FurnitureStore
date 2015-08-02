@@ -38,23 +38,22 @@ public class Module {
 	@Enumerated(EnumType.STRING)
 	private ModuleType moduleType;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private Provider provider;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "provider_id", nullable = false)
+	private Provider provider;
 	
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "module_id", nullable = true)
-//	private StorageModuleUnit storageModuleUnit;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "storage_module_unit_id", nullable = true)
+	private StorageModuleUnit storageModuleUnit;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
 	private List<ProductTemplate> productTemplates;
 	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "module_id", nullable = false)
-//	private List<ShipmentUnit> shipmentUnits;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+	private List<ShipmentUnit> shipmentUnits;
 	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	@JoinColumn(name = )
-//	private List<RequestUnit> requestUnit;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+	private List<RequestUnit> requestUnit;
 
 	public int getId() {
 		return id;

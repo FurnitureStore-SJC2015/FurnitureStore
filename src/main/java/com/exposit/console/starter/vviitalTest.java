@@ -64,6 +64,19 @@ public class vviitalTest {
 		productDao.delete(product);
 	}
 	
+	public void testWrongConsoleOut(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+		
+		ModuleDao moduleDao = (ModuleDao) context.getBean("moduleRepository");
+		
+		List<Module> modules = moduleDao.findAll();
+		
+		for(Module x : modules){
+			out.println(x.getId());
+		}
+	}
+	
+	
 	ProductCatalogUnit makeProduct(String name, double coefficient, double cost){
 		ProductCatalogUnit product = new ProductCatalogUnit();
 		product.setName(name);
