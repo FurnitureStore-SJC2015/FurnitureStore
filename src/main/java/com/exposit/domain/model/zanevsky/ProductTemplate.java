@@ -7,7 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +27,11 @@ public class ProductTemplate {
 	private int count;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "module_id", nullable = false)
 	private Module module;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {

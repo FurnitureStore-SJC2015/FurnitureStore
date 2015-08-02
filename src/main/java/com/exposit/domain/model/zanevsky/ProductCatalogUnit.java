@@ -3,6 +3,7 @@ package com.exposit.domain.model.zanevsky;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,19 +38,17 @@ public class ProductCatalogUnit {
 	@Column(name = "product_name", length = 50)
 	private String name;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "feedback_id")
-	private List<Feedback> feedbacks;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "sale_id")
 	private Sale sale;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = {CascadeType.REMOVE})
+	private List<Feedback> feedbacks;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = CascadeType.ALL)
 	private List<ProductTemplate> productTemplates;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = CascadeType.ALL)
 	private List<OrderUnit> orderUnits;
 
 	public int getId() {

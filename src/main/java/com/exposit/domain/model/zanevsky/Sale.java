@@ -42,7 +42,6 @@ public class Sale {
 	private double percentageSale;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sale")
-	@JoinColumn(name = "sale_id")
 	private List<ProductCatalogUnit> productCatalogUnits;
 
 	public Sale(){

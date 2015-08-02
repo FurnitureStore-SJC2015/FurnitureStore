@@ -3,6 +3,7 @@ package com.exposit.domain.model.zanevsky;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,16 +24,15 @@ public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Basic(fetch = FetchType.EAGER)
-	@Column(name = "status_id")
+	@Column(name = "state_id")
 	private int id;
 	
 	@Basic(fetch = FetchType.EAGER)
-	@Column(name = "status_name")
+	@Column(name = "state_name")
 	@Enumerated(EnumType.STRING)
 	private StatusType statusType;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "status_id", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "status", cascade = CascadeType.ALL)
 	private List<OrderUnit> orderUnit;
 	
 	public int getId() {

@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,13 +39,14 @@ public class Feedback {
 	private Date date;
 	
 	@Basic(fetch = FetchType.EAGER)
-	@Column(name = "`range`")
+	@Column(name = "rating")
 	@Enumerated(EnumType.ORDINAL)
 	private RangeType range;
 	
 	//private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 
 	public int getId() {

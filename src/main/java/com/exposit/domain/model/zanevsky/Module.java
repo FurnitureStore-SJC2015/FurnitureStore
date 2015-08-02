@@ -3,6 +3,7 @@ package com.exposit.domain.model.zanevsky;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,8 +45,7 @@ public class Module {
 //	@JoinColumn(name = "module_id", nullable = true)
 //	private StorageModuleUnit storageModuleUnit;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "module_id", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
 	private List<ProductTemplate> productTemplates;
 	
 //	@OneToMany(fetch = FetchType.LAZY)
