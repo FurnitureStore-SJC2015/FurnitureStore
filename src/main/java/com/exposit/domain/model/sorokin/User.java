@@ -17,6 +17,8 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.exposit.domain.model.zanevsky.Feedback;
+
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"login", "password", "email" }) })
@@ -43,7 +45,10 @@ public class User {
 			columnDefinition = "int default 4")
 	private Role role;
 
-	// private List<Feedback> feedbacks;
+	@OneToMany
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
+	private List<Feedback> feedbacks;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
@@ -119,12 +124,14 @@ public class User {
 		this.role = role;
 	}
 
-	/*
-	 * public List<Feedback> getFeedbacks() { return feedbacks; }
-	 * 
-	 * public void setFeedbacks(List<Feedback> feedbacks) { this.feedbacks =
-	 * feedbacks; }
-	 */
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
 	public Bonus getBonus() {
 		return bonus;
 	}

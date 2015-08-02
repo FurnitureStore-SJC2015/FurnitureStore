@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.exposit.domain.model.zanevsky.OrderUnit;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -44,6 +46,11 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;
+
+	@OneToMany
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "order_id", nullable = false)
+	private List<OrderUnit> orderUnits;
 
 	public User getUser() {
 		return user;
