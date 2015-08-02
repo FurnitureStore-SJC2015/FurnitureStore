@@ -21,7 +21,7 @@ public class PaymentSchemeRepository extends
 	public List<PaymentScheme> getAllPaymentSchemesByPaymentForm(
 			PaymentForm paymentForm) {
 		Criteria cr = getSession().createCriteria(PaymentScheme.class).add(
-				Restrictions.eq("paymentType", paymentForm));
+				Restrictions.eq("paymentForm", paymentForm));
 		return (List<PaymentScheme>) cr.list();
 	}
 

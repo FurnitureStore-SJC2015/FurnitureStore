@@ -24,7 +24,7 @@ public class PaymentScheme {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "payment_type_id")
-	private PaymentForm paymentType;
+	private PaymentForm paymentForm;
 
 	@Column(name = "term")
 	private Integer term;
@@ -50,12 +50,12 @@ public class PaymentScheme {
 		this.id = id;
 	}
 
-	public PaymentForm getPaymentType() {
-		return paymentType;
+	public PaymentForm getPaymentForm() {
+		return paymentForm;
 	}
 
-	public void setPaymentType(PaymentForm paymentType) {
-		this.paymentType = paymentType;
+	public void setPaymentForm(PaymentForm paymentForm) {
+		this.paymentForm = paymentForm;
 	}
 
 	public Integer getTerm() {

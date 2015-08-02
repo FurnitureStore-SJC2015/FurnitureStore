@@ -35,7 +35,7 @@ public class Order {
 	private Date executionDate;
 
 	@OneToMany
-	@JoinColumn(name = "order_id", nullable = false)
+	@JoinColumn(name = "order_id")
 	@Cascade(CascadeType.ALL)
 	private List<Payment> payments;
 
@@ -44,12 +44,13 @@ public class Order {
 	private PaymentScheme paymentScheme;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@OneToMany
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "order_id", nullable = false)
+	@JoinColumn(name = "order_id")
 	private List<OrderUnit> orderUnits;
 
 	public User getUser() {

@@ -47,7 +47,7 @@ public class User {
 
 	@OneToMany
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	private List<Feedback> feedbacks;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -57,7 +57,7 @@ public class User {
 
 	@OneToMany
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	private List<Order> orders;
 
 	public Integer getId() {
