@@ -33,6 +33,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<list>
 				<value>com.exposit.domain.model.dobrilko</value>
 				<value>com.exposit.domain.model.sorokin</value>
+				<value>com.exposit.domain.model.zanevsky</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
