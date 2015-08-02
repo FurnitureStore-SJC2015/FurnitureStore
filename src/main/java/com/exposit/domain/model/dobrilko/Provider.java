@@ -21,7 +21,7 @@ public class Provider {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "provider_id")
 	private int id;
-	@Column(name = "provider_name")
+	@Column(name = "provider_name", unique=true)
 	private String name;
 	@Column(name = "provider_email")
 	private String email;
