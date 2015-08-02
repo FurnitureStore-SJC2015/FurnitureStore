@@ -1,14 +1,18 @@
 package com.exposit.domain.model.dobrilko;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.exposit.domain.model.zanevsky.Module;
 
+@Entity
+@Table(name = "storage_module_unit")
 public class StorageModuleUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -3,15 +3,18 @@ package com.exposit.domain.model.dobrilko;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.exposit.domain.model.zanevsky.Module;
 
+@Entity
+@Table(name = "provider")
 public class Provider {
 
 	@Id
@@ -26,16 +29,19 @@ public class Provider {
 	private String phone;
 	@Column(name = "zip_code")
 	private String zipCode;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="provider", orphanRemoval = true) 
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+			orphanRemoval = true)
 	private List<Module> modules;
-	 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+			orphanRemoval = true)
 	private List<Request> requests;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider",
+			orphanRemoval = true)
 	private List<Shipment> shipments;
-	
+
 	@Column(name = "login")
 	private String login;
 
@@ -79,15 +85,13 @@ public class Provider {
 		this.zipCode = zipCode;
 	}
 
-	
-	public List<Module> getModules() { 
-		return modules; 
+	public List<Module> getModules() {
+		return modules;
 	}
-	
-	public void setModules(List<Module> modules) { 
-		this.modules = modules; 
+
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
 	}
-	 
 
 	public List<Request> getRequests() {
 		return requests;

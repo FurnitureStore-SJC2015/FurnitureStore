@@ -1,6 +1,7 @@
 package com.exposit.domain.model.dobrilko;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.exposit.domain.model.zanevsky.Module;
 
+@Entity
+@Table(name = "shipment_unit")
 public class ShipmentUnit {
 
 	@Id
