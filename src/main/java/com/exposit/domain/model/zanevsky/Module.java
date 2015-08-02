@@ -63,13 +63,13 @@ public class Module {
 		this.id = id;
 	}
 
-//	public Provider getProvider() {
-//		return provider;
-//	}
-//
-//	public void setProvider(Provider provider) {
-//		this.provider = provider;
-//	}
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
 
 	public ModuleType getModuleType() {
 		return moduleType;
@@ -79,13 +79,13 @@ public class Module {
 		this.moduleType = moduleType;
 	}
 
-//	public StorageModuleUnit getStorageModuleUnit() {
-//		return storageModuleUnit;
-//	}
-//
-//	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
-//		this.storageModuleUnit = storageModuleUnit;
-//	}
+	public StorageModuleUnit getStorageModuleUnit() {
+		return storageModuleUnit;
+	}
+
+	public void setStorageModuleUnit(StorageModuleUnit storageModuleUnit) {
+		this.storageModuleUnit = storageModuleUnit;
+	}
 
 	public List<ProductTemplate> getProductTemplates() {
 		return productTemplates;
@@ -95,20 +95,20 @@ public class Module {
 		this.productTemplates = productTemplates;
 	}
 
-//	public List<ShipmentUnit> getShipmentUnits() {
-//		return shipmentUnits;
-//	}
-//
-//	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
-//		this.shipmentUnits = shipmentUnits;
-//	}
+	public List<ShipmentUnit> getShipmentUnits() {
+		return shipmentUnits;
+	}
 
-//	public RequestUnit getRequestUnit() {
-//		return requestUnit;
-//	}
-//
-//	public void setRequestUnit(RequestUnit requestUnit) {
-//		this.requestUnit = requestUnit;
-//	}
+	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
+		this.shipmentUnits = shipmentUnits;
+	}
+
+	public List<RequestUnit> getRequestUnit() {
+		return requestUnit;
+	}
+
+	public void setRequestUnit(List<RequestUnit> requestUnit) {
+		this.requestUnit = requestUnit;
+	}
 
 }

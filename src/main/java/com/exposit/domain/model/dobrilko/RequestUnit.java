@@ -16,8 +16,12 @@ public class RequestUnit {
 	@Column(name = "request_unit_id")
 	private int id;
 	
-	@Column(name = "count")
+	@Column(name = "request_module_count")
 	private int count;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "request_id", nullable = false)
+	private Request request;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id")
@@ -32,9 +36,13 @@ public class RequestUnit {
 	}
 
 	
-	public Module getModule() { return module; }
+	public Module getModule() { 
+		return module; 
+	}
 	
-	public void setModule(Module module) { this.module = module; }
+	public void setModule(Module module) { 
+		this.module = module; 
+	}
 	 
 
 	public int getCount() {
