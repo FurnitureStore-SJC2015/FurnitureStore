@@ -20,8 +20,18 @@ import com.exposit.repository.dao.zanevsky.SaleDao;
 import static java.lang.System.*;
 
 public class vviitalTest {
+	
+	public Tests tests;
+	
+	void Test(){
+		this.tests.firstTest();
+		this.tests.testWrongConsoleOut();
+	}
+}
+
+class Tests{
 	@SuppressWarnings("deprecation")
-	public void test(){
+	public void firstTest(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
 		
 		ProductCatalogUnitDao productDao = (ProductCatalogUnitDao) context.getBean("productCatalogUnitRepository");
@@ -31,7 +41,7 @@ public class vviitalTest {
 		
 		ProductCatalogUnit product = makeProduct("Chair", 12.5, 2000);
 		
-		List<Feedback> feedbacks = new ArrayList<>();
+		List<Feedback> feedbacks = new ArrayList<Feedback>();
 		
 		feedbacks.add(makeFeedback(product, "good", new Date(2015 - 1900, 8, 1), RangeType.FOUR));
 		feedbacks.add(makeFeedback(product, "bad", new Date(2015 - 1900, 8, 1), RangeType.TWO));
@@ -45,7 +55,7 @@ public class vviitalTest {
 		productDao.save(product);
 		
 		List<Module> modules = moduleDao.findAll();
-		List<ProductTemplate> templates = new ArrayList<>();
+		List<ProductTemplate> templates = new ArrayList<ProductTemplate>();
 		
 		for(Module x : modules){
 			templates.add(makeTemplate(product, x, 10));
@@ -102,6 +112,5 @@ public class vviitalTest {
 		template.setModule(module);
 		return template;
 	}
-	
 	
 }

@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "product_catalog_unit")
@@ -27,7 +28,7 @@ public class ProductCatalogUnit {
 	private int id;
 	
 	@Basic(fetch = FetchType.EAGER)
-	@Column(name = "product_cost", scale = 2)
+	@Column(name = "product_cost", scale = 2, unique = true)
 	private double cost;
 	
 	@Basic(fetch = FetchType.EAGER)
