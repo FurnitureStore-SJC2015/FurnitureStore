@@ -27,12 +27,7 @@ public class MaxTester {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
-		UserService userService = (UserService) context
-				.getBean("userServiceImpl");
-		if (userService.findUserByLoginAndPassword("mxsn1995", "123") != null) {
-			System.out.println("True user!");
-		} else
-			System.out.println("Error");
+		
 	}
 
 	private static Order createNewOrder(PaymentScheme scheme) {
