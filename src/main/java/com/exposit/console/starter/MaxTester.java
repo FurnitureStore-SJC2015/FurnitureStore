@@ -12,6 +12,7 @@ import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.PaymentType;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
+import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.repository.dao.sorokin.BonusDao;
 import com.exposit.repository.dao.sorokin.OrderDao;
 import com.exposit.repository.dao.sorokin.PaymentDao;
@@ -22,34 +23,16 @@ import com.exposit.repository.dao.sorokin.UserDao;
 
 public class MaxTester {
 
+	@SuppressWarnings({ "unused", "resource" })
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
-		UserDao userDao = (UserDao) context.getBean("userRepository");
-		RoleDao roleDao = (RoleDao) context.getBean("roleRepository");
-		PaymentSchemeDao paymentSchemeDao = (PaymentSchemeDao) context
-				.getBean("paymentSchemeRepository");
-		BonusDao bonusDao = (BonusDao) context.getBean("bonusRepository");
-		PaymentFormDao paymentFormDao = (PaymentFormDao) context
-				.getBean("paymentFormRepository");
-		OrderDao orderDao = (OrderDao) context.getBean("orderRepository");
-		PaymentDao paymentDao = (PaymentDao) context
-				.getBean("paymentRepository");
-
-		List<PaymentScheme> schemes = paymentSchemeDao
-				.getAllPaymentSchemesByPaymentForm(paymentFormDao
-						.getPaymentFormByPaymentType(PaymentType.CREDIT));
-		PaymentScheme scheme1 = new PaymentScheme();
-		scheme1.setPaymentForm(paymentFormDao
-				.getPaymentFormByPaymentType(PaymentType.CREDIT));
-
-		for (PaymentScheme scheme : schemes) {
-			for (Order order : orderDao.getListOfOrdersByPaymentScheme(scheme)) {
-				System.out.println(order.getId() + ": "
-						+ order.getExecutionDate() + "");
-			}
-		}
-
+		UserService userService = (UserService) context
+				.getBean("userServiceImpl");
+		if (userService.findUserByLoginAndPassword("mxsn1995", "123") != null) {
+			System.out.println("True user!");
+		} else
+			System.out.println("Error");
 	}
 
 	private static Order createNewOrder(PaymentScheme scheme) {

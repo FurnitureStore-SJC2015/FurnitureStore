@@ -32,4 +32,12 @@ public class UserRepository extends AbstractHibernateDao<User, Integer>
 		return (List<User>) cr.list();
 	}
 
+	@Override
+	public User findUserByLoginAndPassword(String login, String password) {
+		Criteria cr = getSession().createCriteria(User.class, "user")
+				.add(Restrictions.eq("login", login))
+				.add(Restrictions.eq("password", password));
+		return (User) cr.uniqueResult();
+	}
+
 }

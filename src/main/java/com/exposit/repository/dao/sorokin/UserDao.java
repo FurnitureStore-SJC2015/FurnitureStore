@@ -13,4 +13,8 @@ public interface UserDao extends GenericDao<User, Integer> {
 
 	public List<User> getListOfAllUsersByBonus(Bonus bonus);
 
+	public User findUserByLoginAndPassword(String login,String password);
+
+	
+
 }
