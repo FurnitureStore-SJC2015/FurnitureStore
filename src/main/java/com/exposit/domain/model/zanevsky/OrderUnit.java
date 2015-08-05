@@ -28,16 +28,17 @@ public class OrderUnit {
 	@Column(name = "order_unit_cost", scale = 2, nullable = false)
 	private double cost;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "state_id", nullable = false)
 	private Status status;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	private Order order;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id", nullable = false)
+	private Order order;
 
 	public int getId() {
 		return id;
@@ -55,13 +56,13 @@ public class OrderUnit {
 		this.productCatalogUnit = productCatalogUnit;
 	}
 
-//	public Order getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Order order) {
-//		this.order = order;
-//	}
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
 	public Status getStatus() {
 		return status;

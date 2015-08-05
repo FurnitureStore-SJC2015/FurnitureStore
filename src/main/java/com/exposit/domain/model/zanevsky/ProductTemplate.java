@@ -26,11 +26,11 @@ public class ProductTemplate {
 	@Column(name = "modules_number", nullable = false)
 	private int count;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id", nullable = false)
 	private Module module;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 

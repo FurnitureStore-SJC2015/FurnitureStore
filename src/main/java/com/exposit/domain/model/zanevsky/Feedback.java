@@ -29,7 +29,7 @@ public class Feedback {
 	@Column(name = "feedback_id")
 	private int id;
 	
-	@Basic(fetch = FetchType.LAZY)
+	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "text", length = 512, nullable = false)
 	private String text;
 	
@@ -43,9 +43,11 @@ public class Feedback {
 	@Enumerated(EnumType.ORDINAL)
 	private RangeType range;
 	
-	//private User user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 
@@ -57,13 +59,13 @@ public class Feedback {
 		this.id = id;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getText() {
 		return text;
