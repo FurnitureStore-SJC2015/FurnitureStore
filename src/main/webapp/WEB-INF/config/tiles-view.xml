@@ -9,16 +9,14 @@
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="" />
 	</definition>
 
-
-	<definition name="home_page" extends="template">
-		<put-attribute name="title" value="User Controller Redirect!" />
-		<put-attribute name="body" value="/WEB-INF/views/user.list.jsp" />
-		<put-attribute name="footer" value="footer from definition Users!" />
+	<definition name="login" extends="template">
+		<put-attribute name="title" value="Login page" />
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
-
-
-
+	<definition name="profile" extends="template">
+		<put-attribute name="title" value="Personal info!" />
+		<put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
+	</definition>
 </tiles-definitions>
