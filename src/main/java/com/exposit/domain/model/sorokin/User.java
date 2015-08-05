@@ -13,9 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Parent;
 
 import com.exposit.domain.model.zanevsky.Feedback;
 
@@ -38,13 +41,11 @@ public class User {
 	private String password;
 	@Column(name = "email")
 	private String email;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id",
 			columnDefinition = "int default 4")
 	private Role role;
-
 	@OneToMany
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "user_id")

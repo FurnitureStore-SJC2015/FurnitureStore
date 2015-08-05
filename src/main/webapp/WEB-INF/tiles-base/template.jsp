@@ -2,7 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-
+<title><tiles:insertAttribute name="title"/>
+</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>" />
 <link rel="stylesheet" type="text/css"

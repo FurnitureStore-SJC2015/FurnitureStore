@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/login">Furniture Store</a>
+			<a class="navbar-brand">Furniture Store</a>
 		</div>
 	</div>
 </div>

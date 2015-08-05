@@ -13,10 +13,16 @@
 
 	<definition name="login" extends="template">
 		<put-attribute name="title" value="Login page" />
-		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
 	</definition>
+
+	<definition name="register" extends="template">
+		<put-attribute name="title" value="Registration" />
+		<put-attribute name="body" value="/WEB-INF/views/user/registrationForm.jsp"></put-attribute>
+	</definition>
+
 	<definition name="profile" extends="template">
 		<put-attribute name="title" value="Personal info!" />
-		<put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/user/profile.jsp" />
 	</definition>
 </tiles-definitions>
