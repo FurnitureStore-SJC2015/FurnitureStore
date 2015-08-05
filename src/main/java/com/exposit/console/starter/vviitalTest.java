@@ -7,12 +7,17 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.exposit.domain.model.dobrilko.Provider;
+import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.model.zanevsky.RangeType;
 import com.exposit.domain.model.zanevsky.Sale;
+import com.exposit.repository.dao.dobrilko.ProviderDao;
+import com.exposit.repository.dao.sorokin.UserDao;
+import com.exposit.repository.dao.zanevsky.FeedbackDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
 import com.exposit.repository.dao.zanevsky.SaleDao;
@@ -21,96 +26,110 @@ import static java.lang.System.*;
 
 public class vviitalTest {
 	
-	public Tests tests;
-	
-	void Test(){
-		this.tests.firstTest();
-		this.tests.testWrongConsoleOut();
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+		
+		BaseTest<Feedback> feedbackTest = new FeedbackRepositoryTest();
+		feedbackTest.criteriaTest(context);
+		
+		BaseTest<Module> moduleTest = new ModuleRepositoryTest();
+		moduleTest.criteriaTest(context);
 	}
 }
 
-class Tests{
-	@SuppressWarnings("deprecation")
-	public void firstTest(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+
+class FeedbackRepositoryTest implements BaseTest<Feedback> {
+
+	@Override
+	public void test(ApplicationContext context) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void criteriaTest(ApplicationContext context) {
+		// TODO Auto-generated method stub
+		FeedbackDao feedbackDao = (FeedbackDao) context.getBean("feedbackRepository");
+		UserDao userDao = (UserDao) context.getBean("userRepository");
+		ProductCatalogUnitDao catalogUnitDao = (ProductCatalogUnitDao) context.getBean("productCatalogUnitRepository");
+		
+		User user = (User) userDao.findById(4);
+		ProductCatalogUnit catalogUnit = (ProductCatalogUnit) catalogUnitDao.findById(1);
+		
+		List<Feedback> feedbacks = feedbackDao.getFeedacksList(user);
+		
+		Show(feedbacks);
+		
+		feedbacks = feedbackDao.getFeedbackList(catalogUnit);
+		
+		Show(feedbacks);
+		
+		double cost = feedbackDao.getAverageMark(catalogUnit);
+		
+		out.println(cost);
+	}
+	
+	@Override
+	public void Show(Feedback entity) {
+		out.println(entity.getId() + " " + entity.getText());
+	}
+
+	@Override
+	public void Show(List<Feedback> list) {
+		for(Feedback x : list){
+			Show(x);
+		}
+	}
+	
+}
+
+class ModuleRepositoryTest implements BaseTest<Module> {
+
+	@Override
+	public void test(ApplicationContext context) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void criteriaTest(ApplicationContext context) {
+		ModuleDao moduleDao = (ModuleDao) context.getBean("moduleRepository");
 		ProductCatalogUnitDao productDao = (ProductCatalogUnitDao) context.getBean("productCatalogUnitRepository");
-		SaleDao saleDao = (SaleDao) context.getBean("saleRepository");
-		ModuleDao moduleDao = (ModuleDao) context.getBean("moduleRepository");
-		List<ProductCatalogUnit> list = productDao.findAll();
+		ProviderDao providerDao = (ProviderDao) context.getBean("providerRepository");
 		
-		ProductCatalogUnit product = makeProduct("Chair", 12.5, 2000);
+		Provider provider = providerDao.findById(1);
+		List<Module> modules = moduleDao.getModules(provider);
 		
-		List<Feedback> feedbacks = new ArrayList<Feedback>();
+		Show(modules);
 		
-		feedbacks.add(makeFeedback(product, "good", new Date(2015 - 1900, 8, 1), RangeType.FOUR));
-		feedbacks.add(makeFeedback(product, "bad", new Date(2015 - 1900, 8, 1), RangeType.TWO));
+		ProductCatalogUnit productCatalogUnit = productDao.findById(1);
+		modules = moduleDao.getModules(productCatalogUnit);
 		
-		product.setFeedbacks(feedbacks);
+		Show(modules);
 		
-		Sale sale = (Sale) saleDao.findAll().toArray()[0];
-		
-		product.setSale(sale);
-		
-		productDao.save(product);
-		
-		List<Module> modules = moduleDao.findAll();
-		List<ProductTemplate> templates = new ArrayList<ProductTemplate>();
-		
-		for(Module x : modules){
-			templates.add(makeTemplate(product, x, 10));
-		}
-		
-		product.setProductTemplates(templates);
-		
-		productDao.update(product);
-		
-		templates.add(makeTemplate(product, (Module)modules.toArray()[0], 11));
-		
-		productDao.update(product);
-		
-		int num = 0;
-		
-		productDao.delete(product);
 	}
-	
-	public void testWrongConsoleOut(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
-		
-		ModuleDao moduleDao = (ModuleDao) context.getBean("moduleRepository");
-		
-		List<Module> modules = moduleDao.findAll();
-		
-		for(Module x : modules){
-			out.println(x.getId());
+
+	@Override
+	public void Show(List<Module> list) {
+		for(Module x : list){
+			Show(x);
 		}
 	}
-	
-	
-	ProductCatalogUnit makeProduct(String name, double coefficient, double cost){
-		ProductCatalogUnit product = new ProductCatalogUnit();
-		product.setName(name);
-		product.setCoefficient(coefficient);
-		product.setCost(cost);
-		return product;
+
+	@Override
+	public void Show(Module entity) {
+		out.println(entity.getId() + " " + entity.getModuleType());
 	}
 	
-	Feedback makeFeedback(ProductCatalogUnit product,String text, Date date, RangeType range){
-		out.println(date.toString());
-		Feedback feedback = new Feedback();
-		feedback.setText(text);
-		feedback.setDate(date);
-		feedback.setRange(range);
-		feedback.setProductCatalogUnit(product);
-		return feedback;
-	}
+}
+
+interface BaseTest <T>{
 	
-	ProductTemplate makeTemplate(ProductCatalogUnit product, Module module, int count){
-		ProductTemplate template = new ProductTemplate();
-		template.setCount(count);
-		template.setProductCatalogUnit(product);
-		template.setModule(module);
-		return template;
-	}
+	public void test(ApplicationContext context);
 	
+	public void criteriaTest(ApplicationContext context);
+	
+	public void Show(List<T> list);
+	
+	public void Show(T entity);
 }
