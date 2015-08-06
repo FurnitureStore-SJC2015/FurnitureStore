@@ -25,10 +25,8 @@
 						<td><strong>${user.email}</strong></td>
 					</tr>
 					<tr>
-						<tr>
 						<td><strong>Current Bonus:</strong></td>
 						<td><strong>${user.bonus.percentage} %</strong></td>
-					</tr>
 					</tr>
 				</tbody>
 			</table>

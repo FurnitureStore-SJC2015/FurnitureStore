@@ -15,20 +15,26 @@
 	<definition name="login" extends="template">
 		<put-attribute name="title" value="Login page" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/authorization/loginForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/authorization/loginForm.jsp" />
 	</definition>
 
 	<definition name="register" extends="template">
 		<put-attribute name="title" value="Registration" />
-		<put-attribute name="body"  value="/WEB-INF/views/authorization/registrationForm.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/authorization/registrationForm.jsp"></put-attribute>
 	</definition>
 
 	<definition name="profile" extends="template">
 		<put-attribute name="title" value="Personal info!" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/profile.jsp" />
 	</definition>
 
+	<definition name="adminPanel" extends="template">
+		<put-attribute name="title" value="Admin Panel"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp"/>
+	</definition>
 
 
 	<!-- Kate's definitions! -->
