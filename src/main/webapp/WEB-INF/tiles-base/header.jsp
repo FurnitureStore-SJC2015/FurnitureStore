@@ -1,8 +1,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container">
-	<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default" role="navigation">
+	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand">Furniture Store</a>
+			<a class="navbar-brand" href="<c:url value="" />">Furniture Store</a>
 		</div>
+		<c:if test="${not empty user}">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href='<c:url value="/profile/${user.id}" />'>Hi, ${user.name}</a></li>
+				<li><a href="<c:url value="/logout"/>">Logout</a></li>
+			</ul>
+		</c:if>
 	</div>
+
 </div>

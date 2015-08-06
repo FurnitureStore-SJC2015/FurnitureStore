@@ -18,27 +18,49 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Parent;
 
 import com.exposit.domain.model.zanevsky.Feedback;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
-		"login", "password", "email" }) })
+		"login", "email" }) })
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Integer id;
+
+	@Size(min = 3, max = 10,
+			message = "*Name must be between 3 and 10 characters long.")
+	@Pattern(regexp = "[a-zA-Z]*",
+			message = "*Name must be alphanumeric with no spaces.")
 	@Column(name = "name")
 	private String name;
+
+	@Size(min = 3, max = 10,
+			message = "*Surname must be between 3 and 10 characters long.")
+	@Pattern(regexp = "[a-zA-Z]*",
+			message = "*Surname must be alphanumeric with no spaces.")
 	@Column(name = "surname")
 	private String surname;
-	@Column(name = "login")
+
+	@Size(min = 3, max = 10,
+			message = "*Login must be between 3 and 10 characters long.")
+	@Pattern(regexp = "[a-zA-Z0-9_-]*",
+			message = "*Login must be alphanumeric with digits and dashes.")
 	private String login;
+
+	@Size(min = 3, max = 15,
+			message = "*Password must be between 3 and 15 characters long.")
+	@Pattern(regexp = "[a-z0-9_-]*",
+			message = "Password must be alphanumeric with digits and dashes.")
 	@Column(name = "password")
 	private String password;
+
+	@Pattern(
+			regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})",
+			message = "*Not valid email.")
 	@Column(name = "email")
 	private String email;
 	@ManyToOne(fetch = FetchType.EAGER)

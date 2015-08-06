@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.repository.dao.sorokin.UserDao;
@@ -40,6 +41,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserByLoginAndPassword(String login, String password) {
 		return userRepository.findUserByLoginAndPassword(login, password);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		userRepository.update(user);
+
+	}
+
+	@Override
+	public List<User> findAllUsersByRole(Role role) {
+		userRepository.getListOfAllUsersByRole(role);
+		return null;
 	}
 
 }
