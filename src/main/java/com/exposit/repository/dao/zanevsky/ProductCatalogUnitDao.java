@@ -19,15 +19,13 @@ public interface ProductCatalogUnitDao extends GenericDao<ProductCatalogUnit, In
 	
 	public List<ProductCatalogUnit> getProducts(Sale sale);
 	
-	public List<ProductCatalogUnit> getProducts(Feedback feedback);
-	
 	public List<ProductCatalogUnit> getProducts(Module module);
-	
-	public List<ProductCatalogUnit> getProducts(ProductTemplate template);
 	
 	public List<ProductCatalogUnit> lowerBound(double cost);
 	
 	public List<ProductCatalogUnit> upperBound(double cost);
 	
-	public ProductCatalogUnit getProducts(String name);
+	public ProductCatalogUnit getProduct(String name);
+
+	public ProductCatalogUnit getProduct(Feedback feedback);
 }

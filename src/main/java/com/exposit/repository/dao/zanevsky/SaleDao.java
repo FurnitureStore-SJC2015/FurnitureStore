@@ -7,6 +7,4 @@ import com.exposit.repository.base.GenericDao;
 public interface SaleDao extends GenericDao<Sale, Integer> {
 	
 	public Sale getSale(ProductCatalogUnit catalogUnit);
-	
-	public boolean haveSale(ProductCatalogUnit catalogUnit);
 }

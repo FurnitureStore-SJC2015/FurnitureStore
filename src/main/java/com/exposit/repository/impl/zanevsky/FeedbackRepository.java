@@ -22,7 +22,8 @@ public class FeedbackRepository extends AbstractHibernateDao<Feedback, Integer>
 	public List<Feedback> getFeedacksList(User user) {
 		Criteria criteria = this.getSession()
 				.createCriteria(Feedback.class, "feedback")
-				.add(Restrictions.eq("user", user));
+				.add(Restrictions.eq("user", user))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return (List<Feedback>) criteria.list();
 	}
 

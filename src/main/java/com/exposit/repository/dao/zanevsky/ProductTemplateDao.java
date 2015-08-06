@@ -9,7 +9,7 @@ import com.exposit.repository.base.GenericDao;
 
 public interface ProductTemplateDao extends GenericDao<ProductTemplate, Integer>{
 	
-	public List<ProductTemplate> getProductTemlplatesList(ProductCatalogUnit catalogUnit);
+	public List<ProductTemplate> getProductTemplatesList(ProductCatalogUnit catalogUnit);
 	
-	public ProductTemplate getProductTemplate(Module module);
+	public List<ProductTemplate> getProductTemplatesList(Module module);
 }

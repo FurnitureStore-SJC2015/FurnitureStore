@@ -53,7 +53,7 @@ public class Module {
 	private List<ShipmentUnit> shipmentUnits;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
-	private List<RequestUnit> requestUnit;
+	private List<RequestUnit> requestUnits;
 
 	public int getId() {
 		return id;
@@ -104,11 +104,11 @@ public class Module {
 	}
 
 	public List<RequestUnit> getRequestUnit() {
-		return requestUnit;
+		return requestUnits;
 	}
 
 	public void setRequestUnit(List<RequestUnit> requestUnit) {
-		this.requestUnit = requestUnit;
+		this.requestUnits = requestUnit;
 	}
 
 }

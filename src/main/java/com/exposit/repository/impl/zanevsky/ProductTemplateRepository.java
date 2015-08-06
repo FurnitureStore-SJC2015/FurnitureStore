@@ -2,6 +2,8 @@ package com.exposit.repository.impl.zanevsky;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.zanevsky.Module;
@@ -15,17 +17,21 @@ public class ProductTemplateRepository
 		extends AbstractHibernateDao<ProductTemplate, Integer>
 		implements ProductTemplateDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProductTemplate> getProductTemlplatesList(
+	public List<ProductTemplate> getProductTemplatesList(
 			ProductCatalogUnit catalogUnit) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = this.getSession().createCriteria(ProductTemplate.class, "template")
+				.add(Restrictions.eq("productCatalogUnit", catalogUnit));
+		return (List<ProductTemplate>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public ProductTemplate getProductTemplate(Module module) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductTemplate> getProductTemplatesList(Module module) {
+		Criteria criteria = this.getSession().createCriteria(ProductTemplate.class, "template")
+				.add(Restrictions.eq("module", module));
+		return (List<ProductTemplate>) criteria.list();
 	}
 	
 }

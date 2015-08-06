@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "status")
+@Table(name = "state")
 public class Status {
 
 	@Id
@@ -33,7 +33,7 @@ public class Status {
 	private StatusType statusType;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "status", cascade = CascadeType.ALL)
-	private List<OrderUnit> orderUnit;
+	private List<OrderUnit> orderUnits;
 	
 	public int getId() {
 		return id;
@@ -48,10 +48,10 @@ public class Status {
 		this.statusType = statusType;
 	}
 	public List<OrderUnit> getOrderUnit() {
-		return orderUnit;
+		return orderUnits;
 	}
 	public void setOrderUnit(List<OrderUnit> orderUnit) {
-		this.orderUnit = orderUnit;
+		this.orderUnits = orderUnit;
 	}
 	
 }

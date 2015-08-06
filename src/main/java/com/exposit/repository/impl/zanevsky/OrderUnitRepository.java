@@ -2,6 +2,8 @@ package com.exposit.repository.impl.zanevsky;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.sorokin.Order;
@@ -15,22 +17,28 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class OrderUnitRepository
 		extends AbstractHibernateDao<OrderUnit, Integer>implements OrderUnitDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderUnit> getOrderUnitsList(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = this.getSession().createCriteria(OrderUnit.class, "unit")
+				.add(Restrictions.eq("order", order));
+		return (List<OrderUnit>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderUnit> getOrderUnitsList(ProductCatalogUnit catalogUnit) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = this.getSession().createCriteria(OrderUnit.class, "unit")
+				.add(Restrictions.eq("productCatalogUnit", catalogUnit));
+		return (List<OrderUnit>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderUnit> getOrderUnitsList(Status status) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = this.getSession().createCriteria(OrderUnit.class, "unit")
+				.add(Restrictions.eq("status", status));
+		return (List<OrderUnit>) criteria.list();
 	}
 	
 }

@@ -1,5 +1,9 @@
 package com.exposit.repository.impl.zanevsky;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
@@ -13,14 +17,11 @@ public class SaleRepository extends AbstractHibernateDao<Sale, Integer>
 
 	@Override
 	public Sale getSale(ProductCatalogUnit catalogUnit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean haveSale(ProductCatalogUnit catalogUnit) {
-		// TODO Auto-generated method stub
-		return false;
+		Criteria criteria = this.getSession().createCriteria(Sale.class, "sale")
+				.createAlias("sale.productCatalogUnits", "product")
+				.add(Restrictions.eq("product.id", catalogUnit.getId()))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return (Sale) criteria.uniqueResult();
 	}
 
 }
