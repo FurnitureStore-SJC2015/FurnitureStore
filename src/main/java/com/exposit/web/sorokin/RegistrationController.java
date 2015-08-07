@@ -34,7 +34,7 @@ public class RegistrationController {
 			return "register";
 		}
 		userRepository.createNewUser(user);
-		redirectAttributes.addFlashAttribute("new_user", user);// TODO
+		redirectAttributes.addFlashAttribute("new_user", user);// TODO or better Session?
 		return resultView;
 	}
 }

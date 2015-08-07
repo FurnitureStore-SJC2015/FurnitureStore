@@ -6,7 +6,7 @@
 		</div>
 		<c:if test="${not empty user}">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/profile/${user.id}" />'>Hi, ${user.name}</a></li>
+				<li><a href='<c:url value="/client/profile/${user.id}" />'>Hi, ${user.name}</a></li>
 				<li><a href="<c:url value="/logout"/>">Logout</a></li>
 			</ul>
 		</c:if>

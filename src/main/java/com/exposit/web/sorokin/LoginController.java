@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exposit.domain.model.sorokin.User;
-import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.UserService;
 
 @Controller
@@ -19,9 +18,6 @@ public class LoginController {
 
 	@Autowired
 	private UserService userRepository;
-
-	@Autowired
-	private OrderService orderRepository;
 
 	@RequestMapping(value = { "", "/login" }, method = { RequestMethod.GET })
 	public String showLogin() {
@@ -35,9 +31,9 @@ public class LoginController {
 			HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = userRepository.findUserByLoginAndPassword(login, password);
-		user.setOrders(orderRepository.getOrders(user));
 		httpSession.setAttribute("user", user);
-		modelAndView.setViewName("redirect:profile/" + user.getId());
+		// TODO here goes security?
+		modelAndView.setViewName("redirect:client/");
 		return modelAndView;
 	}
 

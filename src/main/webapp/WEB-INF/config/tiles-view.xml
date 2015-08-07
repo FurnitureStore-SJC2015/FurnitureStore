@@ -25,10 +25,16 @@
 			value="/WEB-INF/views/authorization/registrationForm.jsp"></put-attribute>
 	</definition>
 
-	<definition name="profile" extends="template">
-		<put-attribute name="title" value="Personal info!" />
+	<definition name="client.profile" extends="template">
+		<put-attribute name="title" value="Personal info" />
 		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/profile.jsp" />
+	</definition>
+	
+	<definition name="client.orders" extends="template">
+	<put-attribute name="title" value="User orders"/>
+	<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"/>
+	<put-attribute name="body" value="/WEB-INF/views/client/orders.jsp"/>
 	</definition>
 
 	<definition name="adminPanel" extends="template">

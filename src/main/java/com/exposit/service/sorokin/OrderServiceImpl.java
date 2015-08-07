@@ -45,4 +45,10 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
+	@Override
+	public void deleteOrder(int id) {
+		orderRepository.delete(id);
+		
+	}
+
 }

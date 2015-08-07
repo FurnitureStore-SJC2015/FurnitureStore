@@ -2,15 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div class="col-md-3">
 
-<h2></h2>
 	<div class="list-group">
 		<ul class="list-group">
-			<a href="#" class="list-group-item">Orders<span
+			<a href='<c:url value="/client/profile/${user.id}"/>' class="list-group-item">My Profile<span
+				class="badge"></span></a>
+			<a href='<c:url value="/client/orders"/>' class="list-group-item">My Orders<span
 				class="badge">${fn:length(user.orders)}</span></a>
-			<a href="#" class="list-group-item">Future payments<span
-				class="badge">14</span></a>
-			<a href="#" class="list-group-item">Dapibus ac facilisis in<span
-				class="badge">10</span></a>
+			<a href="#" class="list-group-item">Position<span
+				class="badge"></span></a>
+			<a href="#" class="list-group-item">Position<span
+				class="badge"></span></a>
 		</ul>
 	</div>
 </div>
