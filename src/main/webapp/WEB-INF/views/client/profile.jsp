@@ -2,12 +2,14 @@
 
 <div class="col-md-9 well">
 	<div class="row">
-		<div class="col-md-3">Here goes picture!</div>
+		<div class="col-md-3">
+		<img src="..." alt="..." class="img-thumbnail">
+		</div>
 		<div class="col-md-6">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>General Info</th>
+						<th><h3>General Info</h3></th>
 					</tr>
 				</thead>
 
@@ -30,7 +32,7 @@
 					</tr>
 				</tbody>
 			</table>
-
+			<button type="button" class="btn btn-primary" onclick="location.href='edit'">Edit profile</button>
 		</div>
 	</div>
 

@@ -30,16 +30,23 @@
 		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/profile.jsp" />
 	</definition>
-	
+
 	<definition name="client.orders" extends="template">
-	<put-attribute name="title" value="User orders"/>
-	<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"/>
-	<put-attribute name="body" value="/WEB-INF/views/client/orders.jsp"/>
+		<put-attribute name="title" value="User orders" />
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/orders.jsp" />
 	</definition>
 
+	<definition name="=client.order " extends="template">
+		<put-attribute name="title" expression="Order ${order.id}"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
+	</definition>
+
+
 	<definition name="adminPanel" extends="template">
-		<put-attribute name="title" value="Admin Panel"/>
-		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp"/>
+		<put-attribute name="title" value="Admin Panel" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp" />
 	</definition>
 
 

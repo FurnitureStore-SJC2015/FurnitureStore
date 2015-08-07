@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,12 +33,13 @@ public class ClientController {
 		User user = (User) session.getAttribute("user");
 		List<Order> orders = orderRepository.getOrders(user);
 		user.setOrders(orderRepository.getOrders(user));
-		session.setAttribute("orderList", orders);
-		return "redirect:profile/" + user.getId();
+		session.setAttribute("orderList", orders);// TODO 2 params of
+													// orderList???
+		return "redirect:profile/";
 
 	}
 
-	@RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "profile/", method = RequestMethod.GET)
 	public String showProfile() {
 		return "client.profile";
 	}
@@ -45,5 +47,12 @@ public class ClientController {
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public String showOrders() {
 		return "client.orders";
+	}
+
+	@RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
+	public String showOrder(@PathVariable("id") Integer id, Model model) {
+		Order order = orderRepository.getOrderById(id);
+		model.addAttribute("order", order);
+		return "client.order";
 	}
 }
