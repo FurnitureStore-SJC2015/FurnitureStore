@@ -13,11 +13,11 @@ import com.exposit.domain.service.sorokin.UserService;
 public class AdminController {
 
 	@Autowired
-	private UserService userRepository;
+	private UserService userService;
 
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String showAdminPanel(Model model) {
-		model.addAttribute("userList", userRepository.getUsers());
+		model.addAttribute("userList", userService.getUsers());
 		return "adminPanel";
 	}
 }

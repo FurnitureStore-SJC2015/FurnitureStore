@@ -22,16 +22,16 @@ import com.exposit.domain.service.sorokin.UserService;
 public class ClientController {
 
 	@Autowired
-	private UserService userRepository;
+	private UserService userService;
 
 	@Autowired
-	private OrderService orderRepository;
+	private OrderService orderService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String initClient(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<Order> orders = orderRepository.getOrders(user);
-		user.setOrders(orderRepository.getOrders(user));
+		List<Order> orders = orderService.getOrders(user);
+		user.setOrders(orderService.getOrders(user));
 
 		byte[] encoded = Base64.encodeBase64(user.getAvatar());
 		String encodedString = new String(encoded);
@@ -52,8 +52,7 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
-	public String showOrder(@PathVariable("id") Integer id, Model model) {
-		Order order = orderRepository.getOrderById(id);
+	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
 		model.addAttribute("order", order);
 		return "client.order";
 	}
