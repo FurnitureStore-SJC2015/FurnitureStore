@@ -22,7 +22,7 @@ import com.exposit.domain.service.sorokin.UserService;
 public class RegistrationController {
 
 	@Autowired
-	private UserService userRepository;
+	private UserService userService;
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
@@ -43,7 +43,7 @@ public class RegistrationController {
 		} catch (IOException e) {
 			e.getStackTrace();
 		}
-		userRepository.createNewUser(user);
+		userService.createNewUser(user);
 		redirectAttributes.addFlashAttribute("new_user", user);// TODO Session??
 		return resultView;
 	}

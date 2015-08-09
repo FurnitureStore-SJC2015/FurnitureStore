@@ -18,7 +18,7 @@ import com.exposit.domain.service.sorokin.UserService;
 public class LoginController {
 
 	@Autowired
-	private UserService userRepository;
+	private UserService userService;
 
 	@RequestMapping(value = { "", "/login" }, method = { RequestMethod.GET })
 	public String showLogin() {
@@ -31,7 +31,7 @@ public class LoginController {
 			value = "password", required = true) String password,
 			HttpSession httpSession) {
 		// TODO AuthenicationException and login exception as parameter
-		User user = userRepository.findUserByLoginAndPassword(login, password);
+		User user = userService.findUserByLoginAndPassword(login, password);
 		httpSession.setAttribute("user", user);
 		return "redirect:client/";
 	}

@@ -2,7 +2,7 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<c:url value="" />">Furniture Store</a>
+			<a class="navbar-brand" href="<c:url value="/" />">Furniture Store</a>
 		</div>
 		<c:if test="${not empty user}">
 			<ul class="nav navbar-nav navbar-right">
