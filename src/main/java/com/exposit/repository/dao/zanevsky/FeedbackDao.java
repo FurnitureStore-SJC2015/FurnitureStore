@@ -13,5 +13,5 @@ public interface FeedbackDao extends GenericDao<Feedback, Integer>{
 	
 	public List<Feedback> getFeedbackList(ProductCatalogUnit catalogUnit);
 	
-	public Double getAverageMark(ProductCatalogUnit catalogUnit);
+	public double getAverageMark(ProductCatalogUnit catalogUnit);
 }
