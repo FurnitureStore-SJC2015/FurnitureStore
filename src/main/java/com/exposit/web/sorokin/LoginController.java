@@ -1,5 +1,6 @@
 package com.exposit.web.sorokin;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,14 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
-	public ModelAndView doLogin(
-			@RequestParam(value = "login", required = true) String login,
-			@RequestParam(value = "password", required = true) String password,
+	public String handleLogin(HttpServletRequest request, @RequestParam(
+			value = "login", required = true) String login, @RequestParam(
+			value = "password", required = true) String password,
 			HttpSession httpSession) {
-		ModelAndView modelAndView = new ModelAndView();
+		// TODO AuthenicationException and login exception as parameter
 		User user = userRepository.findUserByLoginAndPassword(login, password);
 		httpSession.setAttribute("user", user);
-		// TODO here goes security?
-		modelAndView.setViewName("redirect:client/");
-		return modelAndView;
+		return "redirect:client/";
 	}
 
 	@RequestMapping(value = { "/logout" })

@@ -6,8 +6,8 @@
 		<h3>Create new account!</h3>
 		<div>
 			<div class="panel-body">
-				<form:form method="POST" modelAttribute="user"
-					class="form-horizontal" role="form">
+				<form:form method="POST" modelAttribute="new_user"
+					class="form-horizontal" role="form" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="name" class="col-sm-4 control-label">Name:</label>
 						<div class="col-sm-8">
@@ -45,6 +45,15 @@
 							<form:input path="email" class="form-control" />
 						</div>
 						<form:errors path="email" class="help-block"></form:errors>
+					</div>
+
+
+
+					<div class="form-group">
+						<label for="image" class="col-sm-4 control-label">Image:</label>
+						<div class="col-sm-8">
+							<input name="image" type="file">
+						</div>
 					</div>
 
 					<div class="form-group">

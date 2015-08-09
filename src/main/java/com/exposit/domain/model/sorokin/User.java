@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -63,19 +64,35 @@ public class User {
 			message = "*Not valid email.")
 	@Column(name = "email")
 	private String email;
+
+	@Column(name = "avatar")
+	@Lob
+	private byte[] avatar;
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id",
+			insertable = false, updatable = false,
 			columnDefinition = "int default 4")
 	private Role role;
 	@OneToMany
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", insertable = false, updatable = false,
+			columnDefinition = "int default 4")
 	private List<Feedback> feedbacks;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "bonus_id", columnDefinition = "int default 4")
+	@JoinColumn(name = "bonus_id", insertable = false, updatable = false,
+			columnDefinition = "int default 4")
 	private Bonus bonus;
 
 	@OneToMany

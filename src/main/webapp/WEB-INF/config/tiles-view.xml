@@ -37,7 +37,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/orders.jsp" />
 	</definition>
 
-	<definition name="=client.order " extends="template">
+	<definition name="client.order" extends="template">
 		<put-attribute name="title" expression="Order ${order.id}"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
