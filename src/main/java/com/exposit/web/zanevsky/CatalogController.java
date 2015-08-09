@@ -24,6 +24,7 @@ public class CatalogController {
 		for(ProductCatalogUnit item : list){
 			System.out.println(item.getId() + " " + item.getName());
 		}
+		//ggg
 		model.addAttribute("list", list);
 		return "shop.catalog";
 	}
