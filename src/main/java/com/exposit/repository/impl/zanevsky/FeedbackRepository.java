@@ -36,11 +36,11 @@ public class FeedbackRepository extends AbstractHibernateDao<Feedback, Integer>
 	}
 
 	@Override
-	public double getAverageMark(ProductCatalogUnit catalogUnit) {
+	public Double getAverageMark(ProductCatalogUnit catalogUnit) {
 		Criteria criteria = this.getSession().createCriteria(Feedback.class, "feedback")
 		.add(Restrictions.eq("productCatalogUnit", catalogUnit))
 		.setProjection(Projections.avg("range"));
-		return (double) criteria.uniqueResult();
+		return (Double) criteria.uniqueResult();
 	}
 	
 }
