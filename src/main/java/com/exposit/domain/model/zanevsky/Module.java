@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -38,6 +39,11 @@ public class Module {
 	@Enumerated(EnumType.STRING)
 	private ModuleType moduleType;
 	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "image")
+	@Lob
+	private byte[] image;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
@@ -95,6 +101,14 @@ public class Module {
 		this.productTemplates = productTemplates;
 	}
 
+	public List<RequestUnit> getRequestUnits() {
+		return requestUnits;
+	}
+
+	public void setRequestUnits(List<RequestUnit> requestUnits) {
+		this.requestUnits = requestUnits;
+	}
+
 	public List<ShipmentUnit> getShipmentUnits() {
 		return shipmentUnits;
 	}
@@ -102,13 +116,13 @@ public class Module {
 	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
 		this.shipmentUnits = shipmentUnits;
 	}
-
-	public List<RequestUnit> getRequestUnit() {
-		return requestUnits;
+	
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setRequestUnit(List<RequestUnit> requestUnit) {
-		this.requestUnits = requestUnit;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

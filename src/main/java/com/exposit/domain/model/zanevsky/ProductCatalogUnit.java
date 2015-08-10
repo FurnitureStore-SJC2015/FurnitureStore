@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,10 +40,15 @@ public class ProductCatalogUnit {
 	@Column(name = "product_name", length = 50)
 	private String name;
 	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "image")
+	@Lob
+	private byte[] image;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sale_id")
 	private Sale sale;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = {CascadeType.REMOVE})
 	private List<Feedback> feedbacks;
 	
@@ -114,6 +120,14 @@ public class ProductCatalogUnit {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+		
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }
