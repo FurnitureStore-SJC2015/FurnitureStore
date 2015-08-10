@@ -6,7 +6,7 @@
 		<h3>Create new account!</h3>
 		<div>
 			<div class="panel-body">
-				<form:form method="POST" modelAttribute="new_user"
+				<form:form method="POST" modelAttribute="client"
 					class="form-horizontal" role="form" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="name" class="col-sm-4 control-label">Name:</label>
@@ -47,12 +47,10 @@
 						<form:errors path="email" class="help-block"></form:errors>
 					</div>
 
-
-
 					<div class="form-group">
-						<label for="image" class="col-sm-4 control-label">Image:</label>
+						<label for="avatar" class="col-sm-4 control-label">Image:</label>
 						<div class="col-sm-8">
-							<input name="image" type="file">
+							<input name="avatar" type="file">
 						</div>
 					</div>
 

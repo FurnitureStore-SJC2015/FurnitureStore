@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.exposit.domain.model.sorokin.Bonus;
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.PaymentType;
@@ -27,26 +28,12 @@ public class MaxTester {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
-		
+		UserDao userDao = (UserDao) context.getBean("userRepository");
+		Client client = (Client) userDao.findById(1);
+		System.out.println(client.getName());
+		Client cli = (Client) userDao.findById(1);
+		System.out.println(cli.getBonus().getPercentage());
+
 	}
 
-	private static Order createNewOrder(PaymentScheme scheme) {
-		Order order = new Order();
-		order.setOrderDate(new Date());
-		order.setExecutionDate(new Date());
-		order.setPaymentScheme(scheme);
-		return order;
-	}
-
-	private static User createNewUser(String email, String login, String name,
-			String password, String surname, Role role, Bonus bonus) {
-		User user = new User();
-		user.setEmail(email);
-		user.setLogin(login);
-		user.setName(name);
-		user.setPassword(password);
-		user.setSurname(surname);
-		user.setRole(role);
-		return user;
-	}
 }

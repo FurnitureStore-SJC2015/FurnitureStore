@@ -1,5 +1,6 @@
 package com.exposit.web.sorokin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
-import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -29,14 +30,12 @@ public class ClientController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String initClient(HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		List<Order> orders = orderService.getOrders(user);
-		user.setOrders(orderService.getOrders(user));
+		Client client = (Client) session.getAttribute("user");
+		byte[] encoded = Base64.encodeBase64(client.getAvatar());
 
-		byte[] encoded = Base64.encodeBase64(user.getAvatar());
 		String encodedString = new String(encoded);
 		session.setAttribute("image", encodedString);
-		session.setAttribute("orderList", orders);// TODO 2 params of List???
+		session.setAttribute("orderList", new ArrayList<Order>());// TODO 2 params of List???
 		return "redirect:profile/";
 
 	}
