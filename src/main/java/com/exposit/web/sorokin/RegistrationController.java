@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -31,20 +32,20 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String doRegistration(@Valid User user, BindingResult result,
+	public String doRegistration(@Valid Client client, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam(
-					value = "image", required = false) MultipartFile image) {
+					value = "avatar", required = false) MultipartFile avatar) {
 		String resultView = "redirect:/login";
 		if (result.hasErrors()) {
 			return "register";
 		}
 		try {
-			user.setAvatar(image.getBytes());
+			client.setAvatar(avatar.getBytes());
 		} catch (IOException e) {
 			e.getStackTrace();
 		}
-		userService.createNewUser(user);
-		redirectAttributes.addFlashAttribute("new_user", user);// TODO Session??
+		//userService.createNewUser(user);
+		//redirectAttributes.addFlashAttribute("new_user", user);// TODO Session??
 		return resultView;
 	}
 }

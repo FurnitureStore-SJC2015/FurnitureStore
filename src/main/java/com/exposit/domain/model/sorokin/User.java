@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -23,6 +25,7 @@ import org.hibernate.annotations.CascadeType;
 import com.exposit.domain.model.zanevsky.Feedback;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"login", "email" }) })
 public class User {
@@ -45,7 +48,6 @@ public class User {
 			message = "*Surname must be alphanumeric with no spaces.")
 	@Column(name = "surname")
 	private String surname;
-
 	@Size(min = 3, max = 10,
 			message = "*Login must be between 3 and 10 characters long.")
 	@Pattern(regexp = "[a-zA-Z0-9_-]*",
@@ -65,40 +67,12 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "avatar")
-	@Lob
-	private byte[] avatar;
-
-	public byte[] getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(byte[] avatar) {
-		this.avatar = avatar;
-	}
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id",
 			insertable = false, updatable = false,
 			columnDefinition = "int default 4")
 	private Role role;
-	@OneToMany
-	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id", insertable = false, updatable = false,
-			columnDefinition = "int default 4")
-	private List<Feedback> feedbacks;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "bonus_id", insertable = false, updatable = false,
-			columnDefinition = "int default 4")
-	private Bonus bonus;
-
-	@OneToMany
-	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private List<Order> orders;
 
 	public Integer getId() {
 		return id;
@@ -148,13 +122,6 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
 
 	public Role getRole() {
 		return role;
@@ -162,22 +129,6 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public List<Feedback> getFeedbacks() {
-		return feedbacks;
-	}
-
-	public void setFeedbacks(List<Feedback> feedbacks) {
-		this.feedbacks = feedbacks;
-	}
-
-	public Bonus getBonus() {
-		return bonus;
-	}
-
-	public void setBonus(Bonus bonus) {
-		this.bonus = bonus;
 	}
 
 }
