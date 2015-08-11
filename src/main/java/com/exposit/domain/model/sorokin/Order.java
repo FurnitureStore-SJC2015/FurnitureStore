@@ -45,20 +45,20 @@ public class Order {
 
 	@ManyToOne
 	@Cascade(CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "client_id")
+	private Client client;
 
 	@OneToMany
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderUnit> orderUnits;
 
-	public User getUser() {
-		return user;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public Integer getId() {

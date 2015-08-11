@@ -18,4 +18,6 @@ public interface OrderService {
 	public void updateOrder(Order order);
 
 	public List<Order> getOrders(User user);
+
+	public Integer getOrdersCount(User user);
 }

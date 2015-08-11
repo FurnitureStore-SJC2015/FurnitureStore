@@ -48,7 +48,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void deleteOrder(int id) {
 		orderRepository.delete(id);
-		
+
+	}
+
+	@Override
+	public Integer getOrdersCount(User user) {
+		return orderRepository.getSizeOfClientOrdersList(user);
 	}
 
 }

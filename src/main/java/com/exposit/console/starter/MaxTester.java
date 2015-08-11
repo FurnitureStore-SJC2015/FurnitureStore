@@ -29,10 +29,15 @@ public class MaxTester {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
 		UserDao userDao = (UserDao) context.getBean("userRepository");
+		BonusDao bonusDao = (BonusDao) context.getBean("bonusRepository");
+		OrderDao orderDao = (OrderDao) context.getBean("orderRepository");
+
 		Client client = (Client) userDao.findById(1);
-		System.out.println(client.getName());
-		Client cli = (Client) userDao.findById(1);
-		System.out.println(cli.getBonus().getPercentage());
+		System.out.println(orderDao.getSizeOfClientOrdersList(client));
+
+		for (Order order : orderDao.getListOfUserOrders(client)) {
+			System.out.println(order.getId());
+		}
 
 	}
 

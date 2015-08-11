@@ -3,6 +3,8 @@ package com.exposit.repository.impl.sorokin;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ public class OrderRepository extends AbstractHibernateDao<Order, Integer>
 	@Override
 	public List<Order> getListOfUserOrders(User user) {
 		Criteria cr = getSession().createCriteria(Order.class).add(
-				Restrictions.eq("user", user));
+				Restrictions.eq("client", user));
 		return (List<Order>) cr.list();
 	}
 
@@ -31,5 +33,12 @@ public class OrderRepository extends AbstractHibernateDao<Order, Integer>
 		Criteria cr = getSession().createCriteria(Order.class).add(
 				Restrictions.eq("paymentScheme", scheme));
 		return (List<Order>) cr.list();
+	}
+
+	@Override
+	public Integer getSizeOfClientOrdersList(User user) {
+		Criteria cr = getSession().createCriteria(Order.class);
+		return cr.add(Restrictions.eq("client", user)).list().size();
+
 	}
 }

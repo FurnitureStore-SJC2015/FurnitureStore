@@ -8,7 +8,7 @@
 					Profile<span class="badge"></span>
 				</a>
 				<a href='<c:url value="/client/orders"/>' class="list-group-item">My
-					Orders<span class="badge">${fn:length(user.orders)}</span>
+					Orders<span class="badge">${orderCount}</span>
 				</a>
 				<a href="#" class="list-group-item">Position<span class="badge"></span></a>
 				<a href="#" class="list-group-item">Position<span class="badge"></span></a>

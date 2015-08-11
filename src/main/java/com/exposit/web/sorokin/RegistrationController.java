@@ -27,7 +27,7 @@ public class RegistrationController {
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
-		model.addAttribute("new_user", new User());
+		model.addAttribute("client", new Client());
 		return "register";
 	}
 
@@ -44,8 +44,8 @@ public class RegistrationController {
 		} catch (IOException e) {
 			e.getStackTrace();
 		}
-		//userService.createNewUser(user);
-		//redirectAttributes.addFlashAttribute("new_user", user);// TODO Session??
+		userService.createNewUser(client);
+		redirectAttributes.addFlashAttribute("client", client);
 		return resultView;
 	}
 }

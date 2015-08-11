@@ -11,6 +11,8 @@ public interface OrderDao extends GenericDao<Order, Integer> {
 
 	public List<Order> getListOfUserOrders(User user);
 
+	public Integer getSizeOfClientOrdersList(User user);
+
 	public List<Order> getListOfOrdersByPaymentScheme(PaymentScheme scheme);
 
 }

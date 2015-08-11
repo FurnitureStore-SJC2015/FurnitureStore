@@ -8,13 +8,14 @@
 	<div class="col-md-8 col-md-offset-2 ">
 		<div class="panel-body">
 			<h3>Please Sign In!</h3>
-			<form:form name="loginForm" action="login" method="POST"
+			<c:url value="/j_spring_security_check" var="loginUrl" />
+			<form:form name="loginForm" action="${ loginUrl}" method="POST"
 				class="form-horizontal" role="form">
 				<div class="form-group ">
 					<label for="login" class="col-sm-3 control-label">Login:</label>
 					<div class="col-sm-9 control-label">
 						<input type="text" id="login" name="login" class="form-control"
-							placeholder="Enter user login" value="${new_user.login}">
+							placeholder="Enter user login" value="${client.login}">
 					</div>
 				</div>
 				<div class="form-group">

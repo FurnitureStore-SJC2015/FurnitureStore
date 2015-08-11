@@ -35,12 +35,12 @@ public class Client extends User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "bonus_id", insertable = false, updatable = false,
-			columnDefinition = "int default 4")
+			columnDefinition = "int default 2")
 	private Bonus bonus;
 
 	@OneToMany
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "client_id")
 	private List<Order> orders;
 
 	public Bonus getBonus() {
