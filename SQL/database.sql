@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `store`.`module` (
   `provider_id` INT(11) NULL DEFAULT NULL,
   `module_type` VARCHAR(50) NULL DEFAULT NULL,
   `image` MEDIUMBLOB NULL DEFAULT NULL,
+  `cost` DOUBLE NOT NULL default 0,
   PRIMARY KEY (`module_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -165,9 +166,6 @@ AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
--- -----------------------------------------------------
--- Table `store`.`product_catalog_unit`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `store`.`product_catalog_unit` (
   `product_catalog_unit_id` INT(11) NOT NULL AUTO_INCREMENT,
   `sale_id` INT(11) NULL DEFAULT NULL,
@@ -175,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `store`.`product_catalog_unit` (
   `product_cost` DOUBLE NULL DEFAULT NULL,
   `margin_coefficient` DOUBLE NULL DEFAULT NULL,
   `image` MEDIUMBLOB NULL DEFAULT NULL,
+  `product_description` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`product_catalog_unit_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
@@ -270,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `store`.`shipment` (
   `shipment_id` INT(11) NOT NULL AUTO_INCREMENT,
   `provider_id` INT(11) NULL DEFAULT NULL,
   `way_bill_id` INT(11) NULL DEFAULT NULL,
-  `cargo_margin_coefficient` DOUBLE NULL DEFAULT NULL,
+  `provider_margin_percent` DOUBLE NULL DEFAULT NULL,
   `is_processed` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`shipment_id`))
 ENGINE = InnoDB
@@ -312,8 +311,8 @@ CREATE TABLE IF NOT EXISTS `store`.`storage_module_unit` (
   `storage_module_unit_id` INT(11) NOT NULL AUTO_INCREMENT,
   `module_id` INT(11) NULL DEFAULT NULL,
   `module_count` INT(11) NULL DEFAULT NULL,
-  `unit_cost` DOUBLE NULL DEFAULT NULL,
   `date_of_delivery` DATETIME NULL DEFAULT NULL,
+  `full_margin` DOUBLE NOT NULL,
   PRIMARY KEY (`storage_module_unit_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -346,6 +345,7 @@ CREATE TABLE IF NOT EXISTS `store`.`waybill` (
   `departure_date` DATETIME NULL DEFAULT NULL,
   `delivery_date` DATETIME NULL DEFAULT NULL,
   `delivery_cost` DOUBLE NULL DEFAULT NULL,
+   `confirmation_date`    DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`way_bill_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -355,3 +355,70 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('1', '1', 'Ivan', 'Adamin', 'Admin', 'root', 'adamin@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('2', '2', 'Max', 'Sorokin', 'Max', 'provider', 'sorokin@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('3', '3', 'Kate', 'Dobrilko', 'Kate', 'company', 'dobrilko@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`,  `name`, `surname`, `login`, `password`, `email`) VALUES ('4', '4', 'Vasili', 'Yavorchuk', 'Vasili', 'user', 'yavorchuk@gmail.com');
+
+INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('1', 'ADMIN');
+INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('2', 'PROVIDER');
+INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('3', 'COMPANY');
+INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('4', 'USER');
+
+INSERT INTO `store`.`bonus` (`bonus_id`, `sum_bound`, `percentage`) VALUES ('1', '2250', '12.5');
+
+INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('1', 'READY');
+INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('2', 'INPROGRESS');
+INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('3', 'NOTREADY');
+
+INSERT INTO `store`.`payment_form` (`payment_type_id`, `payment_type`) VALUES ('1', 'CREDIT');
+
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('1', '1', '1', 'TABLE_LEG');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('2', '2', '1', 'TABLETOP');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('3', '3', '1', 'CHAIR_BACK');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('4', '4', '1', 'CHAIR_LEG');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('5', '5', '1', 'CHAIR_SEAT');
+
+INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`,`date_of_delivery`) VALUES ('1', '1', '500','100', '2015-07-28 12:00:00');
+INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('2', '2', '200', '400', '2015-07-28 12:00:00');
+INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('3', '3', '300', '300', '2015-07-28 12:00:00');
+INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('4', '4', '400', '200', '2015-07-28 12:00:00');
+INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('5', '5', '500', '100', '2015-07-28 12:00:00');
+
+INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`, `provider_login`) VALUES ('1', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831', 'Max');
+
+INSERT INTO `store`.`product_catalog_unit` (`product_catalog_unit_id`, `sale_id`, `product_name`, `product_cost`, `margin_coefficient`) VALUES ('1', '1', 'Table', '10000', '22.5');
+
+INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('1', '1', '1', '4');
+INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('2', '1', '2', '1');
+
+INSERT INTO `store`.`request` (`request_id`, `provider_id`, `request_date`) VALUES ('1', '1', '2015-07-28 12:00:00');
+
+INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('1', '1', '1', '1000');
+INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('2', '1', '2', '1000');
+INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('3', '1', '3', '1000');
+
+INSERT INTO `store`.`shipment` (`shipment_id`, `provider_id`, `way_bill_id`,`is_processed`,`provider_margin_percent`) VALUES ('1', '1', '1', '0','15');
+
+INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('1', '1', '3', '1000', '1000');
+INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('2', '1', '4', '1000', '2000');
+INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('3', '1', '5', '1000', '3000');
+
+INSERT INTO `store`.`waybill` (`way_bill_id`, `shipment_id`, `departure_date`, `delivery_date`, `delivery_cost`,`confirmation_date`) VALUES ('1', '1', '2015-07-12', '2015-07-24', '1230',NULL);
+
+INSERT INTO `store`.`sale` (`sale_id`, `start_time`, `end_time`, `percentage_sale`) VALUES ('1', '2015-07-12', '2015-08-12', '11.5');
+INSERT INTO `store`.`sale` (`sale_id`, `start_time`, `end_time`, `percentage_sale`) VALUES ('2', '2015-07-12', '2015-09-12', '1.5');
+
+INSERT INTO `store`.`feedback` (`feedback_id`, `product_catalog_unit_id`, `text`, `feedback_date`, `rating`) VALUES ('1', '1',  'Good product', '2015-08-01 12:00:00', '4');
+
+INSERT INTO `store`.`orders` (`order_id`,  `payment_scheme_id`, `order_date`, `execution_date`) VALUES ('1', '4',  '2015-07-29 12:00:00', '2015-07-31 12:00:00');
+
+INSERT INTO `store`.`order_unit` (`order_unit_id`, `state_id`, `order_id`, `product_catalog_unit_id`, `order_unit_cost`) VALUES ('1', '1', '1', '1', '2000');
+INSERT INTO `store`.`order_unit` (`order_unit_id`, `state_id`, `order_id`, `product_catalog_unit_id`, `order_unit_cost`) VALUES ('2', '1', '1', '1', '2000');
+
+INSERT INTO `store`.`payment_scheme` (`payment_scheme_id`, `payment_type_id`, `term`, `penalty`, `number_of_payments`, `interest_rate`) VALUES ('1', '1', '15', '1.5', '10', '12.5');
+
+INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('1', '1', '2015-07-29 12:00:00', '200', '1');
+INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('2', '1', '2015-07-30 12:00:00', '300', '1');
+
