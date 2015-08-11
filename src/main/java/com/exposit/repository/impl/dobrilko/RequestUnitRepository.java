@@ -22,7 +22,7 @@ public class RequestUnitRepository extends
 	}
 
 	@Override
-	public Module getModuleByRequesiUnit(RequestUnit requestUnit) {
+	public Module getModuleByRequestUnit(RequestUnit requestUnit) {
 		Criteria criteria = getSession().createCriteria(Module.class).add(
 				Restrictions.eq("requestUnit", requestUnit));
 		return (Module) criteria.uniqueResult();

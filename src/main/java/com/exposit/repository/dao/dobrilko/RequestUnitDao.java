@@ -9,5 +9,5 @@ public interface RequestUnitDao extends GenericDao<RequestUnit, Integer> {
 
 	public Request getRequestByRequestUnit(RequestUnit requestUnit);
 
-	public Module getModuleByRequesiUnit(RequestUnit requestUnit);
+	public Module getModuleByRequestUnit(RequestUnit requestUnit);
 }

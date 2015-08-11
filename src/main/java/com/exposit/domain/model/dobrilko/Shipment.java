@@ -25,8 +25,8 @@ public class Shipment {
 	@Column(name = "shipment_id")
 	private int id;
 
-	@Column(name = "cargo_margin_coefficient")
-	private double marginCoefficient;
+	@Column(name = "provider_margin_precent")
+	private int providerMarginPercent;
 
 	@Column(name = "is_processed")
 	private boolean isProcessed;
@@ -55,12 +55,12 @@ public class Shipment {
 		this.id = id;
 	}
 
-	public double getMarginCoefficient() {
-		return marginCoefficient;
+	public double getProviderMarginPercent() {
+		return providerMarginPercent;
 	}
 
-	public void setMarginCoefficient(double marginCoefficient) {
-		this.marginCoefficient = marginCoefficient;
+	public void setProviderMarginPercent(int providerMarginPercent) {
+		this.providerMarginPercent = providerMarginPercent;
 	}
 
 	public void setWaybill(Waybill waybill) {

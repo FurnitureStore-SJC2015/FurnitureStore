@@ -34,8 +34,8 @@ public class StorageModuleUnit {
 	@Column(name = "module_count")
 	private int count;
 
-	@Column(name = "unit_cost")
-	private double cost;
+	@Column(name = "full_margin")
+	private double fullMargin;
 
 	public int getId() {
 		return id;
@@ -61,12 +61,12 @@ public class StorageModuleUnit {
 		this.count = count;
 	}
 
-	public double getCost() {
-		return cost;
+	public double getFullMargin() {
+		return fullMargin;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setFullMargin(double fullMargin) {
+		this.fullMargin = fullMargin;
 	}
 
 }

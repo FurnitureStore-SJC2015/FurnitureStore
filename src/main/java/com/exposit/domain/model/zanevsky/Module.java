@@ -27,18 +27,21 @@ import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 @Entity
 @Table(name = "module")
 public class Module {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "module_id")
-	private int id;	
-	
+	private int id;
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "module_type")
 	@Enumerated(EnumType.STRING)
 	private ModuleType moduleType;
-	
+
+	@Column(name = "cost")
+	private double cost;
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "image")
 	@Lob
@@ -47,18 +50,21 @@ public class Module {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "storage_module_unit_id", nullable = true)
 	private StorageModuleUnit storageModuleUnit;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module",
+			cascade = CascadeType.ALL)
 	private List<ProductTemplate> productTemplates;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module",
+			cascade = CascadeType.ALL)
 	private List<ShipmentUnit> shipmentUnits;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module",
+			cascade = CascadeType.ALL)
 	private List<RequestUnit> requestUnits;
 
 	public int getId() {
@@ -116,13 +122,21 @@ public class Module {
 	public void setShipmentUnits(List<ShipmentUnit> shipmentUnits) {
 		this.shipmentUnits = shipmentUnits;
 	}
-	
+
 	public byte[] getImage() {
 		return image;
 	}
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 }

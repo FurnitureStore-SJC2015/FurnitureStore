@@ -30,6 +30,8 @@ public class Waybill {
 	private Date deliveryDate;
 	@Column(name = "delivery_cost")
 	private double deliveryCost;
+	@Column(name = "confirmation_date")
+	private Date confirmationDate;
 
 	public int getId() {
 		return id;

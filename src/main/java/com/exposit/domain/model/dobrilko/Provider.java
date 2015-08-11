@@ -30,8 +30,7 @@ public class Provider {
 	@Column(name = "zip_code")
 	private String zipCode;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "provider",
-			orphanRemoval = true)
+	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Module> modules;
 
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
