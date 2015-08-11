@@ -49,23 +49,29 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp" />
 	</definition>
 
-    <definition name="request.provider-panel" extends="template">
+	<definition name="request.provider-panel" extends="template">
 		<put-attribute name="title" value="Provider Request Panel" />
-		<put-attribute name="body" value="/WEB-INF/views/request/provider-panel.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/request/provider-panel.jsp" />
 	</definition>
 
 	<!-- Kate's definitions! -->
-	
-	<!-- Vital's definitions! -->
-	
-	<definition name = "shop.catalog" extends="template">
-		<put-attribute name="title" value="Shop Catalog" />
+
+	<definition name="request.provider-panel" extends="template">
+		<put-attribute name="title" value="Provider Request Panel" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/shop/catalog.jsp" />
+			value="/WEB-INF/views/request/provider-panel.jsp" />
 	</definition>
-	
-	<definition name = "shop.product" extends="template">
-		<put-attribute name="title" value = "Product"></put-attribute>
+
+	<!-- Vital's definitions! -->
+
+	<definition name="shop.catalog" extends="template">
+		<put-attribute name="title" value="Shop Catalog" />
+		<put-attribute name="body" value="/WEB-INF/views/shop/catalog.jsp" />
+	</definition>
+
+	<definition name="shop.product" extends="template">
+		<put-attribute name="title" value="Product"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/shop/product.jsp"></put-attribute>
 	</definition>

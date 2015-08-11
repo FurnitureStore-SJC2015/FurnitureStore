@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.service.sorokin.OrderService;
 
+@Component
 public class StringToOrderConverter implements Converter<String, Order> {
 
 	@Autowired
