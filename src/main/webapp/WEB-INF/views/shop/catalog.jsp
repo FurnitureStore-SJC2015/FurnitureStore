@@ -8,11 +8,11 @@
 <c:forEach items= "${list}" var="item">
 	<div class="media">
 	  <a class="pull-left" href="#">
-	  	<img src="data:image/jpeg;base64,${images.get(item.id)}" class="media-object" alt = "${item.name }" height="150" width="150">
+	  	<img src="data:image/jpeg;base64,${item.image}" class="media-object" alt = "${item.name }" height="150" width="150">
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading">${item.name }</h4>
-	    ${texts.get(item.id) }
+	    ${item.description }
 	    ...
 	  </div>
 	</div>
