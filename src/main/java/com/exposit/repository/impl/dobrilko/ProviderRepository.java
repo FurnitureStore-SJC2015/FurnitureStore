@@ -1,7 +1,5 @@
 package com.exposit.repository.impl.dobrilko;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -16,20 +14,18 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class ProviderRepository extends AbstractHibernateDao<Provider, Integer>
 		implements ProviderDao {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Request> getRequestsByProvider(Provider provider) {
-		Criteria criteria = getSession().createCriteria(Request.class).add(
-				Restrictions.eq("provider", provider));
-		return (List<Request>) criteria.list();
+	public Provider getProvider(Request request) {
+		Criteria criteria = getSession().createCriteria(Provider.class).add(
+				Restrictions.eq("request", request));
+		return (Provider) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Shipment> getShipmentsByProvider(Provider provider) {
-		Criteria criteria = getSession().createCriteria(Shipment.class).add(
-				Restrictions.eq("provider", provider));
-		return (List<Shipment>) criteria.list();
+	public Provider getProvider(Shipment shipment) {
+		Criteria criteria = getSession().createCriteria(Provider.class).add(
+				Restrictions.eq("shipment", shipment));
+		return (Provider) criteria.uniqueResult();
 	}
 
 }
