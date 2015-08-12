@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.repository.dao.dobrilko.WaybillDao;
 
+@Service
 public class WaybillServiceImpl implements WaybillService {
 
 	@Autowired

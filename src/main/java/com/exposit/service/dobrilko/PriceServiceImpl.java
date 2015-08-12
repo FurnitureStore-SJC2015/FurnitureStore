@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.dobrilko.Shipment;
@@ -18,6 +19,7 @@ import com.exposit.repository.dao.dobrilko.WaybillDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
 
+@Service
 public class PriceServiceImpl implements PriceService {
 
 	@Autowired
