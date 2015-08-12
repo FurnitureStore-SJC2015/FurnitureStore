@@ -21,27 +21,30 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Submit" />
+						<div class="col-md-2 col-md-offset-3">
+							<input type="submit" class="btn btn-primary btn-lg btn-block"
+								value="Find" />
+						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 
-		<c:if test="${not empty userList}">
-			<div class="col-md-12 well">
-				<h1>All Users</h1>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Surname</th>
-							<th>Login</th>
-							<th>E-mail</th>
-							<th>Role</th>
-							<th>Action</th>
-						</tr>
-					</thead>
+		<div class="col-md-10 col-md-offset-1 well">
+			<h1>List of user:</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Login</th>
+						<th>E-mail</th>
+						<th>Role</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<c:if test="${not empty userList}">
 					<tbody>
 						<c:set var="i" value="1"></c:set>
 						<c:forEach items="${userList}" var="user">
@@ -65,9 +68,8 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>
-			</div>
-		</c:if>
+				</c:if>
+			</table>
+		</div>
 	</div>
-
 </sec:authorize>
