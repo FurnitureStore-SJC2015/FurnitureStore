@@ -1,17 +1,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<table>
+<div class="page-header">
+	<h1>"Products catalog</h1>
+</div>
+
 <c:forEach items= "${list}" var="item">
-	 <tr>
-	 	<td>
-	 		${item.id}
-	 	</td>
-	 	<td>
-	 		${item.name}
-	 	</td>
-	 </tr>
- </c:forEach>
-</table>
+	<div class="media">
+	  <a class="pull-left" href="#">
+	  	<img src="data:image/jpeg;base64,${images.get(item.id)}" class="media-object" alt = "${item.name }" height="150" width="150">
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading">${item.name }</h4>
+	    ${texts.get(item.id) }
+	    ...
+	  </div>
+	</div>
+</c:forEach>
+
+
+<div class="col-md-9">
+		<h2>Product</h2>
+		<h3>${product.description}</h3>
+	</div>
+	
+<ul class="pagination">
+<li><a href="#">&laquo;</a></li>
+<c:forEach var = "i" begin="1" end="${pageCount}">
+	<li><a href = "#">${i}</a></li>
+</c:forEach>
+  <li><a href="#">&raquo;</a></li>
+</ul>
 
 <h2>HELLO</h2>

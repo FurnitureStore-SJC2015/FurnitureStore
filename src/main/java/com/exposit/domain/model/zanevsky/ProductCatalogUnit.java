@@ -31,7 +31,7 @@ public class ProductCatalogUnit {
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_cost", scale = 2, unique = true)
 	private double cost;
-	
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "margin_coefficient", scale = 2)
 	private double coefficient;
@@ -39,6 +39,10 @@ public class ProductCatalogUnit {
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_name", length = 50)
 	private String name;
+	
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "product_description")
+	private String description;
 	
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "image")
@@ -128,6 +132,14 @@ public class ProductCatalogUnit {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+		
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

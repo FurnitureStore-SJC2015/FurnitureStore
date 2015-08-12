@@ -7,4 +7,9 @@ import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 public interface ProductCatalogUnitService {
 	
 	public List<ProductCatalogUnit> getAllProductCatalogUnits();
+	
+	
+	public ProductCatalogUnit FindById(int id);
+	
+	public String processImage(ProductCatalogUnit product);
 }
