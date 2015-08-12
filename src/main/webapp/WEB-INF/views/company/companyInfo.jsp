@@ -3,23 +3,13 @@
 
 <div class="col-md-9 well">
 	<div class="page-header">
-		<h1>"${product.name}" information</h1>
-	</div>
-	
-	<div class="col-md-6">
-		<img src="data:image/jpeg;base64,${product.image}" class="img-thumbnail">
-	</div>
-	
-	<div>
-		<button type="button" class="btn btn-primary btn-lg">
-		      Add to client card
-		</button>
+		<h1>"${company.companyName}" information</h1>
 	</div>
 	
 	<div class = "row">
 		<div class="col-md-12">
 			<h1>Description</h1>
-			<h3>${product.description}</h3>
+			<h3>${company.description}</h3>
 		</div>
 		
 		
@@ -28,44 +18,50 @@
 				<thead>
 					<tr>
 						<th>
-							<h1>Product characteristics</h1>
+							<h1>Company props</h1>
 						</th>
 					</tr>
 				</thead>
 				<tr>
 					<td>
-						Product name
+						Company name
 					</td>
 					<td>
-						${product.name}
+						${company.companyName}
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Cost
+						Email
 					</td>
 					<td>
-						${product.cost}
+						${company.email}
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Modules number
+						Company address
 					</td>
 					<td>
-						${modulesCount}
+						${company.address}
 					</td>
 				</tr>
-				<c:if test="${ product.sale != 0 }">
-					<tr>
-						<td>
-							Sale
-						</td>
-						<td>
-							${product.sale}
-						</td>
-					</tr>
-				</c:if>
+				<tr>
+					<td>
+						ZIP code
+					</td>
+					<td>
+						${company.zip}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						director
+					</td>
+					<td>
+						${company.director}
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>
