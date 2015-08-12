@@ -71,4 +71,10 @@
 		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/shop/product.jsp"></put-attribute>
 	</definition>
+	
+	<definition name = "company.info" extends="template">
+		<put-attribute name="title" value="Company Information"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

@@ -26,6 +26,22 @@ public class Company extends User {
 	@Column(name = "director")
 	private String director;
 
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "description")
+	private String description;
+
+	@Basic(fetch = FetchType.EAGER)
+	@Column(name = "company_name")
+	private String companyName;
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -50,5 +66,11 @@ public class Company extends User {
 		this.director = director;
 	}
 	
-	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
