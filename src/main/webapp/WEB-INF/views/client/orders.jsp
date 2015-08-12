@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-${orderList}
-
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <div class="col-md-9 well">
 	<c:if test="${not empty orderList}">
 		<h1>Orders</h1>

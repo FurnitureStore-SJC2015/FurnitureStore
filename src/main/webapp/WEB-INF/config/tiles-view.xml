@@ -43,12 +43,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
 	</definition>
 
-
 	<definition name="admin.index" extends="template">
-		<put-attribute name="title" value="Admin Panel" />
+		<put-attribute name="title" value="Admin Index Page" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
 	</definition>
-
+	
+	<definition name="admin.panel" extends="template">
+		<put-attribute name="title" value="Admin Panel" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp" />
+	</definition>
+	
+	<definition name="admin.register" extends="template">
+		<put-attribute name="title" value="Registration"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/registration.jsp"/>
+	</definition>
 
 	<!-- Kate's definitions! -->
 

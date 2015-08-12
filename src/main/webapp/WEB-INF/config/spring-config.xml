@@ -54,11 +54,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		</property>
 	</bean>
 
-
-	<!--org.springframework.context.support.ConversionServiceFactoryBean -->
-
-
-
 	<import resource="app-data.xml" />
 	<import resource="spring-security.xml" />
 </beans>

@@ -1,7 +1,5 @@
 package com.exposit.domain.model.sorokin;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,18 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-
-import com.exposit.domain.model.zanevsky.Feedback;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -54,11 +49,7 @@ public class User {
 			message = "*Login must be alphanumeric with digits and dashes.")
 	private String login;
 
-	@Size(min = 3, max = 15,
-			message = "*Password must be between 3 and 15 characters long.")
-	@Pattern(regexp = "[a-z0-9_-]*",
-			message = "Password must be alphanumeric with digits and dashes.")
-	@Column(name = "password")
+	@NotNull(message = "Password cannot be null!")
 	private String password;
 
 	@Pattern(
@@ -121,7 +112,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Role getRole() {
 		return role;

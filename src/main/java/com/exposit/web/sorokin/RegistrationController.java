@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,9 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
 		model.addAttribute("client", new Client());
@@ -34,18 +38,20 @@ public class RegistrationController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String doRegistration(@Valid Client client, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam(
-					value = "avatar", required = false) MultipartFile avatar) {
+					value = "image") MultipartFile avatar) {
 		String resultView = "redirect:/login";
 		if (result.hasErrors()) {
 			return "register";
 		}
+		String cryptedPassword = encoder.encode(client.getPassword());
+		client.setPassword(cryptedPassword);
 		try {
 			client.setAvatar(avatar.getBytes());
 		} catch (IOException e) {
 			e.getStackTrace();
 		}
 		userService.createNewUser(client);
-		redirectAttributes.addFlashAttribute("client", client);
+		redirectAttributes.addFlashAttribute("new_client", client);
 		return resultView;
 	}
 }

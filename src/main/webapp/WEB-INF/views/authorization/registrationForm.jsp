@@ -36,7 +36,7 @@
 						<div class="col-sm-8">
 							<form:password path="password" class="form-control" />
 						</div>
-						<form:errors path="password" class=""></form:errors>
+						<form:errors path="password" class="danger"></form:errors>
 					</div>
 
 					<div class="form-group">
@@ -48,9 +48,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="avatar" class="col-sm-4 control-label">Image:</label>
+						<label for="image" class="col-sm-4 control-label">Image:</label>
 						<div class="col-sm-8">
-							<input name="avatar" type="file">
+							<input name="image" type="file">
 						</div>
 					</div>
 

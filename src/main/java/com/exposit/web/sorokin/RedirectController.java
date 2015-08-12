@@ -21,7 +21,7 @@ public class RedirectController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String redirect(HttpSession session, Authentication auth) {
 		User user = (User) userService.findUserByName(auth.getName());
-		Authentication auth1 = auth;
-		return "redirect:/" + user.getRole().getName().toString().toLowerCase()+ "/";
+		return "redirect:/" + user.getRole().getName().toString().toLowerCase()
+				+ "/";
 	}
 }

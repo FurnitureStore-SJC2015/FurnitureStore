@@ -15,7 +15,7 @@
 					<label for="login" class="col-sm-3 control-label">Login:</label>
 					<div class="col-sm-9 control-label">
 						<input type="text" id="login" name="login" class="form-control"
-							placeholder="Enter user login" value="${client.login}">
+							placeholder="Enter user login" value="${new_client.login}">
 					</div>
 				</div>
 				<div class="form-group">
