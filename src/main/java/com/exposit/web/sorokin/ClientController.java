@@ -1,7 +1,5 @@
 package com.exposit.web.sorokin;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +14,7 @@ import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.web.dto.sorokin.ProfileDto;
 
 @Controller
 @RequestMapping("/client")
@@ -33,21 +32,19 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "profile/", method = RequestMethod.GET)
-	public ModelAndView showProfile(HttpSession session, Authentication auth) {
+	public String showProfile(Authentication auth, Model model) {
 		Client client = (Client) userService.findUserByName(auth.getName());
-		ModelAndView modelAndView = new ModelAndView();
-		byte[] encodedImage = Base64.encodeBase64(client.getAvatar());
-		String image = new String(encodedImage);
-		modelAndView.addObject("user", client).addObject("image", image)
-				.addObject("orderCount", orderService.getOrdersCount(client));
-		modelAndView.setViewName("client.profile");
-		return modelAndView;
+		ProfileDto profile = new ProfileDto(client, client.getAvatar(),
+				orderService.getOrdersCount(client));
+		model.addAttribute("profile", profile);
+		return "client.profile";
 	}
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
-	public String showOrders(Model model) {
-		Client client = (Client) model.asMap().get("client");
-		System.out.println(client.getName());
+	public String showOrders(Authentication auth) {
+		Client client = (Client) userService.findUserByName(auth.getName());
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("orderList", orderService.getOrders(client));
 		return "client.orders";
 	}
 

@@ -49,6 +49,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<list>
 				<bean class="com.exposit.web.converters.StringToOrderConverter" />
 				<bean class="com.exposit.web.converters.StringToRoleConverter" />
+				<bean class="com.exposit.web.converters.StringToUserConverter" />
 			</list>
 		</property>
 	</bean>

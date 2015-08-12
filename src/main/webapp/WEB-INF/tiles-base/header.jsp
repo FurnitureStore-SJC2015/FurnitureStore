@@ -25,7 +25,6 @@
 
 		<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value="admin/users/"/>">Display Users</a></li>
 				<li><a href="<c:url value="/logout"/>">Logout</a></li>
 			</ul>
 		</sec:authorize>

@@ -3,7 +3,7 @@
 <div class="col-md-9 well">
 	<div class="row">
 		<div class="col-md-3">
-			<img src="data:image/jpeg;base64,${image}" class="img-thumbnail">
+			<img src="data:image/jpeg;base64,${profile.encodedAvatar}" class="img-thumbnail">
 		</div>
 		<div class="col-md-6">
 			<table class="table table-hover">
@@ -16,19 +16,19 @@
 				<tbody>
 					<tr>
 						<td><strong>Name:</strong></td>
-						<td><strong>${user.name}</strong></td>
+						<td><strong>${profile.client.name}</strong></td>
 					</tr>
 					<tr>
 						<td><strong>Surname:</strong></td>
-						<td><strong>${user.surname}</strong></td>
+						<td><strong>${profile.client.surname}</strong></td>
 					</tr>
 					<tr>
 						<td><strong>E-mail:</strong></td>
-						<td><strong>${user.email}</strong></td>
+						<td><strong>${profile.client.email}</strong></td>
 					</tr>
 					<tr>
 						<td><strong>Current Bonus:</strong></td>
-						<td><strong>${user.bonus.percentage} %</strong></td>
+						<td><strong>${profile.client.bonus.percentage} %</strong></td>
 					</tr>
 				</tbody>
 			</table>
