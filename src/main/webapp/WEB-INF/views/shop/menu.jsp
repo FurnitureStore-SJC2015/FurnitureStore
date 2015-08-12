@@ -8,7 +8,7 @@
 			</a>
 			<a href='<c:url value="/company/info"/>' class="list-group-item"> Shop information
 			</a>
-			<a href='<c:url value="/company/info"/>' class="list-group-item"> Modify Shop
+			<a href='<c:url value="/company/add"/>' class="list-group-item"> Modify Shop
 			</a>
 		</ul>
 	</div>
