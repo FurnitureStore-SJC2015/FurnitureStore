@@ -47,23 +47,34 @@
 		<put-attribute name="title" value="Admin Index Page" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
 	</definition>
-	
+
 	<definition name="admin.panel" extends="template">
 		<put-attribute name="title" value="Admin Panel" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp" />
 	</definition>
-	
+
 	<definition name="admin.register" extends="template">
-		<put-attribute name="title" value="Registration"/>
-		<put-attribute name="body" value="/WEB-INF/views/admin/registration.jsp"/>
+		<put-attribute name="title" value="Registration" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/registration.jsp" />
 	</definition>
 
 	<!-- Kate's definitions! -->
 
-	<definition name="request.provider-panel" extends="template">
+	<definition name="request-provider-panel" extends="template">
 		<put-attribute name="title" value="Provider Request Panel" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/request/provider-panel.jsp" />
+			value="/WEB-INF/views/provider/request/provider-panel.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="request-info" extends="template">
+		<put-attribute name="title" value="Request Info" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/provider/request/request.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
 	</definition>
 
 	<!-- Vital's definitions! -->
@@ -79,21 +90,23 @@
 		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/shop/product.jsp"></put-attribute>
 	</definition>
-	
-	<definition name = "company.info" extends="template">
+
+	<definition name="company.info" extends="template">
 		<put-attribute name="title" value="Company Information"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
 	</definition>
-	
-	<definition name = "catalog.modify.action" extends="template">
-		<put-attribute name="title" value = "Catalog modify"></put-attribute>
+
+	<definition name="catalog.modify.action" extends="template">
+		<put-attribute name="title" value="Catalog modify"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/shop/modifyMenu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/shop/shopModifier.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/shop/shopModifier.jsp"></put-attribute>
 	</definition>
-	
-	<definition name = "catalog.add.product" extends="template">
-		<put-attribute name="title" value = "Catalog modify"></put-attribute>
+
+	<definition name="catalog.add.product" extends="template">
+		<put-attribute name="title" value="Catalog modify"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/shop/modifyMenu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/shop/addProduct.jsp"></put-attribute>
 	</definition>

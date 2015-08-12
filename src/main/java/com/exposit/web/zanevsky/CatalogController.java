@@ -55,7 +55,7 @@ public class CatalogController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "c", method = RequestMethod.POST)
 	public String addProduct(Model model){
 		return "catalog.modify.action";
 	}
