@@ -24,7 +24,7 @@ public class ProductDtoServiceImpl implements ProductDtoService{
 	@Override
 	public List<ProductDto> getAllProductCatalogUnits() {
 		List<ProductCatalogUnit> list = this.productService.getAllProductCatalogUnits();
-		List<ProductDto> productDtos = new ArrayList<>();
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
 		for(ProductCatalogUnit product : list){
 			productDtos.add(this.converter.Convert(product, this.productService));
 		}
