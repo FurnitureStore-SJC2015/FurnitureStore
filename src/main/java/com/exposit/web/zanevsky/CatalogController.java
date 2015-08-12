@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
@@ -38,6 +39,25 @@ public class CatalogController {
 		model.addAttribute("product", product);
 		model.addAttribute("modulesCount", 42);
 		return "shop.product";
+	}
+	
+	@RequestMapping(value = "/action", method = RequestMethod.GET)
+	public ModelAndView chooseAction(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("catalog.modify.action");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public ModelAndView showProductAddForm(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("catalog.add.product");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addProduct(Model model){
+		return "catalog.modify.action";
 	}
 	
 }
