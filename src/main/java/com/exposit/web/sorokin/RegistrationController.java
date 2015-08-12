@@ -43,8 +43,8 @@ public class RegistrationController {
 		if (result.hasErrors()) {
 			return "register";
 		}
-		String cryptedPassword = encoder.encode(client.getPassword());
-		client.setPassword(cryptedPassword);
+		//String cryptedPassword = encoder.encode(client.getPassword());
+		client.setPassword(client.getPassword());
 		try {
 			client.setAvatar(avatar.getBytes());
 		} catch (IOException e) {

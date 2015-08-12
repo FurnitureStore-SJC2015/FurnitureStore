@@ -20,9 +20,9 @@
 		<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 
 			<ul class="nav navbar-nav">
-				<li><a href='<c:url value="panel" />'>Show list of users</a></li>
-				<li><a href='<c:url value="register/provider"/>'>New Provider</a></li>
-				<li><a href='<c:url value="register/company"/>'>New	Employer</a></li>
+				<li><a href='<c:url value="/admin/panel" />'>Show list of users</a></li>
+				<li><a href='<c:url value="/admin/register/provider"/>'>New Provider</a></li>
+				<li><a href='<c:url value="/admin/register/company"/>'>New	Employer</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<c:url value="/logout"/>">Logout</a></li>
