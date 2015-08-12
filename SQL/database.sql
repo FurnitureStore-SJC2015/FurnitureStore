@@ -50,11 +50,15 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `store`.`company`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `store`.`company` ;
+
 CREATE TABLE IF NOT EXISTS `store`.`company` (
   `id` INT(11) NOT NULL,
   `address` VARCHAR(50) NULL DEFAULT NULL,
   `zip` VARCHAR(45) NULL DEFAULT NULL,
   `director` VARCHAR(45) NULL DEFAULT NULL,
+  `description` VARCHAR(5000) NULL DEFAULT NULL,
+  `company_name` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_company_UNIQUE` (`id` ASC))
 ENGINE = InnoDB
