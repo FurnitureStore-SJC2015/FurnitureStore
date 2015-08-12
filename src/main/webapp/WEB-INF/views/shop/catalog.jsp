@@ -15,16 +15,15 @@
 		    <h4 class="media-heading">${item.name }</h4>
 		    ${item.description }
 		    ...
+		    <c:set var = "link" value = "catalog/product/${item.id}"></c:set>
+		    <button class="btn btn-default" onclick="location.href='${link}'">
+		    	Show info 
+		    </button>
 		  </div>
 		</div>
 	</c:forEach>
 	
 	
-	<div class="col-md-9">
-			<h2>Product</h2>
-			<h3>${product.description}</h3>
-		</div>
-		
 	<ul class="pagination">
 	<li><a href="#">&laquo;</a></li>
 	<c:forEach var = "i" begin="1" end="${pageCount}">
