@@ -10,9 +10,10 @@ import com.exposit.repository.base.GenericDao;
 
 public interface ShipmentDao extends GenericDao<Shipment, Integer> {
 
-	public Waybill getWaybillByShipment(Shipment shipment);
+	public Shipment getShipment(ShipmentUnit shipmentUnit);
 
-	public Provider getProviderByShipment(Shipment shipment);
+	public List<Shipment> getShipments(Provider provider);
 
-	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment);
+	public Shipment getShipment(Waybill waybill);
+	
 }

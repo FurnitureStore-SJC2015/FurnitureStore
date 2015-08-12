@@ -9,7 +9,7 @@ import com.exposit.repository.base.GenericDao;
 
 public interface WaybillDao extends GenericDao<Waybill, Integer> {
 
-	public Shipment getShipmentByWaybill(Waybill waybill);
-	
-	public List<Waybill> getWaybillsInPeriod(Date beginningDate, Date endDate);
+	public Waybill getWaybill(Shipment shipment);
+
+	public List<Waybill> getWaybills(Date beginningDate, Date endDate);
 }

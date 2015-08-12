@@ -1,12 +1,13 @@
 package com.exposit.repository.impl.dobrilko;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.RequestUnit;
-import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.repository.dao.dobrilko.RequestUnitDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
 
@@ -14,18 +15,12 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class RequestUnitRepository extends
 		AbstractHibernateDao<RequestUnit, Integer> implements RequestUnitDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Request getRequestByRequestUnit(RequestUnit requestUnit) {
-		Criteria criteria = getSession().createCriteria(Request.class).add(
-				Restrictions.eq("requestUnit", requestUnit));
-		return (Request) criteria.uniqueResult();
-	}
-
-	@Override
-	public Module getModuleByRequestUnit(RequestUnit requestUnit) {
-		Criteria criteria = getSession().createCriteria(Module.class).add(
-				Restrictions.eq("requestUnit", requestUnit));
-		return (Module) criteria.uniqueResult();
+	public List<RequestUnit> getRequestUnits(Request request) {
+		Criteria criteria = getSession().createCriteria(RequestUnit.class).add(
+				Restrictions.eq("request", request));
+		return (List<RequestUnit>) criteria.list();
 	}
 
 }

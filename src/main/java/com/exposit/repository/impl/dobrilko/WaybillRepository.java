@@ -16,18 +16,18 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class WaybillRepository extends AbstractHibernateDao<Waybill, Integer>
 		implements WaybillDao {
 
-	@Override
-	public Shipment getShipmentByWaybill(Waybill waybill) {
-		Criteria criteria = getSession().createCriteria(Shipment.class).add(
-				Restrictions.eq("waybill", waybill));
-		return (Shipment) criteria.uniqueResult();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Waybill> getWaybillsInPeriod(Date beginningDate, Date endDate) {
+	public List<Waybill> getWaybills(Date beginningDate, Date endDate) {
 		Criteria criteria = getSession().createCriteria(Waybill.class).add(
 				(Restrictions.between("arrival_date", beginningDate, endDate)));
 		return (List<Waybill>) criteria.list();
+	}
+
+	@Override
+	public Waybill getWaybill(Shipment shipment) {
+		Criteria criteria = getSession().createCriteria(Waybill.class).add(
+				Restrictions.eq("shipment", shipment));
+		return (Waybill) criteria.uniqueResult();
 	}
 }

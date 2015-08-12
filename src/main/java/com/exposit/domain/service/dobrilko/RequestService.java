@@ -8,16 +8,24 @@ import com.exposit.domain.model.zanevsky.Module;
 
 public interface RequestService {
 
-	public Integer createRequest(Request request);
+	public Integer saveRequest(Request request);
 
 	public Request getRequestById(int id);
+
+	public List<Request> getAllRequests();
+
+	public void deleteRequest(int id);
+
+	public Integer saveRequestUnit(RequestUnit requestUnit);
+
+	public RequestUnit getRequestUnitById(int id);
+
+	public List<RequestUnit> getAllRequestUnits();
+
+	public void deleteRequestUnit(int id);
 
 	public List<RequestUnit> getRequestUnitsByRequest(Request request);
 
 	public Module getModuleByRequestUnit(RequestUnit requestUnit);
-
-	public List<Request> showRequests();
-
-	public Integer createRequestUnit(RequestUnit requestUnit);
 
 }

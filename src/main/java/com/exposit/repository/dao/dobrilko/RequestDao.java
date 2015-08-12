@@ -9,7 +9,7 @@ import com.exposit.repository.base.GenericDao;
 
 public interface RequestDao extends GenericDao<Request, Integer> {
 
-	public Provider getProviderByRequest(Request request);
+	public Request getRequest(RequestUnit requestUnit);
 
-	public List<RequestUnit> getRequestUnitsByRequest(Request request);
+	public List<Request> getRequests(Provider provider);
 }

@@ -12,6 +12,7 @@ import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.repository.dao.dobrilko.RequestDao;
 import com.exposit.repository.dao.dobrilko.RequestUnitDao;
+import com.exposit.repository.dao.zanevsky.ModuleDao;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -20,12 +21,8 @@ public class RequestServiceImpl implements RequestService {
 	private RequestUnitDao requestUnitDao;
 	@Autowired
 	private RequestDao requestDao;
-
-	@Transactional
-	@Override
-	public Integer createRequestUnit(RequestUnit requestUnit) {
-		return requestUnitDao.save(requestUnit);
-	}
+	@Autowired
+	private ModuleDao moduleDao;
 
 	@Transactional
 	@Override
@@ -36,24 +33,58 @@ public class RequestServiceImpl implements RequestService {
 	@Transactional
 	@Override
 	public List<RequestUnit> getRequestUnitsByRequest(Request request) {
-		return requestDao.getRequestUnitsByRequest(request);
-	}
-
-	@Transactional
-	@Override
-	public List<Request> showRequests() {
-		return requestDao.findAll();
+		return requestUnitDao.getRequestUnits(request);
 	}
 
 	@Transactional
 	@Override
 	public Module getModuleByRequestUnit(RequestUnit requestUnit) {
-		return requestUnitDao.getModuleByRequestUnit(requestUnit);
+		return moduleDao.getModule(requestUnit);
 	}
 
 	@Override
-	public Integer createRequest(Request request) {
+	public Integer saveRequest(Request request) {
 		return requestDao.save(request);
+	}
+
+	@Transactional
+	@Override
+	public List<Request> getAllRequests() {
+		return requestDao.findAll();
+
+	}
+
+	@Transactional
+	@Override
+	public void deleteRequest(int id) {
+		requestDao.delete(id);
+	}
+
+	@Transactional
+	@Override
+	public Integer saveRequestUnit(RequestUnit requestUnit) {
+
+		return requestUnitDao.save(requestUnit);
+	}
+
+	@Transactional
+	@Override
+	public RequestUnit getRequestUnitById(int id) {
+		return requestUnitDao.findById(id);
+	}
+
+	@Transactional
+	@Override
+	public List<RequestUnit> getAllRequestUnits() {
+
+		return requestUnitDao.findAll();
+	}
+
+	@Transactional
+	@Override
+	public void deleteRequestUnit(int id) {
+		requestUnitDao.delete(id);
+
 	}
 
 }

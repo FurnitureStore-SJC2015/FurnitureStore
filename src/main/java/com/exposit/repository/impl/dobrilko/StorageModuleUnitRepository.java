@@ -15,11 +15,12 @@ public class StorageModuleUnitRepository extends
 		StorageModuleUnitDao {
 
 	@Override
-	public Module getModuleByStorageModuleUnit(
-			StorageModuleUnit storageModuleUnit) {
-		Criteria criteria = getSession().createCriteria(Module.class).add(
-				Restrictions.eq("storageModuleUnit", storageModuleUnit));
-		return (Module) criteria.uniqueResult();
+	public StorageModuleUnit getStorageModuleUnit(Module module) {
+
+		Criteria criteria = getSession()
+				.createCriteria(StorageModuleUnit.class).add(
+						Restrictions.eq("module", module));
+		return (StorageModuleUnit) criteria.uniqueResult();
 	}
 
 }

@@ -20,8 +20,6 @@ public class RequestController {
 	public ModelAndView showProviderRequestsPanel() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("requests", requestService.showRequests());
-		mav.setViewName("request.provider-panel");
 		return mav;
 	}
 }

@@ -17,26 +17,26 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 		implements ShipmentDao {
 
-	@Override
-	public Waybill getWaybillByShipment(Shipment shipment) {
-		Criteria criteria = getSession().createCriteria(Waybill.class).add(
-				Restrictions.eq("shipment", shipment));
-		return (Waybill) criteria.uniqueResult();
-	}
-
-	@Override
-	public Provider getProviderByShipment(Shipment shipment) {
-		Criteria criteria = getSession().createCriteria(Provider.class).add(
-				Restrictions.eq("shipment", shipment));
-		return (Provider) criteria.uniqueResult();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment) {
-		Criteria criteria = getSession().createCriteria(ShipmentUnit.class)
-				.add(Restrictions.eq("shipment", shipment));
-		return (List<ShipmentUnit>) criteria.list();
+	public List<Shipment> getShipments(Provider provider) {
+		Criteria criteria = getSession().createCriteria(Shipment.class).add(
+				Restrictions.eq("provider", provider));
+		return (List<Shipment>) criteria.list();
+	}
+
+	@Override
+	public Shipment getShipment(Waybill waybill) {
+		Criteria criteria = getSession().createCriteria(Shipment.class).add(
+				Restrictions.eq("waybill", waybill));
+		return (Shipment) criteria.uniqueResult();
+	}
+
+	@Override
+	public Shipment getShipment(ShipmentUnit shipmentUnit) {
+		Criteria criteria = getSession().createCriteria(Shipment.class).add(
+				Restrictions.eq("shipmentUnit", shipmentUnit));
+		return (Shipment) criteria.uniqueResult();
 	}
 
 }

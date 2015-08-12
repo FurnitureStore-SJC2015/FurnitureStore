@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
@@ -16,19 +17,20 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class RequestRepository extends AbstractHibernateDao<Request, Integer>
 		implements RequestDao {
 
+	@Transactional
 	@Override
-	public Provider getProviderByRequest(Request request) {
-		Criteria criteria = getSession().createCriteria(Provider.class).add(
-				Restrictions.eq("request", request));
-		return (Provider) criteria.uniqueResult();
+	public Request getRequest(RequestUnit requestUnit) {
+		Criteria criteria = getSession().createCriteria(Request.class).add(
+				Restrictions.eq("requestUnit", requestUnit));
+		return (Request) criteria.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
-	public List<RequestUnit> getRequestUnitsByRequest(Request request) {
-		Criteria criteria = getSession().createCriteria(RequestUnit.class).add(
-				Restrictions.eq("request", request));
-		return (List<RequestUnit>) criteria.list();
+	public List<Request> getRequests(Provider provider) {
+		Criteria criteria = getSession().createCriteria(Request.class).add(
+				Restrictions.eq("provider", provider));
+		return (List<Request>) criteria.list();
 	}
-
 }
