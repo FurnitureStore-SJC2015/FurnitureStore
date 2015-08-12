@@ -53,7 +53,6 @@ public class CatalogController {
 		model.addAttribute("image", image);
 		model.addAttribute("modulesCount", 42);
 		return "shop.product";
-		///
 	}
 	
 }
