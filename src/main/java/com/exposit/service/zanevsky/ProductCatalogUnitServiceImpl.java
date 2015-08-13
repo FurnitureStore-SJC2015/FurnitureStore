@@ -7,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.sorokin.User;
+import com.exposit.domain.model.zanevsky.Feedback;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
+import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
 
@@ -35,6 +40,54 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 		rawImage = Base64.encodeBase64(rawImage);
 		String image = new String(rawImage);
 		return image;
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> getProducts(Order order) {
+		return this.productDao.getProducts(order);
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> getProducts(User user) {
+		return this.productDao.getProducts(user);
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> getProducts(Sale sale) {
+		return this.productDao.getProducts(sale);
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> getProducts(Module module) {
+		return this.productDao.getProducts(module);
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> lowerBound(double cost) {
+		return this.productDao.lowerBound(cost);
+	}
+
+
+	@Override
+	public List<ProductCatalogUnit> upperBound(double cost) {
+		return this.productDao.upperBound(cost);
+	}
+
+
+	@Override
+	public ProductCatalogUnit getProduct(String name) {
+		return this.productDao.getProduct(name);
+	}
+
+
+	@Override
+	public ProductCatalogUnit getProduct(Feedback feedback) {
+		return this.productDao.getProduct(feedback);
 	}
 	
 }

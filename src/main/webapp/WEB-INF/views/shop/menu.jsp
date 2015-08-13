@@ -10,6 +10,8 @@
 			</a>
 			<a href='<c:url value="/company/add"/>' class="list-group-item"> Modify Shop
 			</a>
+			<a href='<c:url value="/company/add"/>' class="list-group-item"> Kate's Cargo
+			</a>
 		</ul>
 	</div>
 </div>
