@@ -1,25 +1,13 @@
 package com.exposit.console.starter;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.exposit.domain.model.sorokin.Bonus;
-import com.exposit.domain.model.sorokin.Client;
-import com.exposit.domain.model.sorokin.Order;
-import com.exposit.domain.model.sorokin.PaymentScheme;
-import com.exposit.domain.model.sorokin.PaymentType;
-import com.exposit.domain.model.sorokin.Role;
+import com.exposit.domain.model.sorokin.RoleType;
 import com.exposit.domain.model.sorokin.User;
-import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.repository.dao.sorokin.BonusDao;
 import com.exposit.repository.dao.sorokin.OrderDao;
-import com.exposit.repository.dao.sorokin.PaymentDao;
-import com.exposit.repository.dao.sorokin.PaymentFormDao;
-import com.exposit.repository.dao.sorokin.PaymentSchemeDao;
-import com.exposit.repository.dao.sorokin.RoleDao;
 import com.exposit.repository.dao.sorokin.UserDao;
 
 public class MaxTester {
@@ -31,13 +19,7 @@ public class MaxTester {
 		UserDao userDao = (UserDao) context.getBean("userRepository");
 		BonusDao bonusDao = (BonusDao) context.getBean("bonusRepository");
 		OrderDao orderDao = (OrderDao) context.getBean("orderRepository");
-
-		Client client = (Client) userDao.findById(1);
-		System.out.println(orderDao.getSizeOfClientOrdersList(client));
-
-		for (Order order : orderDao.getListOfUserOrders(client)) {
-			System.out.println(order.getId());
-		}
+		RoleService roleService = (RoleService) context.getBean("roleService");
 
 	}
 

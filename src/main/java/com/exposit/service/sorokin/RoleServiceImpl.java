@@ -10,7 +10,7 @@ import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.repository.dao.sorokin.RoleDao;
 
-@Service
+@Service("roleService")
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
@@ -26,6 +26,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role getRoleById(Integer id) {
 		return roleRepository.findById(id);
+	}
+
+	@Override
+	public List<Role> getAllRolesButAdmin() {
+		return roleRepository.getAllRolesButAdmin();
 	}
 
 }

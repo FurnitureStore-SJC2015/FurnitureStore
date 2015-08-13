@@ -21,7 +21,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="myUserDetailsService">
-			<!--  <password-encoder ref="encoder" /> -->
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
 

@@ -26,8 +26,8 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private BCryptPasswordEncoder encoder;
+	//@Autowired
+	//private BCryptPasswordEncoder encoder;
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
@@ -43,8 +43,8 @@ public class RegistrationController {
 		if (result.hasErrors()) {
 			return "register";
 		}
-		String cryptedPassword = encoder.encode(client.getPassword());
-		client.setPassword(cryptedPassword);
+		//String cryptedPassword = encoder.encode(client.getPassword());
+		//client.setPassword(cryptedPassword);
 		try {
 			client.setAvatar(avatar.getBytes());
 		} catch (IOException e) {

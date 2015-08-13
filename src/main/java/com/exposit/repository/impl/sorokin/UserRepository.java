@@ -3,6 +3,7 @@ package com.exposit.repository.impl.sorokin;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -47,4 +48,31 @@ public class UserRepository extends AbstractHibernateDao<User, Integer>
 		return (User) cr.uniqueResult();
 	}
 
+	@Override
+	public List<User> queryListOfUsers(Integer size,
+			Integer offset) {
+		Criteria cr = getSession().createCriteria(User.class);
+		cr.setFirstResult(size * (offset - 1));
+		cr.setMaxResults(size);
+		return (List<User>) cr.list();
+	}
+
+	@Override
+	public List<User> getListOfUsersByRole(Role role, Integer size,
+			Integer offset) {
+		Criteria cr = getSession().createCriteria(User.class).add(
+				Restrictions.eq("role", role));
+		cr.setFirstResult(size * (offset - 1));
+		cr.setMaxResults(size);
+		return (List<User>) cr.list();
+	}
+
+	@Override
+	public Integer getCountOfUsersByRole(Role role) {
+		Criteria cr = getSession().createCriteria(User.class).add(
+				Restrictions.eq("role", role));
+		cr.setProjection(Projections.rowCount());
+		Long result = (Long) cr.uniqueResult();
+		return result.intValue();
+	}
 }

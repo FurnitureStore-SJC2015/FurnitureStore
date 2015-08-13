@@ -3,11 +3,9 @@ package com.exposit.repository.impl.sorokin;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
@@ -37,8 +35,11 @@ public class OrderRepository extends AbstractHibernateDao<Order, Integer>
 
 	@Override
 	public Integer getSizeOfClientOrdersList(User user) {
-		Criteria cr = getSession().createCriteria(Order.class);
-		return cr.add(Restrictions.eq("client", user)).list().size();
+		Criteria cr = getSession().createCriteria(Order.class)
+				.add(Restrictions.eq("client", user))
+				.setProjection(Projections.rowCount());
+		Long result = (Long) cr.uniqueResult();
+		return result.intValue();
 
 	}
 }

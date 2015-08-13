@@ -17,4 +17,11 @@ public interface UserDao extends GenericDao<User, Integer> {
 
 	public User findUserByName(String username);
 
+	public List<User> queryListOfUsers(Integer size,
+			Integer offset);
+
+	public List<User> getListOfUsersByRole(Role role, Integer size,
+			Integer offset);
+
+	public Integer getCountOfUsersByRole(Role role);
 }

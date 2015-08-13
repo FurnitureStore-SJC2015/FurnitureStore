@@ -22,6 +22,12 @@ public interface UserService {
 	public List<User> findAllUsersByRole(Role role);
 
 	public User findUserByName(String username);
-	
+
+	public List<User> queryListOfUsers(Integer size, Integer offset);
+
+	public List<User> queryListOfUsersByRole(Role role, Integer size,
+			Integer offset);
+
+	public Integer getCountOfUsers(Role role);
 
 }

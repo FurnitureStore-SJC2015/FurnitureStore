@@ -59,4 +59,20 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByName(username);
 	}
 
+	@Override
+	public List<User> queryListOfUsers(Integer size, Integer offset) {
+		return userRepository.queryListOfUsers(size, offset);
+	}
+
+	@Override
+	public List<User> queryListOfUsersByRole(Role role, Integer size,
+			Integer offset) {
+		return userRepository.getListOfUsersByRole(role, size, offset);
+	}
+
+	@Override
+	public Integer getCountOfUsers(Role role) {
+		return userRepository.getCountOfUsersByRole(role);
+	}
+
 }
