@@ -8,10 +8,13 @@
 <c:set var="selectedRoleId" value="${userList[0].role.id}"></c:set>
 <c:set var="updateUser" value="users/update/"></c:set>
 <c:set var="deleteUser" value="users/delete/"></c:set>
-
+<c:set var="i" value="1"></c:set>
 
 <script type="text/javascript">
-	function deleteUser(userId) {
+	
+	function deleteUser(userId,i) {
+		var selectedOption = $('#selector option:selected').val();
+		
 		$.ajax({
 			url : "users/" + userId+"/delete",
 			type : "POST",
@@ -20,6 +23,10 @@
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success : function(obj) {
+				var temp=$("#record"+i);
+				temp.fadeOut(800, function(){
+                    temp.remove();
+                });
 				// TODO
 			}
 		});
@@ -31,10 +38,11 @@
 		<div class="row">
 			<div class="col-md-2">
 				<c:url value="/admin/panel" var="panelUrl" />
-				<form name="selectForm" action="${panelUrl}" method="POST" class="form-horizontal">
+				<form name="selectForm" action="${panelUrl}" method="POST"
+					class="form-horizontal">
 					<div class="form-group">
-						<label for="sel1">Select role:</label> 
-						<select name="id" class="form-control" id="sel1">
+						<label for="selector">Select role:</label> <select name="id"
+							class="form-control" id="selector">
 							<c:forEach var="item" items="${roleList}">
 								<c:if test="${item.id eq selectedRoleId}">
 									<option value="${item.id}" selected="selected">${item.name}</option>
@@ -66,10 +74,11 @@
 					</tr>
 				</thead>
 				<c:if test="${not empty userList}">
+
 					<tbody>
-						<c:set var="i" value="1"></c:set>
+
 						<c:forEach items="${userList}" var="user">
-							<tr>
+							<tr id="record${i}">
 								<td>${i}</td>
 								<td>${user.name}</td>
 								<td><strong>${user.surname}</strong></td>
@@ -77,7 +86,8 @@
 								<td><strong>${user.email}</strong></td>
 								<td><strong>${user.role.name}</strong></td>
 								<td>
-									<button class="btn btn-primary" onclick="deleteUser(${user.id})">Delete</button>
+									<button class="btn btn-primary"
+										onclick="deleteUser(${user.id},${i})">Delete</button>
 								</td>
 								<c:set var="i" value="${i + 1}"></c:set>
 							</tr>

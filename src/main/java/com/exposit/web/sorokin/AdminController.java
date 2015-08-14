@@ -49,7 +49,8 @@ public class AdminController {
 
 	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
 	public String processUser(@PathVariable("id") User user, Model model) {
-		userService.deleteUser(user);
+		//userService.deleteUser(user);
+		System.out.println("Worked!");
 		return "admin.panel";
 	}
 

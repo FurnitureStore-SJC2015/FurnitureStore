@@ -60,9 +60,7 @@ public class User {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "role_id", referencedColumnName = "role_id",
-			insertable = false, updatable = false,
-			columnDefinition = "int default 2")
+	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
 	private Role role;
 
 	public Integer getId() {
