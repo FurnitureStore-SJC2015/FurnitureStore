@@ -5,7 +5,7 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<c:url value="/" />">Furniture
+			<a class="navbar-brand" href="<c:url value="/home" />">Furniture
 				Store</a>
 		</div>
 
@@ -20,9 +20,8 @@
 		<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 
 			<ul class="nav navbar-nav">
-				<li><a href='<c:url value="/admin/panel" />'>Show list of users</a></li>
+				<li><a href='<c:url value="/admin/panel" />'>Query users</a></li>
 				<li><a href='<c:url value="/admin/register/provider"/>'>New Provider</a></li>
-				<li><a href='<c:url value="/admin/register/company"/>'>New	Employer</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<c:url value="/logout"/>">Logout</a></li>

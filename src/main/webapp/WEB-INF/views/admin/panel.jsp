@@ -5,30 +5,53 @@
 	prefix="sec"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<c:set var="selectedRoleId" value="${userList[0].role.id}"></c:set>
+<c:set var="updateUser" value="users/update/"></c:set>
+<c:set var="deleteUser" value="users/delete/"></c:set>
+
+
+<script type="text/javascript">
+	function deleteUser(userId) {
+		$.ajax({
+			url : "users/" + userId+"/delete",
+			type : "POST",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+			},
+			success : function(obj) {
+				// TODO
+			}
+		});
+	}
+</script>
+
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 	<div class="col-md-12">
 		<div class="row">
-			<div class="col-md-2 col-md-offset-5">
+			<div class="col-md-2">
 				<c:url value="/admin/panel" var="panelUrl" />
-				<form name="selectForm" action="${panelUrl}" method="POST"
-					class="form-horizontal">
+				<form name="selectForm" action="${panelUrl}" method="POST" class="form-horizontal">
 					<div class="form-group">
-						<label for="sel1">Select role:</label> <select name="id"
-							class="form-control" id="sel1">
+						<label for="sel1">Select role:</label> 
+						<select name="id" class="form-control" id="sel1">
 							<c:forEach var="item" items="${roleList}">
-								<option value="${item.id}">${item.name}</option>
+								<c:if test="${item.id eq selectedRoleId}">
+									<option value="${item.id}" selected="selected">${item.name}</option>
+								</c:if>
+								<c:if test="${item.id ne selectedRoleId}">
+									<option value="${item.id}">${item.name}</option>
+								</c:if>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form-group">
-						<div class="col-md-6 col-md-offset-3">
-							<input type="submit" class="btn btn-success btn-lg" value="Find" />
-						</div>
+						<input type="submit" class="btn btn-success" value="Query Users" />
 					</div>
 				</form>
 			</div>
 		</div>
-		<div class="col-md-10 col-md-offset-1 well">
+		<div class="col-md-12">
 			<h1>List of user:</h1>
 			<table class="table table-striped">
 				<thead>
@@ -53,15 +76,9 @@
 								<td><strong>${user.login}</strong></td>
 								<td><strong>${user.email}</strong></td>
 								<td><strong>${user.role.name}</strong></td>
-								<td><c:set var="showUser" value="admin/users/${user.id}"></c:set>
-									<c:set var="updateUser" value="admin/users/${user.id}/update"></c:set>
-									<c:set var="deleteUser" value="admin/users/${user.id}/delete"></c:set>
-									<button class="btn btn-info"
-										onclick="location.href='${showUser}'">Show</button>
-									<button class="btn btn-primary"
-										onclick="location.href='${updateUser}'">Update</button>
-									<button class="btn btn-danger"
-										onclick="location.href='${deleteUser}'">Delete</button></td>
+								<td>
+									<button class="btn btn-primary" onclick="deleteUser(${user.id})">Delete</button>
+								</td>
 								<c:set var="i" value="${i + 1}"></c:set>
 							</tr>
 						</c:forEach>

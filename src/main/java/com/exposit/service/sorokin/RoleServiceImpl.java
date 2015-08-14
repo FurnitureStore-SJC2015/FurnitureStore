@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.sorokin.Role;
+import com.exposit.domain.model.sorokin.RoleType;
 import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.repository.dao.sorokin.RoleDao;
 
@@ -31,6 +32,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public List<Role> getAllRolesButAdmin() {
 		return roleRepository.getAllRolesButAdmin();
+	}
+
+	@Override
+	public Role getRoleByRoleType(RoleType roleType) {
+		return roleRepository.getRoleByRoleType(roleType);
 	}
 
 }

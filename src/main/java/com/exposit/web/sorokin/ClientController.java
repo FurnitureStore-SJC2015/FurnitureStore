@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.service.sorokin.OrderService;
+import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.web.dto.sorokin.ClientDto;
 
@@ -27,6 +28,9 @@ public class ClientController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private PaymentService paymentService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String initClient() {
@@ -53,6 +57,7 @@ public class ClientController {
 	@RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
 		model.addAttribute("order", order);
+		model.addAttribute("paymentList", paymentService.getPayments(order));
 		return "client.order";
 	}
 }

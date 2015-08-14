@@ -1,8 +1,5 @@
 package com.exposit.web.sorokin;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +34,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/panel", method = RequestMethod.GET)
 	public String showListOfUsers(Model model) {
-		model.addAttribute("roleList", roleService.getAllRoles());
+		model.addAttribute("roleList", roleService.getAllRolesButAdmin());
 		return "admin.panel";
 	}
 
-	@RequestMapping(value = { "/panel" }, method = { RequestMethod.POST })
+	@RequestMapping(value = "/panel", method = { RequestMethod.POST })
 	public String processAdminPanel(Model model, RedirectAttributes attributes,
 			@RequestParam("id") Role role) {
 		attributes.addFlashAttribute("userList",
@@ -50,21 +47,15 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.POST)
-	public ModelAndView processUser(@PathVariable("id") User user) {
-		ModelAndView modelAndView = new ModelAndView();
-		return modelAndView;
+	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
+	public String processUser(@PathVariable("id") User user, Model model) {
+		userService.deleteUser(user);
+		return "admin.panel";
 	}
 
 	@RequestMapping(value = "/register/provider", method = RequestMethod.GET)
 	public String showRegisterFormForProvider(Model model) {
 		model.addAttribute("provider", new Provider());
-		return "admin.register";
-	}
-
-	@RequestMapping(value = "/register/employer", method = RequestMethod.GET)
-	public String showRegisterFormForEmployer(Model model) {
-		model.addAttribute("employer", new Company());
 		return "admin.register";
 	}
 
