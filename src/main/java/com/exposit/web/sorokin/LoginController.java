@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exposit.domain.service.sorokin.UserService;
@@ -19,8 +20,19 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = { "", "/login" }, method = { RequestMethod.GET })
-	public String showLogin() {
-		return "login";
+	public ModelAndView showLogin(@RequestParam(value = "error",
+			required = false) String error, Authentication auth) {
+		ModelAndView modelAndView = new ModelAndView();
+		if (error != null) {
+			modelAndView.addObject("error", "Invalid user login and password!");
+		}
+		if (auth != null) {
+			modelAndView.setViewName("redirect:/redirector");
+			return modelAndView;
+		}
+
+		modelAndView.setViewName("login");
+		return modelAndView;
 	}
 
 	@RequestMapping(value = { "/logout" })

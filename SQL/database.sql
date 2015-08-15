@@ -326,6 +326,15 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `store`.`user`
 -- -----------------------------------------------------
+
+CREATE TABLE if NOT EXISTS `store`.`persistent_logins` (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    PRIMARY KEY (series)
+);
+
 CREATE TABLE IF NOT EXISTS `store`.`user` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT,
   `role_id` INT(11) NULL DEFAULT NULL,
@@ -368,7 +377,7 @@ INSERT INTO `store`.`user` (`user_id`, `role_id`,  `name`, `surname`, `login`, `
 INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('1', 'ADMIN');
 INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('2', 'PROVIDER');
 INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('3', 'COMPANY');
-INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('4', 'USER');
+INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('4', 'CLIENT');
 
 INSERT INTO `store`.`bonus` (`bonus_id`, `sum_bound`, `percentage`) VALUES ('1', '2250', '12.5');
 

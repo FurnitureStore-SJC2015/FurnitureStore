@@ -11,6 +11,16 @@
 			<c:url value="/j_spring_security_check" var="loginUrl" />
 			<form:form name="loginForm" action="${ loginUrl}" method="POST"
 				class="form-horizontal" role="form">
+				<c:if test="${not empty error}">
+					<div class="form-group has-warning">
+						<div class="col-md-10">
+							<label class="control-label" for="errorMessage">${error}</label>
+						</div>
+
+					</div>
+
+				</c:if>
+
 				<div class="form-group ">
 					<label for="login" class="col-sm-3 control-label">Login:</label>
 					<div class="col-sm-9 control-label">
@@ -25,6 +35,16 @@
 							class="form-control" placeholder="Enter user password">
 					</div>
 				</div>
+
+				<div class="form-group">
+					<div class="col-sm-6">
+						<input id="remember_me" name='_spring_security_remember_me'
+							type="checkbox" /> <label for="remember_me">Remember me</label>
+
+					</div>
+				</div>
+
+
 				<div class="form-group">
 					<div class="col-sm-offset3 col-sm-9">
 						<button type="submit" class="btn btn-success btn-sm">Sign
