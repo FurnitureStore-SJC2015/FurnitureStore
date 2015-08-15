@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.RequestUnit;
@@ -16,6 +17,7 @@ import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
 
 @Service
+@Transactional
 public class ModuleServiceImpl implements ModuleService{
 
 	@Autowired

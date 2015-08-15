@@ -3,7 +3,7 @@
 <div class="col-md-3">
 	<div class="list-group">
 		<ul class="list-group">
-			<a href='<c:url value="/catalog/add"/>' class="list-group-item"> Add new product
+			<a href='<c:url value="/catalog/action/add"/>' class="list-group-item"> Add new product
 			</a>
 		</ul>
 	</div>

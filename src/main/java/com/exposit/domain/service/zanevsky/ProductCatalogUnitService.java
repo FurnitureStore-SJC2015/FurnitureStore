@@ -32,4 +32,8 @@ public interface ProductCatalogUnitService {
 	public ProductCatalogUnit getProduct(String name);
 
 	public ProductCatalogUnit getProduct(Feedback feedback);
+	
+	public ProductCatalogUnit getEmptyProduct();
+	
+	public void Save(ProductCatalogUnit product);
 }

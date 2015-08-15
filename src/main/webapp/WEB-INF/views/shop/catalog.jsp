@@ -15,7 +15,8 @@
 		    <h4 class="media-heading">${item.name }</h4>
 		    ${item.description }
 		    ...
-		    <c:set var = "link" value = "catalog/product/${item.id}"></c:set>
+		    <c:set var="link" value="/product/${item.id}"/>
+		    
 		    <button class="btn btn-default" onclick="location.href='${link}'">
 		    	Show info 
 		    </button>

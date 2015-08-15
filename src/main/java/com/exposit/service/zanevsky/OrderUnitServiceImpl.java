@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.OrderUnit;
@@ -13,6 +14,7 @@ import com.exposit.domain.service.zanevsky.OrderUnitService;
 import com.exposit.repository.dao.zanevsky.OrderUnitDao;
 
 @Service
+@Transactional
 public class OrderUnitServiceImpl implements OrderUnitService{
 
 	@Autowired

@@ -1,5 +1,9 @@
 package com.exposit.web.dto.zanevsky;
 
+import java.util.List;
+
+import com.exposit.domain.model.zanevsky.ProductTemplate;
+
 public class ProductDto {
 	
 	private int id;
@@ -13,6 +17,16 @@ public class ProductDto {
 	private String image;
 	
 	private double sale;
+	
+	private List<ProductTemplate> templates;
+
+	public List<ProductTemplate> getTemplates() {
+		return templates;
+	}
+
+	public void setTemplates(List<ProductTemplate> templates) {
+		this.templates = templates;
+	}
 
 	public int getId() {
 		return id;

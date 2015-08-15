@@ -9,4 +9,6 @@ public interface ProductDtoService {
 	public List<ProductDto> getAllProductCatalogUnits();
 	
 	public ProductDto FindById(int id);
+	
+	public ProductDto getEmptyProduct();
 }

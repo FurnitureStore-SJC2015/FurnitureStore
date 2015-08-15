@@ -14,6 +14,7 @@ import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
+import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
 
 @Service
@@ -23,12 +24,14 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	@Autowired
 	private ProductCatalogUnitDao productDao;
 	
+	@Autowired
+	private ProductTemplateService templateService;
+	
 	@Override
 	public List<ProductCatalogUnit> getAllProductCatalogUnits() {
 		return this.productDao.findAll();
 	}
 
-	
 	@Override
 	public ProductCatalogUnit FindById(int id) {
 		return this.productDao.findById(id);
@@ -88,6 +91,19 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	@Override
 	public ProductCatalogUnit getProduct(Feedback feedback) {
 		return this.productDao.getProduct(feedback);
+	}
+
+
+	@Override
+	public ProductCatalogUnit getEmptyProduct() {
+		ProductCatalogUnit product = new ProductCatalogUnit();
+		product.setProductTemplates(this.templateService.getEmptyProductTemplatesList());
+		return product;
+	}
+
+	@Override
+	public void Save(ProductCatalogUnit product) {
+		this.productDao.save(product);
 	}
 	
 }

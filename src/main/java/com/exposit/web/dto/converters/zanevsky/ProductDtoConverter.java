@@ -18,6 +18,7 @@ public class ProductDtoConverter {
 		dto.setName(product.getName());
 		if (product.getSale() != null)
 			dto.setSale(product.getSale().getPercentageSale());
+		dto.setTemplates(product.getProductTemplates());
 		return dto;
 	}
 }

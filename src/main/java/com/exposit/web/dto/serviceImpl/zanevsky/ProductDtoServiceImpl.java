@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
+import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.web.dto.converters.zanevsky.ProductDtoConverter;
 import com.exposit.web.dto.service.zanevsky.ProductDtoService;
 import com.exposit.web.dto.zanevsky.ProductDto;
@@ -20,6 +21,9 @@ public class ProductDtoServiceImpl implements ProductDtoService{
 	
 	@Autowired
 	private ProductDtoConverter converter;
+	
+	@Autowired
+	private ProductTemplateService productTemplateService;
 	
 	@Override
 	public List<ProductDto> getAllProductCatalogUnits() {
@@ -35,6 +39,13 @@ public class ProductDtoServiceImpl implements ProductDtoService{
 	public ProductDto FindById(int id) {
 		ProductCatalogUnit product = this.productService.FindById(id);
 		return this.converter.Convert(product, this.productService);
+	}
+
+	@Override
+	public ProductDto getEmptyProduct() {
+		ProductDto product = new ProductDto();
+		product.setTemplates(this.productTemplateService.getEmptyProductTemplatesList());
+		return product;
 	}
 	
 	
