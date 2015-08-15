@@ -13,14 +13,18 @@
 				class="form-horizontal" role="form">
 				<c:if test="${not empty error}">
 					<div class="form-group has-warning">
-						<div class="col-md-10">
+						<div class="col-md-12">
 							<label class="control-label" for="errorMessage">${error}</label>
 						</div>
-
 					</div>
-
 				</c:if>
-
+				<c:if test="${not empty logout}">
+					<div class="form-group has-success">
+						<div class="col-md-12">
+							<label class="control-label" for=logoutMessage>${logout}</label>
+						</div>
+					</div>
+				</c:if>
 				<div class="form-group ">
 					<label for="login" class="col-sm-3 control-label">Login:</label>
 					<div class="col-sm-9 control-label">

@@ -5,4 +5,5 @@ import com.exposit.repository.base.GenericDao;
 
 public interface BonusDao extends GenericDao<Bonus, Integer> {
 
+	public Bonus getCurrentDefaultBonus();
 }

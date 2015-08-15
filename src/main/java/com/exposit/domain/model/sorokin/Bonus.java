@@ -22,6 +22,17 @@ public class Bonus {
 	@Column(name = "percentage")
 	private double percentage;
 
+	@Column(name = "flag")
+	private Boolean flag;
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
+
 	public Integer getId() {
 		return id;
 	}

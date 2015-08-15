@@ -21,6 +21,8 @@ public class MaxTester {
 		OrderDao orderDao = (OrderDao) context.getBean("orderRepository");
 		RoleService roleService = (RoleService) context.getBean("roleService");
 
+		System.out.println(bonusDao.getCurrentDefaultBonus().getPercentage());
+
 	}
 
 }

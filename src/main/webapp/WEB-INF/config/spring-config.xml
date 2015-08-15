@@ -54,6 +54,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		</property>
 	</bean>
 
+	<bean id="shoppingCart" class="com.exposit.domain.model.sorokin.ShoppingCart"
+		scope="session">
+		<aop:scoped-proxy />
+	</bean>
+
+
 	<import resource="app-data.xml" />
 	<import resource="spring-security.xml" />
 </beans>

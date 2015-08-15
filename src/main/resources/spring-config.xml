@@ -24,6 +24,15 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
+	<bean id="shoppingCart" class="com.exposit.domain.model.sorokin.ShoppingCart"
+		scope="session">
+		<aop:scoped-proxy />
+	</bean>
+
+	<bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="10" />
+	</bean>
 
 	<import resource="app-data.xml" />
 </beans>
