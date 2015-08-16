@@ -51,6 +51,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 				<bean class="com.exposit.web.converters.StringToRoleConverter" />
 				<bean class="com.exposit.web.converters.StringToUserConverter" />				
 				<bean class="com.exposit.web.converters.StringToProductConverter"/>
+				<bean class="com.exposit.web.converters.StringToProductCatalogUnitConverter"/>
 			</list>
 		</property>
 	</bean>

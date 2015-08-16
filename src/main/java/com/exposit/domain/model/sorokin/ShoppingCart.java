@@ -1,5 +1,6 @@
 package com.exposit.domain.model.sorokin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
 	private List<ProductCatalogUnit> items;
 
 	public ShoppingCart() {

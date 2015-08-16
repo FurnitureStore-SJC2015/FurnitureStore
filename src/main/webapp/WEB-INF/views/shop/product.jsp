@@ -11,11 +11,12 @@
 		<img src="data:image/jpeg;base64,${product.image}" class="img-thumbnail">
 	</div>
 	
-	<form:form action = "" commandName="product">
+	<c:url var="addToCart" value="/cart/add/${product.id}"></c:url>
+	<form:form action = "${addToCart}" method="POST" commandName="product">
 		<label> Count </label>
 		<form:input path="cost"/>
 		
-		<input type="submit" value="Add to client card" />
+		<input type="submit" value="Add to shopping cart" />
 		
 	</form:form>
 	
