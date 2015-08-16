@@ -38,23 +38,12 @@ public class Provider {
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
 
-	@Column(name = "provider_login", unique = true)
-	private String login;
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getEmail() {
@@ -81,6 +70,14 @@ public class Provider {
 		this.zipCode = zipCode;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public List<Module> getModules() {
 		return modules;
 	}
@@ -95,14 +92,6 @@ public class Provider {
 
 	public void setShipments(List<Shipment> shipments) {
 		this.shipments = shipments;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 }

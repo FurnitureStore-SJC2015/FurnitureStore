@@ -208,7 +208,6 @@ CREATE TABLE IF NOT EXISTS `store`.`provider` (
   `phone` VARCHAR(50) NULL DEFAULT NULL,
   `provider_email` VARCHAR(50) NULL DEFAULT NULL,
   `zip_code` VARCHAR(50) NULL DEFAULT NULL,
-  `provider_login` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`provider_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -400,7 +399,7 @@ INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('4', '4', '400', '200', '2015-07-28 12:00:00');
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('5', '5', '500', '100', '2015-07-28 12:00:00');
 
-INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`, `provider_login`) VALUES ('1', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831', 'Max');
+INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`) VALUES ('1', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831');
 
 INSERT INTO `store`.`product_catalog_unit` (`product_catalog_unit_id`, `sale_id`, `product_name`, `product_cost`, `margin_coefficient`) VALUES ('1', '1', 'Table', '10000', '22.5');
 
