@@ -43,6 +43,13 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
 	</definition>
 
+	<definition name="client.cart" extends="template">
+		<put-attribute name="title" value="Shopping Cart" />
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/cart.jsp" />
+
+	</definition>
+
 	<definition name="admin.index" extends="template">
 		<put-attribute name="title" value="Admin Index Page" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
@@ -68,7 +75,7 @@
 		<put-attribute name="menu"
 			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="request-info" extends="template">
 		<put-attribute name="title" value="Request Info" />
 		<put-attribute name="body"

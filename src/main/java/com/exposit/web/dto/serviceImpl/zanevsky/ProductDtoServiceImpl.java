@@ -12,6 +12,7 @@ import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.web.dto.converters.zanevsky.ProductDtoConverter;
 import com.exposit.web.dto.service.zanevsky.ProductDtoService;
 import com.exposit.web.dto.zanevsky.ProductDto;
+import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 @Service
 public class ProductDtoServiceImpl implements ProductDtoService{
@@ -47,6 +48,14 @@ public class ProductDtoServiceImpl implements ProductDtoService{
 		product.setTemplates(this.productTemplateService.getEmptyProductTemplatesList());
 		return product;
 	}
-	
-	
+
+	@Override
+	public List<ProductDto> getProductByCriteria(ProductSearchCriteria criteria) {
+		List<ProductDto> products = new ArrayList<ProductDto>();
+		List<ProductCatalogUnit> productUnits = this.productService.findByCriteria(criteria);
+		for(ProductCatalogUnit product : productUnits){
+			products.add(this.converter.Convert(product, productService));
+		}
+		return products;
+	}
 }

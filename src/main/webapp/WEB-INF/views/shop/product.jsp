@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="col-md-9 well">
 	<div class="page-header">
@@ -10,11 +11,13 @@
 		<img src="data:image/jpeg;base64,${product.image}" class="img-thumbnail">
 	</div>
 	
-	<div>
-		<button type="button" class="btn btn-primary btn-lg">
-		      Add to client card
-		</button>
-	</div>
+	<form:form action = "" commandName="product">
+		<label> Count </label>
+		<form:input path="cost"/>
+		
+		<input type="submit" value="Add to client card" />
+		
+	</form:form>
 	
 	<div class = "row">
 		<div class="col-md-12">
@@ -46,14 +49,6 @@
 					</td>
 					<td>
 						${product.cost}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Modules number
-					</td>
-					<td>
-						${modulesCount}
 					</td>
 				</tr>
 				<c:if test="${ product.sale != 0 }">

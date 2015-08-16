@@ -1,35 +1,81 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div class="col-md-9 well">
-	<div class="page-header">
-		<h1>"Products catalog</h1>
-	</div>
+<div class = "col-md-9 well">	
+	<c:if test="${not empty searchCriteria}">
+		<c:url var = "action" value="/catalog/search/result"></c:url>
+		<form:form action="${action }" method="GET" commandName="searchCriteria"> 
+			<fieldset>
+				<legend>Search Criteria</legend>
+				<table>
+					<tr>
+						<td> <label> Minimum cost</label></td>
+						<td> <form:input path = "minCost"/></td>
+					</tr>
+					<tr>
+						<td> <label> Maximum cost</label></td>
+						<td> <form:input path = "maxCost"/></td>
+					</tr>
+				</table>
+			</fieldset>
+			
+			<input type="submit" value="Search" />
+		</form:form>
+	</c:if>
 	
-	<c:forEach items= "${list}" var="item">
-		<div class="media">
-		  <a class="pull-left" href="#">
-		  	<img src="data:image/jpeg;base64,${item.image}" class="media-object" alt = "${item.name }" height="150" width="150">
-		  </a>
-		  <div class="media-body">
-		    <h4 class="media-heading">${item.name }</h4>
-		    ${item.description }
-		    ...
-		    <c:set var="link" value="/product/${item.id}"/>
-		    
-		    <button class="btn btn-default" onclick="location.href='${link}'">
-		    	Show info 
-		    </button>
-		  </div>
+	<c:if test="${not empty products }">
+		<div class = "col-md-15 well">
+			<div class="page-header">
+				<h3>Products catalog</h3>
+			</div>
+			<table class = "table table-striped">
+				<thead>
+					<tr>
+						<th> </th>
+						<th> Description</th>
+						<th> Approximate price</th>
+						<th></th>
+					</tr>
+				</thead>
+				<c:forEach items="${products }" var="product">
+					<tr>
+						<td>
+							 <a class="pull-left" href="#">
+							  	<img src="data:image/jpeg;base64,${product.image}" class="media-object" alt = "${product.name }" height="150" width="150">
+							  </a>
+						</td>
+						<td>
+							<h5>${product.description }</h5>
+						</td>
+						<td>
+							<h5>${product.cost }</h5>
+						</td>
+						<td>
+							<div>
+								<c:set var="link" value="product/${product.id}"/>
+								<button class="btn btn-default btn-md" onclick="location.href='${link}'">
+							    	Show info 
+							    </button>
+						    </div>
+						    <div>
+							    <c:set var="link" value="product/delete/${product.id}"/>
+								<button class="btn btn-default btn-md" onclick="location.href='${link}'">
+							    	Delete
+							    </button>
+							</div>
+							<div>
+								<c:set var="link" value="product/edit/${product.id}"/>
+								<button class="btn btn-default btn-md" onclick="location.href='${link}'">
+							    	Edit 
+							    </button>
+							</div>
+						</td>
+					</tr>
+					
+				</c:forEach>
+			</table>
+			
 		</div>
-	</c:forEach>
-	
-	
-	<ul class="pagination">
-	<li><a href="#">&laquo;</a></li>
-	<c:forEach var = "i" begin="1" end="${pageCount}">
-		<li><a href = "#">${i}</a></li>
-	</c:forEach>
-	  <li><a href="#">&raquo;</a></li>
-	</ul>
+	</c:if>
 </div>

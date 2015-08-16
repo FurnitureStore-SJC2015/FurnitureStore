@@ -3,6 +3,7 @@ package com.exposit.web.dto.service.zanevsky;
 import java.util.List;
 
 import com.exposit.web.dto.zanevsky.ProductDto;
+import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 public interface ProductDtoService {
 
@@ -11,4 +12,6 @@ public interface ProductDtoService {
 	public ProductDto FindById(int id);
 	
 	public ProductDto getEmptyProduct();
+	
+	public List<ProductDto> getProductByCriteria(ProductSearchCriteria criteria);
 }

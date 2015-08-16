@@ -10,6 +10,7 @@ import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.repository.base.GenericDao;
+import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 public interface ProductCatalogUnitDao extends GenericDao<ProductCatalogUnit, Integer>{
 	
@@ -28,4 +29,6 @@ public interface ProductCatalogUnitDao extends GenericDao<ProductCatalogUnit, In
 	public ProductCatalogUnit getProduct(String name);
 
 	public ProductCatalogUnit getProduct(Feedback feedback);
+	
+	public List<ProductCatalogUnit> getProductByCustomCriteria(ProductSearchCriteria criteria);
 }

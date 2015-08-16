@@ -8,6 +8,7 @@ import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.Sale;
+import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 public interface ProductCatalogUnitService {
 	
@@ -36,4 +37,10 @@ public interface ProductCatalogUnitService {
 	public ProductCatalogUnit getEmptyProduct();
 	
 	public void Save(ProductCatalogUnit product);
+	
+	public void RemoveById(int id);
+	
+	public List<ProductCatalogUnit> findByCriteria(ProductSearchCriteria criteria);
+	
+	public void AddNewProduct(ProductCatalogUnit product);
 }
