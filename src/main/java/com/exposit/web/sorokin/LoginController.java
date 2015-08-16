@@ -21,17 +21,21 @@ public class LoginController {
 
 	@RequestMapping(value = { "", "/login" }, method = { RequestMethod.GET })
 	public ModelAndView showLogin(@RequestParam(value = "error",
-			required = false) String error, Authentication auth) {
+			required = false) String error, @RequestParam(value = "logout",
+			required = false) String logout, Authentication auth) {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login");
 		if (error != null) {
 			modelAndView.addObject("error", "Invalid user login and password!");
 		}
-		if (auth != null) {
-			modelAndView.setViewName("redirect:/redirector");
-			return modelAndView;
+		if (logout != null) {
+			modelAndView.addObject("logout",
+					"You've been logged out successfully.");
 		}
 
-		modelAndView.setViewName("login");
+		if (auth != null) {
+			modelAndView.setViewName("redirect:/redirector");
+		}
 		return modelAndView;
 	}
 
@@ -41,14 +45,6 @@ public class LoginController {
 		httpSession.setAttribute("client", null);
 		httpSession.invalidate();
 		return modelAndView;
-	}
-
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
-	public String redirectIfLoggedIn(Authentication auth) {
-		if (auth != null) {
-			return "redirect:/redirector";
-		} else
-			return "redirect:/login";
 	}
 
 }

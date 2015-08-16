@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.RoleType;
+import com.exposit.domain.service.sorokin.BonusService;
 import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -29,6 +30,9 @@ public class RegistrationController {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private BonusService bonusService;
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -49,6 +53,7 @@ public class RegistrationController {
 		}
 		String cryptedPassword = encoder.encode(client.getPassword());
 		client.setRole(roleService.getRoleByRoleType(RoleType.CLIENT));
+		client.setBonus(bonusService.getCurrentDefaultBonus());
 		client.setPassword(cryptedPassword);
 		try {
 			client.setAvatar(avatar.getBytes());
