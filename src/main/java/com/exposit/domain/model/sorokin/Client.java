@@ -34,8 +34,7 @@ public class Client extends User {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "bonus_id", insertable = false, updatable = false,
-			columnDefinition = "int default 2")
+	@JoinColumn(name = "bonus_id")
 	private Bonus bonus;
 
 	@OneToMany

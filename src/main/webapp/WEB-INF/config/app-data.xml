@@ -23,7 +23,17 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="url" value="jdbc:mysql://localhost:3306/store" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
-	</bean>
+	</bean> 
+	
+	
+	<!-- <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://sql2.freemysqlhosting.net:3306/sql287099" />
+		<property name="username" value="sql287099" />
+		<property name="password" value="aJ7*cL4*" />
+	</bean>-->
+	
 
 
 	<bean id="sessionFactory"
