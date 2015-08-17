@@ -32,4 +32,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return shoppingCart.getItems();
 	}
 
+	@Override
+	public void addProduct(Integer count, ProductCatalogUnit product) {
+		for (int i = 0; i < count; i++) {
+			shoppingCart.getItems().add(product);
+		}
+
+	}
+
+	@Override
+	public ShoppingCart getShoppingCart() {
+
+		return this.shoppingCart;
+	}
+
 }

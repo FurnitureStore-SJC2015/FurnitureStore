@@ -7,7 +7,10 @@
 
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
 	<div class="col-md-9">
-
+	
+	<c:forEach var="item" items="${shoppingCart.items}">
+	${item.name}
+	</c:forEach>
 		<button type="button" class="btn btn-link">Choose payment scheme</button>
 
 	</div>

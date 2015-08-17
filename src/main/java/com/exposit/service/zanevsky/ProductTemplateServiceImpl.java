@@ -32,6 +32,9 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 	private ProductTemplate makeTemplate(Module module, int count){
 		ProductTemplate template = new ProductTemplate();
 		template.setModule(module);
+		if (module.getProductTemplates() == null)
+			module.setProductTemplates(new ArrayList<ProductTemplate>());
+//		module.getProductTemplates().add(template);
 		template.setCount(count);
 		return template;
 	}

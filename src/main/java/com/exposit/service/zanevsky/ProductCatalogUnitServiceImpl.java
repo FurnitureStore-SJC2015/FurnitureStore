@@ -12,10 +12,12 @@ import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
+import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
+import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 @Service
 @Transactional
@@ -98,12 +100,45 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	public ProductCatalogUnit getEmptyProduct() {
 		ProductCatalogUnit product = new ProductCatalogUnit();
 		product.setProductTemplates(this.templateService.getEmptyProductTemplatesList());
+		for(ProductTemplate template : product.getProductTemplates()){
+			template.setProductCatalogUnit(product);
+		}
 		return product;
 	}
 
 	@Override
 	public void Save(ProductCatalogUnit product) {
 		this.productDao.save(product);
+	}
+
+	@Override
+	public void RemoveById(int id) {
+		this.productDao.delete(id);
+	}
+
+	@Override
+	public List<ProductCatalogUnit> findByCriteria(
+			ProductSearchCriteria criteria) {
+		return this.productDao.getProductByCustomCriteria(criteria);
+	}
+
+	@Override
+	public void AddNewProduct(ProductCatalogUnit product) {
+		product.setCost(this.calculateApproximatePrice(product));
+		for(ProductTemplate item : product.getProductTemplates()){
+			item.getModule().getProductTemplates().add(item);
+		}
+		
+		this.productDao.save(product);
+	}
+	
+	private double calculateApproximatePrice(ProductCatalogUnit product){
+		double price = 0;
+		for(ProductTemplate item : product.getProductTemplates()){
+			price += item.getModule().getCost() * item.getCount();
+		}
+		price += price * product.getCoefficient() / 100;
+		return price;
 	}
 	
 }

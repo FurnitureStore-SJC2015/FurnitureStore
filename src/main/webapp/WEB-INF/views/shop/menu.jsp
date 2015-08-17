@@ -10,6 +10,10 @@
 			</a>
 			<a href='<c:url value="/catalog/action"/>' class="list-group-item"> Modify Shop
 			</a>
+			<a href='<c:url value="/catalog/action/add"/>' class="list-group-item"> Add new product
+			</a>
+			<a href='<c:url value="/catalog/search"/>' class="list-group-item"> Search
+			</a>
 			<a href='<c:url value="/catalog/action/add"/>' class="list-group-item"> Kate's Cargo
 			</a>
 		</ul>
