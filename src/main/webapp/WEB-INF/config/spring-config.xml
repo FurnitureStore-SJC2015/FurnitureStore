@@ -49,9 +49,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<list>
 				<bean class="com.exposit.web.converters.StringToOrderConverter" />
 				<bean class="com.exposit.web.converters.StringToRoleConverter" />
-				<bean class="com.exposit.web.converters.StringToUserConverter" />				
-				<bean class="com.exposit.web.converters.StringToProductConverter"/>
-				<bean class="com.exposit.web.converters.StringToProductCatalogUnitConverter"/>
+				<bean class="com.exposit.web.converters.StringToUserConverter" />
+				<bean class="com.exposit.web.converters.StringToProductConverter" />
+				<bean class="com.exposit.web.converters.StringToProductCatalogUnitConverter" />
+				<bean class="com.exposit.web.converters.StringToPaymentSchemeConverter" />
 			</list>
 		</property>
 	</bean>

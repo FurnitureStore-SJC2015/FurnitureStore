@@ -17,4 +17,8 @@ public interface ShoppingCartService {
 
 	public ShoppingCart getShoppingCart();
 
+	public void removeAt(int i);
+
+	public double getTotalPrice();
+
 }

@@ -12,25 +12,25 @@
 
 <script type="text/javascript">
 	
-	function deleteUser(userId,i) {
-		var selectedOption = $('#selector option:selected').val();
-		
-		$.ajax({
-			url : "users/" + userId+"/delete",
-			type : "POST",
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
-			},
-			success : function(obj) {
-				var temp=$("#record"+i);
-				temp.fadeOut(800, function(){
-                    temp.remove();
-                });
-				// TODO
-			}
-		});
-	}
+function deleteUser(userId,i) {
+	var selectedOption = $('#selector option:selected').val();
+	
+	$.ajax({
+		url : "users/" + userId+"/delete",
+		type : "POST",
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(obj) {
+			var temp=$("#record"+i);
+			temp.fadeOut(800, function(){
+                temp.remove();
+            });
+			// TODO
+		}
+	});
+}
 </script>
 
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">

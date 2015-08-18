@@ -18,6 +18,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void addOneProduct(ProductCatalogUnit product) {
 		shoppingCart.getItems().add(product);
+		shoppingCart.setTotalPrice(shoppingCart.getTotalPrice()
+				+ product.getCost());
 
 	}
 
@@ -46,4 +48,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return this.shoppingCart;
 	}
 
+	@Override
+	public void removeAt(int i) {
+		shoppingCart.setTotalPrice(shoppingCart.getTotalPrice()
+				- shoppingCart.getItems().get(i).getCost());
+		shoppingCart.getItems().remove(i);
+
+	}
+
+	@Override
+	public double getTotalPrice() {
+		return shoppingCart.getTotalPrice();
+	}
 }

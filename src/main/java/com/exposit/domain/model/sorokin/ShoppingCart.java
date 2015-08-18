@@ -10,10 +10,14 @@ import org.springframework.stereotype.Component;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 
 public class ShoppingCart implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private double totalPrice;
 	private List<ProductCatalogUnit> items;
 
 	public ShoppingCart() {
 		items = new ArrayList<ProductCatalogUnit>();
+		totalPrice = 0;
 	}
 
 	public List<ProductCatalogUnit> getItems() {
@@ -22,6 +26,18 @@ public class ShoppingCart implements Serializable {
 
 	public void setItems(List<ProductCatalogUnit> items) {
 		this.items = items;
+	}
+
+	public Integer getSize() {
+		return items.size();
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

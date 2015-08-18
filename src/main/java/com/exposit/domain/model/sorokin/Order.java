@@ -101,4 +101,10 @@ public class Order {
 		this.paymentScheme = paymentScheme;
 	}
 
+	public void setOrderUnits(List<OrderUnit> orderUnits) {
+		this.orderUnits = orderUnits;
+	}
+	
+	
+
 }

@@ -1,7 +1,5 @@
 package com.exposit.web.sorokin;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -38,13 +36,4 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-
-	@RequestMapping(value = { "/logout" })
-	public ModelAndView logout(HttpSession httpSession) {
-		ModelAndView modelAndView = new ModelAndView("redirect:login");
-		httpSession.setAttribute("client", null);
-		httpSession.invalidate();
-		return modelAndView;
-	}
-
 }

@@ -66,6 +66,12 @@
 			value="/WEB-INF/views/admin/registration.jsp" />
 	</definition>
 
+	<definition name="client.new.order" extends="template">
+		<put-attribute name="title" value="Check order" />
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/newOrder.jsp" />
+	</definition>
+
 	<!-- Kate's definitions! -->
 
 	<definition name="request-provider-panel" extends="template">
@@ -104,9 +110,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
 	</definition>
-	
-	<definition name = "catalog.add.product" extends="template">
-		<put-attribute name="title" value = "Add new product"></put-attribute>
+
+	<definition name="catalog.add.product" extends="template">
+		<put-attribute name="title" value="Add new product"></put-attribute>
 		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/shop/addProduct.jsp"></put-attribute>
 	</definition>
