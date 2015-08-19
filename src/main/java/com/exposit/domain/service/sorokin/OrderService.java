@@ -3,6 +3,7 @@ package com.exposit.domain.service.sorokin;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.User;
 
 public interface OrderService {
@@ -20,4 +21,6 @@ public interface OrderService {
 	public List<Order> getOrders(User user);
 
 	public Integer getOrdersCount(User user);
+
+	public Order createNewOrder(PaymentScheme paymentScheme);
 }

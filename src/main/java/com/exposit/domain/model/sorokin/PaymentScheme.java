@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "payment_scheme")
 public class PaymentScheme {
@@ -39,6 +42,7 @@ public class PaymentScheme {
 	private double percentage;
 
 	@OneToMany
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "payment_scheme_id")
 	private List<Order> orders;
 
@@ -90,9 +94,6 @@ public class PaymentScheme {
 		this.percentage = percentage;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;

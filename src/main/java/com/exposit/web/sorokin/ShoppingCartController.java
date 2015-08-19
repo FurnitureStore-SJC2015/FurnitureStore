@@ -1,7 +1,5 @@
 package com.exposit.web.sorokin;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
+import com.exposit.domain.service.sorokin.PaymentFormService;
 import com.exposit.domain.service.sorokin.ShoppingCartService;
 
 @Controller
@@ -21,6 +20,7 @@ public class ShoppingCartController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showCart(Model model) {
+
 		model.addAttribute("shoppingCart",
 				shoppingCartService.getShoppingCart());
 		return "client.cart";
@@ -31,6 +31,13 @@ public class ShoppingCartController {
 	public String addToCart(@PathVariable("id") ProductCatalogUnit product) {
 		shoppingCartService.addOneProduct(product);
 		return "redirect:/catalog";
-
 	}
+
+	@RequestMapping(value = "/delete/{i}")
+	public String removeFromCart(@PathVariable("i") int i) {
+		// TODO exception
+		shoppingCartService.removeAt(i - 1);
+		return "client.cart";
+	}
+
 }
