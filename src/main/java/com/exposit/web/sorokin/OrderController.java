@@ -1,11 +1,19 @@
 package com.exposit.web.sorokin;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.exposit.domain.model.sorokin.Client;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.ShoppingCart;
 import com.exposit.domain.service.sorokin.OrderService;
@@ -28,11 +36,20 @@ public class OrderController {
 	@Autowired
 	private PaymentService paymentService;
 
-	@RequestMapping("/check")
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String checkOrder(
 			@RequestParam("schemeSelector") PaymentScheme paymentScheme,
 			Model model) {
 		model.addAttribute("order", orderService.createNewOrder(paymentScheme));
 		return "client.new.order";
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public void saveOrder(
+			@ModelAttribute("paymentScheme") PaymentScheme scheme,
+			HttpSession session, @AuthenticationPrincipal Client client) {
+		Order order = orderService.createNewOrder(scheme);
+		order.setClient(client);
+		System.out.println(order.getClient().getName());
 	}
 }

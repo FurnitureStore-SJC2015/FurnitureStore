@@ -166,7 +166,7 @@ function getPaymentSchemes(){
 							<div class="calculateButton" style="display: none;">
 								<label>Process ordering</label> 
 								<input type="submit"
-									class="btn btn-success" value="Calculate payments!"/>
+									class="btn btn-success" value="Process order!"/>
 							</div>
 						</div>
 					</div>

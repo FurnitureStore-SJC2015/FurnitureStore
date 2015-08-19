@@ -24,6 +24,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven conversion-service="conversionService" />
+	
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean
+				class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgu‌​mentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />

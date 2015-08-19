@@ -104,6 +104,12 @@ public class Order {
 	public void setOrderUnits(List<OrderUnit> orderUnits) {
 		this.orderUnits = orderUnits;
 	}
+
+	public List<OrderUnit> getOrderUnits() {
+		return orderUnits;
+	}
+	
+	
 	
 	
 

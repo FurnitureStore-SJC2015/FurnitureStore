@@ -21,4 +21,6 @@ public interface ShoppingCartService {
 
 	public double getTotalPrice();
 
+	public void clearCart();
+
 }
