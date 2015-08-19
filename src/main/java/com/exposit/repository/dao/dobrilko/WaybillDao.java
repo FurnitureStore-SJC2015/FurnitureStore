@@ -12,4 +12,8 @@ public interface WaybillDao extends GenericDao<Waybill, Integer> {
 	public Waybill getWaybill(Shipment shipment);
 
 	public List<Waybill> getWaybills(Date beginningDate, Date endDate);
+
+	public List<Waybill> getConfirmedWaybills(Date beginningDate, Date endDate);
+
+	public List<Waybill> getConfirmedWaybills();
 }

@@ -25,9 +25,6 @@ public class ShipmentUnit {
 
 	@Column(name = "cost")
 	private double cost;
-	
-	@Column (name = "provider_margin_percent")
-	private int providerMarginPercent;
 
 	@ManyToOne
 	@JoinColumn(name = "module_id")

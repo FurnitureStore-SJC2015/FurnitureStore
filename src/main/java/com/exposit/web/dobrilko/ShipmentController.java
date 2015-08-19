@@ -16,7 +16,7 @@ import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 
 @Controller
-@RequestMapping(value = "/request", method = RequestMethod.GET)
+@RequestMapping(value = "/provider/shipments", method = RequestMethod.GET)
 public class ShipmentController {
 
 	@Autowired
@@ -28,18 +28,11 @@ public class ShipmentController {
 	@Autowired
 	private ShipmentService shipmentService;
 
-	@RequestMapping(value = "/provider_panel", method = RequestMethod.GET)
-	public String showProviderRequestsPanel(Model model) {
+	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
+	public String showShipmentsAcceptancePanel(Model model) {
+		model.addAttribute("shipments", shipmentService.getShipments());
 
-		model.addAttribute("requests", requestService.getAllRequests());
-		return "request-provider-panel";
+		return "shipment-acceptance";
 	}
 
-	@RequestMapping(value = "/provider_panel/{id}", method = RequestMethod.GET)
-	public String showRequest(@PathVariable int id, Model model) {
-		model.addAttribute("request", requestService.getRequestById(id));
-		model.addAttribute("requestUnits", requestService
-				.getRequestUnitsByRequest(requestService.getRequestById(id)));
-		return "request-info";
-	}
 }

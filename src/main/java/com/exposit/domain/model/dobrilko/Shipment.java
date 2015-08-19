@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -25,17 +27,21 @@ public class Shipment {
 	@Column(name = "shipment_id")
 	private int id;
 
-	@Column(name = "provider_margin_precent")
+	@Max(value = 100)
+	@Min(value = 0)
+	@Column(name = "provider_margin_percent")
 	private int providerMarginPercent;
 
 	@Column(name = "is_processed")
 	private boolean isProcessed;
 
 	@OneToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "way_bill_id")
 	private Waybill waybill;
 
 	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
 

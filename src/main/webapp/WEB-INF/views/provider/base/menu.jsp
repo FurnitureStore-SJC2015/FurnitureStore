@@ -7,7 +7,7 @@
 			<li class="list-group-item"><a
 				href=<c:url value="/provider/profile"/>>PROFILE</a></li>
 			<li class="list-group-item"><a
-				href='<c:url value="/provider/requests"/>'>REQUESTS </a></li>
+				href='<c:url value="/provider/module_requests"/>'>REQUESTS </a></li>
 			<li class="list-group-item"><a
 				href='<c:url value="/provider/reports"/>'>REPORTS </a></li>
 			<li class="list-group-item"><a

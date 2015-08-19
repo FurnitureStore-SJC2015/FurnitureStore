@@ -20,7 +20,8 @@ public class WaybillRepository extends AbstractHibernateDao<Waybill, Integer>
 	@Override
 	public List<Waybill> getWaybills(Date beginningDate, Date endDate) {
 		Criteria criteria = getSession().createCriteria(Waybill.class).add(
-				(Restrictions.between("arrival_date", beginningDate, endDate)));
+				(Restrictions.between("confirmationDate", beginningDate,
+						endDate)));
 		return (List<Waybill>) criteria.list();
 	}
 
@@ -29,5 +30,24 @@ public class WaybillRepository extends AbstractHibernateDao<Waybill, Integer>
 		Criteria criteria = getSession().createCriteria(Waybill.class).add(
 				Restrictions.eq("shipment", shipment));
 		return (Waybill) criteria.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Waybill> getConfirmedWaybills(Date beginningDate, Date endDate) {
+		Criteria criteria = getSession()
+				.createCriteria(Waybill.class)
+				.add((Restrictions.isNotNull("confirmationDate")))
+				.add(Restrictions.between("confirmationDate", beginningDate,
+						endDate));
+		return (List<Waybill>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Waybill> getConfirmedWaybills() {
+		Criteria criteria = getSession().createCriteria(Waybill.class).add(
+				(Restrictions.isNotNull("confirmationDate")));
+		return (List<Waybill>) criteria.list();
 	}
 }

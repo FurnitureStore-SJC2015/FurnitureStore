@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.repository.dao.dobrilko.WaybillDao;
@@ -42,6 +43,14 @@ public class WaybillServiceImpl implements WaybillService {
 		return waybillDao.findById(id);
 	}
 
+	@Transactional
+	@Override
+	public Waybill getWaybillByShipment(Shipment shipment) {
+		return waybillDao.getWaybill(shipment);
+	}
+
+	@Transactional
+	@Override
 	public List<Waybill> getWaybills(Date beginningDate, Date endDate) {
 		return waybillDao.getWaybills(beginningDate, endDate);
 	}
@@ -54,4 +63,20 @@ public class WaybillServiceImpl implements WaybillService {
 
 	}
 
+	@Transactional
+	@Override
+	public List<Waybill> getConfirmedWaybills(Date beginningDate, Date endDate) {
+		return waybillDao.getConfirmedWaybills(beginningDate, endDate);
+	}
+
+	@Override
+	public List<Waybill> getConfirmedWaybills() {
+		return waybillDao.getConfirmedWaybills();
+	}
+
+	@Override
+	public void updateWaybill(Waybill waybill) {
+		waybillDao.update(waybill);
+
+	}
 }

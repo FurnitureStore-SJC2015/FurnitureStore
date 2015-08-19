@@ -26,7 +26,6 @@ import com.exposit.repository.dao.zanevsky.ModuleDao;
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
 
-	// TODO ask if you can use instance of other service
 	@Autowired
 	private PriceService priceService;
 	@Autowired
@@ -117,6 +116,82 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Override
 	public Shipment getShipmentByWaybill(Waybill waybill) {
 		return shipmentDao.getShipment(waybill);
+	}
+
+	@Transactional
+	@Override
+	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment) {
+		return shipmentUnitDao.getShipmentUnits(shipment);
+	}
+
+	
+
+	@SuppressWarnings("deprecation")
+	@Transactional
+	@Override
+	public List<Date> parseDateRangeValue(String dateRangeValue) {
+		List<Date> dates = new ArrayList<Date>();
+		dateRangeValue.trim();
+		String[] dateStrings = dateRangeValue.split("-");
+		for (String dateString : dateStrings) {
+			dateString.trim();
+			String[] dateValues = dateString.split("/");
+			Integer months = Integer.parseInt(dateValues[0].trim());
+			Integer days = Integer.parseInt(dateValues[1].trim());
+			Integer year = Integer.parseInt(dateValues[2].trim());
+			dates.add(new Date(year - 1900, months - 1, days));
+		}
+		return dates;
+	}
+
+	@Transactional
+	@Override
+	public List<Shipment> getShipments(String dateRangeValue) {
+		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
+		return this.getShipments(dates.get(0), dates.get(1));
+	}
+
+	@Transactional
+	@Override
+	public List<Shipment> getConfirmedShipments(Date beginningDate, Date endDate) {
+		List<Shipment> shipments = new ArrayList<Shipment>();
+		for (Waybill waybill : waybillDao.getConfirmedWaybills(beginningDate,
+				endDate)) {
+
+			shipments.add(shipmentDao.getShipment(waybill));
+		}
+		return shipments;
+	}
+
+	@Transactional
+	@Override
+	public List<Shipment> getConfirmedShipments() {
+		List<Shipment> shipments = new ArrayList<Shipment>();
+		for (Waybill waybill : waybillDao.getConfirmedWaybills()) {
+
+			shipments.add(shipmentDao.getShipment(waybill));
+		}
+		return shipments;
+	}
+
+	@Transactional
+	@Override
+	public List<Shipment> getConfirmedShipments(String dateRangeValue) {
+		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
+		return this.getConfirmedShipments(dates.get(0), dates.get(1));
+	}
+
+	@Transactional
+	@Override
+	public Integer saveShipmentUnit(ShipmentUnit shipmentUnit) {
+		return shipmentUnitDao.save(shipmentUnit);
+	}
+
+	@Transactional
+	@Override
+	public void updateShipment(Shipment shipment) {
+		shipmentDao.update(shipment);
+
 	}
 
 }

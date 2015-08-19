@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "waybill")
@@ -20,7 +24,9 @@ public class Waybill {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "way_bill_id")
 	private int id;
-	@OneToOne(mappedBy = "waybill")
+	@OneToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "shipment_id")
 	private Shipment shipment;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "departure_date")

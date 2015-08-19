@@ -1,5 +1,6 @@
 package com.exposit.domain.service.dobrilko;
 
+import java.util.Date;
 import java.util.List;
 
 import com.exposit.domain.model.dobrilko.Request;
@@ -27,5 +28,8 @@ public interface RequestService {
 	public List<RequestUnit> getRequestUnitsByRequest(Request request);
 
 	public Module getModuleByRequestUnit(RequestUnit requestUnit);
+
+	void processRequest(Request request, Date deliveryDate,
+			int providerMarginPercent, double deliveryCost);
 
 }
