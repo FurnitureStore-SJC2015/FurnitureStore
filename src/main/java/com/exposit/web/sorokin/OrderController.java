@@ -1,10 +1,12 @@
 package com.exposit.web.sorokin;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.ShoppingCart;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
+import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.OrderUnitService;
 
 @Controller
@@ -36,6 +39,9 @@ public class OrderController {
 	@Autowired
 	private PaymentService paymentService;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String checkOrder(
 			@RequestParam("schemeSelector") PaymentScheme paymentScheme,
@@ -45,11 +51,15 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public void saveOrder(
+	public String saveOrder(
 			@ModelAttribute("paymentScheme") PaymentScheme scheme,
-			HttpSession session, @AuthenticationPrincipal Client client) {
+			HttpSession session, Principal principal) {
+		Client client = (Client) userService
+				.findUserByName(((UserDetails) ((Authentication) principal)
+						.getPrincipal()).getUsername());
 		Order order = orderService.createNewOrder(scheme);
 		order.setClient(client);
-		System.out.println(order.getClient().getName());
+		orderService.createNewOrder(order);
+		return "redirect:/client/";
 	}
 }
