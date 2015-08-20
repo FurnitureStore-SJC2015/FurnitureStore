@@ -13,11 +13,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Module;
 
 @Entity
 @Table(name = "provider")
-public class Provider {
+public class Provider extends User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,12 +31,7 @@ public class Provider {
 	@Size(max = 50, message = "Provider name lenght must be less than 50.")
 	@NotNull(message = "Provider name is a mandatory.")
 	@Column(name = "provider_name", unique = true)
-	private String name;
-	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*"
-			+ "@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-			message = "Email should match the pattern!")
-	@Column(name = "provider_email")
-	private String email;
+	private String providerName;
 
 	@Pattern(regexp = "^[0-9]{12}$",
 			message = "Phone number must be 12 digits string!")
@@ -55,20 +51,12 @@ public class Provider {
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getPhone() {
@@ -87,14 +75,6 @@ public class Provider {
 		this.zipCode = zipCode;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public List<Module> getModules() {
 		return modules;
 	}
@@ -109,6 +89,14 @@ public class Provider {
 
 	public void setShipments(List<Shipment> shipments) {
 		this.shipments = shipments;
+	}
+
+	public String getProviderName() {
+		return providerName;
+	}
+
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
 	}
 
 }
