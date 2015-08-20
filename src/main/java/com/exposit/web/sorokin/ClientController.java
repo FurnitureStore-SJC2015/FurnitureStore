@@ -31,18 +31,12 @@ public class ClientController {
 	private PaymentService paymentService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String initClient() {
-		return "redirect:profile/";
-	}
-
-	@RequestMapping(value = "profile/", method = RequestMethod.GET)
-	public String showProfile(Authentication auth, Model model,
-			HttpSession session) {
-		Client dbClient = (Client) userService.findUserByName(auth.getName());
-		ClientDto clientDto = new ClientDto(dbClient, dbClient.getAvatar(),
-				orderService.getOrdersCount(dbClient));
-		session.setAttribute("client", clientDto);
-		return "client.profile";
+	public String initializeClient(Authentication auth, HttpSession session) {
+		Client client = (Client) userService.findUserByName(auth.getName());
+		ClientDto clientDto = new ClientDto.Builder(client,
+				orderService.getOrdersCount(client)).build();
+		session.setAttribute("loggedClient", clientDto);
+		return "redirect:/profile";
 	}
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)

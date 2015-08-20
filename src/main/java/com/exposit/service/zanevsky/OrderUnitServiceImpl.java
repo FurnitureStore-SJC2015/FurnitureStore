@@ -49,7 +49,7 @@ public class OrderUnitServiceImpl implements OrderUnitService {
 			OrderUnit orderUnit = new OrderUnit();
 			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
 			orderUnit.setCost(cart.getItems().get(i).getCost());
-			orderUnit.setProductCatalogUnit(cart.getItems().get(0));
+			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
 			orderUnits.add(orderUnit);
 		}
 		return orderUnits;

@@ -16,13 +16,8 @@ public class MaxTester {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"spring-config.xml");
-		UserDao userDao = (UserDao) context.getBean("userRepository");
-		BonusDao bonusDao = (BonusDao) context.getBean("bonusRepository");
 		OrderDao orderDao = (OrderDao) context.getBean("orderRepository");
 		RoleService roleService = (RoleService) context.getBean("roleService");
-
-		System.out.println(bonusDao.getCurrentDefaultBonus().getPercentage());
-
 	}
 
 }

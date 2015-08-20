@@ -12,28 +12,31 @@
 		<c:url var="logout" value="/j_spring_security_logout" />
 
 		<sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
+			<sec:authentication var="user" property="principal" />
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/client/profile/" />'>Hi,
-						${client.profile.name}</a></li>
-				<li><a href="<c:url value="/cart"/>"><strong>My
+				<li><a href='<c:url value="/client/" />'><span
+						class="glyphicon glyphicon-user"></span>Hi, ${user.username}</a></li>
+				<li><a href="<c:url value="/cart"/>"><span
+						class="glyphicon glyphicon-shopping-cart"></span><strong>My
 							cart</strong></a></li>
-				<li><a href="<c:url value="${logout}"/>">Logout</a></li>
+				<li><a href="<c:url value="${logout}"/>"><span
+						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
 			</ul>
 		</sec:authorize>
 
 		<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
-
 			<ul class="nav navbar-nav">
-				<li><a href='<c:url value="/admin/panel" />'>Query users</a></li>
-				<li><a href='<c:url value="/admin/register/provider"/>'>New
-						Provider</a></li>
+				<li><a href='<c:url value="/admin/panel" />'><span
+						class="glyphicon glyphicon-list-alt"></span>All users</a></li>
+				<li><a href='<c:url value="/admin/register/provider"/>'><span
+						class="glyphicon glyphicon-user"></span>New Provider</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value="${logout}"/>">Logout</a></li>
+				<li><a href="<c:url value="${logout}"/>"><span
+						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 			</ul>
 		</sec:authorize>
-
 	</div>
 
 </div>

@@ -72,6 +72,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/newOrder.jsp" />
 	</definition>
 
+
+	<definition name="client.profile.edit" extends="template">
+		<put-attribute name="title" value="Edit profile" />
+		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/editProfile.jsp" />
+	</definition>
+
+
 	<!-- Kate's definitions! -->
 
 	<definition name="requests-provider" extends="template">
