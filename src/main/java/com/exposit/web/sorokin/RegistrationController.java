@@ -45,8 +45,7 @@ public class RegistrationController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String doRegistration(@Valid Client client, BindingResult result,
-			RedirectAttributes redirectAttributes, @RequestParam(
-					value = "image") MultipartFile avatar) {
+			RedirectAttributes redirectAttributes, @RequestParam(value = "image") MultipartFile avatar) {
 		String resultView = "redirect:/login";
 		if (result.hasErrors()) {
 			return "register";

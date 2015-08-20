@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
 @Entity
 @Table(name = "client")
 @PrimaryKeyJoinColumn(name = "id")
@@ -24,8 +26,8 @@ public class Client extends User {
 	@Lob
 	private byte[] avatar;
 
-	public byte[] getAvatar() {
-		return avatar;
+	public String getAvatar() {
+		return Base64.encode(avatar);
 	}
 
 	public void setAvatar(byte[] avatar) {

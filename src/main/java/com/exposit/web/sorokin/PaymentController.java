@@ -27,7 +27,6 @@ public class PaymentController {
 
 	@RequestMapping(value = "/forms", method = RequestMethod.POST)
 	public @ResponseBody List<PaymentForm> getAllPaymentForms(Model model) {
-
 		return paymentFormService.getAllPaymentForms();
 
 	}

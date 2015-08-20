@@ -10,6 +10,82 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
+
+
+<div class="col-md-6 col-md-offset-3">
+	<div class="panel panel-default">
+
+
+		<div class="panel-heading">
+			<h5 class="text-center">
+				<span class="glyphicon glyphicon-pencil"></span><strong>Provider
+					registration</strong>
+			</h5>
+		</div>
+
+		<div class="panel-body">
+			<form:form name="newProvider" modelAttribute="provider" method="POST"
+				class="form-horizontal" role="form">
+
+				<div class="form-group">
+					<label for="name" class="col-sm-4 control-label">Name:</label>
+					<div class="col-sm-6 control-label">
+						<form:input path="name" class="form-control" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="phone" class="col-sm-4 control-label">Phone:</label>
+					<div class="col-sm-6 control-label">
+						<form:input path="phone" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="col-sm-4 control-label">Email:</label>
+					<div class="col-sm-6 control-label">
+						<form:input path="email" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="zipCode" class="col-sm-4 control-label">Zip
+						code:</label>
+					<div class="col-sm-6 control-label">
+						<form:input path="zipCode" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6 control-label">
+						<input type="submit" value="Register"
+							class="btn btn-lg btn-primary" />
+					</div>
+				</div>
+			</form:form>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="col-md-10 col-md-offset-1">
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#employee">New

@@ -12,12 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -49,7 +49,7 @@ public class User {
 			message = "*Login must be alphanumeric with digits and dashes.")
 	private String login;
 
-	@NotNull(message = "Password cannot be null!")
+	@NotEmpty(message = "Password cannot be null!")
 	private String password;
 
 	@Pattern(
