@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -18,12 +19,9 @@ import com.exposit.domain.model.zanevsky.Module;
 
 @Entity
 @Table(name = "provider")
+@PrimaryKeyJoinColumn(name="provider_id")
 public class Provider extends User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "provider_id")
-	private int id;
 	@Pattern(regexp = "[A-Z][a-zA-Z|| ||\\-||&||\"||0-9]*]*",
 			message = "Provider name should: 1. Start from capital letter"
 					+ "2. Contain only letters, numeric symbols, spaces,"
@@ -50,14 +48,6 @@ public class Provider extends User {
 
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getPhone() {
 		return phone;

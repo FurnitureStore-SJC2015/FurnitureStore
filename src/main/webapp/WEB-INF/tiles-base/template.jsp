@@ -1,5 +1,9 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <html>
 <head>
 
@@ -22,15 +26,20 @@
 <script src="<c:url value="/resources/js/json2.js" />"></script>
 <!--  <script src="<c:url value="/resources/js/bootstrap.js" />"></script>-->
 
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
 <!--  <script src="<c:url value="/resources/js/bootstrap-datepicker.js" />"></script>-->
 <!-- Include Required Prerequisites -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
- 
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
 <!-- Include Date Range Picker -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

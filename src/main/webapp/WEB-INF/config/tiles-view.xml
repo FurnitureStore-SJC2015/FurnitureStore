@@ -7,14 +7,13 @@
 	<definition name="template" template="/WEB-INF/tiles-base/template.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="menu" value="" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>
 
 	<!-- Max's definitions! -->
 	<definition name="login" extends="template">
 		<put-attribute name="title" value="Login page" />
-		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/authorization/loginForm.jsp" />
 	</definition>
@@ -27,25 +26,21 @@
 
 	<definition name="client.profile" extends="template">
 		<put-attribute name="title" value="Personal info" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/profile.jsp" />
 	</definition>
 
 	<definition name="client.orders" extends="template">
 		<put-attribute name="title" value="User orders" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/orders.jsp" />
 	</definition>
 
 	<definition name="client.order" extends="template">
 		<put-attribute name="title" expression="Order ${order.id}"></put-attribute>
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
 	</definition>
 
 	<definition name="client.cart" extends="template">
 		<put-attribute name="title" value="Shopping Cart" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/cart.jsp" />
 
 	</definition>
@@ -68,14 +63,12 @@
 
 	<definition name="client.new.order" extends="template">
 		<put-attribute name="title" value="Check order" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/newOrder.jsp" />
 	</definition>
 
 
 	<definition name="client.profile.edit" extends="template">
 		<put-attribute name="title" value="Edit profile" />
-		<put-attribute name="menu" value="/WEB-INF/views/client/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/editProfile.jsp" />
 	</definition>
 
@@ -148,26 +141,22 @@
 
 	<definition name="shop.catalog" extends="template">
 		<put-attribute name="title" value="Shop Catalog" />
-		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/shop/catalog.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/company/shop/catalog.jsp" />
 	</definition>
 
 	<definition name="shop.product" extends="template">
 		<put-attribute name="title" value="Product"></put-attribute>
-		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/shop/product.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/company/shop/product.jsp"></put-attribute>
 	</definition>
 
 	<definition name="company.info" extends="template">
 		<put-attribute name="title" value="Company Information"></put-attribute>
-		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
 	</definition>
 
 	<definition name="catalog.add.product" extends="template">
 		<put-attribute name="title" value="Add new product"></put-attribute>
-		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/shop/addProduct.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/company/shop/addProduct.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>
