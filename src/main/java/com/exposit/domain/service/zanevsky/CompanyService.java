@@ -4,7 +4,5 @@ import com.exposit.domain.model.zanevsky.Company;
 
 public interface CompanyService {
 	
-	public Company findById(int id);
-	
-	public Company getUniqueCompany();
+	public Company getCompanyEmployer();
 }

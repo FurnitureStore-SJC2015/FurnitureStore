@@ -37,6 +37,14 @@
 						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 			</ul>
 		</sec:authorize>
+
+		<sec:authorize access="isAuthenticated() and hasRole('ROLE_COMPANY')">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value="${logout}"/>"><span
+						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+			</ul>
+
+		</sec:authorize>
 	</div>
 
 </div>

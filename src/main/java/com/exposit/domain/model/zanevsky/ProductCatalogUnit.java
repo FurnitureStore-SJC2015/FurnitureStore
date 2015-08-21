@@ -14,20 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 @Entity
 @Table(name = "product_catalog_unit")
 public class ProductCatalogUnit {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_catalog_unit_id")
 	private int id;
-	
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_cost", scale = 2, unique = true)
 	private double cost;
@@ -35,31 +35,34 @@ public class ProductCatalogUnit {
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "margin_coefficient", scale = 2)
 	private double coefficient;
-	
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_name", length = 50)
 	private String name;
-	
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "product_description")
 	private String description;
-	
+
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "image")
 	@Lob
 	private byte[] image;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sale_id")
 	private Sale sale;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = {CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit",
+			cascade = { CascadeType.REMOVE })
 	private List<Feedback> feedbacks;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit",
+			cascade = CascadeType.ALL)
 	private List<ProductTemplate> productTemplates;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit", cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit",
+			cascade = CascadeType.ALL)
 	private List<OrderUnit> orderUnits;
 
 	public int getId() {
@@ -125,15 +128,15 @@ public class ProductCatalogUnit {
 	public void setName(String name) {
 		this.name = name;
 	}
-		
-	public byte[] getImage() {
-		return image;
+
+	public String getImage() {
+		return Base64.encode(image);
 	}
 
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-		
+
 	public String getDescription() {
 		return description;
 	}

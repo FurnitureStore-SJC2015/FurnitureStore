@@ -12,7 +12,7 @@ import com.exposit.repository.hibernate.AbstractHibernateDao;
 public class CompanyRepository extends AbstractHibernateDao<Company, Integer> implements CompanyDao {
 
 	@Override
-	public Company GetUniqueCompany() {
+	public Company getCompanyEmployer() {
 		List<Company> list = this.findAll();
 		return list.get(0);
 	}

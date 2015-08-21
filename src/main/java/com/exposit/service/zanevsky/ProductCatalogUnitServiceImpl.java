@@ -35,16 +35,13 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	}
 
 	@Override
-	public ProductCatalogUnit FindById(int id) {
+	public ProductCatalogUnit findById(int id) {
 		return this.productDao.findById(id);
 	}
 
 	@Override
 	public String processImage(ProductCatalogUnit product) {
-		byte[] rawImage = product.getImage();
-		rawImage = Base64.encodeBase64(rawImage);
-		String image = new String(rawImage);
-		return image;
+		return product.getImage();
 	}
 
 
@@ -107,12 +104,12 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	}
 
 	@Override
-	public void Save(ProductCatalogUnit product) {
+	public void save(ProductCatalogUnit product) {
 		this.productDao.save(product);
 	}
 
 	@Override
-	public void RemoveById(int id) {
+	public void removeById(int id) {
 		this.productDao.delete(id);
 	}
 
@@ -123,7 +120,7 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	}
 
 	@Override
-	public void AddNewProduct(ProductCatalogUnit product) {
+	public void addNewProduct(ProductCatalogUnit product) {
 		product.setCost(this.calculateApproximatePrice(product));
 		for(ProductTemplate item : product.getProductTemplates()){
 			item.getModule().getProductTemplates().add(item);

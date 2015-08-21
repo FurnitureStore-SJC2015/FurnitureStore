@@ -15,7 +15,7 @@ public class StringToProductConverter implements Converter<String, ProductDto>{
 	
 	@Override
 	public ProductDto convert(String id) {
-		return this.productService.FindById(Integer.valueOf(id));
+		return this.productService.findById(Integer.valueOf(id));
 	}
 
 }

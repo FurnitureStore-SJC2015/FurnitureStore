@@ -24,109 +24,117 @@ import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 @Controller
 @RequestMapping("/catalog")
 public class CatalogController {
-	
+
 	@Autowired
 	private ProductDtoService productDtoService;
-	
+
 	@Autowired
 	private ProductCatalogUnitService productService;
-	
+
 	@Autowired
 	private ProductTemplateService productTemplateService;
-	
-	@RequestMapping(value = {"", "/", "/all"}, method = RequestMethod.GET)
-	public ModelAndView showCatalog(Model model){
-		List<ProductDto> products = this.productDtoService.getAllProductCatalogUnits();
-		ModelAndView mav = new ModelAndView("shop.catalog");
-		mav.addObject("products", products);
-		return mav;
+
+	@RequestMapping(value = { "", "/", "/all" }, method = RequestMethod.GET)
+	public String showCatalog(Model model) {
+		model.addAttribute("products",
+				productService.getAllProductCatalogUnits());
+		return "shop.catalog";
 	}
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView search(Model model){
+	public ModelAndView search(Model model) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("searchCriteria", new ProductSearchCriteria());
 		mav.setViewName("shop.catalog");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/search/result", method = RequestMethod.GET)
-	public ModelAndView searchResult(Model model, ProductSearchCriteria criteria){
+	public ModelAndView searchResult(Model model, ProductSearchCriteria criteria) {
 		System.out.println(criteria.getMinCost() + " " + criteria.getMaxCost());
-		List<ProductDto> products = this.productDtoService.getProductByCriteria(criteria);
+		List<ProductDto> products = this.productDtoService
+				.getProductByCriteria(criteria);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("searchCriteria", criteria);
 		mav.addObject("products", products);
 		mav.setViewName("shop.catalog");
 		return mav;
 	}
-	
-	@RequestMapping(value = {"product/{id}", "/search/product/{id}"}, method = RequestMethod.GET)
-	public ModelAndView showProduct(@PathVariable(value = "id") ProductDto product, Model model){
+
+	@RequestMapping(value = { "product/{id}", "/search/product/{id}" },
+			method = RequestMethod.GET)
+	public ModelAndView showProduct(
+			@PathVariable(value = "id") ProductDto product, Model model) {
 		ModelAndView mav = new ModelAndView("shop.product");
 		mav.addObject("product", product);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/action/add", method = RequestMethod.GET)
-	public ModelAndView showProductAddForm(){
+	public ModelAndView showProductAddForm() {
 		ModelAndView modelAndView = new ModelAndView("catalog.add.product");
-		modelAndView.addObject("product", this.productService.getEmptyProduct());
+		modelAndView
+				.addObject("product", this.productService.getEmptyProduct());
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/action/add", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute("product") ProductCatalogUnit product, @RequestParam(value = "productImage") MultipartFile image){
+	public String addProduct(
+			@ModelAttribute("product") ProductCatalogUnit product,
+			@RequestParam(value = "productImage") MultipartFile image) {
 		try {
 			product.setImage(image.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.productService.AddNewProduct(product);
+		this.productService.addNewProduct(product);
 		return "redirect:/catalog/";
 	}
-	
-//	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-//	public String showProduct(@PathVariable int id, Model model){
-//		ProductDto product = this.productDtoService.FindById(id);
-//		model.addAttribute("product", product);
-//		model.addAttribute("modulesCount", 42);
-//		return "shop.product";
-//	}
-//	
-//	@RequestMapping(value = "/action", method = RequestMethod.GET)
-//	public ModelAndView chooseAction(){
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("catalog.modify.action");
-//		modelAndView.addObject("products", this.productDtoService.getAllProductCatalogUnits());
-//		return modelAndView;
-//	}
-//	
-//	@RequestMapping(value = "/action/add", method = RequestMethod.GET)
-//	public ModelAndView showProductAddForm(){
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("catalog.add.product");
-//		modelAndView.addObject("product", this.productService.getEmptyProduct());
-//		return modelAndView;
-//	}
-//	
-//	@RequestMapping(value = "/action/add", method = RequestMethod.POST)
-//	public String addProduct(@ModelAttribute("product") ProductCatalogUnit product, @RequestParam(value = "productImage") MultipartFile image){
-//		try {
-//			product.setImage(image.getBytes());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		this.productService.Save(product);
-//		return "redirect:/catalog/action/";
-//	}
-//	
-//	@RequestMapping(value = "/action/delete/product/{id}", method = RequestMethod.GET)
-//	public String deleteProduct(@PathVariable("id") int id, Model model){
-//		System.out.println("delete method run");
-//		this.productService.RemoveById(id);
-//		return "redirect:catalog/action/";
-//	}
+
+	// @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+	// public String showProduct(@PathVariable int id, Model model){
+	// ProductDto product = this.productDtoService.FindById(id);
+	// model.addAttribute("product", product);
+	// model.addAttribute("modulesCount", 42);
+	// return "shop.product";
+	// }
+	//
+	// @RequestMapping(value = "/action", method = RequestMethod.GET)
+	// public ModelAndView chooseAction(){
+	// ModelAndView modelAndView = new ModelAndView();
+	// modelAndView.setViewName("catalog.modify.action");
+	// modelAndView.addObject("products",
+	// this.productDtoService.getAllProductCatalogUnits());
+	// return modelAndView;
+	// }
+	//
+	// @RequestMapping(value = "/action/add", method = RequestMethod.GET)
+	// public ModelAndView showProductAddForm(){
+	// ModelAndView modelAndView = new ModelAndView();
+	// modelAndView.setViewName("catalog.add.product");
+	// modelAndView.addObject("product", this.productService.getEmptyProduct());
+	// return modelAndView;
+	// }
+	//
+	// @RequestMapping(value = "/action/add", method = RequestMethod.POST)
+	// public String addProduct(@ModelAttribute("product") ProductCatalogUnit
+	// product, @RequestParam(value = "productImage") MultipartFile image){
+	// try {
+	// product.setImage(image.getBytes());
+	// } catch (IOException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// this.productService.Save(product);
+	// return "redirect:/catalog/action/";
+	// }
+	//
+	// @RequestMapping(value = "/action/delete/product/{id}", method =
+	// RequestMethod.GET)
+	// public String deleteProduct(@PathVariable("id") int id, Model model){
+	// System.out.println("delete method run");
+	// this.productService.RemoveById(id);
+	// return "redirect:catalog/action/";
+	// }
 }

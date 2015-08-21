@@ -3,11 +3,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-
-<sec:authorize access="isAuthenticated() and hasRole('ROLE_COMPANY')">
-
-
-	<div class="col-md-9 well">
+<div class="col-md-9">
+	<sec:authorize access="isAuthenticated() and hasRole('ROLE_COMPANY')">
 		<c:if test="${not empty searchCriteria}">
 			<c:url var="action" value="/catalog/search/result"></c:url>
 			<form:form action="${action }" method="GET"
@@ -25,26 +22,34 @@
 						</tr>
 					</table>
 				</fieldset>
-
 				<input type="submit" value="Search" />
 			</form:form>
 		</c:if>
+	</sec:authorize>
 
+	<sec:authorize
+		access="isAuthenticated() and hasAnyRole('ROLE_CLIENT','ROLE_COMPANY') ">
 		<c:if test="${not empty products }">
-			<div class="col-md-15 well">
-				<div class="page-header">
-					<h3>Products catalog</h3>
+
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<h5 class="text-center">
+						<strong><span class="glyphicon glyphicon-list-alt"></span>Catalog</strong>
+					</h5>
 				</div>
-				<table class="table table-striped">
+
+				<div class="panel-body"></div>
+				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th></th>
 							<th>Description</th>
-							<th>Approximate price</th>
+							<th>Price</th>
 							<th></th>
 						</tr>
 					</thead>
-					<c:forEach items="${products }" var="product">
+					<c:forEach items="${products}" var="product">
 						<tr>
 							<td><a class="pull-left" href="#"> <img
 									src="data:image/jpeg;base64,${product.image}"
@@ -54,32 +59,36 @@
 							<td>
 								<h5>${product.description }</h5>
 							</td>
-							<td>
-								<h5>${product.cost }</h5>
-							</td>
+							<td><sec:authorize access="hasRole('ROLE_COMPANY')">
+									<h5>${product.cost }</h5>
+								</sec:authorize> <sec:authorize access="hasRole('ROLE_CLIENT')">
+									<h5>${product.cost }</h5>
+
+								</sec:authorize></td>
 							<td>
 								<div>
-									<c:set var="link" value="product/${product.id}" />
-									<button class="btn btn-default btn-md"
+									<c:url var="link" value="catalog/product/${product.id}" />
+									<button class="btn btn-primary btn-md"
 										onclick="location.href='${link}'">Show info</button>
-								</div>
-								<div>
-									<c:set var="link" value="product/delete/${product.id}" />
-									<button class="btn btn-default btn-md"
-										onclick="location.href='${link}'">Delete</button>
-								</div>
-								<div>
-									<c:set var="link" value="product/edit/${product.id}" />
-									<button class="btn btn-default btn-md"
-										onclick="location.href='${link}'">Edit</button>
-								</div>
+								</div> <sec:authorize access="hasRole('ROLE_COMPANY')">
+									<div>
+										<c:set var="link" value="product/delete/${product.id}" />
+										<button class="btn btn-default btn-md"
+											onclick="location.href='${link}'">Delete</button>
+									</div>
+									<div>
+										<c:set var="link" value="product/edit/${product.id}" />
+										<button class="btn btn-default btn-md"
+											onclick="location.href='${link}'">Edit</button>
+									</div>
+								</sec:authorize>
 							</td>
 						</tr>
 
 					</c:forEach>
 				</table>
-
 			</div>
+
 		</c:if>
-	</div>
-</sec:authorize>
+	</sec:authorize>
+</div>

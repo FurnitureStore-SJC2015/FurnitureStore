@@ -16,7 +16,7 @@ public class StringToProductCatalogUnitConverter implements
 
 	@Override
 	public ProductCatalogUnit convert(String id) {
-		return productCatalogUnitService.FindById(Integer.valueOf(id));
+		return productCatalogUnitService.findById(Integer.valueOf(id));
 	}
 
 }

@@ -14,7 +14,7 @@ public interface ProductCatalogUnitService {
 	
 	public List<ProductCatalogUnit> getAllProductCatalogUnits();
 	
-	public ProductCatalogUnit FindById(int id);
+	public ProductCatalogUnit findById(int id);
 	
 	public String processImage(ProductCatalogUnit product);
 	
@@ -36,11 +36,11 @@ public interface ProductCatalogUnitService {
 	
 	public ProductCatalogUnit getEmptyProduct();
 	
-	public void Save(ProductCatalogUnit product);
+	public void save(ProductCatalogUnit product);
 	
-	public void RemoveById(int id);
+	public void removeById(int id);
 	
 	public List<ProductCatalogUnit> findByCriteria(ProductSearchCriteria criteria);
 	
-	public void AddNewProduct(ProductCatalogUnit product);
+	public void addNewProduct(ProductCatalogUnit product);
 }
