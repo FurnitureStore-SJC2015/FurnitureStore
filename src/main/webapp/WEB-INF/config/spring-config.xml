@@ -24,7 +24,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven conversion-service="conversionService" />
-	
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 
@@ -50,15 +50,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 				<bean class="com.exposit.web.converters.StringToOrderConverter" />
 				<bean class="com.exposit.web.converters.StringToRoleConverter" />
 				<bean class="com.exposit.web.converters.StringToUserConverter" />
-				<bean class="com.exposit.web.converters.StringToProductConverter" />
 				<bean class="com.exposit.web.converters.StringToProductCatalogUnitConverter" />
 				<bean class="com.exposit.web.converters.StringToPaymentSchemeConverter" />
-				<bean
-					class="com.exposit.web.converters.StringToProductCatalogUnitConverter" />
+				<bean class="com.exposit.web.converters.StringToProductCatalogUnitConverter" />
 				<bean class="com.exposit.web.converters.dobrilko.StringToRequestConverter" />
-				<bean
-					class="com.exposit.web.converters.dobrilko.StringToShipmentConverter" />
-				
+				<bean class="com.exposit.web.converters.dobrilko.StringToShipmentConverter" />
+
 			</list>
 		</property>
 	</bean>
@@ -71,4 +68,5 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<import resource="app-data.xml" />
 	<import resource="spring-security.xml" />
+	<import resource="mail-sender.xml" />
 </beans>

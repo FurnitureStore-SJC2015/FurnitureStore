@@ -15,7 +15,7 @@
 				<a href='<c:url value="/client/orders"/>' class="list-group-item">My
 					Orders<span class="badge">${orderCount}</span>
 				</a>
-				<a href='<c:url value="/catalog"/>' class="list-group-item">Shop<span
+				<a href='<c:url value="/catalog"/>' class="list-group-item">To catalog<span
 					class="badge"></span>
 				</a>
 			</ul>

@@ -44,7 +44,6 @@ public class ProductCatalogUnit {
 	@Column(name = "product_description")
 	private String description;
 
-	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "image")
 	@Lob
 	private byte[] image;

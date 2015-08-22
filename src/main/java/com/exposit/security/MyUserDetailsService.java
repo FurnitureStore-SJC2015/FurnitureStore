@@ -1,5 +1,6 @@
 package com.exposit.security;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,8 +17,9 @@ import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.service.sorokin.UserService;
 
 @Service("myUserDetailsService")
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	private UserService userService;
 

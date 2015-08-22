@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.RoleType;
 import com.exposit.domain.service.sorokin.BonusService;
+import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -35,6 +37,9 @@ public class RegistrationController {
 	private BonusService bonusService;
 
 	@Autowired
+	private MailService mailService;
+
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
@@ -45,12 +50,20 @@ public class RegistrationController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String doRegistration(@Valid Client client, BindingResult result,
-			RedirectAttributes redirectAttributes, @RequestParam(value = "image") MultipartFile avatar) {
+			RedirectAttributes redirectAttributes, @RequestParam(
+					value = "image") MultipartFile avatar) {
 		String resultView = "redirect:/login";
 		if (result.hasErrors()) {
 			return "register";
 		}
-		String cryptedPassword = encoder.encode(client.getPassword());
+		registerNewClient(client, avatar);
+		redirectAttributes.addFlashAttribute("new_client", client);
+		return resultView;
+	}
+
+	private void registerNewClient(Client client, MultipartFile avatar) {
+		String password = RandomStringUtils.randomAlphabetic(8);
+		String cryptedPassword = encoder.encode(password);
 		client.setRole(roleService.getRoleByRoleType(RoleType.CLIENT));
 		client.setBonus(bonusService.getCurrentDefaultBonus());
 		client.setPassword(cryptedPassword);
@@ -60,7 +73,7 @@ public class RegistrationController {
 			e.getStackTrace();
 		}
 		userService.createNewUser(client);
-		redirectAttributes.addFlashAttribute("new_client", client);
-		return resultView;
+		mailService.sendRegistrationMail(client.getLogin(), password,
+				client.getEmail());
 	}
 }

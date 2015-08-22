@@ -49,7 +49,6 @@ public class User {
 			message = "*Login must be alphanumeric with digits and dashes.")
 	private String login;
 
-	@NotEmpty(message = "Password cannot be null!")
 	private String password;
 
 	@Pattern(

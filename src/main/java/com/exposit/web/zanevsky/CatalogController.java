@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
+import com.exposit.domain.service.zanevsky.FeedbackService;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.web.dto.service.zanevsky.ProductDtoService;
@@ -33,6 +35,9 @@ public class CatalogController {
 
 	@Autowired
 	private ProductTemplateService productTemplateService;
+
+	@Autowired
+	private FeedbackService feedbackService;
 
 	@RequestMapping(value = { "", "/", "/all" }, method = RequestMethod.GET)
 	public String showCatalog(Model model) {
@@ -63,11 +68,12 @@ public class CatalogController {
 
 	@RequestMapping(value = { "product/{id}", "/search/product/{id}" },
 			method = RequestMethod.GET)
-	public ModelAndView showProduct(
-			@PathVariable(value = "id") ProductDto product, Model model) {
-		ModelAndView mav = new ModelAndView("shop.product");
-		mav.addObject("product", product);
-		return mav;
+	public String showProduct(
+			@PathVariable(value = "id") ProductCatalogUnit product, Model model) {
+		product.setFeedbacks(feedbackService.getFeedbackList(product));
+		model.addAttribute("product", product);
+		return "shop.product";
+
 	}
 
 	@RequestMapping(value = "/action/add", method = RequestMethod.GET)
