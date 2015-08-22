@@ -40,8 +40,7 @@ public class Feedback {
 
 	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "rating")
-	@Enumerated(EnumType.ORDINAL)
-	private RangeType range;
+	private int range;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id", nullable = false)
@@ -83,11 +82,11 @@ public class Feedback {
 		this.date = date;
 	}
 
-	public RangeType getRange() {
+	public int getRange() {
 		return range;
 	}
 
-	public void setRange(RangeType range) {
+	public void setRange(int range) {
 		this.range = range;
 	}
 

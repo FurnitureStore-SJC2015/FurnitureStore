@@ -5,6 +5,26 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
+<script>
+	function changeDisplayStatus() {
+		var feedbacks = $('.allFeedbacks');
+		if (feedbacks.css('display') == 'none') {
+			feedbacks.show('slow');
+		} else {
+			feedbacks.hide('slow');
+		}
+	}
+
+	function addFeedback() {
+		var feedback = $('.oneFeedback');
+		if (feedback.css('display') == 'none') {
+			feedback.show('slow');
+		} else {
+			feedback.hide('slow');
+		}
+	}
+</script>
+
 <sec:authorize
 	access="isAuthenticated() and hasAnyRole('ROLE_CLIENT','ROLE_COMPANY')">
 	<div class="col-md-9">
@@ -15,6 +35,7 @@
 				</h5>
 			</div>
 			<div class="panel-body">
+
 				<div class="row">
 					<div class="col-md-3">
 						<img src="data:image/jpeg;base64,${product.image}"
@@ -22,6 +43,10 @@
 					</div>
 
 					<div class="col-md-9">
+						<h4>
+							<strong>Description:</strong>
+						</h4>
+						${product.description}
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
@@ -32,7 +57,6 @@
 									<td><strong>Name:</strong></td>
 									<td><strong>${product.name}</strong></td>
 								</tr>
-
 								<sec:authorize access="hasRole('ROLE_COMPANY')">
 									<tr>
 										<td><strong>Coefficient:</strong></td>
@@ -42,7 +66,6 @@
 										<td><strong>Cost:</strong></td>
 										<td><strong>${product.cost}</strong></td>
 									</tr>
-
 								</sec:authorize>
 								<sec:authorize access="hasRole('ROLE_CLIENT')">
 									<tr>
@@ -56,50 +79,74 @@
 				</div>
 
 				<sec:authorize access="hasRole('ROLE_CLIENT')">
-					<div class="row">
-					
+					<a href="javascript:addFeedback()"><p class="text-right">Add your own feedback: </p></a>
+					<div class="oneFeedback" style="display: none;">
+						<c:url var="url" value="/feedback/add" />
+						<form action="${url}" method="post">
+							<div class="col-md-8 col-md-offset-2 well">
+								<h4 class="text-center">
+									<strong>What do you think about this ${product.name}?</strong>
+								</h4>
+								<div class="form-group">
+									<div class="col-sm-9">
+										<textarea class="form-control" id="message" name="message"
+											rows="3"></textarea>
+									</div>
+									<div class="col-sm-3">
+										<select id="range" name="range" class="form-control">
+											<option value="5">5</option>
+											<option value="4">4</option>
+											<option value="3">3</option>
+											<option value="2">2</option>
+											<option value="1">1</option>
+										</select> <input type="submit" class="btn btn-primary"
+											value="Add feedback" />
+									</div>
+									<input type="hidden" id="productId" name="productId"
+										value="${product.id}">
+								</div>
+							</div>
+						</form>
 					</div>
 				</sec:authorize>
 
 
 				<c:if test="${not empty product.feedbacks}">
 					<div class="col-md-12">
-						<h2 class="text-left">Feedbacks:</h2>
-						<c:forEach var="feedback" items="${product.feedbacks}">
-							<div class="row">
-								<div class="col-md-2">
-									<img src="data:image/jpeg;base64,${feedback.client.avatar}"
-										class="img-thumbnail" alt="Sample Image">
-								</div>
-								<div class="col-md-10">
-									<div class="media">
-										<div class="media-body">
-											<h4 class="media-heading">
-												<small><i>Posted on <fmt:formatDate type="both"
-															value="${feedback.date}" />
-														<div class="text-right">My range: ${feedback.range}</div>
-												</i></small>
-											</h4>
-											<p>
-												<strong>${feedback.text}</strong>
-											</p>
+						<a href="javascript:changeDisplayStatus()">Feedbacks: </a>
+						<div class="allFeedbacks">
+							<c:forEach var="feedback" items="${product.feedbacks}">
+								<div class="row">
+									<div class="col-md-2">
+										<img src="data:image/jpeg;base64,${feedback.client.avatar}"
+											class="img-thumbnail" alt="Sample Image">
+									</div>
+									<div class="col-md-10">
+										<div class="media">
+											<div class="media-body">
+												<h4 class="media-heading">
+													<small><i>Posted on <fmt:formatDate type="both"
+																value="${feedback.date}" />
+															<div class="text-right">My range: ${feedback.range}</div>
+													</i></small>
+												</h4>
+												<p>
+													<strong>${feedback.text}</strong>
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
 					</div>
 				</c:if>
 
 				<c:if test="${empty product.feedbacks}">
 					<h2>No feedbacks</h2>
 				</c:if>
-
-
-
-
 			</div>
-
+			<div class="panel-footer clearfix"></div>
 		</div>
 
 	</div>

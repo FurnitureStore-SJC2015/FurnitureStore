@@ -1,7 +1,6 @@
 package com.exposit.web.zanevsky;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.service.zanevsky.FeedbackService;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.web.dto.service.zanevsky.ProductDtoService;
-import com.exposit.web.dto.zanevsky.ProductDto;
 import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
 @Controller
@@ -42,7 +39,7 @@ public class CatalogController {
 	@RequestMapping(value = { "", "/", "/all" }, method = RequestMethod.GET)
 	public String showCatalog(Model model) {
 		model.addAttribute("products",
-				productService.getAllProductCatalogUnits());
+				productDtoService.getAllProductCatalogUnits());
 		return "shop.catalog";
 	}
 
@@ -54,17 +51,14 @@ public class CatalogController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/search/result", method = RequestMethod.GET)
-	public ModelAndView searchResult(Model model, ProductSearchCriteria criteria) {
-		System.out.println(criteria.getMinCost() + " " + criteria.getMaxCost());
-		List<ProductDto> products = this.productDtoService
-				.getProductByCriteria(criteria);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("searchCriteria", criteria);
-		mav.addObject("products", products);
-		mav.setViewName("shop.catalog");
-		return mav;
-	}
+	// @RequestMapping(value = "/search/result", method = RequestMethod.GET)
+	/*
+	 * public ModelAndView searchResult(Model model, ProductSearchCriteria
+	 * criteria) { List<ProductDto> products = this.productDtoService
+	 * .getProductByCriteria(criteria); ModelAndView mav = new ModelAndView();
+	 * mav.addObject("searchCriteria", criteria); mav.addObject("products",
+	 * products); mav.setViewName("shop.catalog"); return mav; }
+	 */
 
 	@RequestMapping(value = { "product/{id}", "/search/product/{id}" },
 			method = RequestMethod.GET)

@@ -17,26 +17,32 @@ import com.exposit.repository.dao.zanevsky.FeedbackDao;
 public class FeedbackServiceImpl implements FeedbackService {
 
 	@Autowired
-	FeedbackDao feedbackDao;
+	FeedbackDao feedbackRepository;
 
 	@Override
 	public Feedback findById(int id) {
-		return this.feedbackDao.findById(id);
+		return this.feedbackRepository.findById(id);
 	}
-	
+
 	@Override
 	public List<Feedback> getFeedacksList(User user) {
-		return this.feedbackDao.getFeedacksList(user);
+		return this.feedbackRepository.getFeedacksList(user);
 	}
 
 	@Override
 	public List<Feedback> getFeedbackList(ProductCatalogUnit catalogUnit) {
-		return this.feedbackDao.getFeedbackList(catalogUnit);
+		return this.feedbackRepository.getFeedbackList(catalogUnit);
 	}
 
 	@Override
 	public double getAverageMark(ProductCatalogUnit catalogUnit) {
-		return this.feedbackDao.getAverageMark(catalogUnit);
+		return this.feedbackRepository.getAverageMark(catalogUnit);
+	}
+
+	@Override
+	public void addNewFeedback(Feedback feedback) {
+		feedbackRepository.save(feedback);
+
 	}
 
 }

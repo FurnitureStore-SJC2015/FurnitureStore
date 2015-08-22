@@ -9,9 +9,9 @@ public interface ProductDtoService {
 
 	public List<ProductDto> getAllProductCatalogUnits();
 	
-	public ProductDto findById(int id);
+	//public ProductDto findById(int id);
 	
-	public ProductDto getEmptyProduct();
+	//public ProductDto getEmptyProduct();
 	
-	public List<ProductDto> getProductByCriteria(ProductSearchCriteria criteria);
+	//public List<ProductDto> getProductByCriteria(ProductSearchCriteria criteria);
 }
