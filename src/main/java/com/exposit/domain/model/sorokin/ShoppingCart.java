@@ -37,7 +37,7 @@ public class ShoppingCart implements Serializable {
 	}
 
 	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+		this.totalPrice= totalPrice;
 	}
 
 }

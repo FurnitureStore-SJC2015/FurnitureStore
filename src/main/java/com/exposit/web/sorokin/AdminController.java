@@ -1,19 +1,24 @@
 package com.exposit.web.sorokin;
 
+import javax.validation.Valid;
+
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.sorokin.Role;
+import com.exposit.domain.model.sorokin.RoleType;
 import com.exposit.domain.model.sorokin.User;
-import com.exposit.domain.model.zanevsky.Company;
+import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.RoleService;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -26,6 +31,12 @@ public class AdminController {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	private MailService mailService;
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String indexPage() {
@@ -57,6 +68,26 @@ public class AdminController {
 	public String showRegisterFormForProvider(Model model) {
 		model.addAttribute("provider", new Provider());
 		return "admin.register";
+	}
+
+	@RequestMapping(value = "/register/provider", method = RequestMethod.POST)
+	public String registerNewProvider(@Valid Provider provider,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin.register";
+		}
+		registerNewProvider(provider);
+		return "admin.panel";
+	}
+
+	private void registerNewProvider(Provider provider) {
+		String password = RandomStringUtils.randomAlphabetic(8);
+		String cryptedPassword = encoder.encode(password);
+		provider.setRole(roleService.getRoleByRoleType(RoleType.PROVIDER));
+		provider.setPassword(cryptedPassword);
+		userService.createNewUser(provider);
+		mailService.sendRegistrationMail(provider.getLogin(), password,
+				provider.getEmail());
 	}
 
 }

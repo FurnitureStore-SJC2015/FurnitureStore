@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
-import com.exposit.domain.service.sorokin.PaymentFormService;
 import com.exposit.domain.service.sorokin.ShoppingCartService;
 
 @Controller
@@ -38,6 +38,14 @@ public class ShoppingCartController {
 		// TODO exception
 		shoppingCartService.removeAt(i - 1);
 		return "client.cart";
+	}
+
+	@RequestMapping(value = "/add/many", method = RequestMethod.POST)
+	public String addToCart(@RequestParam("count") Integer count,
+			@RequestParam("productId") ProductCatalogUnit product) {
+		shoppingCartService.addProduct(count, product);
+		return "redirect:/catalog";
+
 	}
 
 }

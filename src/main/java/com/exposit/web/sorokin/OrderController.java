@@ -2,8 +2,6 @@ package com.exposit.web.sorokin;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,7 +51,7 @@ public class OrderController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveOrder(
 			@ModelAttribute("paymentScheme") PaymentScheme scheme,
-			HttpSession session, Principal principal) {
+			Principal principal) {
 		Client client = (Client) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());

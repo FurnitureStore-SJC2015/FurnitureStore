@@ -48,7 +48,7 @@ public class OrderUnitServiceImpl implements OrderUnitService {
 		for (int i = 0; i < cart.getSize(); i++) {
 			OrderUnit orderUnit = new OrderUnit();
 			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
-			orderUnit.setCost(cart.getItems().get(i).getCost());
+			orderUnit.setCost(cart.getItems().get(i).getCost()*cart.getItems().get(i).getCoefficient());
 			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
 			orderUnits.add(orderUnit);
 		}

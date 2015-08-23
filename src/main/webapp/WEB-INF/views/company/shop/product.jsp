@@ -79,31 +79,37 @@
 				</div>
 
 				<sec:authorize access="hasRole('ROLE_CLIENT')">
-					<a href="javascript:addFeedback()"><p class="text-right">Add your own feedback: </p></a>
+					<a href="javascript:addFeedback()"><p class="text-right">Add
+							your own feedback:</p></a>
 					<div class="oneFeedback" style="display: none;">
 						<c:url var="url" value="/feedback/add" />
 						<form action="${url}" method="post">
-							<div class="col-md-8 col-md-offset-2 well">
+							<div class="col-md-10 col-md-offset-1 well">
 								<h4 class="text-center">
 									<strong>What do you think about this ${product.name}?</strong>
 								</h4>
 								<div class="form-group">
-									<div class="col-sm-9">
+									<div class="col-sm-8">
 										<textarea class="form-control" id="message" name="message"
-											rows="3"></textarea>
+											rows="4"></textarea>
 									</div>
-									<div class="col-sm-3">
+									<div class="col-sm-2">
 										<select id="range" name="range" class="form-control">
 											<option value="5">5</option>
 											<option value="4">4</option>
 											<option value="3">3</option>
 											<option value="2">2</option>
 											<option value="1">1</option>
-										</select> <input type="submit" class="btn btn-primary"
+										</select>
+									</div>
+									<div class="col-md-2">
+										<input type="submit" class="btn btn-primary"
 											value="Add feedback" />
 									</div>
+
 									<input type="hidden" id="productId" name="productId"
 										value="${product.id}">
+
 								</div>
 							</div>
 						</form>
@@ -143,11 +149,32 @@
 				</c:if>
 
 				<c:if test="${empty product.feedbacks}">
-					<h2>No feedbacks</h2>
+					<div class="col-md-12">
+						<h2>No feedbacks</h2>
+					</div>
 				</c:if>
 			</div>
-			<div class="panel-footer clearfix"></div>
+			<div class="panel-footer clearfix">
+				<div class="pull-right">
+					<c:url value="/cart/add/many" var="addToCart" />
+					<form action="${addToCart}" method="post">
+						<div class="col-md-6">
+							<select id="count" name="count" class="form-control">
+								<option value="1" selected="selected">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<input type="hidden" id="productId" name="productId"
+								value="${product.id}"> <input type="submit"
+								class="btn btn-primary" value="Add to Cart" />
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-
 	</div>
 </sec:authorize>

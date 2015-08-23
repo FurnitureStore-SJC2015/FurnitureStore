@@ -38,6 +38,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	public void addProduct(Integer count, ProductCatalogUnit product) {
 		for (int i = 0; i < count; i++) {
 			shoppingCart.getItems().add(product);
+			shoppingCart.setTotalPrice(shoppingCart.getTotalPrice()
+					+ product.getCoefficient() * product.getCost());
 		}
 
 	}
@@ -51,7 +53,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void removeAt(int i) {
 		shoppingCart.setTotalPrice(shoppingCart.getTotalPrice()
-				- shoppingCart.getItems().get(i).getCost());
+				- (shoppingCart.getItems().get(i).getCost())*(shoppingCart.getItems().get(i).getCoefficient()));
 		shoppingCart.getItems().remove(i);
 
 	}

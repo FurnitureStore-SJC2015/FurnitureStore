@@ -27,7 +27,7 @@ function deleteUser(userId,i) {
 			temp.fadeOut(800, function(){
                 temp.remove();
             });
-			// TODO
+			location.reload();
 		}
 	});
 }

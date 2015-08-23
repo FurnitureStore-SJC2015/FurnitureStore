@@ -124,7 +124,7 @@ function getPaymentSchemes(){
 								<tr id="record${i}">
 									<td>${i}</td>
 									<td>${item.name}</td>
-									<td>${item.cost}</td>
+									<td>${item.cost*item.coefficient}</td>
 									<td>
 										<button class="btn btn-primary" onclick="removeFromCart(${i})">Delete</button>
 									</td>

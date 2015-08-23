@@ -6,9 +6,7 @@
 	prefix="sec"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
 <div class="col-md-9">
-
 	<div class="panel panel-success">
 		<div class="panel-heading ">
 			<h5 class="text-center">
@@ -36,13 +34,12 @@
 						<tr>
 							<td>${i}</td>
 							<td>${unit.productCatalogUnit.name }</td>
-							<td>${unit.productCatalogUnit.cost}</td>
+							<td>${unit.cost}</td>
 						</tr>
 						<c:set var="i" value="${i + 1}"></c:set>
 					</c:forEach>
 				</tbody>
 			</table>
-
 			<div class="row">
 				<div class="col-md-4">
 					<div class="text-left">
@@ -63,15 +60,14 @@
 					</div>
 				</div>
 			</div>
-
-
 			<div class="pull-left">
 				<c:url var="toCart" value="/cart" />
 
-					 <a class="btn btn-primary" href="${toCart}"><span
+				<a class="btn btn-primary" href="${toCart}"><span
 					class="glyphicon glyphicon-triangle-left"></span>To cart</a>
 			</div>
 			<div class="pull-right">
+				<c:url var="confirm" value="/order/save" />
 				<form action="${confirm}" method="POST">
 					<input type="submit" class="btn btn-success" value="Confirm order">
 					<input type="hidden" id="paymentScheme" name="paymentScheme"
