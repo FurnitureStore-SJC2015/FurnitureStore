@@ -420,7 +420,7 @@ INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`
 INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('2', '1', '2', '1000');
 INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('3', '1', '3', '1000');
 
-INSERT INTO `store`.`shipment` (`shipment_id`, `provider_id`, `way_bill_id`,`is_processed`,`provider_margin_percent`) VALUES ('1', '1', '1', '0','15');
+INSERT INTO `store`.`shipment` (`shipment_id`, `provider_id`, `way_bill_id`,`is_processed`,`provider_margin_percent`) VALUES ('1', '2', '1', '0','15');
 
 INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('1', '1', '3', '1000', '1000');
 INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('2', '1', '4', '1000', '2000');
