@@ -2,11 +2,13 @@ package com.exposit.domain.model.dobrilko;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -16,10 +18,12 @@ import javax.validation.constraints.Size;
 
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Module;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
+@SuppressWarnings("restriction")
 @Entity
 @Table(name = "provider")
-@PrimaryKeyJoinColumn(name="provider_id")
+@PrimaryKeyJoinColumn(name = "provider_id")
 public class Provider extends User {
 
 	@Pattern(regexp = "[A-Z][a-zA-Z|| ||\\-||&||\"||0-9]*]*",
@@ -31,6 +35,10 @@ public class Provider extends User {
 	@Column(name = "provider_name", unique = true)
 	private String providerName;
 
+	@Column(name = "avatar")
+	@Lob
+	private byte[] avatar;
+
 	@Pattern(regexp = "^[0-9]{12}$",
 			message = "Phone number must be 12 digits string!")
 	@Column(name = "phone")
@@ -40,7 +48,11 @@ public class Provider extends User {
 	@Column(name = "zip_code")
 	private String zipCode;
 
-	@OneToMany(mappedBy = "provider", orphanRemoval = true)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "provider_module", joinColumns = @JoinColumn(
+			name = "provider_id", referencedColumnName = "provider_id"),
+			inverseJoinColumns = @JoinColumn(name = "module_id",
+					referencedColumnName = "module_id"))
 	private List<Module> modules;
 
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
@@ -65,10 +77,6 @@ public class Provider extends User {
 		this.zipCode = zipCode;
 	}
 
-	public List<Module> getModules() {
-		return modules;
-	}
-
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
@@ -87,6 +95,14 @@ public class Provider extends User {
 
 	public void setProviderName(String providerName) {
 		this.providerName = providerName;
+	}
+
+	public String getAvatar() {
+		return Base64.encode(avatar);
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 }

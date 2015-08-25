@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.dobrilko.Shipment;
@@ -99,6 +100,7 @@ public class RequestServiceImpl implements RequestService {
 
 	}
 
+	@Transactional
 	@Override
 	public void processRequest(Request request, Date deliveryDate,
 			int providerMarginPercent, double deliveryCost) {
@@ -133,5 +135,11 @@ public class RequestServiceImpl implements RequestService {
 		waybill.setShipment(shipment);
 		waybillService.updateWaybill(waybill);
 
+	}
+
+	@Transactional
+	@Override
+	public List<Request> getRequestByProvider(Provider provider) {
+		return requestDao.getRequests(provider);
 	}
 }

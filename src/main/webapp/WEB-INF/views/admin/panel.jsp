@@ -13,7 +13,6 @@
 <script type="text/javascript">
 	
 function deleteUser(userId,i) {
-	var selectedOption = $('#selector option:selected').val();
 	
 	$.ajax({
 		url : "users/" + userId+"/delete",

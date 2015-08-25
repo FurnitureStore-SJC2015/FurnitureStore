@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
@@ -165,7 +166,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Transactional
 	@Override
-	public List<Shipment> getConfirmedShipments() {
+	public List<Shipment> getConfirmedShipments(Provider provider) {
 		List<Shipment> shipments = new ArrayList<Shipment>();
 		for (Waybill waybill : waybillDao.getConfirmedWaybills()) {
 
@@ -174,12 +175,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		return shipments;
 	}
 
-	@Transactional
-	@Override
-	public List<Shipment> getConfirmedShipments(String dateRangeValue) {
-		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
-		return this.getConfirmedShipments(dates.get(0), dates.get(1));
-	}
+	
 
 	@Transactional
 	@Override
@@ -192,6 +188,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public void updateShipment(Shipment shipment) {
 		shipmentDao.update(shipment);
 
+	}
+
+	@Override
+	public List<Shipment> getConfirmedShipments(String dateRangeValue,
+			Provider provider) {
+		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
+		return this.getConfirmedShipments(dates.get(0), dates.get(1));
 	}
 
 }

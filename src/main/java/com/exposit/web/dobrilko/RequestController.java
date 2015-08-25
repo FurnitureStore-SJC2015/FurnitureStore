@@ -1,8 +1,11 @@
 package com.exposit.web.dobrilko;
 
+import java.security.Principal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
+import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.web.dto.service.dobrilko.RequestUnitDtoService;
 
 @Controller
@@ -31,11 +37,16 @@ public class RequestController {
 	private ShipmentService shipmentService;
 	@Autowired
 	private RequestUnitDtoService requestUnitDtoService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
-	public String showProviderRequestsPanel(Model model) {
+	public String showProviderRequestsPanel(Model model, Principal principal) {
 
-		model.addAttribute("requests", requestService.getAllRequests());
+		Provider provider = (Provider) userService
+				.findUserByName(((UserDetails) ((Authentication) principal)
+						.getPrincipal()).getUsername());
+		model.addAttribute("requests", requestService.getRequestByProvider(provider));
 		return "requests-provider";
 	}
 

@@ -56,8 +56,7 @@
 							<button class="btn btn-info" onclick="location.href='${link}'">SHOW
 								UNITS</button></td>
 
-						<td><c:set var="link"
-								value="reports/${shipment.id}/waybill"></c:set>
+						<td><c:set var="link" value="reports/${shipment.id}/waybill"></c:set>
 							<button class="btn btn-success" onclick="location.href='${link}'">SHOW
 								WAYBILL</button></td>
 					</tr>

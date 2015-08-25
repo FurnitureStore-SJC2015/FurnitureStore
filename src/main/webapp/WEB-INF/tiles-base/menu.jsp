@@ -44,3 +44,20 @@
 		</div>
 	</div>
 </sec:authorize>
+
+<sec:authorize access="isAuthenticated() and hasRole('ROLE_PROVIDER')">
+	<div class="col-md-3">
+		<div class="list-group">
+			<ul class="list-group">
+				<li class="list-group-item"><a
+				href=<c:url value="/provider/profile"/>>PROFILE</a></li>
+			<li class="list-group-item"><a
+				href='<c:url value="/provider/module_requests"/>'>REQUESTS </a></li>
+			<li class="list-group-item"><a
+				href='<c:url value="/provider/reports"/>'>REPORTS </a></li>
+			<li class="list-group-item"><a
+				href='<c:url value="/provider/modules"/>'>MODULES</a></li>
+			</ul>
+		</div>
+	</div>
+</sec:authorize>

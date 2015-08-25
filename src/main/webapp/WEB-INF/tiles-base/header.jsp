@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
@@ -45,6 +45,18 @@
 						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 			</ul>
 
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated() and hasRole('ROLE_PROVIDER')">
+			<ul class="nav navbar-nav">
+
+				<li><a href='<c:url value="/provider/" />'><span
+						class="glyphicon glyphicon-user"></span>Hi, ${provider.name}</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value="${logout}"/>"><span
+						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+			</ul>
 		</sec:authorize>
 	</div>
 

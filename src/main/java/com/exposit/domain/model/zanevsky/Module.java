@@ -13,17 +13,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 
+@SuppressWarnings("restriction")
 @Entity
 @Table(name = "module")
 public class Module {
@@ -47,9 +51,8 @@ public class Module {
 	@Lob
 	private byte[] image;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "provider_id", nullable = false)
-	private Provider provider;
+	@ManyToMany(mappedBy = "modules")
+	private List<Provider> providers;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "storage_module_unit_id", nullable = true)
@@ -75,12 +78,9 @@ public class Module {
 		this.id = id;
 	}
 
-	public Provider getProvider() {
-		return provider;
-	}
 
-	public void setProvider(Provider provider) {
-		this.provider = provider;
+	public void setProvider(List<Provider> providers) {
+		this.providers = providers;
 	}
 
 	public ModuleType getModuleType() {
@@ -123,14 +123,14 @@ public class Module {
 		this.shipmentUnits = shipmentUnits;
 	}
 
-	public byte[] getImage() {
-		return image;
+	public String getImage() {
+		return Base64.encode(image);
 	}
 
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
+
 	public double getCost() {
 		return cost;
 	}

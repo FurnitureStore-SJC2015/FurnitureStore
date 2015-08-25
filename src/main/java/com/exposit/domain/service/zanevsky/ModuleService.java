@@ -25,4 +25,6 @@ public interface ModuleService {
 	public Module getModule(StorageModuleUnit storageModuleUnit);
 	
 	public Module getModule(ProductTemplate template);
+	
+	public void deleteModuleFromProviderList(Integer id, Provider provider);
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.Shipment;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.repository.dao.dobrilko.ProviderDao;
 
@@ -59,6 +60,11 @@ public class ProviderServiceImpl implements ProviderService {
 	@Override
 	public Provider getProvider(Shipment shipment) {
 		return providerDao.getProvider(shipment);
+	}
+
+	@Override
+	public List<Provider> getProviders(Module module) {
+		return providerDao.getProviders(module);
 	}
 
 }

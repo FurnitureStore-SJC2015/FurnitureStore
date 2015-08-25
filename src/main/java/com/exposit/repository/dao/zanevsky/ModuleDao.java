@@ -24,4 +24,5 @@ public interface ModuleDao extends GenericDao<Module, Integer>{
 	public Module getModule(StorageModuleUnit storageModuleUnit);
 	
 	public Module getModule(ProductTemplate template);
+	
 }

@@ -1,68 +1,77 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<c:set var="i" value="1"></c:set>
 <script type="text/javascript">
-	function deleteModule(moduleId, i) {
-		var selectedOption = $('#selector option:selected').val();
-
-		$.ajax({
-			url : "modules/" + modulesId + "/delete",
-			type : "POST",
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
-			},
-			success : function(obj) {
-				var temp = $("#record" + i);
-				temp.fadeOut(800, function() {
-					temp.remove();
-				});
-
-			}
-		});
-	}
+	
+function deleteModule(moduleId,i) {
+		
+	$.ajax({
+		url : "modules/"+moduleId+"/delete",
+		type : "POST",
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(obj) {
+			var temp=$("#record"+i);
+			temp.fadeOut(800, function(){
+                temp.remove();
+            });
+			location.reload();
+		}
+	});
+}
 </script>
 
-<div class="col-md-9 well">
-
-	<div class="col-md-12">
-		<h2>
-			<strong>MODULES MANAGEMENT</strong>
-		</h2>
-	</div>
-
-
-	<div class="col-md-12">
-
-
-
-
-
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>MODULE ID</th>
-					<th>MODULE NAME</th>
-					<th></th>
-				</tr>
-			</thead>
-
-			<tbody>
-
-				<c:forEach items="${modules}" var="module">
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="text-center">
+				<span class="glyphicon glyphicon-edit"></span><strong>Provided
+					modules list</strong>
+			</h5>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
 					<tr>
-						<td>${shipment.id}</td>
-						<td>${shipment.providerMarginPercent}</td>
-						<td><c:set var="link" value="reports/${shipment.id}"></c:set>
-							<button class="btn btn-info" onclick="location.href='${link}'">SHOW
-								UNITS</button></td>
-
+						<th>MODULE</th>
+						<th>PICTURE</th>
+						<th>DELETE</th>
 
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+
+					<c:forEach items="${modules}" var="module">
+						<tr id="record${i}">
+							<td>${module.moduleType}</td>
+							<td><c:if test="${not empty module.image}">
+									<div class="col-md-4">
+										<img src="data:image/jpeg;base64,${module.image}"
+											class="img-thumbnail">
+									</div>
+								</c:if></td>
+
+							<td>
+								<button class="btn btn-default"
+									onclick="deleteModule(${module.id},${i})">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</td>
+							<c:set var="i" value="${i + 1}"></c:set>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
+		</div>
+
+		<div class="panel-footer clearfix"></div>
 	</div>
 
 </div>

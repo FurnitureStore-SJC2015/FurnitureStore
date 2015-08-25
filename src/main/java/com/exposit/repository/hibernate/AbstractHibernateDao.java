@@ -19,9 +19,9 @@ public class AbstractHibernateDao<T, PK extends Serializable> implements
 		HibernateDao<T, PK> {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
-	protected Session getSession() {
+	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
@@ -40,6 +40,8 @@ public class AbstractHibernateDao<T, PK extends Serializable> implements
 
 	@Override
 	public void update(T object) {
+
+		getSession().clear();
 		getSession().update(object);
 
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.Shipment;
+import com.exposit.domain.model.zanevsky.Module;
 
 public interface ProviderService {
 
@@ -21,4 +22,6 @@ public interface ProviderService {
 	public Provider getProvider(Request request);
 
 	public Provider getProvider(Shipment shipment);
+	
+	public List<Provider> getProviders(Module module);
 }

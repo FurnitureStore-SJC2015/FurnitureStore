@@ -86,8 +86,14 @@
 		<put-attribute name="title" value="Provider Request Panel" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/request/requests-acceptance.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
+	</definition>
+	<definition name="generic-error" extends="template">
+	    <put-attribute name="menu" value=""/>
+		<put-attribute name="title" value="Error" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/error/error.jsp" />
+
 	</definition>
 
 	<definition name="shipment-acceptance" extends="template">
@@ -97,52 +103,53 @@
 		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 	</definition>
 
+	<definition name="modules-list" extends="template">
+		<put-attribute name="title" value="Provided Modules List" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/provider/modules/modules.jsp" />
+
+	</definition>
+
 	<definition name="request-info" extends="template">
 		<put-attribute name="title" value="Request Info" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/request/request.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 
 	<definition name="request-processing" extends="template">
 		<put-attribute name="title" value="Request Processing" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/request/request-processing.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 
 	<definition name="profile-provider" extends="template">
 		<put-attribute name="title" value="Provider's profile" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/profile/profile-provider.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 
 	<definition name="report-management-page" extends="template">
 		<put-attribute name="title" value="Reports management page" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/reports/report-management-page.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 
 	<definition name="shipment-info" extends="template">
 		<put-attribute name="title" value="Report Unit Info" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/reports/report-unit-info.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 
 	<definition name="waybill-info" extends="template">
 		<put-attribute name="title" value="Waybill Info" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/reports/waybill-info.jsp" />
-		<put-attribute name="menu"
-			value="/WEB-INF/views/provider/base/menu.jsp"></put-attribute>
+
 	</definition>
 	<!-- Vital's definitions! -->
 
