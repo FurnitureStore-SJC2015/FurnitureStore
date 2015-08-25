@@ -445,3 +445,12 @@ INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `paymen
 INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('2', '1', '2015-07-30 12:00:00', '300', '1');
 
 INSERT INTO `store`.`provider_module` (`provider_id`, `module_id`) VALUES ('2', '1');
+
+UPDATE `store`.`waybill` SET `shipment_id`='2' WHERE `way_bill_id`='1';
+UPDATE `store`.`shipment` SET `shipment_id`='2' WHERE `shipment_id`='1';
+UPDATE `store`.`waybill` SET `way_bill_id`='2' WHERE `way_bill_id`='1';
+UPDATE `store`.`shipment` SET `way_bill_id`='2' WHERE `shipment_id`='2';
+UPDATE `store`.`waybill` SET `confirmation_date`='2015-08-01 00:00:00' WHERE `way_bill_id`='2';
+
+
+
