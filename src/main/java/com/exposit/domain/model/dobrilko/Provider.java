@@ -105,4 +105,5 @@ public class Provider extends User {
 		this.avatar = avatar;
 	}
 
+	
 }

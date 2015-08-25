@@ -125,8 +125,6 @@ public class ShipmentServiceImpl implements ShipmentService {
 		return shipmentUnitDao.getShipmentUnits(shipment);
 	}
 
-	
-
 	@SuppressWarnings("deprecation")
 	@Transactional
 	@Override
@@ -147,38 +145,6 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Transactional
 	@Override
-	public List<Shipment> getShipments(String dateRangeValue) {
-		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
-		return this.getShipments(dates.get(0), dates.get(1));
-	}
-
-	@Transactional
-	@Override
-	public List<Shipment> getConfirmedShipments(Date beginningDate, Date endDate) {
-		List<Shipment> shipments = new ArrayList<Shipment>();
-		for (Waybill waybill : waybillDao.getConfirmedWaybills(beginningDate,
-				endDate)) {
-
-			shipments.add(shipmentDao.getShipment(waybill));
-		}
-		return shipments;
-	}
-
-	@Transactional
-	@Override
-	public List<Shipment> getConfirmedShipments(Provider provider) {
-		List<Shipment> shipments = new ArrayList<Shipment>();
-		for (Waybill waybill : waybillDao.getConfirmedWaybills()) {
-
-			shipments.add(shipmentDao.getShipment(waybill));
-		}
-		return shipments;
-	}
-
-	
-
-	@Transactional
-	@Override
 	public Integer saveShipmentUnit(ShipmentUnit shipmentUnit) {
 		return shipmentUnitDao.save(shipmentUnit);
 	}
@@ -194,7 +160,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public List<Shipment> getConfirmedShipments(String dateRangeValue,
 			Provider provider) {
 		List<Date> dates = this.parseDateRangeValue(dateRangeValue);
-		return this.getConfirmedShipments(dates.get(0), dates.get(1));
+
+		return shipmentDao.getConfirmedShipments(dates.get(0), dates.get(1),
+				provider);
 	}
 
 }

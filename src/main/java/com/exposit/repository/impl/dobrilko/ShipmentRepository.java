@@ -1,5 +1,6 @@
 package com.exposit.repository.impl.dobrilko;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -39,4 +40,16 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 		return (Shipment) criteria.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shipment> getConfirmedShipments(Date beginningDate,
+			Date endDate, Provider provider) {
+		Criteria criteria = getSession()
+				.createCriteria(Shipment.class)
+				.add(Restrictions.eq("provider", provider)).createAlias("waybill", "wbll")
+				.add(Restrictions.isNotNull("wbll.confirmationDate"))
+				.add(Restrictions.between("wbll.confirmationDate",
+						beginningDate, endDate));
+		return (List<Shipment>) criteria.list();
+	}
 }

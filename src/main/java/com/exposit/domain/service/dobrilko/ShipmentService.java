@@ -22,15 +22,11 @@ public interface ShipmentService {
 
 	public List<Shipment> getShipments(Date beginningDate, Date endDate);
 
-	public List<Shipment> getConfirmedShipments(Date beginningDate, Date endDate);
-
 	public void acceptShipment(Shipment shipment, Date confirmantionDate);
 
 	public Shipment getShipment(Waybill waybill);
 
 	public List<Date> parseDateRangeValue(String dateRangeValue);
-
-	public List<Shipment> getShipments(String dateRangeValue);
 
 	public List<Shipment> getConfirmedShipments(String dateRangeValue,
 			Provider provider);
@@ -39,5 +35,4 @@ public interface ShipmentService {
 
 	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment);
 
-	List<Shipment> getConfirmedShipments(Provider provider);
 }

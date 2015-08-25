@@ -41,7 +41,7 @@ public class AbstractHibernateDao<T, PK extends Serializable> implements
 	@Override
 	public void update(T object) {
 
-		getSession().clear();
+		
 		getSession().update(object);
 
 	}

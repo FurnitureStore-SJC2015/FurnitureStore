@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.domain.service.dobrilko.WaybillService;
@@ -61,17 +62,6 @@ public class WaybillServiceImpl implements WaybillService {
 		waybill.setConfirmationDate(confirmationDate);
 		waybillDao.update(waybill);
 
-	}
-
-	@Transactional
-	@Override
-	public List<Waybill> getConfirmedWaybills(Date beginningDate, Date endDate) {
-		return waybillDao.getConfirmedWaybills(beginningDate, endDate);
-	}
-
-	@Override
-	public List<Waybill> getConfirmedWaybills() {
-		return waybillDao.getConfirmedWaybills();
 	}
 
 	@Override

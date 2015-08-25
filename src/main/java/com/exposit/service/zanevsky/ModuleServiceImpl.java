@@ -38,7 +38,8 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public List<Module> getModules(Provider provider) {
-		return this.moduleDao.getModules(provider);
+		return this.moduleDao
+				.getModules(providerDao.findById(provider.getId()));
 	}
 
 	@Override
@@ -71,21 +72,25 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public void deleteModuleFromProviderList(Integer id, Provider provider) {
 
-		List<Module> modules = this.getModules(provider);
-
 		Module module = this.findById(id);
+		Provider pr = providerDao.findById(provider.getId());
+		List<Module> modules = this.getModules(pr);
+
 		List<Provider> providers = providerDao.getProviders(module);
 
 		modules.remove(module);
-		providers.remove(provider);
+
+		providers.remove(pr);
 
 		module.setProvider(providers);
-		provider.setModules(modules);
+		pr.setModules(modules);
 
-		
-		
+		providerDao.update(pr);
 		moduleDao.update(module);
-		providerDao.update(provider);
-		this.getModules(provider);
+
+		List<Provider> prs = providerDao.getProviders(module);
+		List<Module> mdls = moduleDao.getModules(pr);
+
+		return;
 	}
 }

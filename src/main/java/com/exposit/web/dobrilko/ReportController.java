@@ -43,13 +43,8 @@ public class ReportController {
 	private UserService userService;
 
 	@RequestMapping(value = { "", "/" }, method = { RequestMethod.GET })
-	public String showReportsPanel(Model model, Principal principal) {
+	public String showReportsPanel() {
 
-		Provider provider = (Provider) userService
-				.findUserByName(((UserDetails) ((Authentication) principal)
-						.getPrincipal()).getUsername());
-		model.addAttribute("shipments",
-				shipmentService.getConfirmedShipments(provider));
 		return "report-management-page";
 	}
 

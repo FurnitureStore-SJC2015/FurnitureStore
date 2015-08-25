@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.repository.dao.dobrilko.WaybillDao;
@@ -48,6 +49,19 @@ public class WaybillRepository extends AbstractHibernateDao<Waybill, Integer>
 	public List<Waybill> getConfirmedWaybills() {
 		Criteria criteria = getSession().createCriteria(Waybill.class).add(
 				(Restrictions.isNotNull("confirmationDate")));
+		return (List<Waybill>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Waybill> getConfirmedWaybills(Date beginningDate, Date endDate,
+			Provider provider) {
+		
+		Criteria criteria = getSession()
+				.createCriteria(Waybill.class).add(Restrictions.eq("provider", provider))
+				.add((Restrictions.isNotNull("confirmationDate")))
+				.add(Restrictions.between("confirmationDate", beginningDate,
+						endDate));
 		return (List<Waybill>) criteria.list();
 	}
 }

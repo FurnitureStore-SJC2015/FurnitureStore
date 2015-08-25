@@ -451,6 +451,10 @@ UPDATE `store`.`shipment` SET `shipment_id`='2' WHERE `shipment_id`='1';
 UPDATE `store`.`waybill` SET `way_bill_id`='2' WHERE `way_bill_id`='1';
 UPDATE `store`.`shipment` SET `way_bill_id`='2' WHERE `shipment_id`='2';
 UPDATE `store`.`waybill` SET `confirmation_date`='2015-08-01 00:00:00' WHERE `way_bill_id`='2';
+UPDATE `store`.`shipment_unit` SET `shipment_id`='2' WHERE `shipment_unit_id`='1';
+UPDATE `store`.`shipment_unit` SET `shipment_id`='2' WHERE `shipment_unit_id`='2';
+UPDATE `store`.`shipment_unit` SET `shipment_id`='2' WHERE `shipment_unit_id`='3';
+
 
 
 

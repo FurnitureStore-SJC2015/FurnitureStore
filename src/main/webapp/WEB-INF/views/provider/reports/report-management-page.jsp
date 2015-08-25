@@ -45,23 +45,24 @@
 					<th></th>
 				</tr>
 			</thead>
+			<c:if test="${not empty shipments}">
+				<tbody>
 
-			<tbody>
+					<c:forEach items="${shipments}" var="shipment">
+						<tr>
+							<td>${shipment.id}</td>
+							<td>${shipment.providerMarginPercent}</td>
+							<td><c:set var="link" value="${shipment.id}"></c:set>
+								<button class="btn btn-info" onclick="location.href='${link}'">SHOW
+									UNITS</button></td>
 
-				<c:forEach items="${shipments}" var="shipment">
-					<tr>
-						<td>${shipment.id}</td>
-						<td>${shipment.providerMarginPercent}</td>
-						<td><c:set var="link" value="reports/${shipment.id}"></c:set>
-							<button class="btn btn-info" onclick="location.href='${link}'">SHOW
-								UNITS</button></td>
-
-						<td><c:set var="link" value="reports/${shipment.id}/waybill"></c:set>
-							<button class="btn btn-success" onclick="location.href='${link}'">SHOW
-								WAYBILL</button></td>
-					</tr>
-				</c:forEach>
-			</tbody>
+							<td><c:set var="link" value="${shipment.id}/waybill"></c:set>
+								<button class="btn btn-success"
+									onclick="location.href='${link}'">SHOW WAYBILL</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</c:if>
 		</table>
 	</div>
 

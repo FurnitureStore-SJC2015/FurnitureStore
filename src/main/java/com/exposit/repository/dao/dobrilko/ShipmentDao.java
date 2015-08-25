@@ -1,5 +1,6 @@
 package com.exposit.repository.dao.dobrilko;
 
+import java.util.Date;
 import java.util.List;
 
 import com.exposit.domain.model.dobrilko.Provider;
@@ -15,5 +16,8 @@ public interface ShipmentDao extends GenericDao<Shipment, Integer> {
 	public List<Shipment> getShipments(Provider provider);
 
 	public Shipment getShipment(Waybill waybill);
-	
+
+	public List<Shipment> getConfirmedShipments(Date beginningDate,
+			Date endDate, Provider provider);
+
 }
