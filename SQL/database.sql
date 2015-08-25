@@ -88,7 +88,6 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `store`.`module` (
   `module_id` INT(11) NOT NULL AUTO_INCREMENT,
   `storage_module_unit_id` INT(11) NULL DEFAULT NULL,
-  `provider_id` INT(11) NULL DEFAULT NULL,
   `module_type` VARCHAR(50) NULL DEFAULT NULL,
   `image` MEDIUMBLOB NULL DEFAULT NULL,
   `cost` DOUBLE NOT NULL default 0,
@@ -208,11 +207,20 @@ CREATE TABLE IF NOT EXISTS `store`.`provider` (
   `phone` VARCHAR(50) NULL DEFAULT NULL,
   `provider_email` VARCHAR(50) NULL DEFAULT NULL,
   `zip_code` VARCHAR(50) NULL DEFAULT NULL,
+  `avatar` MEDIUMBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`provider_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
+CREATE TABLE `provider_module` (
+    `provider_id` INT(11) NOT NULL,
+    `module_id` INT(11) NOT NULL,
+    PRIMARY KEY (`provider_id`, `module_id`),
+    CONSTRAINT `FK_MODULE` FOREIGN KEY (`module_id`) REFERENCES `module` (`module_id`),
+    CONSTRAINT `FK_PROVIDER` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`provider_id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `store`.`request`
 -- -----------------------------------------------------
@@ -369,10 +377,10 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('1', '1', 'Ivan', 'Adamin', 'Admin', 'root', 'adamin@gmail.com');
-INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('2', '2', 'Max', 'Sorokin', 'Max', 'provider', 'sorokin@gmail.com');
-INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('3', '3', 'Kate', 'Dobrilko', 'Kate', 'company', 'dobrilko@gmail.com');
-INSERT INTO `store`.`user` (`user_id`, `role_id`,  `name`, `surname`, `login`, `password`, `email`) VALUES ('4', '4', 'Vasili', 'Yavorchuk', 'Vasili', 'user', 'yavorchuk@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('1', '1', 'Ivan', 'Adamin', 'Admin', '$2a$10$TTlBPrRYopOm1nskoErldOz48lR761OhQve1d53zPKF8ThhvEXWc6', 'adamin@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('2', '2', 'Max', 'Sorokin', 'Max', '$2a$10$6q1wAVN3xkhxYCU2ktO7aeqZ7LJhBRtTdCZLAIAli4LOWq9GkpNfK', 'sorokin@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`, `name`, `surname`, `login`, `password`, `email`) VALUES ('3', '3', 'Kate', 'Dobrilko', 'Kate', '$2a$10$H3CdgTc21syJt48UOVKC1ObYwxXI8iVQDTIKQuJbpedhc42iDICLa', 'dobrilko@gmail.com');
+INSERT INTO `store`.`user` (`user_id`, `role_id`,  `name`, `surname`, `login`, `password`, `email`) VALUES ('4', '4', 'Vasili', 'Yavorchuk', 'Vasili', '$2a$10$7LeQv44QOe/t0y8b9kUzFOunYLvVkkrFgUBrqaQqThMLY3j54Rsju', 'yavorchuk@gmail.com');
 
 INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('1', 'ADMIN');
 INSERT INTO `store`.`role` (`role_id`, `role_type`) VALUES ('2', 'PROVIDER');
@@ -387,11 +395,11 @@ INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('3', 'NOTREADY');
 
 INSERT INTO `store`.`payment_form` (`payment_type_id`, `payment_type`) VALUES ('1', 'CREDIT');
 
-INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('1', '1', '1', 'TABLE_LEG');
-INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('2', '2', '1', 'TABLETOP');
-INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('3', '3', '1', 'CHAIR_BACK');
-INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('4', '4', '1', 'CHAIR_LEG');
-INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `provider_id`, `module_type`) VALUES ('5', '5', '1', 'CHAIR_SEAT');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`,`module_type`) VALUES ('1', '1',  'TABLE_LEG');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`,  `module_type`) VALUES ('2', '2',  'TABLETOP');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `module_type`) VALUES ('3', '3',  'CHAIR_BACK');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`, `module_type`) VALUES ('4', '4',  'CHAIR_LEG');
+INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`,  `module_type`) VALUES ('5', '5',  'CHAIR_SEAT');
 
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`,`date_of_delivery`) VALUES ('1', '1', '500','100', '2015-07-28 12:00:00');
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('2', '2', '200', '400', '2015-07-28 12:00:00');
@@ -399,14 +407,14 @@ INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('4', '4', '400', '200', '2015-07-28 12:00:00');
 INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`, `module_count`, `full_margin`, `date_of_delivery`) VALUES ('5', '5', '500', '100', '2015-07-28 12:00:00');
 
-INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`) VALUES ('1', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831');
+INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`) VALUES ('2', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831');
 
 INSERT INTO `store`.`product_catalog_unit` (`product_catalog_unit_id`, `sale_id`, `product_name`, `product_cost`, `margin_coefficient`) VALUES ('1', '1', 'Table', '10000', '22.5');
 
 INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('1', '1', '1', '4');
 INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('2', '1', '2', '1');
 
-INSERT INTO `store`.`request` (`request_id`, `provider_id`, `request_date`) VALUES ('1', '1', '2015-07-28 12:00:00');
+INSERT INTO `store`.`request` (`request_id`, `provider_id`, `request_date`) VALUES ('1', '2', '2015-07-28 12:00:00');
 
 INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('1', '1', '1', '1000');
 INSERT INTO `store`.`request_unit` (`request_unit_id`, `request_id`, `module_id`, `request_module_count`) VALUES ('2', '1', '2', '1000');
@@ -435,3 +443,4 @@ INSERT INTO `store`.`payment_scheme` (`payment_scheme_id`, `payment_type_id`, `t
 INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('1', '1', '2015-07-29 12:00:00', '200', '1');
 INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('2', '1', '2015-07-30 12:00:00', '300', '1');
 
+INSERT INTO `store`.`provider_module` (`provider_id`, `module_id`) VALUES ('2', '1');
