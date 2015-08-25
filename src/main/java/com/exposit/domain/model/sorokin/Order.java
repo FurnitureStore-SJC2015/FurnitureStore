@@ -31,6 +31,9 @@ public class Order {
 	@Column(name = "order_date")
 	private Date orderDate;
 
+	@Column(name = "assembly_date")
+	private Date assemblyDate;
+
 	@Column(name = "execution_date")
 	private Date executionDate;
 
@@ -52,6 +55,14 @@ public class Order {
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderUnit> orderUnits;
+
+	public Date getAssemblyDate() {
+		return assemblyDate;
+	}
+
+	public void setAssemblyDate(Date assemblyDate) {
+		this.assemblyDate = assemblyDate;
+	}
 
 	public Client getClient() {
 		return client;
@@ -108,9 +119,5 @@ public class Order {
 	public List<OrderUnit> getOrderUnits() {
 		return orderUnits;
 	}
-	
-	
-	
-	
 
 }

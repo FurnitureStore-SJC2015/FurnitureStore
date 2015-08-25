@@ -30,8 +30,8 @@
 			<ul class="list-group">
 				<a href=<c:url value="/catalog"/> class="list-group-item">
 					Catalog </a>
-				<a href='<c:url value="/company/info"/>' class="list-group-item">
-					Shop information </a>
+				<a href='<c:url value="/company/incoming"/>' class="list-group-item">
+					Incoming orders</a>
 				<a href='<c:url value="/catalog/action"/>' class="list-group-item">
 					Modify Shop </a>
 				<a href='<c:url value="/catalog/action/add"/>'

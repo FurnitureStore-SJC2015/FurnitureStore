@@ -32,7 +32,7 @@ public class OrderUnit {
 	@JoinColumn(name = "state_id", nullable = false)
 	private Status status;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_catalog_unit_id", nullable = false)
 	private ProductCatalogUnit productCatalogUnit;
 	

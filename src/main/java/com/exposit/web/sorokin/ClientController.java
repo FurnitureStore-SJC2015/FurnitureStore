@@ -15,6 +15,7 @@ import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.service.zanevsky.OrderUnitService;
 import com.exposit.web.dto.sorokin.ClientDto;
 
 @Controller
@@ -29,6 +30,9 @@ public class ClientController {
 
 	@Autowired
 	private PaymentService paymentService;
+
+	@Autowired
+	private OrderUnitService orderUnitService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String initializeClient(Authentication auth, HttpSession session) {
@@ -48,6 +52,8 @@ public class ClientController {
 
 	@RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
+		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
+		order.setPayments(paymentService.getPayments(order));
 		model.addAttribute("order", order);
 		model.addAttribute("paymentList", paymentService.getPayments(order));
 		return "client.order";

@@ -71,6 +71,13 @@
 		<put-attribute name="title" value="Edit profile" />
 		<put-attribute name="body" value="/WEB-INF/views/client/editProfile.jsp" />
 	</definition>
+	
+	
+	<definition name="company.order.confirm" extends="template">
+		<put-attribute name="title" value="Orders to confirm" />
+		<put-attribute name="body" value="/WEB-INF/views/company/shop/confirmOrder.jsp" />
+	</definition>
+	
 
 
 	<!-- Kate's definitions! -->

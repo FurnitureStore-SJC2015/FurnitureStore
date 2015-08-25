@@ -1,44 +1,53 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<div class="col-md-9 well">
-	<c:if test="${not empty orderList}">
-		<h1>Orders</h1>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Order date</th>
-					<th>Execution date</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:set var="i" value="1"></c:set>
-				<c:forEach items="${orderList}" var="order">
-					<tr>
-						<td>${i}</td>
-						<td>${order.orderDate}</td>
-						<td>${order.executionDate}</td>
-						<td><c:set var="link" value="orders/${order.id}"></c:set>
-							<button class="btn btn-info" onclick="location.href='${link}'">More
-								info</button></td>
-						<c:set var="i" value="${i + 1}"></c:set>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</c:if>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="text-center">
+				<strong><span class="glyphicon glyphicon-list-alt"><strong>Orders</strong>
+			</h5>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-10 col-md-offset-1">
+				<c:if test="${empty orderList}">
+					<h1>No orders!</h1>
+				</c:if>
+				<c:if test="${not empty orderList}">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Order date</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${orderList}" var="order">
+								<c:if test="${empty order.assemblyDate}">
+									<tr class="active">
 
-	<c:if test="${empty orderList}">
-		<h1>No orders!</h1>
-	</c:if>
-
-
-
-
-
-
-
-
+										<td>#${order.id}</td>
+										<td><fmt:formatDate type="both" dateStyle="medium"
+												timeStyle="medium" value="${order.orderDate}" /></td>
+										<td>Not confirmed</td>
+									</tr>
+								</c:if>
+								<c:if test="${not empty order.assemblyDate}">
+									<tr class="success">
+										<c:url var="showOrder" value="/client/orders/${order.id}"></c:url>
+										<td><a class="brn brn-link" href="${showOrder}">#${order.id}</a></td>
+										<td><fmt:formatDate type="both" dateStyle="medium"
+												timeStyle="medium" value="${order.orderDate}" /></td>
+										<td>Confirmed</td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:if>
+			</div>
+		</div>
+	</div>
 </div>

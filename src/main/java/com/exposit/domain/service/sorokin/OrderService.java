@@ -1,5 +1,6 @@
 package com.exposit.domain.service.sorokin;
 
+import java.util.Date;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Order;
@@ -22,5 +23,11 @@ public interface OrderService {
 
 	public Integer getOrdersCount(User user);
 
-	public Order createNewOrder(PaymentScheme paymentScheme);
+	public Order confirmOrder(Order order, Date assemblyDate);
+
+	public Order preOrder(PaymentScheme paymentScheme);
+
+	public List<Order> getListOfOrdersToConfirm();
+
+	public Double getOrderSum(Order order);
 }

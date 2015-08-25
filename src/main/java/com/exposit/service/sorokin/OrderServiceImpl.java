@@ -11,6 +11,7 @@ import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Payment;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.User;
+import com.exposit.domain.model.zanevsky.OrderUnit;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.ShoppingCartService;
@@ -73,18 +74,40 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order createNewOrder(PaymentScheme paymentScheme) {
-		List<Payment> payments = paymentService
-				.calculatePayments(paymentScheme);
+	public Order confirmOrder(Order order, Date assemblyDate) {
+		PaymentScheme scheme = order.getPaymentScheme();
+		order.setAssemblyDate(assemblyDate);
+		List<Payment> payments = paymentService.calculatePayments(order);
+		order.setPayments(payments);
+		order.setExecutionDate(payments.get(
+				order.getPaymentScheme().getNumberOfPayments() - 1).getDate());
+		return order;
+	}
+
+	@Override
+	public Order preOrder(PaymentScheme paymentScheme) {
 		Order order = new Order();
+		order.setOrderDate(new Date());
 		order.setOrderUnits(orderUnitService
 				.initializeOrderUnits(shoppingCartService.getShoppingCart()));
-		order.setPayments(payments);
 		order.setPaymentScheme(paymentScheme);
-		order.setOrderDate(new Date());
-		order.setExecutionDate(payments.get(
-				paymentScheme.getNumberOfPayments() - 1).getDate());
 		return order;
+
+	}
+
+	@Override
+	public List<Order> getListOfOrdersToConfirm() {
+		return orderRepository.getListOfOrdersToConfirm();
+	}
+
+	@Override
+	public Double getOrderSum(Order order) {
+		List<OrderUnit> units = orderUnitService.getOrderUnitsList(order);
+		double sum = 0;
+		for (OrderUnit unit : units) {
+			sum += unit.getCost();
+		}
+		return sum;
 	}
 
 }

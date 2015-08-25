@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `store`.`orders` (
   `payment_scheme_id` INT(11) NULL DEFAULT NULL,
   `order_date` DATETIME NULL DEFAULT NULL,
   `execution_date` DATETIME NULL DEFAULT NULL,
+  `assembly_date` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2

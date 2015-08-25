@@ -22,13 +22,14 @@
 	href="<c:url value="/resources/css/bootstrap/bootstrap-theme.css"/>" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/bootstrap/bootstrap-theme.css"/>" />
-<script src="<c:url value="/resources/js/jquery-2.1.3.js" />"></script>
+
+<script src="<c:url value="/resources/js/jquery-1.9.1.js" />"></script>
+<script src="<c:url value="/resources/js/jquery-ui.js" />"></script>
 <script src="<c:url value="/resources/js/json2.js" />"></script>
-<!--  <script src="<c:url value="/resources/js/bootstrap.js" />"></script>-->
+
 
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
-<!--  <script src="<c:url value="/resources/js/bootstrap-datepicker.js" />"></script>-->
 <!-- Include Required Prerequisites -->
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>

@@ -1,6 +1,7 @@
 package com.exposit.web.sorokin;
 
 import java.security.Principal;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,20 +46,36 @@ public class OrderController {
 	public String checkOrder(
 			@RequestParam("schemeSelector") PaymentScheme paymentScheme,
 			Model model) {
-		model.addAttribute("order", orderService.createNewOrder(paymentScheme));
+		model.addAttribute("order", orderService.preOrder(paymentScheme));
+		return "client.new.order";
+	}
+
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String showOrderComposition(@PathVariable("id") Order order,
+			Model model) {
+		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
+		model.addAttribute("order", order);
 		return "client.new.order";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveOrder(
+	public String createNewOrder(
 			@ModelAttribute("paymentScheme") PaymentScheme scheme,
 			Principal principal) {
 		Client client = (Client) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
-		Order order = orderService.createNewOrder(scheme);
+		Order order = orderService.preOrder(scheme);
 		order.setClient(client);
 		orderService.createNewOrder(order);
 		return "redirect:/client/";
+	}
+
+	@RequestMapping(value = { "/confirm" }, method = RequestMethod.POST)
+	public String confirmOrder(@RequestParam(value = "orderId") Order order,
+			@RequestParam("confirmationDate") Date assemblyDate) {
+		Order confirmedOrder = orderService.confirmOrder(order, assemblyDate);
+		orderService.updateOrder(confirmedOrder);
+		return "redirect:/company/incoming";
 	}
 }

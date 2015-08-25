@@ -42,4 +42,12 @@ public class OrderRepository extends AbstractHibernateDao<Order, Integer>
 		return result.intValue();
 
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> getListOfOrdersToConfirm() {
+		Criteria cr = getSession().createCriteria(Order.class).add(
+				Restrictions.isNull("assemblyDate"));
+		return (List<Order>) cr.list();
+	}
 }

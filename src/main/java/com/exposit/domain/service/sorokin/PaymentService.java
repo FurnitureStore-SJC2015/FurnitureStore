@@ -1,5 +1,6 @@
 package com.exposit.domain.service.sorokin;
 
+import java.util.Date;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Order;
@@ -20,5 +21,5 @@ public interface PaymentService {
 
 	public List<Payment> getPayments(Order order);
 
-	public List<Payment> calculatePayments(PaymentScheme paymentScheme);
+	public List<Payment> calculatePayments(Order order);
 }
