@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +47,8 @@ public class ProfileController {
 		if (result.hasErrors()) {
 			return "client.profile.edit";
 		}
-		Client loggedClient = (Client) userService.findUserByName(auth.getName());
+		Client loggedClient = (Client) userService.findUserByName(auth
+				.getName());
 		setChangedFields(loggedClient, editedClient, avatar);
 		userService.updateUser(loggedClient);
 		return "redirect:/client";

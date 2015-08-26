@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
-import com.exposit.domain.model.sorokin.ShoppingCart;
 import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
@@ -35,9 +34,6 @@ public class OrderController {
 	private OrderUnitService orderUnitService;
 
 	@Autowired
-	private ShoppingCart shoppingCart;
-
-	@Autowired
 	private PaymentService paymentService;
 
 	@Autowired
@@ -45,6 +41,22 @@ public class OrderController {
 
 	@Autowired
 	private MailService mailService;
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public String showOrders(Authentication auth, Model model) {
+		Client client = (Client) userService.findUserByName(auth.getName());
+		model.addAttribute("orderList", orderService.getOrders(client));
+		return "client.orders";
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
+		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
+		order.setPayments(paymentService.getPayments(order));
+		model.addAttribute("order", order);
+		model.addAttribute("paymentList", paymentService.getPayments(order));
+		return "client.order";
+	}
 
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String checkOrder(
@@ -83,9 +95,9 @@ public class OrderController {
 		mailService.sendConfirationMail(order.getClient());
 		return "redirect:/company/incoming";
 	}
-	
-	@RequestMapping(value={"/delete/{id}"},method=RequestMethod.POST)
-	public String deleteOrder(@PathVariable("id")Order order){
+
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.POST)
+	public String deleteOrder(@PathVariable("id") Order order) {
 		orderService.deleteOrder(order);
 		return "redirect:/company/incoming";
 	}
