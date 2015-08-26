@@ -43,10 +43,7 @@
 								<td><strong>Provider name:</strong></td>
 								<td><strong>${provider.providerName} </strong></td>
 							</tr>
-							<tr>
-								<td><strong>Provider name:</strong></td>
-								<td><strong>${provider.providerName} </strong></td>
-							</tr>
+							
 							<tr>
 								<td><strong>Provider phone:</strong></td>
 								<td><strong>${provider.phone} </strong></td>
@@ -64,7 +61,7 @@
 
 			<div class="panel-footer clearfix">
 				<div class="pull-right">
-					<c:url var="edit" value="/profile/edit" />
+					<c:url var="edit" value="/provider/profile/edit" />
 					<a href="${edit}" class="btn btn-primary">Edit profile</a>
 				</div>
 			</div>

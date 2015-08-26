@@ -2,6 +2,8 @@ package com.exposit.domain.service.dobrilko;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.Shipment;
@@ -24,4 +26,7 @@ public interface ProviderService {
 	public Provider getProvider(Shipment shipment);
 	
 	public List<Provider> getProviders(Module module);
+	
+	public void setChangedFields(Provider loggedProvider,
+			Provider editedProvider, MultipartFile avatar);
 }

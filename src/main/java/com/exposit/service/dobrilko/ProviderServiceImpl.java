@@ -1,10 +1,13 @@
 package com.exposit.service.dobrilko;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
@@ -16,6 +19,8 @@ import com.exposit.repository.dao.dobrilko.ProviderDao;
 @Service
 public class ProviderServiceImpl implements ProviderService {
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	@Autowired
 	private ProviderDao providerDao;
 
@@ -65,6 +70,25 @@ public class ProviderServiceImpl implements ProviderService {
 	@Override
 	public List<Provider> getProviders(Module module) {
 		return providerDao.getProviders(module);
+	}
+
+	@Override
+	public void setChangedFields(Provider loggedProvider,
+			Provider editedProvider, MultipartFile avatar) {
+		loggedProvider.setEmail(editedProvider.getEmail());
+		loggedProvider.setProviderName(editedProvider.getProviderName());
+		loggedProvider
+				.setPassword(encoder.encode(editedProvider.getPassword()));
+		loggedProvider.setPhone(editedProvider.getPhone());
+		loggedProvider.setZipCode(editedProvider.getZipCode());
+		if (avatar != null) {
+			try {
+				loggedProvider.setAvatar(avatar.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
