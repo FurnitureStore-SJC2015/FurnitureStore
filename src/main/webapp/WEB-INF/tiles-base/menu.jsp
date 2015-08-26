@@ -12,7 +12,7 @@
 				<a href='<c:url value="/client/"/>' class="list-group-item">My
 					Profile<span class="badge"></span>
 				</a>
-				<a href='<c:url value="/client/orders"/>' class="list-group-item">My
+				<a href='<c:url value="/order/all"/>' class="list-group-item">My
 					Orders<span class="badge">${orderCount}</span>
 				</a>
 				<a href='<c:url value="/catalog"/>' class="list-group-item">To catalog<span

@@ -36,7 +36,7 @@
 								</c:if>
 								<c:if test="${not empty order.assemblyDate}">
 									<tr class="success">
-										<c:url var="showOrder" value="/client/orders/${order.id}"></c:url>
+										<c:url var="showOrder" value="/order/${order.id}"></c:url>
 										<td><a class="brn brn-link" href="${showOrder}">#${order.id}</a></td>
 										<td><fmt:formatDate type="both" dateStyle="medium"
 												timeStyle="medium" value="${order.orderDate}" /></td>
