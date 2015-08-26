@@ -1,6 +1,7 @@
 package com.exposit.web.sorokin;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.exposit.domain.exceptions.SuchUserRegisteredException;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.RoleType;
 import com.exposit.domain.service.sorokin.BonusService;
@@ -51,7 +53,8 @@ public class RegistrationController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String doRegistration(@Valid Client client, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam(
-					value = "image") MultipartFile avatar) {
+					value = "image") MultipartFile avatar) throws SQLException,
+			IOException {
 		String resultView = "redirect:/login";
 		if (result.hasErrors()) {
 			return "register";
@@ -61,19 +64,28 @@ public class RegistrationController {
 		return resultView;
 	}
 
-	private void registerNewClient(Client client, MultipartFile avatar) {
+	private void registerNewClient(Client client, MultipartFile avatar)
+			throws IOException, SQLException {
 		String password = RandomStringUtils.randomAlphabetic(8);
 		String cryptedPassword = encoder.encode(password);
-		client.setTotalSpent(0);
+		client.setTotalSpent(0.0);
 		client.setRole(roleService.getRoleByRoleType(RoleType.CLIENT));
 		client.setBonus(bonusService.getCurrentDefaultBonus());
 		client.setPassword(cryptedPassword);
 		try {
 			client.setAvatar(avatar.getBytes());
 		} catch (IOException e) {
-			e.getStackTrace();
+			// TODO Auto-generated catch block
+			throw new IOException();
 		}
-		userService.createNewUser(client);
+
+		try {
+			userService.createNewUser(client);
+		} catch (Exception e) {
+			throw new SuchUserRegisteredException(
+					"Invalid login or email. Try again!");
+		}
+
 		mailService.sendRegistrationMail(client.getLogin(), password,
 				client.getEmail());
 	}

@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.exposit.domain.exception.CustomException;
+
+import com.exposit.domain.exceptions.CustomException;
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.ModuleService;

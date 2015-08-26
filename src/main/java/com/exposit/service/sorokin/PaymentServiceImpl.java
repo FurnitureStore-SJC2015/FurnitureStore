@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,14 +70,15 @@ public class PaymentServiceImpl implements PaymentService {
 
 		int delta = order.getPaymentScheme().getTerm()
 				/ order.getPaymentScheme().getNumberOfPayments();
-		Double bonusPersentage = (order.getClient().getBonus().getPercentage())/100;
+		Double bonusPersentage = (order.getClient().getBonus().getPercentage()) / 100;
 		List<Payment> payments = new ArrayList<Payment>();
 		DateTime paymentDate = new DateTime(order.getAssemblyDate())
 				.plusDays(delta);
-		DecimalFormat df=new DecimalFormat("0.00");
-		String formate = df.format((1-bonusPersentage)*orderService.getOrderSum(order)
+		DecimalFormat df = new DecimalFormat("0.00");
+		String formate = df.format((1 - bonusPersentage)
+				* orderService.getOrderSum(order)
 				/ order.getPaymentScheme().getNumberOfPayments());
-		Double onePaymentSum=0d;
+		Double onePaymentSum = 0d;
 		try {
 			onePaymentSum = df.parse(formate).doubleValue();
 		} catch (ParseException e) {
@@ -91,5 +93,16 @@ public class PaymentServiceImpl implements PaymentService {
 			payments.add(payment);
 		}
 		return payments;
+	}
+
+	@Override
+	public Boolean canBePayed(Payment payment) {
+		Days difference = Days.daysBetween(new DateTime(),
+				new DateTime(payment.getDate()));
+		if (difference.getDays() < 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

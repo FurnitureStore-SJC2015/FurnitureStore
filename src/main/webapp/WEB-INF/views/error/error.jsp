@@ -2,16 +2,13 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
-<h3>
-	<strong>Exception name:</strong>
-</h3>
-<h3>${name}</h3>
-<h3>
-	<strong>Exception has been caught on page:</strong>
-</h3>
-<h3>${url}</h3>
-<h3>
-	<strong>Error message: </strong>
-</h3>
-<h3>${exception.message}</h3>
+<div class="col-md-10 col-md-offset-1">
+	<h2>
+		<strong>${name}</strong>
+	</h2>
 
+	<h3>
+		<strong>${message}</strong>
+	</h3>
+
+</div>

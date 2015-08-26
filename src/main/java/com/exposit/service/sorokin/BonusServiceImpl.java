@@ -1,5 +1,7 @@
 package com.exposit.service.sorokin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,4 +22,13 @@ public class BonusServiceImpl implements BonusService {
 		return bonusRepository.getCurrentDefaultBonus();
 	}
 
+	@Override
+	public Bonus getCuitableBonus(Double totalSpent) {
+		if (bonusRepository.getSuitableBonuses(totalSpent) != null) {
+			List<Bonus> suitableBonuses = bonusRepository
+					.getSuitableBonuses(totalSpent);
+			return suitableBonuses.get(suitableBonuses.size() - 1);
+		} else
+			return bonusRepository.getCurrentDefaultBonus();
+	}
 }

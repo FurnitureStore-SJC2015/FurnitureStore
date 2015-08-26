@@ -1,4 +1,4 @@
-package com.exposit.domain.exception;
+ package com.exposit.domain.exceptions;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -18,7 +18,6 @@ public class CustomException extends Exception {
 	}
 
 	public String getMessage() {
-
 		return message;
 
 	}

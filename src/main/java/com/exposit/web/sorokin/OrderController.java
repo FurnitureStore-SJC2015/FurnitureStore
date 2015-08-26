@@ -22,6 +22,7 @@ import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.OrderUnitService;
+import com.exposit.web.dto.service.PaymentDtoService;
 
 @Controller
 @RequestMapping("/order")
@@ -42,6 +43,9 @@ public class OrderController {
 	@Autowired
 	private MailService mailService;
 
+	@Autowired
+	private PaymentDtoService paymentDtoService;
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String showOrders(Authentication auth, Model model) {
 		Client client = (Client) userService.findUserByName(auth.getName());
@@ -52,9 +56,8 @@ public class OrderController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
-		order.setPayments(paymentService.getPayments(order));
 		model.addAttribute("order", order);
-		model.addAttribute("paymentList", paymentService.getPayments(order));
+		model.addAttribute("paymentList", paymentDtoService.getListOfDtoPayments(order));
 		return "client.order";
 	}
 

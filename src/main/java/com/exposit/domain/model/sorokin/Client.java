@@ -51,8 +51,8 @@ public class Client extends User {
 		return totalSpent;
 	}
 
-	public void setTotalSpent(Integer totalSpent) {
-		this.totalSpent = totalSpent;
+	public void setTotalSpent(Double totalSpent) {
+		this.totalSpent+= totalSpent;
 	}
 
 	public Bonus getBonus() {
