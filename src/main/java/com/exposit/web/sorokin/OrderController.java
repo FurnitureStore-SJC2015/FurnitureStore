@@ -18,6 +18,7 @@ import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.ShoppingCart;
+import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
@@ -41,6 +42,9 @@ public class OrderController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private MailService mailService;
 
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String checkOrder(
@@ -76,6 +80,13 @@ public class OrderController {
 			@RequestParam("confirmationDate") Date assemblyDate) {
 		Order confirmedOrder = orderService.confirmOrder(order, assemblyDate);
 		orderService.updateOrder(confirmedOrder);
+		mailService.sendConfirationMail(order.getClient());
+		return "redirect:/company/incoming";
+	}
+	
+	@RequestMapping(value={"/delete/{id}"},method=RequestMethod.POST)
+	public String deleteOrder(@PathVariable("id")Order order){
+		orderService.deleteOrder(order);
 		return "redirect:/company/incoming";
 	}
 }

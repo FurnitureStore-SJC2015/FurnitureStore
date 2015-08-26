@@ -40,7 +40,7 @@ public class AdminController {
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String indexPage() {
-		return "admin.index";
+		return "redirect:/admin/panel";
 	}
 
 	@RequestMapping(value = "/panel", method = RequestMethod.GET)

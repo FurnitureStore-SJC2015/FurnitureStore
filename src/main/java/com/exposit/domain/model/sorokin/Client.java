@@ -44,6 +44,17 @@ public class Client extends User {
 	@JoinColumn(name = "client_id")
 	private List<Order> orders;
 
+	@Column(name = "total_spent")
+	private double totalSpent;
+
+	public double getTotalSpent() {
+		return totalSpent;
+	}
+
+	public void setTotalSpent(Integer totalSpent) {
+		this.totalSpent = totalSpent;
+	}
+
 	public Bonus getBonus() {
 		return bonus;
 	}

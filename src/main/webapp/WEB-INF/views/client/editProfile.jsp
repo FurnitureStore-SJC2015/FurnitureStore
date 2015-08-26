@@ -13,7 +13,7 @@
 
 			<div class="panel-heading">
 				<h5 class="text-center">
-				<span class="glyphicon glyphicon-edit"></span>
+				<span class="glyphicon glyphicon-cog"></span>
 					<strong>Edit profile</strong>
 				</h5>
 			</div>

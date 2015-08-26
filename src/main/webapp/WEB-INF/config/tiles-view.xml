@@ -45,11 +45,6 @@
 
 	</definition>
 
-	<definition name="admin.index" extends="template">
-		<put-attribute name="title" value="Admin Index Page" />
-		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
-	</definition>
-
 	<definition name="admin.panel" extends="template">
 		<put-attribute name="title" value="Admin Panel" />
 		<put-attribute name="body" value="/WEB-INF/views/admin/panel.jsp" />
@@ -69,15 +64,17 @@
 
 	<definition name="client.profile.edit" extends="template">
 		<put-attribute name="title" value="Edit profile" />
-		<put-attribute name="body" value="/WEB-INF/views/client/editProfile.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/editProfile.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name="company.order.confirm" extends="template">
 		<put-attribute name="title" value="Orders to confirm" />
-		<put-attribute name="body" value="/WEB-INF/views/company/shop/confirmOrder.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/shop/confirmOrder.jsp" />
 	</definition>
-	
+
 
 
 	<!-- Kate's definitions! -->
@@ -89,10 +86,9 @@
 
 	</definition>
 	<definition name="generic-error" extends="template">
-	    <put-attribute name="menu" value=""/>
+		<put-attribute name="menu" value="" />
 		<put-attribute name="title" value="Error" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/error/error.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/error/error.jsp" />
 
 	</definition>
 
@@ -155,12 +151,14 @@
 
 	<definition name="shop.catalog" extends="template">
 		<put-attribute name="title" value="Shop Catalog" />
-		<put-attribute name="body" value="/WEB-INF/views/company/shop/catalog.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/shop/catalog.jsp" />
 	</definition>
 
 	<definition name="shop.product" extends="template">
 		<put-attribute name="title" value="Product"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/company/shop/product.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/shop/product.jsp"></put-attribute>
 	</definition>
 
 	<definition name="company.info" extends="template">
@@ -171,6 +169,7 @@
 
 	<definition name="catalog.add.product" extends="template">
 		<put-attribute name="title" value="Add new product"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/company/shop/addProduct.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/shop/addProduct.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

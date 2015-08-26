@@ -31,7 +31,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5 class="text-center">
-					<strong>"${product.name}" information</strong>
+					<strong><span class="glyphicon glyphicon-info-sign"></span>${product.name} information</strong>
 				</h5>
 			</div>
 			<div class="panel-body">
@@ -60,7 +60,7 @@
 								<sec:authorize access="hasRole('ROLE_COMPANY')">
 									<tr>
 										<td><strong>Coefficient:</strong></td>
-										<td><Strong>${product.coefficient}</Strong></td>
+										<td><strong><fmt:formatNumber value="${product.coefficient}" maxFractionDigits="2"/></strong></td>
 									</tr>
 									<tr>
 										<td><strong>Cost:</strong></td>
@@ -70,7 +70,7 @@
 								<sec:authorize access="hasRole('ROLE_CLIENT')">
 									<tr>
 										<td><strong>Cost:</strong></td>
-										<td><strong>${product.cost*product.coefficient}</strong></td>
+										<td><strong><fmt:formatNumber value="${product.cost*product.coefficient}" maxFractionDigits="2"/></strong></td>
 									</tr>
 								</sec:authorize>
 							</tbody>

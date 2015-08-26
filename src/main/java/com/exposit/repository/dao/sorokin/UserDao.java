@@ -3,6 +3,7 @@ package com.exposit.repository.dao.sorokin;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Bonus;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.repository.base.GenericDao;
@@ -17,11 +18,11 @@ public interface UserDao extends GenericDao<User, Integer> {
 
 	public User findUserByName(String username);
 
-	public List<User> queryListOfUsers(Integer size,
-			Integer offset);
+	public List<User> queryListOfUsers(Integer size, Integer offset);
 
 	public List<User> getListOfUsersByRole(Role role, Integer size,
 			Integer offset);
 
 	public Integer getCountOfUsersByRole(Role role);
+
 }

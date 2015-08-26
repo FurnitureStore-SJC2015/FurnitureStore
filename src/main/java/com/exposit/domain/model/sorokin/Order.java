@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
 
 import com.exposit.domain.model.zanevsky.OrderUnit;
 
@@ -46,7 +47,7 @@ public class Order {
 	@JoinColumn(name = "payment_scheme_id")
 	private PaymentScheme paymentScheme;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "client_id")
 	private Client client;

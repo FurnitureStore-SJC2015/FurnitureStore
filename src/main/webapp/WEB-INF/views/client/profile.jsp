@@ -52,6 +52,9 @@
 			</div>
 
 			<div class="panel-footer clearfix">
+				<div class="pull-left">
+				<strong>Total spent: ${profile.totalSpent}</strong>
+				</div>
 				<div class="pull-right">
 					<c:url var="edit" value="/profile/edit" />
 					<a href="${edit}" class="btn btn-primary">Edit profile</a>

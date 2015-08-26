@@ -57,12 +57,18 @@
 							<tr>
 								<td>${i}</td>
 								<td>${unit.productCatalogUnit.name }</td>
-								<td>${unit.cost}</td>
+								<td><fmt:formatNumber value="${unit.cost}" maxFractionDigits="2"/></td>
 							</tr>
 							<c:set var="i" value="${i + 1}"></c:set>
 						</c:forEach>
 					</tbody>
 				</table>
+				<sec:authorize access="hasRole('ROLE_CLIENT')">
+					<div class="text-left">
+						<strong><h3>Current Bonus:
+							${sessionScope.loggedClient.profile.bonus.percentage} %</h3></strong>
+					</div>
+				</sec:authorize>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="text-left">
@@ -97,8 +103,7 @@
 						<c:url var="confirm" value="/order/save" />
 						<form action="${confirm}" method="POST">
 							<input type="submit" class="btn btn-success"
-								value="Confirm order">
-								 <input type="hidden"
+								value="Confirm order"> <input type="hidden"
 								id="paymentScheme" name="paymentScheme"
 								value="${order.paymentScheme.id}">
 						</form>
@@ -112,8 +117,9 @@
 								<div class="form-group">
 									<div class='input-group date' id='datetimepicker1'
 										onclick="buttonEffect()">
-										<input type='text' id="confirmationDate" name="confirmationDate" class="form-control" />
-										<span class="input-group-addon"> <span
+										<input type='text' id="confirmationDate"
+											name="confirmationDate" class="form-control" /> <span
+											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"></span></span>
 									</div>
 								</div>
@@ -121,8 +127,8 @@
 
 							<input type="submit" style="display: none;" id="submitButton"
 								name="submitButton" class="btn btn-success"
-								value="Confirm order" onchange="buttonEffect()"> 
-								<input type="hidden" id="orderId" name="orderId" value="${order.id}">
+								value="Confirm order" onchange="buttonEffect()"> <input
+								type="hidden" id="orderId" name="orderId" value="${order.id}">
 
 						</form>
 					</sec:authorize>
