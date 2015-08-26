@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.sorokin.Bonus;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.repository.dao.sorokin.UserDao;
@@ -75,4 +76,5 @@ public class UserRepository extends AbstractHibernateDao<User, Integer>
 		Long result = (Long) cr.uniqueResult();
 		return result.intValue();
 	}
+
 }

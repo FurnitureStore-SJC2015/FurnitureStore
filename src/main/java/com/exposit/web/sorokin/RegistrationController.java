@@ -64,6 +64,7 @@ public class RegistrationController {
 	private void registerNewClient(Client client, MultipartFile avatar) {
 		String password = RandomStringUtils.randomAlphabetic(8);
 		String cryptedPassword = encoder.encode(password);
+		client.setTotalSpent(0);
 		client.setRole(roleService.getRoleByRoleType(RoleType.CLIENT));
 		client.setBonus(bonusService.getCurrentDefaultBonus());
 		client.setPassword(cryptedPassword);

@@ -1,5 +1,7 @@
 package com.exposit.service.sorokin;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,16 +69,25 @@ public class PaymentServiceImpl implements PaymentService {
 
 		int delta = order.getPaymentScheme().getTerm()
 				/ order.getPaymentScheme().getNumberOfPayments();
+		Double bonusPersentage = (order.getClient().getBonus().getPercentage())/100;
 		List<Payment> payments = new ArrayList<Payment>();
-		DateTime paymentDate = new DateTime(order.getAssemblyDate()).plusDays(delta);
-		double onePaymentSum = orderService.getOrderSum(order)
-				/ order.getPaymentScheme().getNumberOfPayments();
-		for (int i=0;i<order.getPaymentScheme().getNumberOfPayments();i++){
-			Payment payment=new Payment();
+		DateTime paymentDate = new DateTime(order.getAssemblyDate())
+				.plusDays(delta);
+		DecimalFormat df=new DecimalFormat("0.00");
+		String formate = df.format((1-bonusPersentage)*orderService.getOrderSum(order)
+				/ order.getPaymentScheme().getNumberOfPayments());
+		Double onePaymentSum=0d;
+		try {
+			onePaymentSum = df.parse(formate).doubleValue();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		for (int i = 0; i < order.getPaymentScheme().getNumberOfPayments(); i++) {
+			Payment payment = new Payment();
 			payment.setPaymentStatus(false);
 			payment.setDate(paymentDate.toDate());
 			payment.setSum(onePaymentSum);
-			paymentDate=paymentDate.plusDays(delta);
+			paymentDate = paymentDate.plusDays(delta);
 			payments.add(payment);
 		}
 		return payments;

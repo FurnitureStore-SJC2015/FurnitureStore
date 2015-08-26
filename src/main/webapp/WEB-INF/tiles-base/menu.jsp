@@ -9,7 +9,7 @@
 	<div class="col-md-3">
 		<div class="list-group">
 			<ul class="list-group">
-				<a href='<c:url value="/profile/"/>' class="list-group-item">My
+				<a href='<c:url value="/client/"/>' class="list-group-item">My
 					Profile<span class="badge"></span>
 				</a>
 				<a href='<c:url value="/client/orders"/>' class="list-group-item">My

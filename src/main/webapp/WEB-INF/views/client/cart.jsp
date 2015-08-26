@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <c:url var="getPaymentForms" value="/payment/forms" />
@@ -76,7 +77,6 @@ function getPaymentSchemes(){
 			for (i=0;i<paymentSchemes.length;i++){
 				var id=paymentSchemes[i]["id"];
 				var term=paymentSchemes[i]["term"];
-				var penalty=paymentSchemes[i]["penalty"];
 				var numberOfPayments=paymentSchemes[i]["numberOfPayments"];
 				var persentage=paymentSchemes[i]["percentage"];
 				var value="term: "+term+" days, payments:"+numberOfPayments+", under "+persentage+"%";
@@ -124,7 +124,7 @@ function getPaymentSchemes(){
 								<tr id="record${i}">
 									<td>${i}</td>
 									<td>${item.name}</td>
-									<td>${item.cost*item.coefficient}</td>
+									<td><fmt:formatNumber value="${item.cost*item.coefficient}" maxFractionDigits="2"/></td>
 									<td>
 										<button class="btn btn-primary" onclick="removeFromCart(${i})">Delete</button>
 									</td>
@@ -136,7 +136,7 @@ function getPaymentSchemes(){
 							<tr>
 								<td></td>
 								<td><strong>Total price:</strong></td>
-								<td><strong>${shoppingCart.totalPrice}</strong></td>
+								<td><strong><fmt:formatNumber value="${shoppingCart.totalPrice}" maxFractionDigits="2"/></strong></td>
 							</tr>
 						</tfoot>
 					</table>

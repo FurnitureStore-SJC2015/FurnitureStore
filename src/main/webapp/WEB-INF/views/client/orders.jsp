@@ -12,7 +12,7 @@
 		<div class="panel-body">
 			<div class="col-md-10 col-md-offset-1">
 				<c:if test="${empty orderList}">
-					<h1>No orders!</h1>
+					<h2>No orders!</h2>
 				</c:if>
 				<c:if test="${not empty orderList}">
 					<table class="table table-bordered">

@@ -62,9 +62,9 @@
 								<h5>${item.product.description }</h5>
 							</td>
 							<td><sec:authorize access="hasRole('ROLE_COMPANY')">
-									<h5>${item.product.cost }</h5>
+									<h5><fmt:formatNumber value="${item.product.cost}" maxFractionDigits="2"/></h5>
 								</sec:authorize> <sec:authorize access="hasRole('ROLE_CLIENT')">
-									<h5>${item.product.cost*item.product.coefficient }</h5>
+									<h5><fmt:formatNumber value="${item.product.cost*item.product.coefficient}" maxFractionDigits="3"/></h5>
 								</sec:authorize></td>
 							<td><c:url var="link"
 									value="catalog/product/${item.product.id}" />
@@ -83,6 +83,9 @@
 				</table>
 			</div>
 
+		</c:if>
+		<c:if test="${empty products}">
+		<h1>No products added</h1>
 		</c:if>
 	</sec:authorize>
 </div>

@@ -2,5 +2,5 @@ package com.exposit.domain.model.sorokin;
 
 public enum PaymentType {
 
-	CREDIT,CASH
+	CASH,HIRE_PURCHASE
 }

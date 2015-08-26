@@ -2,6 +2,7 @@ package com.exposit.domain.service.sorokin;
 
 import java.util.List;
 
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
 
@@ -29,5 +30,4 @@ public interface UserService {
 			Integer offset);
 
 	public Integer getCountOfUsers(Role role);
-
 }

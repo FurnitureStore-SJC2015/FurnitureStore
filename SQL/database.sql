@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `store`.`client` (
   `id` INT(11) NOT NULL,
   `bonus_id` VARCHAR(45) NULL DEFAULT NULL,
   `avatar` MEDIUMBLOB NULL DEFAULT NULL,
+  `total_spent` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB
@@ -162,7 +163,6 @@ CREATE TABLE IF NOT EXISTS `store`.`payment_scheme` (
   `payment_scheme_id` INT(11) NOT NULL AUTO_INCREMENT,
   `payment_type_id` INT(11) NULL DEFAULT NULL,
   `term` INT(11) NULL DEFAULT NULL,
-  `penalty` DOUBLE NULL DEFAULT NULL,
   `number_of_payments` INT(11) NULL DEFAULT NULL,
   `interest_rate` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`payment_scheme_id`))
@@ -394,7 +394,8 @@ INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('1', 'READY');
 INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('2', 'INPROGRESS');
 INSERT INTO `store`.`state` (`state_id`, `state_name`) VALUES ('3', 'NOTREADY');
 
-INSERT INTO `store`.`payment_form` (`payment_type_id`, `payment_type`) VALUES ('1', 'CREDIT');
+INSERT INTO `store`.`payment_form` (`payment_type_id`, `payment_type`) VALUES ('1', 'CASH');
+INSERT INTO `store`.`payment_form` (`payment_type_id`, `payment_type`) VALUES ('2', 'HIRE_PURCHASE');
 
 INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`,`module_type`) VALUES ('1', '1',  'TABLE_LEG');
 INSERT INTO `store`.`module` (`module_id`, `storage_module_unit_id`,  `module_type`) VALUES ('2', '2',  'TABLETOP');
@@ -439,8 +440,7 @@ INSERT INTO `store`.`orders` (`order_id`,  `payment_scheme_id`, `order_date`, `e
 INSERT INTO `store`.`order_unit` (`order_unit_id`, `state_id`, `order_id`, `product_catalog_unit_id`, `order_unit_cost`) VALUES ('1', '1', '1', '1', '2000');
 INSERT INTO `store`.`order_unit` (`order_unit_id`, `state_id`, `order_id`, `product_catalog_unit_id`, `order_unit_cost`) VALUES ('2', '1', '1', '1', '2000');
 
-INSERT INTO `store`.`payment_scheme` (`payment_scheme_id`, `payment_type_id`, `term`, `penalty`, `number_of_payments`, `interest_rate`) VALUES ('1', '1', '15', '1.5', '10', '12.5');
-
+INSERT INTO `store`.`payment_scheme` (`payment_scheme_id`, `payment_type_id`, `term`, `number_of_payments`, `interest_rate`) VALUES ('1', '1', '15','10', '12.5');
 INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('1', '1', '2015-07-29 12:00:00', '200', '1');
 INSERT INTO `store`.`payment` (`payment_id`, `order_id`, `payment_date`, `payment_sum`, `payment_status`) VALUES ('2', '1', '2015-07-30 12:00:00', '300', '1');
 

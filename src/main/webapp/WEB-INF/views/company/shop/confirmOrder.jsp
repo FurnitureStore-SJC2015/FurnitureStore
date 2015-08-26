@@ -31,13 +31,22 @@
 								<td>${item.id}</td>
 								<td><fmt:formatDate type="both" dateStyle="medium"
 										timeStyle="long" value="${item.orderDate}" /></td>
-								<td><c:url var="showOrder"
-										value="/order/check/${item.id}" /> <c:url var="confirm"
-										value="catalog/product/${item.id}" />
-									<button class="btn btn-primary"
-										onclick="location.href='${showOrder}'">Show order</button>
-									<button class="btn btn-success"
-										onclick="location.href='${confirm}'">Confirm</button></td>
+								<td>
+									<div class="row">
+										<div class="col-md-3">
+											<c:url var="showOrder" value="/order/check/${item.id}" />
+											<c:url var="delete" value="/order/delete/${item.id}" />
+											<button class="btn btn-primary"
+												onclick="location.href='${showOrder}'">Show</button>
+										</div>
+										<div class="col-md-3">
+											<form action="${delete}" method="post">
+												<button type="submit" class="btn btn-danger"
+													onclick="location.href='${delete}'">Delete</button>
+											</form>
+										</div>
+									</div>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>

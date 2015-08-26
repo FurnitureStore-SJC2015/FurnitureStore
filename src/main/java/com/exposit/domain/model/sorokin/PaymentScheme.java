@@ -32,9 +32,6 @@ public class PaymentScheme {
 	@Column(name = "term")
 	private Integer term;
 
-	@Column(name = "penalty")
-	private double penalty;
-
 	@Column(name = "number_of_payments")
 	private Integer numberOfPayments;
 
@@ -68,14 +65,6 @@ public class PaymentScheme {
 
 	public void setTerm(Integer term) {
 		this.term = term;
-	}
-
-	public double getPenalty() {
-		return penalty;
-	}
-
-	public void setPenalty(double penalty) {
-		this.penalty = penalty;
 	}
 
 	public Integer getNumberOfPayments() {

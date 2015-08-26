@@ -5,6 +5,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.service.sorokin.MailService;
 
 @Service
@@ -22,5 +23,16 @@ public class MailServiceImpl implements MailService {
 		message.setText("Welcome to Furniture Store.\nYour login: " + login
 				+ "\nYour password: " + password);
 		mailSender.send(message);
+	}
+
+	@Override
+	public void sendConfirationMail(Client client) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("furniturestore3@gmail.com");
+		message.setTo(client.getEmail());
+		message.setSubject("Order confirmation");
+		message.setText("Hi, "+client.getName()+".\nYour order confirmed! You can see your order in your profile!");
+		mailSender.send(message);
+
 	}
 }
