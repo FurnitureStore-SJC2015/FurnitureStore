@@ -21,12 +21,12 @@
 					<tr>
 						<td>${request.id}</td>
 						<td>${request.requestDate}</td>
-						<td><c:set var="link" value="module_requests/${request.id}"></c:set>
+						<td><c:set var="link" value="requests/${request.id}"></c:set>
 							<button class="btn btn-info" onclick="location.href='${link}'">SHOW
 								DETAILS</button></td>
 
 						<td><c:set var="link"
-								value="module_requests/${request.id}/processing_page"></c:set>
+								value="requests/${request.id}/processing_page"></c:set>
 							<button class="btn btn-success" onclick="location.href='${link}'">PROCESS
 								REQUEST</button></td>
 					</tr>

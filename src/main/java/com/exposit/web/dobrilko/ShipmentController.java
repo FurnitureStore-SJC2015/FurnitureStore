@@ -16,7 +16,7 @@ import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 
 @Controller
-@RequestMapping(value = "/provider/shipments", method = RequestMethod.GET)
+@RequestMapping(value = "/shipments", method = RequestMethod.GET)
 public class ShipmentController {
 
 	@Autowired

@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
-import com.exposit.domain.model.sorokin.Client;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.service.dobrilko.PriceService;
+import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.domain.service.sorokin.UserService;
-import com.exposit.web.dto.service.dobrilko.RequestUnitDtoService;
 
 @Controller
-@RequestMapping(value = "/provider/module_requests", method = RequestMethod.GET)
+@RequestMapping(value = "/requests", method = RequestMethod.GET)
 public class RequestController {
 
 	@Autowired
@@ -36,7 +36,8 @@ public class RequestController {
 	@Autowired
 	private ShipmentService shipmentService;
 	@Autowired
-	private RequestUnitDtoService requestUnitDtoService;
+	private ProviderService providerService;
+
 	@Autowired
 	private UserService userService;
 
@@ -46,7 +47,8 @@ public class RequestController {
 		Provider provider = (Provider) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
-		model.addAttribute("requests", requestService.getRequestByProvider(provider));
+		model.addAttribute("requests",
+				requestService.getRequestByProvider(provider));
 		return "requests-provider";
 	}
 
@@ -80,9 +82,28 @@ public class RequestController {
 
 	Model model) {
 		model.addAttribute("request", request);
-		model.addAttribute("requestUnits",
-				requestUnitDtoService.getRequestUnitsByRequest(request));
+
+		model.addAttribute("requestUnits", requestService
+				.convertRequestUnitsToDto(requestService
+						.getRequestUnitsByRequest(request)));
 		return "request-info";
 	}
 
+	@RequestMapping(value = { "/new" }, method = RequestMethod.GET)
+	public String makeRequest(@PathVariable("id") Integer moduleId, Model model) {
+
+		model.addAttribute("moduleId", moduleId);
+		return "request.new";
+
+	}
+
+	@RequestMapping(value = { "/order" }, method = RequestMethod.GET)
+	public String makeRequestForOrder(
+			@RequestParam(value = "order") Order order, Model model) {
+
+		model.addAttribute("requestUnits",
+				requestService.convertOrderToRequestUnitsDto(order));
+		return "request.order";
+
+	}
 }

@@ -153,6 +153,12 @@
 			value="/WEB-INF/views/provider/profile/profile-provider-edit.jsp" />
 
 	</definition>
+	<definition name="request.order" extends="template">
+		<put-attribute name="title" value="New Request Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/request/request.jsp" />
+
+	</definition>
 
 	<!-- Vital's definitions! -->
 

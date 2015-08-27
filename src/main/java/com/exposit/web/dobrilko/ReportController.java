@@ -14,18 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exposit.domain.model.dobrilko.Provider;
-import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.domain.service.sorokin.UserService;
-import com.exposit.web.dto.service.dobrilko.RequestUnitDtoService;
-import com.exposit.web.dto.service.dobrilko.ShipmentUnitDtoService;
 
 @Controller
-@RequestMapping(value = "/provider/reports", method = RequestMethod.GET)
+@RequestMapping(value = "/reports", method = RequestMethod.GET)
 public class ReportController {
 	@Autowired
 	private RequestService requestService;
@@ -35,10 +32,7 @@ public class ReportController {
 	private PriceService priceService;
 	@Autowired
 	private ShipmentService shipmentService;
-	@Autowired
-	private RequestUnitDtoService requestUnitDtoService;
-	@Autowired
-	private ShipmentUnitDtoService shipmentUnitDtoService;
+
 	@Autowired
 	private UserService userService;
 
@@ -69,8 +63,9 @@ public class ReportController {
 
 	Model model) {
 		model.addAttribute("shipment", shipment);
-		model.addAttribute("shipmentUnits",
-				shipmentUnitDtoService.getShipmentUnitsByShipment(shipment));
+		model.addAttribute("shipmentUnits", shipmentService
+				.convertShipmentUnitsToDto(shipmentService
+						.getShipmentUnitsByShipment(shipment)));
 		return "shipment-info";
 	}
 

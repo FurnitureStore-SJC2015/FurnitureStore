@@ -10,7 +10,7 @@
 		</h2>
 	</div>
 
-	<c:url var="action" value="/provider/reports/filtered"></c:url>
+	<c:url var="action" value="/reports/filtered"></c:url>
 	<form:form action="${action}" method="GET" commandName="dateFilter">
 
 		<div class="col-md-4">

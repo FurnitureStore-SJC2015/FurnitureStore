@@ -9,20 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exposit.domain.model.dobrilko.Provider;
-import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
+import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 import com.exposit.domain.model.dobrilko.Waybill;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
+import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.repository.dao.dobrilko.RequestDao;
-import com.exposit.repository.dao.dobrilko.RequestUnitDao;
-import com.exposit.repository.dao.dobrilko.ShipmentDao;
 import com.exposit.repository.dao.dobrilko.ShipmentUnitDao;
+import com.exposit.repository.dao.dobrilko.ShipmentDao;
 import com.exposit.repository.dao.dobrilko.StorageModuleUnitDao;
 import com.exposit.repository.dao.dobrilko.WaybillDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
+import com.exposit.web.dto.dobrilko.ShipmentUnitDto;
 
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
@@ -34,7 +36,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Autowired
 	private StorageModuleUnitDao storageModuleUnitDao;
 	@Autowired
-	private RequestUnitDao requestUnitDao;
+	private ShipmentUnitDao ShipmentUnitDao;
 	@Autowired
 	private ShipmentUnitDao shipmentUnitDao;
 	@Autowired
@@ -45,6 +47,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 	private RequestDao requestDao;
 	@Autowired
 	private ModuleDao moduleDao;
+	@Autowired
+	private ModuleService moduleService;
 
 	@Transactional
 	@Override
@@ -165,4 +169,20 @@ public class ShipmentServiceImpl implements ShipmentService {
 				provider);
 	}
 
+	@Override
+	public List<ShipmentUnitDto> convertShipmentUnitsToDto(
+			List<ShipmentUnit> ShipmentUnits) {
+		List<ShipmentUnitDto> dtos = new ArrayList<ShipmentUnitDto>();
+		for (ShipmentUnit ShipmentUnit : ShipmentUnits) {
+			Module module = moduleService.getModule(ShipmentUnit);
+
+			ShipmentUnitDto dto = new ShipmentUnitDto.Builder(
+					ShipmentUnit.getId(), ShipmentUnit.getCount(), module
+							.getModuleType().toString(), module.getCost())
+					.build();
+			dtos.add(dto);
+		}
+		return dtos;
+
+	}
 }

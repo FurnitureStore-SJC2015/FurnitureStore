@@ -6,7 +6,9 @@ import java.util.List;
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.RequestUnit;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
+import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 public interface RequestService {
 
@@ -32,7 +34,19 @@ public interface RequestService {
 
 	public Module getModuleByRequestUnit(RequestUnit requestUnit);
 
-	void processRequest(Request request, Date deliveryDate,
+	public void processRequest(Request request, Date deliveryDate,
 			int providerMarginPercent, double deliveryCost);
+	
+	public List<Request> createRequests(List<RequestUnitDto> requestUnits);
+	
+	public void sendRequest(Request request);
+	
+	public void sendRequests(List<Request> requests);
+
+	List<RequestUnitDto> convertRequestUnitsToDto(List<RequestUnit> requestUnits);
+	
+	public List<RequestUnitDto> convertOrderToRequestUnitsDto(Order order);
+
+	
 
 }

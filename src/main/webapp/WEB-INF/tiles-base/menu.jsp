@@ -15,8 +15,8 @@
 				<a href='<c:url value="/order/all"/>' class="list-group-item">My
 					Orders<span class="badge">${orderCount}</span>
 				</a>
-				<a href='<c:url value="/catalog"/>' class="list-group-item">To catalog<span
-					class="badge"></span>
+				<a href='<c:url value="/catalog"/>' class="list-group-item">To
+					catalog<span class="badge"></span>
 				</a>
 			</ul>
 		</div>
@@ -50,13 +50,12 @@
 		<div class="list-group">
 			<ul class="list-group">
 				<li class="list-group-item"><a
-				href=<c:url value="/provider/profile"/>>PROFILE</a></li>
-			<li class="list-group-item"><a
-				href='<c:url value="/provider/module_requests"/>'>REQUESTS </a></li>
-			<li class="list-group-item"><a
-				href='<c:url value="/provider/reports"/>'>REPORTS </a></li>
-			<li class="list-group-item"><a
-				href='<c:url value="/provider/modules"/>'>MODULES</a></li>
+					href=<c:url value="/provider/profile"/>>PROFILE</a></li>
+				<li class="list-group-item"><a
+					href='<c:url value="/requests"/>'>REQUESTS </a></li>
+				<li class="list-group-item"><a href='<c:url value="/reports"/>'>REPORTS
+				</a></li>
+				<li class="list-group-item"><a href='<c:url value="/modules"/>'>MODULES</a></li>
 			</ul>
 		</div>
 	</div>

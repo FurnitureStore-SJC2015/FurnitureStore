@@ -19,7 +19,7 @@
 		</h2>
 	</div>
 	<div class="col-md-12">
-		<c:url value="/provider/module_requests/${request.id}/process" var="processUrl" />
+		<c:url value="requests/${request.id}/process" var="processUrl" />
 		<form:form align="center" name="processingForm" action="${processUrl}"
 			method="POST" class="form-horizontal" role="form">
 

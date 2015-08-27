@@ -1,5 +1,6 @@
 package com.exposit.service.zanevsky;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,12 +12,19 @@ import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
+import com.exposit.domain.model.zanevsky.OrderUnit;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
+import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.ModuleService;
+import com.exposit.domain.service.zanevsky.OrderUnitService;
+import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
+import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.repository.dao.dobrilko.ProviderDao;
+import com.exposit.repository.dao.dobrilko.StorageModuleUnitDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
 
@@ -30,6 +38,15 @@ public class ModuleServiceImpl implements ModuleService {
 	ProviderDao providerDao;
 	@Autowired
 	UserService userService;
+	@Autowired
+	OrderUnitService orderUnitService;
+	@Autowired
+	ProductCatalogUnitService productCatalogUnitService;
+	@Autowired
+	ProductTemplateService productTemplateService;
+
+	@Autowired
+	StorageModuleUnitService storageModuleUnitService;
 
 	@Override
 	public Module findById(int id) {
@@ -92,5 +109,27 @@ public class ModuleServiceImpl implements ModuleService {
 		List<Module> mdls = moduleDao.getModules(pr);
 
 		return;
+	}
+
+	@Transactional
+	@Override
+	public List<ProductTemplate> getAbsentProductTemplates(Order order) {
+
+		List<ProductTemplate> productTemplates = new ArrayList<ProductTemplate>();
+
+		List<ProductCatalogUnit> catalogUnits = productCatalogUnitService
+				.getProducts(order);
+		for (ProductCatalogUnit productCatalogUnit : catalogUnits) {
+			for (ProductTemplate productTemplate : productTemplateService
+					.getProductTemplates(productCatalogUnit)) {
+				if (storageModuleUnitService.getStorageModuleUnit(
+						this.getModule(productTemplate)).getCount() == 0) {
+					productTemplates.add(productTemplate);
+				}
+
+			}
+		}
+		return productTemplates;
+
 	}
 }

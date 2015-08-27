@@ -1,7 +1,5 @@
 package com.exposit.web.dobrilko;
 
-import java.io.IOException;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exposit.domain.model.dobrilko.Provider;
-import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.sorokin.UserService;
 

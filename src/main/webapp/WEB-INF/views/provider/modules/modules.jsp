@@ -9,7 +9,7 @@
 function deleteModule(moduleId,i) {
 		
 	$.ajax({
-		url : "modules/"+moduleId+"/delete",
+		url : "/modules/"+moduleId+"/delete",
 		type : "POST",
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");

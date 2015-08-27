@@ -24,9 +24,10 @@ public interface ProviderService {
 	public Provider getProvider(Request request);
 
 	public Provider getProvider(Shipment shipment);
-	
+
 	public List<Provider> getProviders(Module module);
-	
+
 	public void setChangedFields(Provider loggedProvider,
 			Provider editedProvider, MultipartFile avatar);
+
 }

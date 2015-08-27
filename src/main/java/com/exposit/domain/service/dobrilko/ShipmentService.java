@@ -7,6 +7,7 @@ import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.Waybill;
+import com.exposit.web.dto.dobrilko.ShipmentUnitDto;
 
 public interface ShipmentService {
 
@@ -34,5 +35,8 @@ public interface ShipmentService {
 	public void updateShipment(Shipment shipment);
 
 	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment);
+
+	List<ShipmentUnitDto> convertShipmentUnitsToDto(
+			List<ShipmentUnit> ShipmentUnits);
 
 }

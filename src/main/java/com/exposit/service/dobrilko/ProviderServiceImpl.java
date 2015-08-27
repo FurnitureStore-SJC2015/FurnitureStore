@@ -1,6 +1,7 @@
 package com.exposit.service.dobrilko;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
+import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.ProviderService;
+import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.repository.dao.dobrilko.ProviderDao;
+import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 @Service
 public class ProviderServiceImpl implements ProviderService {
@@ -23,6 +27,8 @@ public class ProviderServiceImpl implements ProviderService {
 	private BCryptPasswordEncoder encoder;
 	@Autowired
 	private ProviderDao providerDao;
+	@Autowired
+	private ModuleService moduleService;
 
 	@Transactional
 	@Override

@@ -11,19 +11,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.exposit.domain.exceptions.CustomException;
 import com.exposit.domain.model.dobrilko.Provider;
+import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.ModuleService;
 
 @Controller
-@RequestMapping(value = "/provider/modules", method = RequestMethod.GET)
+@RequestMapping(value = "/modules", method = RequestMethod.GET)
 public class ModuleController {
 	@Autowired
 	private ModuleService moduleService;
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private StorageModuleUnitService storageModuleUnitService;
 
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
 	public String deleteModuleFromProvider(@PathVariable("id") Integer id,
@@ -38,13 +41,20 @@ public class ModuleController {
 	}
 
 	@RequestMapping(value = { "", "/" }, method = { RequestMethod.GET })
-	public String showProviderModulesPanel(Model model, Principal principal)
-			throws CustomException {
+	public String showProviderModulesPanel(Model model, Principal principal) {
 
 		Provider provider = (Provider) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
 		model.addAttribute("modules", moduleService.getModules(provider));
+		return "modules-list";
+	}
+
+	@RequestMapping(value = { "/catalog" }, method = { RequestMethod.GET })
+	public String showModulesCatalog(Model model) {
+
+		model.addAttribute("storageModuleUnits",
+				storageModuleUnitService.getStorageModuleUnitDtos());
 		return "modules-list";
 	}
 
