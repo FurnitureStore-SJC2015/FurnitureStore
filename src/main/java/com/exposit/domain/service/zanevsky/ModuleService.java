@@ -1,5 +1,6 @@
 package com.exposit.domain.service.zanevsky;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.exposit.domain.model.dobrilko.Provider;
@@ -29,5 +30,5 @@ public interface ModuleService {
 
 	public void deleteModuleFromProviderList(Integer id, Provider provider);
 
-	public List<ProductTemplate> getAbsentProductTemplates(Order order);
+	public HashMap<Module, Integer> getAbsentProductTemplates(Order order);
 }

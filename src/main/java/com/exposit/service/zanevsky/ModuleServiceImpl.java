@@ -1,6 +1,7 @@
 package com.exposit.service.zanevsky;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -113,23 +114,27 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Transactional
 	@Override
-	public List<ProductTemplate> getAbsentProductTemplates(Order order) {
+	public HashMap<Module, Integer> getAbsentProductTemplates(Order order) {
 
 		List<ProductTemplate> productTemplates = new ArrayList<ProductTemplate>();
 
+		HashMap<Module, Integer> returnMap = new HashMap<Module, Integer>();
 		List<ProductCatalogUnit> catalogUnits = productCatalogUnitService
 				.getProducts(order);
 		for (ProductCatalogUnit productCatalogUnit : catalogUnits) {
 			for (ProductTemplate productTemplate : productTemplateService
 					.getProductTemplates(productCatalogUnit)) {
-				if (storageModuleUnitService.getStorageModuleUnit(
-						this.getModule(productTemplate)).getCount() == 0) {
-					productTemplates.add(productTemplate);
+				Module module = this.getModule(productTemplate);
+				Integer storageCount = storageModuleUnitService
+						.getStorageModuleUnit(module).getCount();
+				Integer templateCount = productTemplate.getCount();
+				if (storageCount < templateCount) {
+					returnMap.put(module, templateCount - storageCount);
 				}
 
 			}
 		}
-		return productTemplates;
+		return returnMap;
 
 	}
 }
