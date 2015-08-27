@@ -1,5 +1,6 @@
 package com.exposit.service.zanevsky;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -47,20 +48,16 @@ public class OrderUnitServiceImpl implements OrderUnitService {
 	@Override
 	public List<OrderUnit> initializeOrderUnits(ShoppingCart cart) {
 		List<OrderUnit> orderUnits = new ArrayList<OrderUnit>();
-		
-		DecimalFormat df=new DecimalFormat("0.00");
-		
-		
+
+		DecimalFormat df = new DecimalFormat("0");
+		df.setRoundingMode(RoundingMode.UP);
 		for (int i = 0; i < cart.getSize(); i++) {
 			OrderUnit orderUnit = new OrderUnit();
 			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
-			
-			String formate = df.format(cart.getItems().get(i).getCost()*cart.getItems().get(i).getCoefficient()); 
-			try {
-				orderUnit.setCost((double)df.parse(formate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+
+			Double cost = cart.getItems().get(i).getCost()
+					* cart.getItems().get(i).getCoefficient();
+			orderUnit.setCost(Double.valueOf(df.format(cost)));
 			orderUnit.setProductCatalogUnit(cart.getItems().get(i));
 			orderUnits.add(orderUnit);
 		}

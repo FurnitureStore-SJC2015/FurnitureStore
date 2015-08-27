@@ -2,6 +2,7 @@ package com.exposit.web.sorokin;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.domain.service.zanevsky.OrderUnitService;
 import com.exposit.web.dto.service.PaymentDtoService;
 
@@ -46,6 +49,9 @@ public class OrderController {
 	@Autowired
 	private PaymentDtoService paymentDtoService;
 
+	@Autowired
+	private ModuleService moduleService;
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String showOrders(Authentication auth, Model model) {
 		Client client = (Client) userService.findUserByName(auth.getName());
@@ -57,7 +63,8 @@ public class OrderController {
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
 		model.addAttribute("order", order);
-		model.addAttribute("paymentList", paymentDtoService.getListOfDtoPayments(order));
+		model.addAttribute("paymentList",
+				paymentDtoService.getListOfDtoPayments(order));
 		return "client.order";
 	}
 
@@ -73,6 +80,8 @@ public class OrderController {
 	public String showOrderComposition(@PathVariable("id") Order order,
 			Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
+		HashMap<Module, Integer> modules = moduleService
+				.getMapOfModulesInOrder(order);
 		model.addAttribute("order", order);
 		return "client.new.order";
 	}

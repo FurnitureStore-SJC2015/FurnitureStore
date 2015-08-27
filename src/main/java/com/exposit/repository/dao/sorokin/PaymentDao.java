@@ -9,4 +9,6 @@ import com.exposit.repository.base.GenericDao;
 public interface PaymentDao extends GenericDao<Payment, Integer> {
 
 	public List<Payment> getListOfAllPayments(Order order);
+
+	public List<Payment> getFuturePayments();
 }

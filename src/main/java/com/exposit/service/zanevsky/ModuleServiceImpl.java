@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,6 @@ import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
-import com.exposit.domain.model.zanevsky.OrderUnit;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
@@ -25,64 +23,63 @@ import com.exposit.domain.service.zanevsky.OrderUnitService;
 import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.repository.dao.dobrilko.ProviderDao;
-import com.exposit.repository.dao.dobrilko.StorageModuleUnitDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
-import com.exposit.repository.hibernate.AbstractHibernateDao;
 
 @Service
 @Transactional
 public class ModuleServiceImpl implements ModuleService {
 
 	@Autowired
-	ModuleDao moduleDao;
+	private ModuleDao moduleRepository;
+
 	@Autowired
-	ProviderDao providerDao;
+	private ProviderDao providerRepository;
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	@Autowired
-	OrderUnitService orderUnitService;
+	private OrderUnitService orderUnitService;
 	@Autowired
-	ProductCatalogUnitService productCatalogUnitService;
+	private ProductCatalogUnitService productCatalogUnitService;
 	@Autowired
-	ProductTemplateService productTemplateService;
+	private ProductTemplateService productTemplateService;
 
 	@Autowired
 	StorageModuleUnitService storageModuleUnitService;
 
 	@Override
 	public Module findById(int id) {
-		return this.moduleDao.findById(id);
+		return this.moduleRepository.findById(id);
 	}
 
 	@Override
 	public List<Module> getModules(Provider provider) {
-		return this.moduleDao
-				.getModules(providerDao.findById(provider.getId()));
+		return this.moduleRepository
+				.getModules(providerRepository.findById(provider.getId()));
 	}
 
 	@Override
 	public List<Module> getModules(ProductCatalogUnit productCatalogUnit) {
-		return this.moduleDao.getModules(productCatalogUnit);
+		return this.moduleRepository.getModules(productCatalogUnit);
 	}
 
 	@Override
 	public Module getModule(ShipmentUnit shipmentUnit) {
-		return this.moduleDao.getModule(shipmentUnit);
+		return this.moduleRepository.getModule(shipmentUnit);
 	}
 
 	@Override
 	public Module getModule(RequestUnit requestUnit) {
-		return this.moduleDao.getModule(requestUnit);
+		return this.moduleRepository.getModule(requestUnit);
 	}
 
 	@Override
 	public Module getModule(StorageModuleUnit storageModuleUnit) {
-		return this.moduleDao.getModule(storageModuleUnit);
+		return this.moduleRepository.getModule(storageModuleUnit);
 	}
 
 	@Override
 	public Module getModule(ProductTemplate template) {
-		return this.moduleDao.getModule(template);
+		return this.moduleRepository.getModule(template);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -91,10 +88,10 @@ public class ModuleServiceImpl implements ModuleService {
 	public void deleteModuleFromProviderList(Integer id, Provider provider) {
 
 		Module module = this.findById(id);
-		Provider pr = providerDao.findById(provider.getId());
+		Provider pr = providerRepository.findById(provider.getId());
 		List<Module> modules = this.getModules(pr);
 
-		List<Provider> providers = providerDao.getProviders(module);
+		List<Provider> providers = providerRepository.getProviders(module);
 
 		modules.remove(module);
 
@@ -103,16 +100,15 @@ public class ModuleServiceImpl implements ModuleService {
 		module.setProvider(providers);
 		pr.setModules(modules);
 
-		providerDao.update(pr);
-		moduleDao.update(module);
+		providerRepository.update(pr);
+		moduleRepository.update(module);
 
-		List<Provider> prs = providerDao.getProviders(module);
-		List<Module> mdls = moduleDao.getModules(pr);
+		List<Provider> prs = providerRepository.getProviders(module);
+		List<Module> mdls = moduleRepository.getModules(pr);
 
 		return;
 	}
 
-	@Transactional
 	@Override
 	public HashMap<Module, Integer> getAbsentProductTemplates(Order order) {
 
@@ -136,5 +132,26 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 		return returnMap;
 
+	}
+
+	@Override
+	public HashMap<Module, Integer> getMapOfModulesInOrder(Order order) {
+		HashMap<Module, Integer> modules = new HashMap<Module, Integer>();
+
+		for (ProductCatalogUnit product : productCatalogUnitService
+				.getProducts(order)) {
+			for (ProductTemplate template : productTemplateService
+					.getProductTemplates(product)) {
+				Module oneModule = this.getModule(template);
+				if (modules.containsKey(oneModule)) {
+					int modulesCount = modules.get(oneModule);
+					modulesCount += template.getCount();
+					modules.put(oneModule, modulesCount);
+				} else
+					modules.put(oneModule, template.getCount());
+			}
+		}
+
+		return modules;
 	}
 }

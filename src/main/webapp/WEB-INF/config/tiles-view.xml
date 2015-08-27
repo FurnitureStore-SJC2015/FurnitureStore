@@ -26,7 +26,8 @@
 
 	<definition name="client.profile" extends="template">
 		<put-attribute name="title" value="Personal info" />
-		<put-attribute name="body" value="/WEB-INF/views/client/profile.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/profileInfo.jsp" />
 	</definition>
 
 	<definition name="client.orders" extends="template">
@@ -35,7 +36,7 @@
 	</definition>
 
 	<definition name="client.order" extends="template">
-		<put-attribute name="title" expression="Order ${order.id}"></put-attribute>
+		<put-attribute name="title" value="Order information" />
 		<put-attribute name="body" value="/WEB-INF/views/client/order.jsp"></put-attribute>
 	</definition>
 

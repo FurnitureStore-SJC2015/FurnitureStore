@@ -25,8 +25,7 @@ public class ModuleRepository extends AbstractHibernateDao<Module, Integer>
 	@Override
 	public List<Module> getModules(Provider provider) {
 
-		Criteria criteria = this.getSession()
-				.createCriteria(Module.class)
+		Criteria criteria = this.getSession().createCriteria(Module.class)
 				.createAlias("providers", "aliasProvider")
 				.add(Restrictions.eq("aliasProvider.id", provider.getId()));
 		return (List<Module>) criteria.list();
@@ -56,12 +55,12 @@ public class ModuleRepository extends AbstractHibernateDao<Module, Integer>
 	// ask
 	@Override
 	public Module getModule(ProductTemplate template) {
-		Criteria criteria = this.getSession()
-				.createCriteria(Module.class, "module")
-				.createCriteria("productTemplates", "product")
-				.add(Restrictions.eq("product.id", template.getId()))
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return (Module) criteria.uniqueResult();
+
+		Criteria c = getSession().createCriteria(Module.class, "module");
+		c.createAlias("module.productTemplates", "template");
+		c.add(Restrictions.eq("template.id", template.getId()));
+		return (Module) c.uniqueResult();
+
 	}
 
 	@Override

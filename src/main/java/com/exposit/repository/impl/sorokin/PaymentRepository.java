@@ -1,9 +1,11 @@
 package com.exposit.repository.impl.sorokin;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.sorokin.Order;
@@ -24,4 +26,13 @@ public class PaymentRepository extends AbstractHibernateDao<Payment, Integer>
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Payment> getFuturePayments() {
+		Criteria cr = getSession().createCriteria(Payment.class);
+		cr.setMaxResults(3);
+		cr.add(Restrictions.between("date", new Date(),
+				new DateTime(new Date()).plusDays(30).toDate()));
+		return cr.list();
+	}
 }

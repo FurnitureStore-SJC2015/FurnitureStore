@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -33,6 +34,7 @@ public class Payment {
 	private Boolean paymentStatus;
 
 	@ManyToOne
+	@JsonBackReference
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "order_id")
 	private Order order;

@@ -22,4 +22,6 @@ public interface PaymentService {
 	public List<Payment> calculatePayments(Order order);
 
 	public Boolean canBePayed(Payment payment);
+
+	public List<Payment> getFururePaymentNotifications();
 }

@@ -2,6 +2,36 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
+<script type="text/javascript">
+	function getNotifications() {
+		var button = $("#button");
+
+		if (button.val("Enable notifications")) {
+			$.ajax({
+				url : "payment/notifications",
+				contentType : 'application/json',
+				type : "POST",
+
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(obj) {
+					if (obj) {
+						//handle
+						button.val('Disable notifications');
+						button.attr('class', 'btn btn-danger');
+					}
+
+				}
+			});
+		} else if (button.val("Disable notifications")) {
+			button.val('Enable notifications');
+			button.attr('class', 'btn btn-success');
+
+		}
+	}
+</script>
 
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
 	<c:set var="profile" value="${loggedClient.profile}"></c:set>
@@ -10,7 +40,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading ">
 				<h5 class="text-center">
-					<span class="glyphicon glyphicon-user"></span> <strong>${profile.name}'s profile</strong>
+					<span class="glyphicon glyphicon-user"></span> <strong>${profile.name}'s
+						profile</strong>
 				</h5>
 			</div>
 			<div class="panel-body">
@@ -47,19 +78,29 @@
 						</tbody>
 					</table>
 				</div>
-
-
 			</div>
-
 			<div class="panel-footer clearfix">
 				<div class="pull-left">
-				<strong>Total spent: ${profile.totalSpent}</strong>
+					<strong>Total spent: ${profile.totalSpent}</strong>
 				</div>
 				<div class="pull-right">
+					<input type="button" id="button" class="btn btn-success"
+						value="Enable notifications" onclick="getNotifications()">
 					<c:url var="edit" value="/profile/edit" />
 					<a href="${edit}" class="btn btn-primary">Edit profile</a>
 				</div>
 			</div>
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				<h3 class="text-center">
+					<span class="glyphicon glyphicon-pushpin"></span><strong></strong>
+				</h3>
+			</div>
+
 		</div>
 	</div>
 </sec:authorize>

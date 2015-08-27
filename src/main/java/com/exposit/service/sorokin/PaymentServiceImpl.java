@@ -74,7 +74,7 @@ public class PaymentServiceImpl implements PaymentService {
 		List<Payment> payments = new ArrayList<Payment>();
 		DateTime paymentDate = new DateTime(order.getAssemblyDate())
 				.plusDays(delta);
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0");
 		String formate = df.format((1 - bonusPersentage)
 				* orderService.getOrderSum(order)
 				/ order.getPaymentScheme().getNumberOfPayments());
@@ -104,5 +104,10 @@ public class PaymentServiceImpl implements PaymentService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Payment> getFururePaymentNotifications() {
+		return paymentRepository.getFuturePayments();
 	}
 }

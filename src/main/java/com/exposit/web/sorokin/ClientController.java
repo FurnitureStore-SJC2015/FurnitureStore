@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.service.sorokin.OrderService;
+import com.exposit.domain.service.sorokin.PaymentService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.web.dto.sorokin.ClientDto;
 
@@ -22,6 +23,9 @@ public class ClientController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private PaymentService paymentService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String initializeClient(Authentication auth, HttpSession session) {

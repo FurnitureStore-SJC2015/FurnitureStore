@@ -65,4 +65,9 @@ public class PaymentController {
 		return "redirect:/order/all";
 
 	}
+
+	@RequestMapping(value = "/notifications", method = RequestMethod.POST)
+	public @ResponseBody List<Payment> getPaymentNotifications() {
+		return paymentService.getFururePaymentNotifications();
+	}
 }
