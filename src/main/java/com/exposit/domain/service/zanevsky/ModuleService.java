@@ -30,10 +30,10 @@ public interface ModuleService {
 
 	public void deleteModuleFromProviderList(Integer id, Provider provider);
 
-	public HashMap<Module, Integer> getAbsentModules(
-			List<ProductCatalogUnit> productCatalogUnits);
-	
-	public HashMap<Module, Integer> getAbsentModules(
-			Order order);
-	
+	public HashMap<Module, Integer> getAbsentModulesInOrder(Order order);
+
+	public HashMap<Module, Integer> getModulesInOrder(Order order);
+
+	public Boolean isAllModulesPresented(Order order);
+
 }

@@ -80,9 +80,8 @@ public class OrderController {
 	public String showOrderComposition(@PathVariable("id") Order order,
 			Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
-		HashMap<Module, Integer> modules = moduleService
-				.getAbsentModules(order);
 		model.addAttribute("order", order);
+		model.addAttribute("flag", moduleService.isAllModulesPresented(order));
 		return "client.new.order";
 	}
 
