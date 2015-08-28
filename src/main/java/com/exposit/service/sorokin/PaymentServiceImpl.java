@@ -108,6 +108,11 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public List<Payment> getFururePaymentNotifications() {
-		return paymentRepository.getFuturePayments();
+		List<Payment> payments = new ArrayList<Payment>();
+		for (Payment payment : paymentRepository.getFirstFuturePayments()) {
+			payment.setOrder(orderService.getOrderByPayment(payment));
+			payments.add(payment);
+		}
+		return payments;
 	}
 }

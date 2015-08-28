@@ -2,7 +2,6 @@ package com.exposit.web.sorokin;
 
 import java.security.Principal;
 import java.util.Date;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.PaymentScheme;
-import com.exposit.domain.model.zanevsky.Module;
+import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
 import com.exposit.domain.service.sorokin.MailService;
 import com.exposit.domain.service.sorokin.OrderService;
 import com.exposit.domain.service.sorokin.PaymentService;
@@ -51,6 +50,9 @@ public class OrderController {
 
 	@Autowired
 	private ModuleService moduleService;
+
+	@Autowired
+	private StorageModuleUnitService storageModuleUnitService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String showOrders(Authentication auth, Model model) {
@@ -103,6 +105,7 @@ public class OrderController {
 			@RequestParam("confirmationDate") Date assemblyDate) {
 		Order confirmedOrder = orderService.confirmOrder(order, assemblyDate);
 		orderService.updateOrder(confirmedOrder);
+		storageModuleUnitService.holdModulesWhileConfirmOrder(order);
 		mailService.sendConfirationMail(order.getClient());
 		return "redirect:/company/incoming";
 	}

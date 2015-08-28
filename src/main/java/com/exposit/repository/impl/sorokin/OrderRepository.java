@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.sorokin.Payment;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.User;
 import com.exposit.repository.dao.sorokin.OrderDao;
@@ -49,5 +50,13 @@ public class OrderRepository extends AbstractHibernateDao<Order, Integer>
 		Criteria cr = getSession().createCriteria(Order.class).add(
 				Restrictions.isNull("assemblyDate"));
 		return (List<Order>) cr.list();
+	}
+
+	@Override
+	public Order getOrderByPayment(Payment payment) {
+		Criteria cr = getSession().createCriteria(Order.class,"order");
+		cr.createCriteria("order.payments","payment");
+		cr.add(Restrictions.eq("payment.id", payment.getId()));
+		return (Order) cr.uniqueResult();
 	}
 }

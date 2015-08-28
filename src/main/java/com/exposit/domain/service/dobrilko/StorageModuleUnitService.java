@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
+import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.web.dto.dobrilko.StorageModuleUnitDto;
 
@@ -20,5 +21,7 @@ public interface StorageModuleUnitService {
 	public void update(StorageModuleUnit storageModuleUnit);
 
 	public void addModulesInStorage(Shipment shipment);
+	
+	public void holdModulesWhileConfirmOrder(Order order);
 
 }

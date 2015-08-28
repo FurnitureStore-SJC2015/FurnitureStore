@@ -110,4 +110,9 @@ public class OrderServiceImpl implements OrderService {
 		return sum;
 	}
 
+	@Override
+	public Order getOrderByPayment(Payment payment) {
+		return orderRepository.getOrderByPayment(payment);
+	}
+
 }

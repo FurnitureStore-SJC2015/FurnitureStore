@@ -10,5 +10,5 @@ public interface PaymentDao extends GenericDao<Payment, Integer> {
 
 	public List<Payment> getListOfAllPayments(Order order);
 
-	public List<Payment> getFuturePayments();
+	public List<Payment> getFirstFuturePayments();
 }

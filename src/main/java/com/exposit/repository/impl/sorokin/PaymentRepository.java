@@ -28,9 +28,10 @@ public class PaymentRepository extends AbstractHibernateDao<Payment, Integer>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Payment> getFuturePayments() {
+	public List<Payment> getFirstFuturePayments() {
 		Criteria cr = getSession().createCriteria(Payment.class);
-		cr.setMaxResults(3);
+		cr.setMaxResults(2);
+		cr.addOrder(org.hibernate.criterion.Order.asc("date"));
 		cr.add(Restrictions.between("date", new Date(),
 				new DateTime(new Date()).plusDays(30).toDate()));
 		return cr.list();

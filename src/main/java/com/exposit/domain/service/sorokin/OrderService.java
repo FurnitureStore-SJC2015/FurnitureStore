@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.sorokin.Payment;
 import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.sorokin.User;
 
@@ -30,4 +31,6 @@ public interface OrderService {
 	public List<Order> getListOfOrdersToConfirm();
 
 	public Double getOrderSum(Order order);
+
+	public Order getOrderByPayment(Payment payment);
 }

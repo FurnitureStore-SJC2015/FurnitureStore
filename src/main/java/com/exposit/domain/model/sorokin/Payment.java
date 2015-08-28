@@ -34,7 +34,7 @@ public class Payment {
 	private Boolean paymentStatus;
 
 	@ManyToOne
-	@JsonBackReference
+	//@JsonBackReference
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "order_id")
 	private Order order;
