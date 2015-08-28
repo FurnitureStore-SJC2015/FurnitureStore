@@ -27,8 +27,7 @@ public class ProductCatalogUnitRepository extends
 		Criteria criteria = this.getSession()
 				.createCriteria(ProductCatalogUnit.class, "product")
 				.createAlias("product.orderUnits", "unit")
-				.add(Restrictions.eq("unit.order", order))
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+				.add(Restrictions.eq("unit.order", order));
 		return (List<ProductCatalogUnit>) criteria.list();
 	}
 
@@ -53,7 +52,7 @@ public class ProductCatalogUnitRepository extends
 		return (List<ProductCatalogUnit>) criteria.list();
 	}
 
-	// Игоря нету нигде, но результат все равно не однозначный...
+	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ProductCatalogUnit> getProducts(Module module) {
@@ -84,9 +83,6 @@ public class ProductCatalogUnitRepository extends
 		return (List<ProductCatalogUnit>) criteria.list();
 	}
 
-	// спорный метод, делать ли имя уникальным или просто к возвращать лист один
-	// мебели???
-	// пока что так оставлю, а потом при написании логики всего решится
 	@Override
 	public ProductCatalogUnit getProduct(String name) {
 		Criteria criteria = this.getSession()

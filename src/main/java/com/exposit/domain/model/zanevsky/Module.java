@@ -54,7 +54,7 @@ public class Module {
 	@ManyToMany(mappedBy = "modules")
 	private List<Provider> providers;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "storage_module_unit_id", nullable = true)
 	private StorageModuleUnit storageModuleUnit;
 

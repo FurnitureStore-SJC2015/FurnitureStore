@@ -1,6 +1,5 @@
 package com.exposit.service.zanevsky;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,8 +52,8 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public List<Module> getModules(Provider provider) {
-		return this.moduleRepository
-				.getModules(providerRepository.findById(provider.getId()));
+		return this.moduleRepository.getModules(providerRepository
+				.findById(provider.getId()));
 	}
 
 	@Override
@@ -110,39 +109,37 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public HashMap<Module, Integer> getAbsentProductTemplates(Order order) {
+	public HashMap<Module, Integer> getAbsentModulesInOrder(Order order) {
 
-		List<ProductTemplate> productTemplates = new ArrayList<ProductTemplate>();
+		HashMap<Module, Integer> orderModuleMap = this
+				.getMapOfModulesInOrder(order);
 
-		HashMap<Module, Integer> returnMap = new HashMap<Module, Integer>();
-		List<ProductCatalogUnit> catalogUnits = productCatalogUnitService
-				.getProducts(order);
-		for (ProductCatalogUnit productCatalogUnit : catalogUnits) {
-			for (ProductTemplate productTemplate : productTemplateService
-					.getProductTemplates(productCatalogUnit)) {
-				Module module = this.getModule(productTemplate);
-				Integer storageCount = storageModuleUnitService
-						.getStorageModuleUnit(module).getCount();
-				Integer templateCount = productTemplate.getCount();
-				if (storageCount < templateCount) {
-					returnMap.put(module, templateCount - storageCount);
-				}
+		HashMap<Module, Integer> absentModuleMap = new HashMap<Module, Integer>();
 
-			}
+		for (Module module : orderModuleMap.keySet()) {
+			int orderModuleCount = orderModuleMap.get(module);
+			int storageModuleCount = module.getStorageModuleUnit().getCount();
+			if (orderModuleCount > storageModuleCount) {
+				absentModuleMap.put(module, orderModuleCount
+						- storageModuleCount);
+			} else
+				continue;
 		}
-		return returnMap;
-
+		return absentModuleMap;
 	}
 
 	@Override
 	public HashMap<Module, Integer> getMapOfModulesInOrder(Order order) {
 		HashMap<Module, Integer> modules = new HashMap<Module, Integer>();
-
+		List<ProductCatalogUnit> units = productCatalogUnitService
+				.getProducts(order);
 		for (ProductCatalogUnit product : productCatalogUnitService
 				.getProducts(order)) {
 			for (ProductTemplate template : productTemplateService
 					.getProductTemplates(product)) {
 				Module oneModule = this.getModule(template);
+				int storageTempCount = oneModule.getStorageModuleUnit()
+						.getCount();
 				if (modules.containsKey(oneModule)) {
 					int modulesCount = modules.get(oneModule);
 					modulesCount += template.getCount();

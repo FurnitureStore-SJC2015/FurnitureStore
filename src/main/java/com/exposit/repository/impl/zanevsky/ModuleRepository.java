@@ -52,7 +52,6 @@ public class ModuleRepository extends AbstractHibernateDao<Module, Integer>
 		return (Module) criteria.uniqueResult();
 	}
 
-	// ask
 	@Override
 	public Module getModule(ProductTemplate template) {
 

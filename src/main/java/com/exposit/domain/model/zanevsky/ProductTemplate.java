@@ -26,8 +26,8 @@ public class ProductTemplate {
 	@Column(name = "modules_number", nullable = false)
 	private int count;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "module_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "module_id")
 	private Module module;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -81,7 +81,7 @@ public class OrderController {
 			Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
 		HashMap<Module, Integer> modules = moduleService
-				.getMapOfModulesInOrder(order);
+				.getAbsentModulesInOrder(order);
 		model.addAttribute("order", order);
 		return "client.new.order";
 	}
