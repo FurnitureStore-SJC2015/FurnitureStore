@@ -21,7 +21,7 @@ public class ExceptionControllerAdvice {
 	public ModelAndView suchUserRegisteredExceptionHandler(
 			SuchUserRegisteredException ex) {
 		ModelAndView mav = new ModelAndView("generic-error");
-		mav.addObject("name", "Such User Registered Exception!");
+		mav.addObject("name", "Such User Registered!");
 		mav.addObject("message", ex.getMessage());
 		return mav;
 	}
