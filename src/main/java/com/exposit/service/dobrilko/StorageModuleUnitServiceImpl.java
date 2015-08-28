@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.exposit.domain.model.dobrilko.Shipment;
+import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 import com.exposit.domain.model.zanevsky.Module;
+import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
 import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.repository.dao.dobrilko.StorageModuleUnitDao;
@@ -20,6 +23,8 @@ public class StorageModuleUnitServiceImpl implements StorageModuleUnitService {
 	private StorageModuleUnitDao storageModuleUnitDao;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	private ShipmentService shipmentService;
 
 	@Override
 	public List<StorageModuleUnit> getStorageModuleUnits() {
@@ -29,6 +34,11 @@ public class StorageModuleUnitServiceImpl implements StorageModuleUnitService {
 	@Override
 	public StorageModuleUnit getStorageModuleUnitById(Integer id) {
 		return storageModuleUnitDao.findById(id);
+	}
+
+	@Override
+	public void update(StorageModuleUnit storageModuleUnit) {
+		storageModuleUnitDao.update(storageModuleUnit);
 	}
 
 	@Override
@@ -43,6 +53,23 @@ public class StorageModuleUnitServiceImpl implements StorageModuleUnitService {
 			dtos.add(dto);
 		}
 		return dtos;
+	}
+
+	@Override
+	public void addModulesInStorage(Shipment shipment) {
+		for (ShipmentUnit shipmentUnit : shipmentService
+				.getShipmentUnitsByShipment(shipment)) {
+			Module module = moduleService.getModule(shipmentUnit);
+
+			StorageModuleUnit storageModuleUnit = this
+					.getStorageModuleUnit(module);
+
+			storageModuleUnit.setCount(storageModuleUnit.getCount()
+					+ shipmentUnit.getCount());
+			this.update(storageModuleUnit);
+
+		}
+
 	}
 
 	@Override

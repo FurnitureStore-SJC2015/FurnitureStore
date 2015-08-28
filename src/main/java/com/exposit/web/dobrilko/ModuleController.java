@@ -1,6 +1,7 @@
 package com.exposit.web.dobrilko;
 
 import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
