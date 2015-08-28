@@ -17,9 +17,10 @@ public class StorageModuleUnitRepository extends
 	@Override
 	public StorageModuleUnit getStorageModuleUnit(Module module) {
 
-		Criteria criteria = getSession()
-				.createCriteria(StorageModuleUnit.class).add(
-						Restrictions.eq("module", module));
+		Criteria criteria = this.getSession().createCriteria(StorageModuleUnit.class)
+				.createAlias("module", "mdl")
+				.add(Restrictions.eq("mdl.id", module.getId()));
+		
 		return (StorageModuleUnit) criteria.uniqueResult();
 	}
 

@@ -1,5 +1,6 @@
 package com.exposit.service.zanevsky;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
+import com.exposit.domain.model.zanevsky.OrderUnit;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
@@ -81,7 +83,6 @@ public class ModuleServiceImpl implements ModuleService {
 		return this.moduleRepository.getModule(template);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public void deleteModuleFromProviderList(Integer id, Provider provider) {
@@ -102,53 +103,56 @@ public class ModuleServiceImpl implements ModuleService {
 		providerRepository.update(pr);
 		moduleRepository.update(module);
 
-		List<Provider> prs = providerRepository.getProviders(module);
-		List<Module> mdls = moduleRepository.getModules(pr);
-
 		return;
 	}
 
+	@Transactional
 	@Override
-	public HashMap<Module, Integer> getAbsentModulesInOrder(Order order) {
+	public HashMap<Module, Integer> getAbsentModules(
+			List<ProductCatalogUnit> productCatalogUnits) {
 
-		HashMap<Module, Integer> orderModuleMap = this
-				.getMapOfModulesInOrder(order);
+		HashMap<Module, Integer> modulesToRequest = new HashMap<Module, Integer>();
 
-		HashMap<Module, Integer> absentModuleMap = new HashMap<Module, Integer>();
-
-		for (Module module : orderModuleMap.keySet()) {
-			int orderModuleCount = orderModuleMap.get(module);
-			int storageModuleCount = module.getStorageModuleUnit().getCount();
-			if (orderModuleCount > storageModuleCount) {
-				absentModuleMap.put(module, orderModuleCount
-						- storageModuleCount);
-			} else
-				continue;
-		}
-		return absentModuleMap;
-	}
-
-	@Override
-	public HashMap<Module, Integer> getMapOfModulesInOrder(Order order) {
-		HashMap<Module, Integer> modules = new HashMap<Module, Integer>();
-		List<ProductCatalogUnit> units = productCatalogUnitService
-				.getProducts(order);
-		for (ProductCatalogUnit product : productCatalogUnitService
-				.getProducts(order)) {
-			for (ProductTemplate template : productTemplateService
-					.getProductTemplates(product)) {
-				Module oneModule = this.getModule(template);
-				int storageTempCount = oneModule.getStorageModuleUnit()
-						.getCount();
-				if (modules.containsKey(oneModule)) {
-					int modulesCount = modules.get(oneModule);
-					modulesCount += template.getCount();
-					modules.put(oneModule, modulesCount);
-				} else
-					modules.put(oneModule, template.getCount());
+		for (ProductCatalogUnit productCatalogUnit : productCatalogUnits) {
+			for (ProductTemplate productTemplate : productTemplateService
+					.getProductTemplates(productCatalogUnit)) {
+				Module module = this.getModule(productTemplate);
+				StorageModuleUnit storageModuleUnit = storageModuleUnitService
+						.getStorageModuleUnit(module);
+				if (productTemplate.getCount() > storageModuleUnit.getCount()) {
+					modulesToRequest.put(module, productTemplate.getCount()
+							- storageModuleUnit.getCount());
+				} else {
+					continue;
+				}
 			}
 		}
-
-		return modules;
+		return modulesToRequest;
 	}
+
+	@Transactional
+	@Override
+	public HashMap<Module, Integer> getAbsentModules(Order order) {
+		List<ProductCatalogUnit> productCatalogUnits = productCatalogUnitService
+				.getProducts(order);
+
+		HashMap<Module, Integer> modulesToRequest = new HashMap<Module, Integer>();
+
+		for (ProductCatalogUnit productCatalogUnit : productCatalogUnits) {
+			for (ProductTemplate productTemplate : productTemplateService
+					.getProductTemplates(productCatalogUnit)) {
+				Module module = this.getModule(productTemplate);
+				StorageModuleUnit storageModuleUnit = storageModuleUnitService
+						.getStorageModuleUnit(module);
+				if (productTemplate.getCount() > storageModuleUnit.getCount()) {
+					modulesToRequest.put(module, productTemplate.getCount()
+							- storageModuleUnit.getCount());
+				} else {
+					continue;
+				}
+			}
+		}
+		return modulesToRequest;
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.exposit.web.dobrilko;
 
 import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,6 +45,7 @@ public class ModuleController {
 		Provider provider = (Provider) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
+
 		model.addAttribute("modules", moduleService.getModules(provider));
 		return "modules-list";
 	}
