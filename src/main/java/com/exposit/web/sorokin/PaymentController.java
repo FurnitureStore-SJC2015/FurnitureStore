@@ -65,4 +65,12 @@ public class PaymentController {
 		return "redirect:/order/all";
 
 	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public String showFuturePayments(Model model, Authentication auth) {
+		Client client = (Client) userService.findUserByName(auth.getName());
+		model.addAttribute("payments",
+				paymentService.getFururePaymentNotifications(client));
+		return "client.payments";
+	}
 }

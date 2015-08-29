@@ -2,6 +2,7 @@ package com.exposit.domain.service.sorokin;
 
 import java.util.List;
 
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Payment;
 
@@ -23,5 +24,5 @@ public interface PaymentService {
 
 	public Boolean canBePayed(Payment payment);
 
-	public List<Payment> getFururePaymentNotifications();
+	public List<Payment> getFururePaymentNotifications(Client client);
 }

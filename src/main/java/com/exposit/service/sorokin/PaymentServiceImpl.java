@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Payment;
 import com.exposit.domain.service.sorokin.OrderService;
@@ -107,9 +108,9 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<Payment> getFururePaymentNotifications() {
+	public List<Payment> getFururePaymentNotifications(Client client) {
 		List<Payment> payments = new ArrayList<Payment>();
-		for (Payment payment : paymentRepository.getFirstFuturePayments()) {
+		for (Payment payment : paymentRepository.getFuturePayments(client)) {
 			payment.setOrder(orderService.getOrderByPayment(payment));
 			payments.add(payment);
 		}

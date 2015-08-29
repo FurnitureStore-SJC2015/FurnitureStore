@@ -20,6 +20,11 @@
 				<li><a href="<c:url value="/cart"/>"><span
 						class="glyphicon glyphicon-shopping-cart"></span><strong>My
 							cart</strong></a></li>
+
+				<li><a href="<c:url value="/payment/all"/>"><span
+						class="glyphicon glyphicon-piggy-bank"></span><strong>My
+							payments</strong></a></li>
+
 				<li><a href="<c:url value="${logout}"/>"><span
 						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
