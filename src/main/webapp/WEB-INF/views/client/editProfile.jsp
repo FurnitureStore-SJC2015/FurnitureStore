@@ -6,15 +6,12 @@
 
 
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
-
 	<div class="col-md-9">
-
 		<div class="panel panel-default">
-
 			<div class="panel-heading">
 				<h5 class="text-center">
-				<span class="glyphicon glyphicon-cog"></span>
-					<strong>Edit profile</strong>
+					<span class="glyphicon glyphicon-cog"></span> <strong>Edit
+						profile</strong>
 				</h5>
 			</div>
 			<div class="panel-body">
@@ -34,7 +31,6 @@
 								<form:password path="password" class="form-control" />
 								<form:errors path="password" class="danger"></form:errors>
 							</div>
-							
 						</div>
 						<div class="form-group">
 							<label for="image" class="col-sm-4 control-label">Image:</label>

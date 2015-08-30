@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -60,7 +62,9 @@ public class OrderController {
 		model.addAttribute("orderList", orderService.getOrders(client));
 		return "client.orders";
 	}
-
+	
+	
+	@PreAuthorize("#order.client.login==principal.username")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
@@ -78,6 +82,7 @@ public class OrderController {
 		return "client.new.order";
 	}
 
+	@PreAuthorize("hasRole('ROLE_COMPANY')")
 	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
 	public String showOrderComposition(@PathVariable("id") Order order,
 			Model model) {
