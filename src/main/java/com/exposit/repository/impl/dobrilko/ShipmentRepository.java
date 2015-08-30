@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -20,21 +21,21 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Shipment> getShipments(Provider provider) {
+	public List<Shipment> getShipments(Provider provider)  throws HibernateException {
 		Criteria criteria = getSession().createCriteria(Shipment.class).add(
 				Restrictions.eq("provider", provider));
 		return (List<Shipment>) criteria.list();
 	}
 
 	@Override
-	public Shipment getShipment(Waybill waybill) {
+	public Shipment getShipment(Waybill waybill) throws HibernateException {
 		Criteria criteria = getSession().createCriteria(Shipment.class).add(
 				Restrictions.eq("waybill", waybill));
 		return (Shipment) criteria.uniqueResult();
 	}
 
 	@Override
-	public Shipment getShipment(ShipmentUnit shipmentUnit) {
+	public Shipment getShipment(ShipmentUnit shipmentUnit) throws HibernateException {
 		Criteria criteria = getSession().createCriteria(Shipment.class).add(
 				Restrictions.eq("shipmentUnit", shipmentUnit));
 		return (Shipment) criteria.uniqueResult();
@@ -43,7 +44,7 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Shipment> getConfirmedShipments(Date beginningDate,
-			Date endDate, Provider provider) {
+			Date endDate, Provider provider) throws HibernateException {
 		Criteria criteria = getSession()
 				.createCriteria(Shipment.class)
 				.add(Restrictions.eq("provider", provider)).createAlias("waybill", "wbll")
