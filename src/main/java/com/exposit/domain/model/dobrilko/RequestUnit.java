@@ -20,17 +20,27 @@ public class RequestUnit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "request_unit_id")
 	private int id;
-	
+
 	@Column(name = "request_module_count")
 	private int count;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "request_id", nullable = false)
 	private Request request;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id")
 	private Module module;
+
+	public RequestUnit() {
+
+	}
+
+	public RequestUnit(int id, int count, Module module) {
+		this.setId(id);
+		this.setModule(module);
+		this.setCount(count);
+	}
 
 	public int getId() {
 		return id;
@@ -40,15 +50,13 @@ public class RequestUnit {
 		this.id = id;
 	}
 
-	
-	public Module getModule() { 
-		return module; 
+	public void setModule(Module module) {
+		this.module = module;
 	}
-	
-	public void setModule(Module module) { 
-		this.module = module; 
+
+	public void setRequest(Request request) {
+		this.request = request;
 	}
-	 
 
 	public int getCount() {
 		return count;

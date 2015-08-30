@@ -122,6 +122,13 @@ public class RequestServiceImpl implements RequestService {
 		return requestUnitDao.findAll();
 	}
 
+
+	@Transactional
+	@Override
+	public void updateRequest(Request request) {
+
+		requestDao.update(request);
+	}
 	@Transactional
 	@Override
 	public void deleteRequestUnit(int id) {
@@ -240,7 +247,5 @@ public class RequestServiceImpl implements RequestService {
 		}
 		return dtos;
 	}
-	
-	
-	
+
 }

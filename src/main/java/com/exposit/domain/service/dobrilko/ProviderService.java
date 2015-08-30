@@ -30,4 +30,6 @@ public interface ProviderService {
 	public void setChangedFields(Provider loggedProvider,
 			Provider editedProvider, MultipartFile avatar);
 
+	public Provider getProviderByName(String providerName);
+
 }

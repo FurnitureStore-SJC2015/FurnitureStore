@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
@@ -37,6 +38,8 @@
 					Modify Shop </a>
 				<a href='<c:url value="/catalog/action/add"/>'
 					class="list-group-item"> Add new product </a>
+				<a href='<c:url value="/modules/catalog"/>' class="list-group-item">Modules
+					Catalog </a>
 				<a href='<c:url value="/catalog/search"/>' class="list-group-item">
 					Search </a>
 				<a href='<c:url value="/catalog/action/add"/>'

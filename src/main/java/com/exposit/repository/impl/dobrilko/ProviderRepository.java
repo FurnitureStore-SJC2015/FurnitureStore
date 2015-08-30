@@ -40,5 +40,11 @@ public class ProviderRepository extends AbstractHibernateDao<Provider, Integer>
 				.add(Restrictions.eq("aliasModule.id", module.getId()));
 		return (List<Provider>) criteria.list();
 	}
+	
+	@Override
+	public Provider getProviderByName(String name){
+		Criteria criteria = this.getSession().createCriteria(Provider.class).add(Restrictions.eq("providerName", name));
+		return (Provider) criteria.uniqueResult();
+	}
 
 }

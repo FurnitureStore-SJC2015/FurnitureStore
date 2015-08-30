@@ -2,10 +2,19 @@ package com.exposit.web.dto.dobrilko;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class RequestUnitDto {
 
 	private int id;
 
+	
+	@NotNull(message = "Modules count is a mandatory.")
+	@Max(value=20, message = "Modules count must be less than 20.")
+	@Min(value=0, message="Modules count must be greater than 0.")
 	private int count;
 
 	private String moduleName;
@@ -14,9 +23,15 @@ public class RequestUnitDto {
 
 	private List<String> providerNames;
 
+	@NotNull(message = "Chosen provider is a mandatory.")
+	@NotEmpty
 	private String chosenProvider;
+	
+	public RequestUnitDto(){
+		
+	}
 
-	private RequestUnitDto(Builder builder) {
+	public RequestUnitDto(Builder builder) {
 		this.id = builder.getId();
 		this.count = builder.getCount();
 		this.moduleName = builder.getModuleName();
@@ -48,6 +63,26 @@ public class RequestUnitDto {
 		return chosenProvider;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+
+	public void setModuleCost(double moduleCost) {
+		this.moduleCost = moduleCost;
+	}
+
+	public void setChosenProvider(String chosenProvider) {
+		this.chosenProvider = chosenProvider;
+	}
+
 	public static class Builder {
 
 		private int id;
@@ -61,6 +96,10 @@ public class RequestUnitDto {
 		private List<String> providerNames;
 
 		private String chosenProvider;
+
+		public Builder() {
+
+		}
 
 		public Builder(int id, int count, String moduleName, double moduleCost,
 				List<String> providerNames, String chosenProvider) {

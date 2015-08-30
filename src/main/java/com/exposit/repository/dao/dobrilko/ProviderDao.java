@@ -16,4 +16,6 @@ public interface ProviderDao extends GenericDao<Provider, Integer> {
 
 	public List<Provider> getProviders(Module module);
 
+	public Provider getProviderByName(String name);
+
 }

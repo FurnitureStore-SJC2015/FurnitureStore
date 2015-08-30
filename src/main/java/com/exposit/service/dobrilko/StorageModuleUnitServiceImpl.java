@@ -55,7 +55,7 @@ public class StorageModuleUnitServiceImpl implements StorageModuleUnitService {
 			StorageModuleUnitDto dto = new StorageModuleUnitDto.Builder(
 					storageModuleUnit.getId(), storageModuleUnit.getCount(),
 					module.getModuleType().toString(), module.getCost(),
-					module.getId(), storageModuleUnit.getFullMargin()).build();
+					module.getId(), storageModuleUnit.getFullMargin(), module.getImage()).build();
 			dtos.add(dto);
 		}
 		return dtos;

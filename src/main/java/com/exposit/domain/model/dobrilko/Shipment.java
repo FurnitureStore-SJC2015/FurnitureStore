@@ -18,6 +18,8 @@ import javax.validation.constraints.Min;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.exposit.domain.model.zanevsky.Module;
+
 @Entity
 @Table(name = "shipment")
 public class Shipment {

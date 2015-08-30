@@ -60,6 +60,8 @@ public class Provider extends User {
 
 	@OneToMany(mappedBy = "provider", orphanRemoval = true)
 	private List<Shipment> shipments;
+	
+	
 
 	public String getPhone() {
 		return phone;

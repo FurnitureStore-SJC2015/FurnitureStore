@@ -78,8 +78,7 @@
 
 	<definition name="client.payments" extends="template">
 		<put-attribute name="title" value="Future payments" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/client/payments.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/payments.jsp" />
 	</definition>
 
 
@@ -110,6 +109,19 @@
 		<put-attribute name="title" value="Provided Modules List" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/modules/modules.jsp" />
+
+	</definition>
+	<definition name="request-success" extends="template">
+		<put-attribute name="title" value="Send Module Request" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/request/request-success.jsp" />
+
+	</definition>
+
+	<definition name="modules.catalog" extends="template">
+		<put-attribute name="title" value="Modules Catalog" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/module/modules-list.jsp" />
 
 	</definition>
 
@@ -160,12 +172,21 @@
 			value="/WEB-INF/views/provider/profile/profile-provider-edit.jsp" />
 
 	</definition>
-	<definition name="request.order" extends="template">
+	<definition name="module-request" extends="template">
 		<put-attribute name="title" value="New Request Order" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/request/request.jsp" />
 
 	</definition>
+
+
+	<definition name="modules.catalog.request" extends="template">
+		<put-attribute name="title" value="New Module Request" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/request/request.jsp" />
+
+	</definition>
+
 
 	<!-- Vital's definitions! -->
 

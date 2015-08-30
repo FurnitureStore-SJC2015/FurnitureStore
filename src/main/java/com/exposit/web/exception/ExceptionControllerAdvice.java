@@ -9,7 +9,7 @@ import com.exposit.domain.exceptions.SuchUserRegisteredException;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
-
+/*
 	@ExceptionHandler(value = { Exception.class, RuntimeException.class })
 	public ModelAndView defaultErrorHandler(Exception e) {
 		Logger logger = Logger.getLogger(ExceptionControllerAdvice.class);
@@ -18,7 +18,7 @@ public class ExceptionControllerAdvice {
 		mav.addObject("name", e.getClass().toString());
 		mav.addObject("message", e.getMessage());
 		return mav;
-	}
+	}*/
 
 	@ExceptionHandler(SuchUserRegisteredException.class)
 	public ModelAndView suchUserRegisteredExceptionHandler(

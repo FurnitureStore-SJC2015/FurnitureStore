@@ -47,6 +47,8 @@ public interface RequestService {
 	
 	public List<RequestUnitDto> convertOrderToRequestUnitsDto(Order order);
 
+	public void updateRequest(Request request);
+
 	
 
 }

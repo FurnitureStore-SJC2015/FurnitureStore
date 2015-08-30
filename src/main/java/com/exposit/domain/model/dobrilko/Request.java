@@ -33,6 +33,25 @@ public class Request {
 	@JoinColumn(name = "request_id")
 	private List<RequestUnit> requestUnits;
 
+	public Request() {
+
+	}
+
+	public Request(Date requestDate, Provider provider) {
+
+		this.setProvider(provider);
+		this.setRequestDate(requestDate);
+
+	}
+
+	public Request(int id, Date requestDate, Provider provider,
+			List<RequestUnit> requestUnits) {
+		this.setId(id);
+		this.setProvider(provider);
+		this.setRequestDate(requestDate);
+		this.setRequestUnits(requestUnits);
+	}
+
 	public int getId() {
 		return id;
 	}
