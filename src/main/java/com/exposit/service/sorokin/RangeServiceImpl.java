@@ -20,9 +20,12 @@ public class RangeServiceImpl implements RangeService {
 	public double countRange(ProductCatalogUnit product) {
 		double range = 0;
 		double feedbackCount = feedbackService.getFeedbackList(product).size();
-		for (Feedback feedback : feedbackService.getFeedbackList(product)) {
-			range += feedback.getRange();
-		}
-		return range / feedbackCount;
+		if (feedbackCount != 0) {
+			for (Feedback feedback : feedbackService.getFeedbackList(product)) {
+				range += feedback.getRange();
+			}
+			return range / feedbackCount;
+		} else
+			return 0;
 	}
 }

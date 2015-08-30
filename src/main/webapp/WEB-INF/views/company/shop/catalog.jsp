@@ -53,18 +53,28 @@
 									<a class="pull-left"> <img
 										src="data:image/jpeg;base64,${item.product.image}"
 										class="img-thumbnail" alt="${item.product.name }"
-										width="175px" height="175px" /> <span
-										class="badge badge-success pull-right"> <fmt:formatNumber
-												type="number" pattern="0.0" value="${item.range}" /></span></a>
+										width="175px" height="175px" /> <c:if
+											test="${item.range ne 0}">
+											<span class="badge badge-success pull-right"> <fmt:formatNumber
+													type="number" pattern="0.0" value="${item.range}" /></span>
+										</c:if>
+									</a>
 								</div>
 							</td>
 							<td>
 								<h5>${item.product.description }</h5>
 							</td>
 							<td><sec:authorize access="hasRole('ROLE_COMPANY')">
-									<h5><fmt:formatNumber value="${item.product.cost}" maxFractionDigits="2"/></h5>
+									<h5>
+										<fmt:formatNumber value="${item.product.cost}"
+											maxFractionDigits="2" />
+									</h5>
 								</sec:authorize> <sec:authorize access="hasRole('ROLE_CLIENT')">
-									<h5><fmt:formatNumber value="${item.product.cost*item.product.coefficient}" maxFractionDigits="3"/></h5>
+									<h5>
+										<fmt:formatNumber
+											value="${item.product.cost*item.product.coefficient}"
+											maxFractionDigits="3" />
+									</h5>
 								</sec:authorize></td>
 							<td><c:url var="link"
 									value="catalog/product/${item.product.id}" />
@@ -85,7 +95,7 @@
 
 		</c:if>
 		<c:if test="${empty products}">
-		<h1>No products added</h1>
+			<h1>No products added</h1>
 		</c:if>
 	</sec:authorize>
 </div>

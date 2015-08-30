@@ -11,6 +11,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
 	<global-method-security pre-post-annotations="enabled" />
 
 	<http auto-config="true" use-expressions="true">
+		<access-denied-handler ref="accessDeniedHandler" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/client/**" access="hasRole('ROLE_CLIENT')" />
 		<intercept-url pattern="/provider/**" access="hasRole('ROLE_PROVIDER')" />
@@ -26,6 +27,11 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
 
 
 	<beans:bean id="myUserDetailsService" class="com.exposit.security.MyUserDetailsService" />
+
+	<beans:bean id="accessDeniedHandler"
+		class="com.exposit.web.exception.AccessDeniedErrorHandler">
+		<beans:property name="errorPage" value="/WEB-INF/views/error/403.jsp"></beans:property>
+	</beans:bean>
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="myUserDetailsService">
