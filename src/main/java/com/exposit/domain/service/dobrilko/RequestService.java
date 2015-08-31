@@ -41,13 +41,16 @@ public interface RequestService {
 	
 	public void sendRequest(Request request);
 	
-	public void sendRequests(List<Request> requests);
 
-	List<RequestUnitDto> convertRequestUnitsToDto(List<RequestUnit> requestUnits);
+	public List<RequestUnitDto> convertRequestUnitsToDto(List<RequestUnit> requestUnits);
 	
 	public List<RequestUnitDto> convertOrderToRequestUnitsDto(Order order);
 
 	public void updateRequest(Request request);
+
+	public void sendRequests(Integer orderId);
+
+	public List<RequestUnitDto> createRequestUnitDtos(Integer orderId);
 
 	
 

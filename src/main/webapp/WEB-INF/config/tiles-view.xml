@@ -124,6 +124,13 @@
 			value="/WEB-INF/views/company/module/modules-list.jsp" />
 
 	</definition>
+	
+	
+	<definition name="module-order-request" extends="template">
+		<put-attribute name="title" value="Modules Catalog" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/request/order-request.jsp" />
+	</definition>
 
 	<definition name="request-info" extends="template">
 		<put-attribute name="title" value="Request Info" />

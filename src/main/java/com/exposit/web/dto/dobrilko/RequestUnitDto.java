@@ -11,11 +11,12 @@ public class RequestUnitDto {
 
 	private int id;
 
-	
 	@NotNull(message = "Modules count is a mandatory.")
 	@Max(value=20, message = "Modules count must be less than 20.")
 	@Min(value=0, message="Modules count must be greater than 0.")
 	private int count;
+	
+	private int moduleId;
 
 	private String moduleName;
 
@@ -83,9 +84,19 @@ public class RequestUnitDto {
 		this.chosenProvider = chosenProvider;
 	}
 
+	public int getModuleId() {
+		return moduleId;
+	}
+
+	public void setModuleId(int moduleId) {
+		this.moduleId = moduleId;
+	}
+
 	public static class Builder {
 
 		private int id;
+		
+		private int moduleId;
 
 		private int count;
 
@@ -101,7 +112,7 @@ public class RequestUnitDto {
 
 		}
 
-		public Builder(int id, int count, String moduleName, double moduleCost,
+		public Builder(int id, int count, String moduleName, Integer moduleId,double moduleCost,
 				List<String> providerNames, String chosenProvider) {
 			this.id = id;
 			this.count = count;
@@ -109,30 +120,40 @@ public class RequestUnitDto {
 			this.moduleCost = moduleCost;
 			this.providerNames = providerNames;
 			this.chosenProvider = chosenProvider;
+			this.moduleId = moduleId;
 		}
 
-		public Builder(int id, int count, String moduleName, double moduleCost,
+		public Builder(int id, int count, String moduleName, Integer moduleId, double moduleCost,
 				List<String> providerNames) {
 			this.id = id;
 			this.count = count;
 			this.moduleName = moduleName;
 			this.moduleCost = moduleCost;
 			this.providerNames = providerNames;
+			this.moduleId = moduleId;
 		}
 
-		public Builder(int count, String moduleName, double moduleCost,
+		public Builder(int count, String moduleName, Integer moduleId, double moduleCost,
 				List<String> providerNames) {
 
 			this.count = count;
 			this.moduleName = moduleName;
 			this.moduleCost = moduleCost;
 			this.providerNames = providerNames;
+			this.moduleId = moduleId;
+			
 		}
 
 		public Builder id(Integer id) {
 			this.id = id;
 			return this;
 		}
+		
+		public Builder moduleId(Integer moduleId) {
+			this.moduleId = moduleId;
+			return this;
+		}
+
 
 		public Builder count(Integer count) {
 			this.count = count;
@@ -186,6 +207,12 @@ public class RequestUnitDto {
 		public RequestUnitDto build() {
 			return new RequestUnitDto(this);
 		}
+
+		public int getModuleId() {
+			return moduleId;
+		}
+
+		
 
 	}
 }

@@ -2,6 +2,7 @@ package com.exposit.service.dobrilko;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
-import com.exposit.domain.model.zanevsky.OrderUnit;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
 import com.exposit.domain.service.dobrilko.ProviderService;
@@ -122,13 +122,13 @@ public class RequestServiceImpl implements RequestService {
 		return requestUnitDao.findAll();
 	}
 
-
 	@Transactional
 	@Override
 	public void updateRequest(Request request) {
 
 		requestDao.update(request);
 	}
+
 	@Transactional
 	@Override
 	public void deleteRequestUnit(int id) {
@@ -198,17 +198,11 @@ public class RequestServiceImpl implements RequestService {
 			}
 			RequestUnitDto dto = new RequestUnitDto.Builder(
 					requestUnit.getId(), requestUnit.getCount(), module
-							.getModuleType().toString(), module.getCost(),
-					providerNames).build();
+							.getModuleType().toString(), module.getId(),
+					module.getCost(), providerNames).build();
 			dtos.add(dto);
 		}
 		return dtos;
-
-	}
-
-	@Override
-	public void sendRequests(List<Request> requests) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -241,11 +235,52 @@ public class RequestServiceImpl implements RequestService {
 			}
 			RequestUnitDto dto = new RequestUnitDto.Builder(
 					productTemplate.getCount(), module.getModuleType()
-							.toString(), module.getCost(), providerNames)
-					.build();
+							.toString(), module.getId(), module.getCost(),
+					providerNames).build();
 			dtos.add(dto);
 		}
 		return dtos;
 	}
 
+	@Transactional
+	@Override
+	public List<RequestUnitDto> createRequestUnitDtos(Integer orderId) {
+		HashMap<Module, Integer> modules = moduleService
+				.getAbsentModulesInOrder(orderService.getOrderById(orderId));
+		List<RequestUnitDto> requestUnitDtos = new ArrayList<RequestUnitDto>();
+		for (Module module : modules.keySet()) {
+			RequestUnitDto requestUnitDto = new RequestUnitDto();
+			requestUnitDto.setChosenProvider(providerService
+					.getProviders(module).get(0).getProviderName());
+			requestUnitDto.setModuleCost(module.getCost());
+			requestUnitDto.setModuleName(module.getModuleType().toString());
+			requestUnitDto.setCount(modules.get(module));
+			requestUnitDtos.add(requestUnitDto);
+		}
+		return requestUnitDtos;
+	}
+
+	@Transactional
+	@Override
+	public void sendRequests(Integer orderId) {
+		HashMap<Module, Integer> modules = moduleService
+				.getAbsentModulesInOrder(orderService.getOrderById(orderId));
+
+		for (Module module : modules.keySet()) {
+			if (!providerService.getProviders(module).isEmpty()) {
+				Request request = new Request();
+				request.setProvider(providerService.getProviders(module).get(0));
+				request.setRequestDate(new Date());
+				this.saveRequest(request);
+				List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();
+				RequestUnit requestUnit = new RequestUnit();
+				requestUnit.setCount(modules.get(module));
+				requestUnit.setModule(module);
+				requestUnit.setRequest(request);
+				request.setRequestUnits(requestUnits);
+				this.updateRequest(request);
+			}
+		}
+
+	}
 }

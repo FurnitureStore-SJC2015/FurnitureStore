@@ -30,20 +30,16 @@
 	<div class="col-md-3">
 		<div class="list-group">
 			<ul class="list-group">
-				<a href=<c:url value="/catalog"/> class="list-group-item">
-					Catalog </a>
-				<a href='<c:url value="/company/incoming"/>' class="list-group-item">
-					Incoming orders</a>
-				<a href='<c:url value="/catalog/action"/>' class="list-group-item">
-					Modify Shop </a>
-				<a href='<c:url value="/catalog/action/add"/>'
-					class="list-group-item"> Add new product </a>
-				<a href='<c:url value="/modules/catalog"/>' class="list-group-item">Modules
-					Catalog </a>
-				<a href='<c:url value="/catalog/search"/>' class="list-group-item">
-					Search </a>
-				<a href='<c:url value="/catalog/action/add"/>'
-					class="list-group-item"> Kate's Cargo </a>
+				<li class="list-group-item"><a href=<c:url value="/catalog"/>>CATALOG</a></li>
+				<li class="list-group-item"><a
+					href='<c:url value="/company/incoming"/>' class="list-group-item">INCOMING
+						ORDERS</a></li>
+				<li class="list-group-item"><a
+					href='<c:url value="/modules/catalog"/>'>MODULES CATALOG</a></li>
+				<li class="list-group-item"><a
+					href='<c:url value="/catalog/search"/>'>SEARCH</a></li>
+				<li class="list-group-item"><a
+					href='<c:url value="/catalog/action/add"/>'>SHIPMENTS</a></li>
 			</ul>
 		</div>
 	</div>

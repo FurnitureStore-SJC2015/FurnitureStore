@@ -41,12 +41,13 @@
 									</div>
 								</c:if></td>
 
-							<td><c:set var="link"
-									value="request/${module.moduleId}"></c:set>
-								<button class="btn btn-default" 
-									onclick="location.href='${link}'" >
-									<span class="glyphicon glyphicon-send"></span>
-								</button></td>
+							<td><c:set var="link" value="request/${module.moduleId}"></c:set>
+								<div align="center">
+									<button class="btn btn-default"
+										onclick="location.href='${link}'">
+										<span class="glyphicon glyphicon-send"></span>
+									</button>
+								</div></td>
 							<c:set var="i" value="${i + 1}"></c:set>
 						</tr>
 					</c:forEach>

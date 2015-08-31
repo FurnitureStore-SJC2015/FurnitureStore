@@ -1,13 +1,18 @@
 package com.exposit.web.dobrilko;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
+import com.exposit.domain.model.dobrilko.RequestUnit;
 import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 @Controller
 @RequestMapping(value = "/requests", method = RequestMethod.GET)
@@ -94,6 +102,23 @@ public class RequestController {
 
 		model.addAttribute("moduleId", moduleId);
 		return "request.new";
+
+	}
+
+	@RequestMapping(value = "/order/${id}", method = { RequestMethod.GET })
+	public String showModuleRequestPanel(@PathVariable("id") Integer id,
+			Model model) {
+		model.addAttribute("requestUnitDtos",
+				requestService.createRequestUnitDtos(id));
+		return "module-order-request";
+
+	}
+
+	@RequestMapping(value = { "/order/${id}/send" },
+			method = { RequestMethod.POST })
+	public String sendOrderRequest(@PathVariable("id") Integer id, Model model) {
+		requestService.sendRequests(id);
+		return "request-success";
 
 	}
 
