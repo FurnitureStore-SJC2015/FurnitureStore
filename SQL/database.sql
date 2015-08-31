@@ -204,7 +204,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `store`.`provider` (
   `provider_id` INT(11) NOT NULL,
-  `provider_name` VARCHAR(50) NULL DEFAULT NULL,
+  `provider_name` VARCHAR(50) NULL DEFAULT NULL UNIQUE,
   `phone` VARCHAR(50) NULL DEFAULT NULL,
   `provider_email` VARCHAR(50) NULL DEFAULT NULL,
   `zip_code` VARCHAR(50) NULL DEFAULT NULL,
