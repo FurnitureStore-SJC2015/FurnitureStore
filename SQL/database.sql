@@ -173,7 +173,6 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `store`.`product_catalog_unit` (
   `product_catalog_unit_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `sale_id` INT(11) NULL DEFAULT NULL,
   `product_name` VARCHAR(50) NULL DEFAULT NULL,
   `product_cost` DOUBLE NULL DEFAULT NULL,
   `margin_coefficient` DOUBLE NULL DEFAULT NULL,
@@ -258,20 +257,6 @@ CREATE TABLE IF NOT EXISTS `store`.`role` (
   PRIMARY KEY (`role_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `store`.`sale`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `store`.`sale` (
-  `sale_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `start_time` DATETIME NULL DEFAULT NULL,
-  `end_time` DATETIME NULL DEFAULT NULL,
-  `percentage_sale` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`sale_id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 

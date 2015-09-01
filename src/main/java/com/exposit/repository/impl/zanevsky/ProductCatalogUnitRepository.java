@@ -11,7 +11,6 @@ import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
-import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.repository.dao.zanevsky.ProductCatalogUnitDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
 import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
@@ -43,16 +42,6 @@ public class ProductCatalogUnitRepository extends
 		return (List<ProductCatalogUnit>) criteria.list();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ProductCatalogUnit> getProducts(Sale sale) {
-		Criteria criteria = this.getSession()
-				.createCriteria(ProductCatalogUnit.class, "product")
-				.add(Restrictions.eq("sale", sale));
-		return (List<ProductCatalogUnit>) criteria.list();
-	}
-
-	// ����� ���� �����, �� ��������� ��� ����� �� �����������...
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ProductCatalogUnit> getProducts(Module module) {

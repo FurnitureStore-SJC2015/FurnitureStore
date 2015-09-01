@@ -48,10 +48,6 @@ public class ProductCatalogUnit {
 	@Lob
 	private byte[] image;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "sale_id")
-	private Sale sale;
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productCatalogUnit",
 			cascade = { CascadeType.REMOVE })
 	private List<Feedback> feedbacks;
@@ -94,14 +90,6 @@ public class ProductCatalogUnit {
 
 	public void setFeedbacks(List<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
-	}
-
-	public Sale getSale() {
-		return sale;
-	}
-
-	public void setSale(Sale sale) {
-		this.sale = sale;
 	}
 
 	public List<ProductTemplate> getProductTemplates() {

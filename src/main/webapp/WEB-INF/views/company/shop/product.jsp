@@ -143,7 +143,7 @@
 													</i></small>
 												</h4>
 												<p>
-													<strong><c:out value="${feedback.text}"/></strong>
+													<strong><c:out value="${feedback.text}" /></strong>
 												</p>
 											</div>
 										</div>

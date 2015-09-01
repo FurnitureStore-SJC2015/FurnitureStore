@@ -83,7 +83,6 @@ public class PaymentServiceImpl implements PaymentService {
 		try {
 			onePaymentSum = df.parse(formate).doubleValue();
 		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 		for (int i = 0; i < order.getPaymentScheme().getNumberOfPayments(); i++) {
 			Payment payment = new Payment();

@@ -1,7 +1,5 @@
 package com.exposit.web.exception;
 
-import javax.mail.MessagingException;
-
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

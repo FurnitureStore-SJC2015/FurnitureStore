@@ -7,28 +7,26 @@ import com.exposit.domain.model.sorokin.User;
 import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
-import com.exposit.domain.model.zanevsky.ProductTemplate;
-import com.exposit.domain.model.zanevsky.Sale;
 import com.exposit.repository.base.GenericDao;
 import com.exposit.web.dto.zanevsky.ProductSearchCriteria;
 
-public interface ProductCatalogUnitDao extends GenericDao<ProductCatalogUnit, Integer>{
-	
+public interface ProductCatalogUnitDao extends
+		GenericDao<ProductCatalogUnit, Integer> {
+
 	public List<ProductCatalogUnit> getProducts(Order order);
-	
+
 	public List<ProductCatalogUnit> getProducts(User user);
-	
-	public List<ProductCatalogUnit> getProducts(Sale sale);
-	
+
 	public List<ProductCatalogUnit> getProducts(Module module);
-	
+
 	public List<ProductCatalogUnit> lowerBound(double cost);
-	
+
 	public List<ProductCatalogUnit> upperBound(double cost);
-	
+
 	public ProductCatalogUnit getProduct(String name);
 
 	public ProductCatalogUnit getProduct(Feedback feedback);
-	
-	public List<ProductCatalogUnit> getProductByCustomCriteria(ProductSearchCriteria criteria);
+
+	public List<ProductCatalogUnit> getProductByCustomCriteria(
+			ProductSearchCriteria criteria);
 }

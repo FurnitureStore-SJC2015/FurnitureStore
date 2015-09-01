@@ -8,11 +8,11 @@
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
 	<div class="col-md-9">
 		<c:set var="i" value="1"></c:set>
-		<div class="pane panel-default">
+		<div class="text-right">
+			<a href="?lang=en">en</a> | <a href="?lang=ru">ru</a>
+		</div>
+		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="text-right">
-					<a href="?lang=en">en</a> | <a href="?lang=ru">ru</a>
-				</div>
 				<h5 class="text-center">
 					<strong><span class="glyphicon glyphicon-list-alt"></span>
 						<spring:message code="payment.header" /></strong>

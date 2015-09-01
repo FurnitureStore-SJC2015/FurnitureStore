@@ -3,6 +3,7 @@ package com.exposit.repository.impl.sorokin;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -24,8 +25,9 @@ public class BonusRepository extends AbstractHibernateDao<Bonus, Integer>
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Bonus> getSuitableBonuses(Double currentSum) {
-		Criteria cr = getSession().createCriteria(Bonus.class).add(
-				Restrictions.le("sumBound", currentSum));
+		Criteria cr = getSession().createCriteria(Bonus.class)
+				.addOrder(Order.asc("sumBound"))
+				.add(Restrictions.le("sumBound", currentSum));
 		return (List<Bonus>) cr.list();
 	}
 
