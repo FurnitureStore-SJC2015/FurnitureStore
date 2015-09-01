@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <script>
 	function changeDisplayStatus() {
@@ -24,7 +25,7 @@
 		}
 	}
 </script>
-
+<spring:htmlEscape defaultHtmlEscape="true" />
 <sec:authorize
 	access="isAuthenticated() and hasAnyRole('ROLE_CLIENT','ROLE_COMPANY')">
 	<div class="col-md-9">
@@ -142,7 +143,7 @@
 													</i></small>
 												</h4>
 												<p>
-													<strong>${feedback.text}</strong>
+													<strong><c:out value="${feedback.text}"/></strong>
 												</p>
 											</div>
 										</div>

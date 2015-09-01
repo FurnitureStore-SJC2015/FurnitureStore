@@ -220,9 +220,4 @@
 			value="/WEB-INF/views/company/companyInfo.jsp"></put-attribute>
 	</definition>
 
-	<definition name="catalog.add.product" extends="template">
-		<put-attribute name="title" value="Add new product"></put-attribute>
-		<put-attribute name="body"
-			value="/WEB-INF/views/company/shop/addProduct.jsp"></put-attribute>
-	</definition>
 </tiles-definitions>

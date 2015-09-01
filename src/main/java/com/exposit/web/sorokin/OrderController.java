@@ -3,9 +3,10 @@ package com.exposit.web.sorokin;
 import java.security.Principal;
 import java.util.Date;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -62,8 +63,7 @@ public class OrderController {
 		model.addAttribute("orderList", orderService.getOrders(client));
 		return "client.orders";
 	}
-	
-	
+
 	@PreAuthorize("#order.client.login==principal.username")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
@@ -107,11 +107,16 @@ public class OrderController {
 
 	@RequestMapping(value = { "/confirm" }, method = RequestMethod.POST)
 	public String confirmOrder(@RequestParam(value = "orderId") Order order,
-			@RequestParam("confirmationDate") Date assemblyDate) {
+			@RequestParam("confirmationDate") Date assemblyDate)
+			throws MessagingException {
 		Order confirmedOrder = orderService.confirmOrder(order, assemblyDate);
 		orderService.updateOrder(confirmedOrder);
 		storageModuleUnitService.holdModulesWhileConfirmOrder(order);
-		mailService.sendConfirationMail(order.getClient());
+		try {
+			mailService.sendConfirationMail(order.getClient());
+		} catch (Exception e) {
+		}
+
 		return "redirect:/company/incoming";
 	}
 

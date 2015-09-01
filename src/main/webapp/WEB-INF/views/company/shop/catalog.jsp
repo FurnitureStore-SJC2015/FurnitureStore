@@ -81,12 +81,6 @@
 								<button class="btn btn-primary btn-md"
 									onclick="location.href='${link}'">Show info</button> <sec:authorize
 									access="hasRole('ROLE_COMPANY')">
-									<c:set var="link" value="product/delete/${item.product.id}" />
-									<button class="btn btn-default btn-md"
-										onclick="location.href='${link}'">Delete</button>
-									<c:set var="link" value="product/edit/${item.product.id}" />
-									<button class="btn btn-default btn-md"
-										onclick="location.href='${link}'">Edit</button>
 								</sec:authorize></td>
 						</tr>
 					</c:forEach>
