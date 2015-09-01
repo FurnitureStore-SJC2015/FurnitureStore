@@ -24,7 +24,7 @@ public class BonusServiceImpl implements BonusService {
 
 	@Override
 	public Bonus getCuitableBonus(Double totalSpent) {
-		if (bonusRepository.getSuitableBonuses(totalSpent) != null) {
+		if (bonusRepository.getSuitableBonuses(totalSpent).size()!=0) {
 			List<Bonus> suitableBonuses = bonusRepository
 					.getSuitableBonuses(totalSpent);
 			return suitableBonuses.get(suitableBonuses.size() - 1);

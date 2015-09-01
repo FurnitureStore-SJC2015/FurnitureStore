@@ -18,7 +18,7 @@
 					Orders<span class="badge">${orderCount}</span>
 				</a>
 				<a href='<c:url value="/catalog"/>' class="list-group-item">To
-					catalog<span class="badge"></span>
+					Catalog<span class="badge"></span>
 				</a>
 			</ul>
 		</div>
