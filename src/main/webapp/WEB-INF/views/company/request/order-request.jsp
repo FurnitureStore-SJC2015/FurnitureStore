@@ -58,20 +58,17 @@ function getProviders(i , moduleId){
 		$.ajax({
 			type : "POST",
 			contentType : 'application/json; charset=utf-8',
-			dataType : 'json',
 			url : "/FurnitureStore/requests/order/send",
 			data : JSON.stringify(requestValues), 
 			success : function(obj) {
 				var temp=$("#record"+i);
-				temp.hide( "clip", {direction: "horizontal"}, 1000 , function(){
+				temp.hide(1000 , function(){
 	                temp.remove();
 	            });
-				location.reload();
 			}
 		});
 	}
 </script>
-
 <div class="col-md-9 well right">
 
 	<div class="col-md-12" align="center">
@@ -81,12 +78,13 @@ function getProviders(i , moduleId){
 	</div>
 	<div class="col-md-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h5 class="text-center">
-					<span class="glyphicon glyphicon-list"></span><strong>New
+			<div class="panel-heading" align="center">
+				<h5>
+					<span class="glyphicon glyphicon-list"></span> <strong>New
 						Request</strong>
 				</h5>
 			</div>
+
 
 			<div class="panel-body">
 				<c:set var="i" value="1"></c:set>
@@ -103,26 +101,39 @@ function getProviders(i , moduleId){
 					</thead>
 
 					<tbody>
-
-						<c:forEach items="${requestUnitDtos}" var="requestUnitDto">
-
+						<c:forEach var="requestUnitDto" items="${requestUnitDtos}">
 							<tr id="record${i}">
 								<td>${requestUnitDto.moduleId}</td>
 								<td>${requestUnitDto.moduleName}</td>
 								<td>${requestUnitDto.moduleCost}</td>
-								<td>${requestUnitDto.count}</td>
-								<td id="selecttd${i}"><button id="btn${i}"
-										class="btn btn-success"
-										onclick="getProviders(${i},${requestUnitDto.moduleId})">SHOW
-										PROVIDERS</button>
-									<div id="attention${i}" style="display: none;">
-										<h5>No providers!</h5>
-									</div></td>
-								<td><button id="sendButton${i}" class="btn btn-success"
-										style="display: none;"
-										onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count},'${requestUnitDto.moduleName}',${requestUnitDto.moduleCost})">PROCESS
-										REQUEST</button></td>
+								<c:choose>
+									<c:when test="${requestUnitDto.count>0}">
+										<td>${requestUnitDto.count}</td>
+										<td id="selecttd${i}"><button id="btn${i}"
+												class="btn btn-success"
+												onclick="getProviders(${i},${requestUnitDto.moduleId})">SHOW
+												PROVIDERS</button>
+											<div align="center" id="attention${i}" style="display: none;">
+												<h5>
+													<strong>No providers!</strong>
+												</h5>
+											</div></td>
+										<td><button id="sendButton${i}" class="btn btn-success"
+												style="display: none;"
+												onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count},'${requestUnitDto.moduleName}',${requestUnitDto.moduleCost})">PROCESS
+												REQUEST</button></td>
+									</c:when>
 
+									<c:otherwise>
+										<td><div>
+												<h5>
+													<strong>Waiting shipment from provider...</strong>
+												</h5>
+											</div></td>
+										<td></td>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
 								<c:set var="i" value="${i + 1}"></c:set>
 							</tr>
 

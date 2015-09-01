@@ -32,7 +32,7 @@
 			<ul class="list-group">
 				<li class="list-group-item"><a href=<c:url value="/catalog"/>>CATALOG</a></li>
 				<li class="list-group-item"><a
-					href='<c:url value="/company/incoming"/>' class="list-group-item">INCOMING
+					href='<c:url value="/company/incoming"/>' >INCOMING
 						ORDERS</a></li>
 				<li class="list-group-item"><a
 					href='<c:url value="/modules/catalog"/>'>MODULES CATALOG</a></li>

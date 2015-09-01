@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.RequestUnit;
+import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.repository.dao.dobrilko.RequestUnitDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
 
@@ -20,6 +21,15 @@ public class RequestUnitRepository extends
 	public List<RequestUnit> getRequestUnits(Request request) {
 		Criteria criteria = getSession().createCriteria(RequestUnit.class).add(
 				Restrictions.eq("request", request));
+		return (List<RequestUnit>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestUnit> getRequestUnits(Module module) {
+		Criteria criteria = getSession().createCriteria(RequestUnit.class)
+				.createAlias("module", "mdl")
+				.add(Restrictions.eq("mdl.id", module.getId()));
 		return (List<RequestUnit>) criteria.list();
 	}
 

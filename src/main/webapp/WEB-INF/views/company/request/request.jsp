@@ -45,7 +45,7 @@
 							<div class="col-md-2">
 								<label for="numberModules">Number</label>
 								<form:input type="number" path="count" id="numberModules"
-									name="number" class="form-control" />
+									 class="form-control"></form:input>
 								<form:errors path="count" class="danger"></form:errors>
 							</div>
 							<div class="col-md-3">

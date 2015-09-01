@@ -242,6 +242,20 @@ public class RequestServiceImpl implements RequestService {
 		return dtos;
 	}
 
+	public Integer getNumberOfNotRequestedModuleUnits(Module module,
+			Integer count) {
+
+		Integer c = 0;
+		for (RequestUnit requestUnit : requestUnitDao.getRequestUnits(module)) {
+			c += requestUnit.getCount();
+		}
+		if (c < count) {
+			return (count - c);
+		} else {
+			return 0;
+		}
+	}
+
 	@Transactional
 	@Override
 	public List<RequestUnitDto> createRequestUnitDtos(Integer orderId) {
@@ -253,8 +267,11 @@ public class RequestServiceImpl implements RequestService {
 			requestUnitDto.setModuleId(module.getId());
 			requestUnitDto.setModuleCost(module.getCost());
 			requestUnitDto.setModuleName(module.getModuleType().toString());
-			requestUnitDto.setCount(modules.get(module));
+			requestUnitDto.setCount(this.getNumberOfNotRequestedModuleUnits(
+					module, modules.get(module)));
+
 			requestUnitDtos.add(requestUnitDto);
+
 		}
 		return requestUnitDtos;
 	}
@@ -282,22 +299,23 @@ public class RequestServiceImpl implements RequestService {
 		}
 
 	}
-	
+
 	@Transactional
 	@Override
-	public void sendRequestFromRequestUnitDto(RequestUnitDto requestUnit){
+	public void sendRequestFromRequestUnitDto(RequestUnitDto requestUnit) {
 		Request request = new Request();
-		request.setProvider(providerService.getProviderById(Integer.parseInt(requestUnit.getChosenProvider())));
+		request.setProvider(providerService.getProviderById(Integer
+				.parseInt(requestUnit.getChosenProvider())));
 		request.setRequestDate(new Date());
 		this.saveRequest(request);
-		RequestUnit reqUnit = new RequestUnit(requestUnit.getCount(), moduleService.findById(requestUnit.getModuleId()));
+		RequestUnit reqUnit = new RequestUnit(requestUnit.getCount(),
+				moduleService.findById(requestUnit.getModuleId()));
 		reqUnit.setRequest(request);
 		this.saveRequestUnit(reqUnit);
 		List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();
 		requestUnits.add(reqUnit);
 		request.setRequestUnits(requestUnits);
 		this.updateRequest(request);
-		
-		
-}
+
+	}
 }
