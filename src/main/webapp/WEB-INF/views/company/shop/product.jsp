@@ -31,7 +31,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5 class="text-center">
-					<strong><span class="glyphicon glyphicon-info-sign"></span>${product.name} information</strong>
+					<strong><span class="glyphicon glyphicon-info-sign"></span>${product.name}
+						information</strong>
 				</h5>
 			</div>
 			<div class="panel-body">
@@ -60,7 +61,8 @@
 								<sec:authorize access="hasRole('ROLE_COMPANY')">
 									<tr>
 										<td><strong>Coefficient:</strong></td>
-										<td><strong><fmt:formatNumber value="${product.coefficient}" maxFractionDigits="2"/></strong></td>
+										<td><strong><fmt:formatNumber
+													value="${product.coefficient}" maxFractionDigits="2" /></strong></td>
 									</tr>
 									<tr>
 										<td><strong>Cost:</strong></td>
@@ -70,7 +72,9 @@
 								<sec:authorize access="hasRole('ROLE_CLIENT')">
 									<tr>
 										<td><strong>Cost:</strong></td>
-										<td><strong><fmt:formatNumber value="${product.cost*product.coefficient}" maxFractionDigits="2"/></strong></td>
+										<td><strong><fmt:formatNumber
+													value="${product.cost*product.coefficient}"
+													maxFractionDigits="2" /></strong></td>
 									</tr>
 								</sec:authorize>
 							</tbody>
@@ -131,8 +135,9 @@
 										<div class="media">
 											<div class="media-body">
 												<h4 class="media-heading">
-													<small><i>Posted on <fmt:formatDate type="both"
-																value="${feedback.date}" />
+													<small><i>${feedback.client.name}
+															${feedback.client.surname} Posted on <fmt:formatDate
+																type="both" value="${feedback.date}" />
 															<div class="text-right">My range: ${feedback.range}</div>
 													</i></small>
 												</h4>
@@ -155,25 +160,27 @@
 				</c:if>
 			</div>
 			<div class="panel-footer clearfix">
-				<div class="pull-right">
-					<c:url value="/cart/add/many" var="addToCart" />
-					<form action="${addToCart}" method="post">
-						<div class="col-md-6">
-							<select id="count" name="count" class="form-control">
-								<option value="1" selected="selected">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>
-						<div class="col-md-6">
-							<input type="hidden" id="productId" name="productId"
-								value="${product.id}"> <input type="submit"
-								class="btn btn-primary" value="Add to Cart" />
-						</div>
-					</form>
-				</div>
+				<sec:authorize access="hasRole('ROLE_CLIENT')">
+					<div class="pull-right">
+						<c:url value="/cart/add/many" var="addToCart" />
+						<form action="${addToCart}" method="post">
+							<div class="col-md-6">
+								<select id="count" name="count" class="form-control">
+									<option value="1" selected="selected">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<input type="hidden" id="productId" name="productId"
+									value="${product.id}"> <input type="submit"
+									class="btn btn-primary" value="Add to Cart" />
+							</div>
+						</form>
+					</div>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>

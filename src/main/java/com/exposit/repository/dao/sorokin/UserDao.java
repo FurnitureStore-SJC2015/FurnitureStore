@@ -3,9 +3,9 @@ package com.exposit.repository.dao.sorokin;
 import java.util.List;
 
 import com.exposit.domain.model.sorokin.Bonus;
-import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
+import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.repository.base.GenericDao;
 
 public interface UserDao extends GenericDao<User, Integer> {
@@ -24,5 +24,7 @@ public interface UserDao extends GenericDao<User, Integer> {
 			Integer offset);
 
 	public Integer getCountOfUsersByRole(Role role);
+
+	public User getUserByFeedback(Feedback feedback);
 
 }

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.exposit.domain.model.zanevsky.Feedback;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 @Entity
@@ -44,6 +45,9 @@ public class Client extends User {
 	@JoinColumn(name = "client_id")
 	private List<Order> orders;
 
+	@OneToMany(mappedBy = "client")
+	private List<Feedback> feedbacks;
+
 	@Column(name = "total_spent")
 	private double totalSpent;
 
@@ -52,7 +56,7 @@ public class Client extends User {
 	}
 
 	public void setTotalSpent(Double totalSpent) {
-		this.totalSpent+= totalSpent;
+		this.totalSpent += totalSpent;
 	}
 
 	public Bonus getBonus() {

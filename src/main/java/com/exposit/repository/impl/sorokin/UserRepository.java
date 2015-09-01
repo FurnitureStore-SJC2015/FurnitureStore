@@ -8,9 +8,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.exposit.domain.model.sorokin.Bonus;
-import com.exposit.domain.model.sorokin.Order;
+import com.exposit.domain.model.sorokin.Client;
 import com.exposit.domain.model.sorokin.Role;
 import com.exposit.domain.model.sorokin.User;
+import com.exposit.domain.model.zanevsky.Feedback;
 import com.exposit.repository.dao.sorokin.UserDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
 
@@ -50,8 +51,7 @@ public class UserRepository extends AbstractHibernateDao<User, Integer>
 	}
 
 	@Override
-	public List<User> queryListOfUsers(Integer size,
-			Integer offset) {
+	public List<User> queryListOfUsers(Integer size, Integer offset) {
 		Criteria cr = getSession().createCriteria(User.class);
 		cr.setFirstResult(size * (offset - 1));
 		cr.setMaxResults(size);
@@ -75,6 +75,14 @@ public class UserRepository extends AbstractHibernateDao<User, Integer>
 		cr.setProjection(Projections.rowCount());
 		Long result = (Long) cr.uniqueResult();
 		return result.intValue();
+	}
+
+	@Override
+	public User getUserByFeedback(Feedback feedback) {
+		Criteria cr = getSession().createCriteria(Client.class, "client");
+		cr.createAlias("client.feedbacks", "feedbacks");
+		cr.add(Restrictions.eq("feedbacks.id", feedback.getId()));
+		return (User) cr.uniqueResult();
 	}
 
 }

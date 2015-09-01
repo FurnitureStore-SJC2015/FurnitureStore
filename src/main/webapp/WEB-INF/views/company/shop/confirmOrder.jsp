@@ -54,7 +54,7 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="panel-footer clearfix">Some info!</div>
+			<div class="panel-footer clearfix"></div>
 		</div>
 	</div>
 </sec:authorize>
