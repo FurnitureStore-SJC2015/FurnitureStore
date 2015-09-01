@@ -105,10 +105,8 @@ public class ModuleController {
 		model.addAttribute(
 				"requestUnit",
 				new RequestUnitDto.Builder().moduleName(
-						module.getModuleType().toString()).id(module.getId()));
+						module.getModuleType().toString()).moduleId(id));
 
-		model.addAttribute("moduleName", module.getModuleType().toString());
-		model.addAttribute("id", module.getId());
 		model.addAttribute("providers", providerService.getProviders(module));
 		return "module-request";
 
@@ -123,10 +121,8 @@ public class ModuleController {
 			model.addAttribute(
 					"requestUnit",
 					new RequestUnitDto.Builder().moduleName(
-							module.getModuleType().toString()).id(module.getId()));
+							module.getModuleType().toString()).moduleId(module.getId()));
 
-			model.addAttribute("moduleName", module.getModuleType().toString());
-			model.addAttribute("id", module.getId());
 			model.addAttribute("providers", providerService.getProviders(module));
 			model.addAttribute("error","Check your input, please. Fields must be valid.");
 			return "module-request";
@@ -136,7 +132,7 @@ public class ModuleController {
 						.getChosenProvider()));
 		
 		RequestUnit requestUnit = new RequestUnit(
-				requestUnitDto.getCount(), moduleService.findById(id));
+				Integer.parseInt(requestUnitDto.getCountString()), moduleService.findById(id));
 		requestService.saveRequestUnit(requestUnit);
 		List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();
 		requestUnits.add(requestUnit);
