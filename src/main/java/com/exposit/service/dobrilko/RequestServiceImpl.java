@@ -196,10 +196,9 @@ public class RequestServiceImpl implements RequestService {
 			for (Provider provider : providers) {
 				providerNames.add(provider.getName());
 			}
-			RequestUnitDto dto = new RequestUnitDto.Builder(
-					requestUnit.getId(), requestUnit.getCount(), module
-							.getModuleType().toString(), module.getId(),
-					module.getCost(), providerNames).build();
+			RequestUnitDto dto = new RequestUnitDto.Builder(module.getId(),
+					requestUnit.getCount(), module.getModuleType().toString(),
+					module.getCost(), providerNames, null).build();
 			dtos.add(dto);
 		}
 		return dtos;

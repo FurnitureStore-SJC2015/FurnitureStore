@@ -28,42 +28,45 @@
 				<form:form method="POST" action="${sendRequest}"
 					modelAttribute="requestUnit" class="form-horizontal"
 					enctype="multipart/form-data" role="form">
-					<div class="panel">
-						<div class="form-group">
-							<div class="col-md-2">
-								<label for="moduleId">Module Id</label>
-								<div id="moduleId">
-									<h5>${id}</h5>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<label for="moduleName">Module Name</label>
-								<div id="moduleName">
-									<h5>${moduleName}</h5>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<label for="numberModules">Number</label>
-								<form:input type="number" path="count" id="numberModules"
-									 class="form-control"></form:input>
-								<form:errors path="count" class="danger"></form:errors>
-							</div>
-							<div class="col-md-3">
-								<c:set var="link" value="providers/${id}"></c:set>
-								<label for="providerSelector">Select Provider</label>
-								<form:select path="chosenProvider" name="providerSelector"
-									class="form-control" id="providerSelector">
-									<c:forEach items="${providers}" var="provider">
-										<option value="${provider.providerName}">${provider.providerName}</option>
-									</c:forEach>
+					<div class="col-md-11">
+						<div class="panel">
 
-								</form:select>
-								<form:errors path="chosenProvider" class="danger"></form:errors>
-							</div>
-							<div class="col-md-2">
-								<div class="calculateButton">
-									<label></label> <input type="submit" class="btn btn-success"
-										value="Send Request" />
+							<div class="form-group">
+								<div class="col-md-2">
+									<label for="moduleId">Module Id</label>
+									<div id="moduleId">
+										<h5>${requestUnit.moduleId}</h5>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="moduleName">Module Name</label>
+									<div id="moduleName">
+										<h5>${requestUnit.moduleName}</h5>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<label for="numberModules">Number</label>
+									<form:input type="number" path="countString"
+										class="form-control" min="1" max="10" />
+
+								</div>
+								<div class="col-md-3">
+									<c:set var="link" value="providers/${requestUnit.moduleId}"></c:set>
+									<label for="providerSelector">Select Provider</label>
+									<form:select path="chosenProvider" name="providerSelector"
+										class="form-control" id="providerSelector">
+										<c:forEach items="${providers}" var="provider">
+											<option value="${provider.providerName}">${provider.providerName}</option>
+										</c:forEach>
+
+									</form:select>
+									<form:errors path="chosenProvider" class="danger"></form:errors>
+								</div>
+								<div class="col-md-2">
+									<div class="calculateButton">
+										<label></label> <input type="submit" class="btn btn-success"
+											value="Send Request" />
+									</div>
 								</div>
 							</div>
 						</div>
