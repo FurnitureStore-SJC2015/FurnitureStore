@@ -52,6 +52,8 @@ public interface RequestService {
 
 	public List<RequestUnitDto> createRequestUnitDtos(Integer orderId);
 
+	public void sendRequestFromRequestUnitDto(RequestUnitDto requestUnit);
+
 	
 
 }

@@ -14,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
@@ -29,6 +31,7 @@ import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.service.zanevsky.ModuleService;
 import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 @Controller
@@ -45,7 +48,8 @@ public class RequestController {
 	private ShipmentService shipmentService;
 	@Autowired
 	private ProviderService providerService;
-
+	@Autowired
+	private ModuleService moduleService;
 	@Autowired
 	private UserService userService;
 
@@ -104,15 +108,15 @@ public class RequestController {
 		return "request.new";
 
 	}
-
+/*
 	@RequestMapping(value = "/order/${id}", method = { RequestMethod.GET })
-	public String showModuleRequestPanel(@PathVariable("id") Integer id,
+	public String makeRequestForOrder(@PathVariable("id") Integer id,
 			Model model) {
 		model.addAttribute("requestUnitDtos",
 				requestService.createRequestUnitDtos(id));
-		return "module-order-request";
+		return "request.order";
 
-	}
+	}*/
 
 	@RequestMapping(value = { "/order/${id}/send" },
 			method = { RequestMethod.POST })
@@ -121,13 +125,34 @@ public class RequestController {
 		return "request-success";
 
 	}
+	
+	 @RequestMapping(value = "/order/send", method = RequestMethod.POST)
+	 public  @ResponseBody String sendRequestFromOrder(@RequestBody RequestUnitDto requestUnitDto) {
+	  
+	        requestService.sendRequestFromRequestUnitDto(requestUnitDto);
+	        return "success";
+	      
+	   
+	  
+	 }
 
-	@RequestMapping(value = { "/order" }, method = RequestMethod.GET)
+	 @RequestMapping(value = "/providers", method = RequestMethod.GET)
+		public @ResponseBody List<Provider> getProvidersByModule(
+				@RequestParam String text) {
+			List<Provider> providers = new ArrayList<Provider>();
+			if (text != null) {
+				providers = providerService.getProviders(moduleService
+						.findById(Integer.parseInt(text)));
+			}
+			return providers;
+		}
+	 
+	@RequestMapping(value = { "/order/{id}" }, method = RequestMethod.POST)
 	public String makeRequestForOrder(
-			@RequestParam(value = "order") Order order, Model model) {
+			@PathVariable(value = "id") Integer orderId, Model model) {
 
-		model.addAttribute("requestUnits",
-				requestService.convertOrderToRequestUnitsDto(order));
+		model.addAttribute("requestUnitDtos",
+				requestService.createRequestUnitDtos(orderId));
 		return "request.order";
 
 	}

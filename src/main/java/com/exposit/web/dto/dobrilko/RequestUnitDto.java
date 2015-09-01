@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class RequestUnitDto {
 
-	private int id;
-
 	@NotNull(message = "Modules count is a mandatory.")
 	@Max(value=20, message = "Modules count must be less than 20.")
 	@Min(value=0, message="Modules count must be greater than 0.")
@@ -22,8 +20,6 @@ public class RequestUnitDto {
 
 	private double moduleCost;
 
-	private List<String> providerNames;
-
 	@NotNull(message = "Chosen provider is a mandatory.")
 	@NotEmpty
 	private String chosenProvider;
@@ -33,17 +29,14 @@ public class RequestUnitDto {
 	}
 
 	public RequestUnitDto(Builder builder) {
-		this.id = builder.getId();
+
 		this.count = builder.getCount();
 		this.moduleName = builder.getModuleName();
 		this.moduleCost = builder.getModuleCost();
-		this.providerNames = builder.getProviderNames();
+		
 	}
 
-	public int getId() {
-		return id;
-	}
-
+	
 	public int getCount() {
 		return count;
 	}
@@ -56,17 +49,13 @@ public class RequestUnitDto {
 		return moduleCost;
 	}
 
-	public List<String> getProviderNames() {
-		return providerNames;
-	}
+
 
 	public String getChosenProvider() {
 		return chosenProvider;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 
 	public void setCount(Integer count) {
 		this.count = count;

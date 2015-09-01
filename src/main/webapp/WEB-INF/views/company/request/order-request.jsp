@@ -2,25 +2,71 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <script type="text/javascript">
-	function sendRequest(i, moduleId, moduleCount) {
-		var chosenProvider = $("#selector" + i + " option:selected").text();
-		var requestValues = {
 
-			"moduleId" : moduleId,
-			"moduleCount" : moduleCount,
-			"chosenProvider" : chosenProvider
+function getProviders(i , moduleId){
+	
+	$.ajax({
+		url : "/FurnitureStore/requests/providers",
+		type : "GET",
+		data: ({
+			   text: moduleId
+		  }),
+		  
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(providers) {
+			var btn=$("#btn"+i);
+			if (providers.length==0){
+				$("#sendButton"+i).hide(1000 );
+				$("#attention"+i).show( 1000);
+				
+			}
+			else {
+				var create = '<select name="selector'+i+'" class="form-control" id="selector'+i+'">';
+				for(var k = 0; k < providers.length;k++)
+				{
+					var id= providers[k]["id"];
+					var val=providers[k]["providerName"];
+					create += '<option value="'+id+'">'+val+'</option>';
+				}
+				create += '</select>';
+				$("#selecttd"+i).append(create);
+				
+				btn.hide(1000);
+				$("#sendButton"+i).show(1000);
+				
+			}
+
+			
+			
+				
+		}
+	});
+}
+	function sendRequest(i, mdlId, mdlCount, mdlNm, mdlCost) {
+		var chsnProvider = $("#selector" + i + " option:selected").val();
+		var requestValues = {
+				
+			moduleId : mdlId,
+			count : mdlCount,
+			moduleCost: mdlCost,
+			moduleName: mdlNm,
+			chosenProvider : chsnProvider
 		}
 		$.ajax({
 			type : "POST",
 			contentType : 'application/json; charset=utf-8',
 			dataType : 'json',
-			url : "requests/order/send",
+			url : "/FurnitureStore/requests/order/send",
 			data : JSON.stringify(requestValues), 
-			success : function() {
+			success : function(obj) {
 				var temp=$("#record"+i);
 				temp.hide( "clip", {direction: "horizontal"}, 1000 , function(){
 	                temp.remove();
 	            });
+				location.reload();
 			}
 		});
 	}
@@ -59,32 +105,30 @@
 					<tbody>
 
 						<c:forEach items="${requestUnitDtos}" var="requestUnitDto">
-							<c:if test="${not empty requestUnitDto.chosenProvider">
-								<tr id="record${i}">
-									<td>${requestUnitDto.moduleId}</td>
-									<td>${requestUnitDto.moduleName}</td>
-									<td>${requestUnitDto.moduleCost}</td>
-									<td>${requestUnitDto.count}</td>
-									<td><label for="selector">Payment Form:</label> <select
-										name="selector${i}" class="form-control" id="selector${i}"
-										onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count})">
-									</select></td>
-									<td><button class="btn btn-success"
-											onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count})">PROCESS
-											REQUEST</button></td>
 
-									<c:set var="i" value="${i + 1}"></c:set>
-								</tr>
-							</c:if>
+							<tr id="record${i}">
+								<td>${requestUnitDto.moduleId}</td>
+								<td>${requestUnitDto.moduleName}</td>
+								<td>${requestUnitDto.moduleCost}</td>
+								<td>${requestUnitDto.count}</td>
+								<td id="selecttd${i}"><button id="btn${i}"
+										class="btn btn-success"
+										onclick="getProviders(${i},${requestUnitDto.moduleId})">SHOW
+										PROVIDERS</button>
+									<div id="attention${i}" style="display: none;">
+										<h5>No providers!</h5>
+									</div></td>
+								<td><button id="sendButton${i}" class="btn btn-success"
+										style="display: none;"
+										onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count},'${requestUnitDto.moduleName}',${requestUnitDto.moduleCost})">PROCESS
+										REQUEST</button></td>
+
+								<c:set var="i" value="${i + 1}"></c:set>
+							</tr>
+
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="col-md-2">
-					<c:set var="link" value="request/order/${id}/send"></c:set>
-					<button class="btn btn-success" onclick="location.href='${link}'">SEND
-						REQUEST</button>
-				</div>
-
 
 			</div>
 		</div>

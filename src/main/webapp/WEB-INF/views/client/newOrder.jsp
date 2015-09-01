@@ -165,12 +165,10 @@
 							<strong class="text-danger">Not enough modules!</strong>
 						</div>
 						<div class="col-md-4">
-							<c:url var="orderModules" value="/request/order" />
-							<form action="${orderModules}" method="POST">
-								<input type="submit" id="submitButton" name="submitButton"
-									class="btn btn-primary" value="Order modules"> <input
-									type="hidden" id="orderId" name="orderId" value="${order.id}">
-							</form>
+							
+							<button class="btn btn-promary"
+								onclick="location.href='/FurnitureStore/requests/order/${order.id}'">Order
+								modules</button>
 						</div>
 					</div>
 				</c:if>

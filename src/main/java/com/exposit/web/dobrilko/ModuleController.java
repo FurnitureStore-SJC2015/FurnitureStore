@@ -135,7 +135,7 @@ public class ModuleController {
 				providerService.getProviderByName(requestUnitDto
 						.getChosenProvider()));
 		
-		RequestUnit requestUnit = new RequestUnit(requestUnitDto.getId(),
+		RequestUnit requestUnit = new RequestUnit(
 				requestUnitDto.getCount(), moduleService.findById(id));
 		requestService.saveRequestUnit(requestUnit);
 		List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();

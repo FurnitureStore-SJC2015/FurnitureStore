@@ -250,8 +250,7 @@ public class RequestServiceImpl implements RequestService {
 		List<RequestUnitDto> requestUnitDtos = new ArrayList<RequestUnitDto>();
 		for (Module module : modules.keySet()) {
 			RequestUnitDto requestUnitDto = new RequestUnitDto();
-			requestUnitDto.setChosenProvider(providerService
-					.getProviders(module).get(0).getProviderName());
+			requestUnitDto.setModuleId(module.getId());
 			requestUnitDto.setModuleCost(module.getCost());
 			requestUnitDto.setModuleName(module.getModuleType().toString());
 			requestUnitDto.setCount(modules.get(module));
@@ -283,4 +282,22 @@ public class RequestServiceImpl implements RequestService {
 		}
 
 	}
+	
+	@Transactional
+	@Override
+	public void sendRequestFromRequestUnitDto(RequestUnitDto requestUnit){
+		Request request = new Request();
+		request.setProvider(providerService.getProviderById(Integer.parseInt(requestUnit.getChosenProvider())));
+		request.setRequestDate(new Date());
+		this.saveRequest(request);
+		RequestUnit reqUnit = new RequestUnit(requestUnit.getCount(), moduleService.findById(requestUnit.getModuleId()));
+		reqUnit.setRequest(request);
+		this.saveRequestUnit(reqUnit);
+		List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();
+		requestUnits.add(reqUnit);
+		request.setRequestUnits(requestUnits);
+		this.updateRequest(request);
+		
+		
+}
 }

@@ -36,6 +36,12 @@ public class RequestUnit {
 
 	}
 
+	public RequestUnit(int count, Module module) {
+
+		this.setModule(module);
+		this.setCount(count);
+	}
+
 	public RequestUnit(int id, int count, Module module) {
 		this.setId(id);
 		this.setModule(module);
