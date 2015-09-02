@@ -68,6 +68,7 @@ public class OrderController {
 	@PreAuthorize("#order.client.login==principal.username")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
+		order.setFullyPaid(orderService.isFullyPaid(order));
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
 		model.addAttribute("order", order);
 		model.addAttribute("paymentList",
@@ -118,13 +119,14 @@ public class OrderController {
 		} catch (Exception e) {
 			Logger.getLogger(Order.class).error("Error sending mail");
 		}
-		Logger.getLogger(Order.class).info("Order"+order.getId()+" confirmed!");
+		Logger.getLogger(Order.class).info(
+				"Order" + order.getId() + " confirmed!");
 		return "redirect:/company/incoming";
 	}
 
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.POST)
-	public String deleteOrder(@PathVariable("id") Order order) {
+	public String deleteOrder(@PathVariable("id") Order order,Authentication auth) {
 		orderService.deleteOrder(order);
-		return "redirect:/company/incoming";
+		return "redirect:/login";
 	}
 }

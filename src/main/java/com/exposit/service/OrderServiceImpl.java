@@ -115,4 +115,12 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.getOrderByPayment(payment);
 	}
 
+	@Override
+	public boolean isFullyPaid(Order order) {
+		boolean result = true;
+		for (Payment payment : paymentService.getPayments(order)) {
+			result =result && payment.getPaymentStatus();
+		}
+		return result;
+	}
 }

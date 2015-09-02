@@ -33,4 +33,6 @@ public interface OrderService {
 	public Double getOrderSum(Order order);
 
 	public Order getOrderByPayment(Payment payment);
+
+	public boolean isFullyPaid(Order order);
 }

@@ -13,10 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
 
 @Entity
 @Table(name = "orders")
@@ -45,7 +45,7 @@ public class Order {
 	@JoinColumn(name = "payment_scheme_id")
 	private PaymentScheme paymentScheme;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "client_id")
 	private Client client;
@@ -54,6 +54,17 @@ public class Order {
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderUnit> orderUnits;
+
+	@Transient
+	private boolean fullyPaid;
+
+	public boolean isFullyPaid() {
+		return fullyPaid;
+	}
+
+	public void setFullyPaid(boolean fullyPaid) {
+		this.fullyPaid = fullyPaid;
+	}
 
 	public Date getAssemblyDate() {
 		return assemblyDate;

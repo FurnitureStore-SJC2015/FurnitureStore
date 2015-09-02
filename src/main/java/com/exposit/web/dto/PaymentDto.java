@@ -6,7 +6,7 @@ public class PaymentDto {
 
 	private Payment payment;
 
-	private Boolean canBePayed;
+	private boolean canBePayed;
 
 	public PaymentDto(Payment payment, Boolean canBePayed) {
 		this.payment = payment;
@@ -21,11 +21,11 @@ public class PaymentDto {
 		this.payment = payment;
 	}
 
-	public Boolean getCanBePayed() {
+	public boolean isCanBePayed() {
 		return canBePayed;
 	}
 
-	public void setCanBePayed(Boolean canBePayed) {
+	public void setCanBePayed(boolean canBePayed) {
 		this.canBePayed = canBePayed;
 	}
 

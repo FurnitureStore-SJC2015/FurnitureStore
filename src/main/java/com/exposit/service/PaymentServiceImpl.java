@@ -72,11 +72,14 @@ public class PaymentServiceImpl implements PaymentService {
 		int delta = order.getPaymentScheme().getTerm()
 				/ order.getPaymentScheme().getNumberOfPayments();
 		Double bonusPersentage = (order.getClient().getBonus().getPercentage()) / 100;
+		Double paymentSchemePersentage = order.getPaymentScheme()
+				.getPercentage()/100;
 		List<Payment> payments = new ArrayList<Payment>();
 		DateTime paymentDate = new DateTime(order.getAssemblyDate())
 				.plusDays(delta);
 		DecimalFormat df = new DecimalFormat("0");
 		String formate = df.format((1 - bonusPersentage)
+				* (1 + paymentSchemePersentage)
 				* orderService.getOrderSum(order)
 				/ order.getPaymentScheme().getNumberOfPayments());
 		Double onePaymentSum = 0d;

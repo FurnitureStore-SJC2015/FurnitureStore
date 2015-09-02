@@ -29,10 +29,10 @@
 							</thead>
 							<c:forEach items="${orders}" var="item">
 								<tr>
-									<td>${item.id}</td>
-									<td><fmt:formatDate type="both" timeZone="${timeZone}"
+									<td class="col-md-1">${item.id}</td>
+									<td class="col-md-6"><fmt:formatDate type="both" timeZone="${timeZone}"
 											dateStyle="medium" timeStyle="long" value="${item.orderDate}" /></td>
-									<td>
+									<td class="col-md-5">
 										<div class="row">
 											<div class="col-md-3">
 												<c:url var="showOrder" value="/order/check/${item.id}" />

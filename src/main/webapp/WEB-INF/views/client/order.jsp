@@ -6,7 +6,6 @@
 <c:set var="j" value="1"></c:set>
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
 	<div class="col-md-9">
-
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5 class="text-center">
@@ -14,7 +13,6 @@
 						#${order.id}</strong>
 				</h5>
 			</div>
-
 			<div class="panel-body">
 				<div class="col-md-4 well">
 					<address>
@@ -29,7 +27,6 @@
 						</c:forEach>
 					</address>
 				</div>
-
 				<div class="col-md-7 col-md-offset-1 well ">
 					<h3 class="text-center">
 						<strong>Payments:</strong>
@@ -43,10 +40,8 @@
 								<td>Info</td>
 							</tr>
 						</thead>
-
 						<tbody>
 							<c:forEach var="paymentDto" items="${paymentList}">
-
 								<jsp:useBean id="now" class="java.util.Date" />
 								<c:if test="${paymentDto.payment.paymentStatus eq true}">
 									<tr class="text-center success">
@@ -74,13 +69,10 @@
 											<td><input type="submit" class="btn btn-success"
 												value="Pay now!"></td>
 											</form>
-
 										</c:if>
-
 										<c:set var="j" value="${j + 1}"></c:set>
 									</tr>
 								</c:if>
-
 							</c:forEach>
 						</tbody>
 					</table>
@@ -89,6 +81,14 @@
 			<div class="panel-footer clearfix">
 				<c:url var="toShop" value="/catalog" />
 				<a href="${toShop}">To catalog</a>
+				<div class="pull-right">
+					<c:if test="${order.fullyPaid eq true}">
+						<c:url var="deleteOrder" value="/order/delete/${order.id}" />
+						<form action="${deleteOrder}" method="post">
+							<input type="submit" class="btn btn-primary" value="Delete order">
+						</form>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</div>

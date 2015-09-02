@@ -48,7 +48,7 @@
 					</thead>
 					<c:forEach items="${products}" var="item">
 						<tr>
-							<td>
+							<td class="col-md-4">
 								<div class="media">
 									<a class="pull-left"> <img
 										src="data:image/jpeg;base64,${item.product.image}"
@@ -61,7 +61,7 @@
 									</a>
 								</div>
 							</td>
-							<td>
+							<td class="col-md-6">
 								<h5>${item.product.description }</h5>
 							</td>
 							<td><sec:authorize access="hasRole('ROLE_COMPANY')">
