@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.exposit.domain.model.sorokin.User;
-import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.model.User;
+import com.exposit.domain.service.UserService;
 
 @Service("myUserDetailsService")
 public class MyUserDetailsService implements UserDetailsService, Serializable {

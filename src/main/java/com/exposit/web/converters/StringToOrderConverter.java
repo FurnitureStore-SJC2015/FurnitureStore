@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.exposit.domain.model.sorokin.Order;
-import com.exposit.domain.service.sorokin.OrderService;
+import com.exposit.domain.model.Order;
+import com.exposit.domain.service.OrderService;
 
 @Component
 public class StringToOrderConverter implements Converter<String, Order> {

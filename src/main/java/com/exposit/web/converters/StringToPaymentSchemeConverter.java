@@ -3,8 +3,8 @@ package com.exposit.web.converters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
-import com.exposit.domain.model.sorokin.PaymentScheme;
-import com.exposit.domain.service.sorokin.PaymentSchemeService;
+import com.exposit.domain.model.PaymentScheme;
+import com.exposit.domain.service.PaymentSchemeService;
 
 public class StringToPaymentSchemeConverter implements
 		Converter<String, PaymentScheme> {

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.exposit.domain.model.sorokin.User;
-import com.exposit.domain.service.sorokin.UserService;
+import com.exposit.domain.model.User;
+import com.exposit.domain.service.UserService;
 
 @Component
 public class StringToUserConverter implements Converter<String, User> {

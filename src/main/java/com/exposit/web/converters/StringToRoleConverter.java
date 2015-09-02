@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.exposit.domain.model.sorokin.Role;
-import com.exposit.domain.model.sorokin.RoleType;
-import com.exposit.domain.service.sorokin.RoleService;
+import com.exposit.domain.model.Role;
+import com.exposit.domain.model.RoleType;
+import com.exposit.domain.service.RoleService;
 
 @Component
 public class StringToRoleConverter implements Converter<String, Role> {

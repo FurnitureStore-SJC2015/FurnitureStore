@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.exposit.domain.model.sorokin.Payment;
-import com.exposit.domain.service.sorokin.PaymentService;
+import com.exposit.domain.model.Payment;
+import com.exposit.domain.service.PaymentService;
 
 @Component
 public class StringToPaymentConverter implements Converter<String, Payment> {
