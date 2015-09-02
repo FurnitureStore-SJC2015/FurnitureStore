@@ -36,8 +36,10 @@ public class PaymentRepository extends AbstractHibernateDao<Payment, Integer>
 		cr.add(Restrictions.eq("client.id", client.getId()));
 		cr.setMaxResults(5);
 		cr.addOrder(org.hibernate.criterion.Order.asc("date"));
-		cr.add(Restrictions.between("date", new Date(),
-				new DateTime(new Date()).plusDays(30).toDate()));
+		cr.add(Restrictions.eq("paymentStatus", false));
+		cr.add(Restrictions
+				.between("date", new Date(),
+						new DateTime(new Date()).plusDays(30).toDate()));
 		return cr.list();
 	}
 }
