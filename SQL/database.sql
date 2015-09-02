@@ -397,7 +397,7 @@ INSERT INTO `store`.`storage_module_unit` (`storage_module_unit_id`, `module_id`
 
 INSERT INTO `store`.`provider` (`provider_id`, `provider_name`, `phone`, `provider_email`, `zip_code`) VALUES ('2', 'Pinskdrev', '+375 (29) 605-57-57', 'question@pinskdrev.by', '224831');
 
-INSERT INTO `store`.`product_catalog_unit` (`product_catalog_unit_id`, `sale_id`, `product_name`, `product_cost`, `margin_coefficient`) VALUES ('1', '1', 'Table', '10000', '22.5');
+INSERT INTO `store`.`product_catalog_unit` (`product_catalog_unit_id`,  `product_name`, `product_cost`, `margin_coefficient`) VALUES ('1',  'Table', '10000', '22.5');
 
 INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('1', '1', '1', '4');
 INSERT INTO `store`.`product_template` (`product_template_id`, `product_catalog_unit_id`, `module_id`, `modules_number`) VALUES ('2', '1', '2', '1');
@@ -415,9 +415,6 @@ INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_
 INSERT INTO `store`.`shipment_unit` (`shipment_unit_id`, `shipment_id`, `module_id`, `count`, `cost`) VALUES ('3', '1', '5', '1000', '3000');
 
 INSERT INTO `store`.`waybill` (`way_bill_id`, `shipment_id`, `departure_date`, `delivery_date`, `delivery_cost`,`confirmation_date`) VALUES ('1', '1', '2015-07-12', '2015-07-24', '1230',NULL);
-
-INSERT INTO `store`.`sale` (`sale_id`, `start_time`, `end_time`, `percentage_sale`) VALUES ('1', '2015-07-12', '2015-08-12', '11.5');
-INSERT INTO `store`.`sale` (`sale_id`, `start_time`, `end_time`, `percentage_sale`) VALUES ('2', '2015-07-12', '2015-09-12', '1.5');
 
 INSERT INTO `store`.`feedback` (`feedback_id`, `product_catalog_unit_id`, `text`, `feedback_date`, `rating`) VALUES ('1', '1',  'Good product', '2015-08-01 12:00:00', '4');
 
