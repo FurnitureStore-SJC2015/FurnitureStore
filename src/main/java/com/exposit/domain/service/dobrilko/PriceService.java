@@ -2,6 +2,7 @@ package com.exposit.domain.service.dobrilko;
 
 import java.util.List;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
@@ -15,10 +16,10 @@ public interface PriceService {
 
 	public double calculateGain(List<Shipment> shipments);
 
-	// TODO
-	/*
-	 * double calculateFullProductCatalogUnitPrice( ProductCatalogUnit
-	 * productCatalogUnit, double companyMargin);
-	 */
+	public List<Double> calculateYearGain(Provider provider);
+
+	public double calculateGain(Shipment shipment);
+
+
 
 }

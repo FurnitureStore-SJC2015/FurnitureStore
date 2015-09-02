@@ -41,4 +41,6 @@ public interface ShipmentService {
 
 	public List<Shipment> getNotConfirmesShipments();
 
+	List<Shipment> getConfirmedShipments(Provider provider);
+
 }

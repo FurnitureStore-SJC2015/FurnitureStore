@@ -1,9 +1,13 @@
 package com.exposit.web.dobrilko;
 
+import java.security.Principal;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exposit.domain.model.dobrilko.Provider;
+import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.sorokin.UserService;
 
@@ -26,14 +31,27 @@ public class ProviderProfileController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PriceService priceService;
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String showProviderProfile() {
+	public String showProviderProfile(Model model, Principal principal) {
+
+		Provider provider = (Provider) userService
+				.findUserByName(((UserDetails) ((Authentication) principal)
+						.getPrincipal()).getUsername());
+		Date date  = new Date();
+		model.addAttribute("values", priceService.calculateYearGain(provider));
+		model.addAttribute("year", date.getYear()+1900);
 		return "profile-provider";
 	}
+	
+	
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String showEditProvderProfileForm(Authentication auth, Model model) {

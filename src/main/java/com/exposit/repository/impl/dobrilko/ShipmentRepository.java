@@ -68,4 +68,14 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 				.add(Restrictions.isNull("wbll.confirmationDate"));
 		return (List<Shipment>) criteria.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shipment> getConfirmedShipments(Provider provider) {
+		Criteria criteria = getSession().createCriteria(Shipment.class)
+				.add(Restrictions.eq("provider", provider))
+				.createAlias("waybill", "wbll")
+				.add(Restrictions.isNotNull("wbll.confirmationDate"));
+		return (List<Shipment>) criteria.list();
+	}
 }

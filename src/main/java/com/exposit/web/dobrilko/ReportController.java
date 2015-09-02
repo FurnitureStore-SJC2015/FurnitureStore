@@ -43,6 +43,7 @@ public class ReportController {
 		return "report-management-page";
 	}
 
+	
 	@RequestMapping(value = { "/filtered" }, method = { RequestMethod.GET })
 	public ModelAndView showFilteredReports(@RequestParam(value = "daterange",
 			required = true) String daterange, Principal principal) {

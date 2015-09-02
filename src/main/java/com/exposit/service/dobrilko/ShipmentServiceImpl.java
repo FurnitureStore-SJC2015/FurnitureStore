@@ -176,6 +176,11 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 
 	@Override
+	public List<Shipment> getConfirmedShipments(Provider provider) {
+		return shipmentDao.getConfirmedShipments(provider);
+	}
+
+	@Override
 	public List<ShipmentUnitDto> convertShipmentUnitsToDto(
 			List<ShipmentUnit> ShipmentUnits) {
 		List<ShipmentUnitDto> dtos = new ArrayList<ShipmentUnitDto>();

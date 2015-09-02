@@ -1,5 +1,7 @@
 package com.exposit.service.dobrilko;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Shipment;
 import com.exposit.domain.model.dobrilko.ShipmentUnit;
 import com.exposit.domain.model.dobrilko.StorageModuleUnit;
@@ -52,12 +55,45 @@ public class PriceServiceImpl implements PriceService {
 					.getShipmentUnitsByShipment(shipment)) {
 				shipmentGain += shipmentUnit.getCost();
 			}
-			shipmentGain *= shipment.getProviderMarginPercent()/100;
+			shipmentGain *= shipment.getProviderMarginPercent() / 100;
 			shipmentGain += waybill.getDeliveryCost();
-			gain+=shipmentGain;
+			gain += shipmentGain;
 		}
 
 		return gain;
+	}
+
+	@Transactional
+	@Override
+	public double calculateGain(Shipment shipment) {
+
+		double shipmentGain = 0;
+		Waybill waybill = waybillService.getWaybillByShipment(shipment);
+		for (ShipmentUnit shipmentUnit : shipmentService
+				.getShipmentUnitsByShipment(shipment)) {
+			shipmentGain += shipmentUnit.getCost();
+		}
+		shipmentGain *= shipment.getProviderMarginPercent() / 100;
+		shipmentGain += waybill.getDeliveryCost();
+
+		return shipmentGain;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Transactional
+	@Override
+	public List<Double> calculateYearGain(Provider provider) {
+		shipmentService.getConfirmedShipments(provider);
+		Double [] values = new Double[12];
+		for (int i = 0; i < 12; i++) {
+			values[i] = 0.0;
+		}
+		for(Shipment shipment: shipmentService.getConfirmedShipments(provider))
+		{			
+			values[waybillService.getWaybillByShipment(shipment).getConfirmationDate().getMonth()] += this.calculateGain(shipment);
+		}
+
+		return  Arrays.asList(values);
 	}
 
 	@Transactional
@@ -69,15 +105,6 @@ public class PriceServiceImpl implements PriceService {
 
 		return baseCost + fullMargin;
 	}
-
-	// TODO
-	/*
-	 * @Transactional
-	 * 
-	 * @Override public double calculateFullProductCatalogUnitPrice(
-	 * 
-	 * }
-	 */
 
 	@Transactional
 	@Override
