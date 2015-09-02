@@ -17,20 +17,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
 import com.exposit.domain.model.dobrilko.RequestUnit;
-import com.exposit.domain.model.sorokin.Client;
-import com.exposit.domain.model.sorokin.PaymentForm;
-import com.exposit.domain.model.sorokin.PaymentScheme;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.dobrilko.RequestService;
 import com.exposit.domain.service.dobrilko.StorageModuleUnitService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.ModuleService;
+import com.exposit.web.dto.dobrilko.ModuleDto;
 import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 @Controller
@@ -63,6 +62,27 @@ public class ModuleController {
 		return "modules-list";
 	}
 
+	@RequestMapping(value = "/provider/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<ModuleDto> getModulesProvider(
+			@PathVariable("id") String providerId) {
+		List<ModuleDto> modules = new ArrayList<ModuleDto>();
+		modules=moduleService.getModulesByProvider(providerService.getProviderById(Integer.parseInt(providerId)));
+
+		return modules;
+	}
+
+	@RequestMapping(value = "/provider/add/{id}", method = RequestMethod.POST)
+	public String addModuleToProvider(@PathVariable("id") Integer id,
+			Principal principal) {
+		Provider provider = (Provider) userService
+				.findUserByName(((UserDetails) ((Authentication) principal)
+						.getPrincipal()).getUsername());
+		moduleService.addModuleToProviderList(id, provider);
+
+		return "modules-list";
+
+	}
+
 	@RequestMapping(value = "/providers", method = RequestMethod.POST)
 	public @ResponseBody List<Provider> getProvidersByModule(
 			@RequestBody final Module module, Model model) {
@@ -85,7 +105,7 @@ public class ModuleController {
 		Provider provider = (Provider) userService
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
-
+		model.addAttribute("providerId", provider.getId());
 		model.addAttribute("modules", moduleService.getModules(provider));
 		return "modules-list";
 	}
@@ -98,14 +118,12 @@ public class ModuleController {
 		return "modules.catalog";
 	}
 
-	@RequestMapping(value =  "/request/{id}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/request/{id}", method = { RequestMethod.GET })
 	public String showModuleRequestPanel(@PathVariable("id") Integer id,
 			Model model) {
 		Module module = moduleService.findById(id);
-		model.addAttribute(
-				"requestUnit",
-				new RequestUnitDto.Builder().moduleName(
-						module.getModuleType().toString()).moduleId(id));
+		model.addAttribute("requestUnit", new RequestUnitDto.Builder()
+				.moduleName(module.getModuleType().toString()).moduleId(id));
 
 		model.addAttribute("providers", providerService.getProviders(module));
 		return "module-request";
@@ -115,28 +133,33 @@ public class ModuleController {
 	@RequestMapping(value = { "/request/{id}/send" },
 			method = { RequestMethod.POST })
 	public String sendRequest(@PathVariable("id") Integer id,
-			@Valid RequestUnitDto requestUnitDto, BindingResult result, Model model) {
+			@Valid RequestUnitDto requestUnitDto, BindingResult result,
+			Model model) {
 		if (result.hasErrors()) {
 			Module module = moduleService.findById(id);
 			model.addAttribute(
 					"requestUnit",
 					new RequestUnitDto.Builder().moduleName(
-							module.getModuleType().toString()).moduleId(module.getId()));
+							module.getModuleType().toString()).moduleId(
+							module.getId()));
 
-			model.addAttribute("providers", providerService.getProviders(module));
-			model.addAttribute("error","Check your input, please. Fields must be valid.");
+			model.addAttribute("providers",
+					providerService.getProviders(module));
+			model.addAttribute("error",
+					"Check your input, please. Fields must be valid.");
 			return "module-request";
 		}
 		Request request = new Request(new Date(),
 				providerService.getProviderByName(requestUnitDto
 						.getChosenProvider()));
-		
+
 		RequestUnit requestUnit = new RequestUnit(
-				Integer.parseInt(requestUnitDto.getCountString()), moduleService.findById(id));
+				Integer.parseInt(requestUnitDto.getCountString()),
+				moduleService.findById(id));
 		requestService.saveRequestUnit(requestUnit);
 		List<RequestUnit> requestUnits = new ArrayList<RequestUnit>();
 		requestUnits.add(requestUnit);
-		
+
 		request.setRequestUnits(requestUnits);
 		requestService.saveRequest(request);
 		return "request-success";

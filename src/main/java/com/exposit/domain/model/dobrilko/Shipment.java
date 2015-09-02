@@ -25,7 +25,7 @@ import com.exposit.domain.model.zanevsky.Module;
 public class Shipment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "shipment_id")
 	private int id;
 

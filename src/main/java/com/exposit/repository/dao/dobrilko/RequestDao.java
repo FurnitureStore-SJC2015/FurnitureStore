@@ -12,4 +12,6 @@ public interface RequestDao extends GenericDao<Request, Integer> {
 	public Request getRequest(RequestUnit requestUnit);
 
 	public List<Request> getRequests(Provider provider);
+
+	public List<Request> getNotProcessedRequests(Provider provider);
 }

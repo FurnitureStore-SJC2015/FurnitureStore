@@ -28,6 +28,15 @@ public class RequestRepository extends AbstractHibernateDao<Request, Integer>
 	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
+	public List<Request> getNotProcessedRequests(Provider provider){
+		Criteria criteria = getSession().createCriteria(Request.class).add(
+				Restrictions.eq("provider", provider)).add(Restrictions.eq("isProcessed", false));
+		return (List<Request>) criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
 	public List<Request> getRequests(Provider provider) {
 		Criteria criteria = getSession().createCriteria(Request.class).add(
 				Restrictions.eq("provider", provider));

@@ -21,7 +21,7 @@ import org.hibernate.annotations.CascadeType;
 public class Waybill {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "way_bill_id")
 	private int id;
 	@OneToOne

@@ -39,4 +39,6 @@ public interface ShipmentService {
 	List<ShipmentUnitDto> convertShipmentUnitsToDto(
 			List<ShipmentUnit> ShipmentUnits);
 
+	public List<Shipment> getNotConfirmesShipments();
+
 }

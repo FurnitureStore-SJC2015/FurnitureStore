@@ -32,6 +32,9 @@ public class Request {
 	@OneToMany
 	@JoinColumn(name = "request_id")
 	private List<RequestUnit> requestUnits;
+	
+	@Column(name="is_processed")
+	private boolean isProcessed;
 
 	public Request() {
 
@@ -74,5 +77,13 @@ public class Request {
 
 	public void setRequestUnits(List<RequestUnit> requestUnits) {
 		this.requestUnits = requestUnits;
+	}
+
+	public boolean isProcessed() {
+		return isProcessed;
+	}
+
+	public void setProcessed(boolean isProcessed) {
+		this.isProcessed = isProcessed;
 	}
 }

@@ -3,7 +3,9 @@ package com.exposit.web.converters.dobrilko;
 import java.util.Date;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StringToDateConverter implements Converter<String, Date> {
 
 	@SuppressWarnings("deprecation")

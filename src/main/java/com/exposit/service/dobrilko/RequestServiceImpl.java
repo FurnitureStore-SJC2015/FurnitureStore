@@ -138,9 +138,17 @@ public class RequestServiceImpl implements RequestService {
 
 	@Transactional
 	@Override
+	public List<Request> getNotProcessedRequests(Provider provider){
+		return requestDao.getNotProcessedRequests(provider);
+	}
+	
+	@Transactional
+	@Override
 	public void processRequest(Request request, Date deliveryDate,
-			int providerMarginPercent, double deliveryCost) {
+			int providerMarginPercent, double deliveryCost, Provider provider) {
 
+		request.setProcessed(true);
+		requestDao.update(request);
 		Shipment shipment = new Shipment();
 		Waybill waybill = new Waybill();
 		waybillService.saveWaybill(waybill);
@@ -162,7 +170,7 @@ public class RequestServiceImpl implements RequestService {
 		shipment.setProviderMarginPercent(providerMarginPercent);
 		shipment.setProcessed(true);
 		shipment.setWaybill(waybill);
-
+		shipment.setProvider(providerService.getProviderById(provider.getId()));
 		shipmentService.updateShipment(shipment);
 
 		waybill.setDeliveryCost(deliveryCost);

@@ -20,6 +20,8 @@ public class RequestUnitDto {
 
 	@NotEmpty
 	private String countString;
+	
+	private int id;
 
 	private String moduleName;
 
@@ -87,6 +89,14 @@ public class RequestUnitDto {
 
 	public void setCountString(String countString) {
 		this.countString = countString;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public static class Builder {

@@ -22,4 +22,6 @@ public interface ShipmentDao extends GenericDao<Shipment, Integer> {
 	public List<Shipment> getConfirmedShipments(Date beginningDate,
 			Date endDate, Provider provider);
 
+	public List<Shipment> getNotConfirmedShipments();
+
 }

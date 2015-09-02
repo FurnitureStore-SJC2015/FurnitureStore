@@ -84,8 +84,7 @@
 
 
 	<!-- Kate's definitions! -->
-
-	<definition name="requests-provider" extends="template">
+<definition name="requests-provider" extends="template">
 		<put-attribute name="title" value="Provider Request Panel" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/provider/request/requests-acceptance.jsp" />
@@ -98,11 +97,10 @@
 
 	</definition>
 
-	<definition name="shipment-acceptance" extends="template">
+	<definition name="shipment-acceptance-panel" extends="template">
 		<put-attribute name="title" value="Company Shipment Acceptance Panel" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/shipment/shipment-acceptance-panel.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/shop/menu.jsp"></put-attribute>
 	</definition>
 
 	<definition name="modules-list" extends="template">
@@ -198,6 +196,13 @@
 		<put-attribute name="title" value="New Module Request" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/request/order-request.jsp" />
+
+	</definition>
+	
+	<definition name="shipment.success" extends="template">
+		<put-attribute name="title" value="Shipment successfully sent" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/provider/request/request-successfully-send.jsp" />
 
 	</definition>
 	<!-- Vital's definitions! -->

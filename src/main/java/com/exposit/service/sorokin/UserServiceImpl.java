@@ -1,5 +1,6 @@
 package com.exposit.service.sorokin;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,12 @@ import com.exposit.repository.dao.sorokin.UserDao;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6590198528411252719L;
 	@Autowired
 	private UserDao userRepository;
 

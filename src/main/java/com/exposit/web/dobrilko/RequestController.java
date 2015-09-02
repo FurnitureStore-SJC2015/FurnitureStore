@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exposit.domain.model.dobrilko.Provider;
 import com.exposit.domain.model.dobrilko.Request;
-import com.exposit.domain.model.dobrilko.RequestUnit;
-import com.exposit.domain.model.sorokin.Order;
-import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.service.dobrilko.PriceService;
 import com.exposit.domain.service.dobrilko.ProviderService;
 import com.exposit.domain.service.dobrilko.RequestService;
@@ -32,6 +29,7 @@ import com.exposit.domain.service.dobrilko.ShipmentService;
 import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.domain.service.sorokin.UserService;
 import com.exposit.domain.service.zanevsky.ModuleService;
+import com.exposit.web.dto.dobrilko.RequestProcessDto;
 import com.exposit.web.dto.dobrilko.RequestUnitDto;
 
 @Controller
@@ -60,23 +58,29 @@ public class RequestController {
 				.findUserByName(((UserDetails) ((Authentication) principal)
 						.getPrincipal()).getUsername());
 		model.addAttribute("requests",
-				requestService.getRequestByProvider(provider));
+				requestService.getNotProcessedRequests(provider));
 		return "requests-provider";
 	}
 
 	@RequestMapping(value = { "/{id}/process" }, method = RequestMethod.POST)
-	public String processRequest(
-			@PathVariable("id") Request request,
-
-			@RequestParam(value = "delivery-date", required = true) Date deliveryDate,
-			@RequestParam(value = "provider-margin-percent", required = true) Integer providerMarginPercent,
-			@RequestParam(value = "delivery-cost", required = true) Double deliveryCost,
-			Model model) {
-
+	public String processRequest(@PathVariable("id") Request request,
+			@Valid RequestProcessDto requestProcessDto,
+			BindingResult bindingResult, Model model, Principal principal) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("request", request);
+			model.addAttribute("requestProcessDto", requestProcessDto);
+			return "request-processing";
+		}
 		model.addAttribute("request", request);
-		requestService.processRequest(request, deliveryDate,
-				providerMarginPercent, deliveryCost);
-		return "request-processing";
+		Provider provider = (Provider) userService
+				.findUserByName(((UserDetails) ((Authentication) principal)
+						.getPrincipal()).getUsername());
+		requestService.processRequest(request,
+				requestProcessDto.getDeliveryDate(),
+				requestProcessDto.getProviderMarginPercent(),
+				requestProcessDto.getDeliveryCost(),
+				providerService.getProviderById(provider.getId()));
+		return "shipment.success";
 	}
 
 	@RequestMapping(value = { "/{id}/processing_page" },
@@ -86,6 +90,7 @@ public class RequestController {
 	Model model) {
 
 		model.addAttribute("request", request);
+		model.addAttribute("requestProcessDto", new RequestProcessDto());
 		return "request-processing";
 	}
 
@@ -108,15 +113,6 @@ public class RequestController {
 		return "request.new";
 
 	}
-/*
-	@RequestMapping(value = "/order/${id}", method = { RequestMethod.GET })
-	public String makeRequestForOrder(@PathVariable("id") Integer id,
-			Model model) {
-		model.addAttribute("requestUnitDtos",
-				requestService.createRequestUnitDtos(id));
-		return "request.order";
-
-	}*/
 
 	@RequestMapping(value = { "/order/${id}/send" },
 			method = { RequestMethod.POST })
@@ -125,28 +121,27 @@ public class RequestController {
 		return "request-success";
 
 	}
-	
-	 @RequestMapping(value = "/order/send", method = RequestMethod.POST)
-	 public  @ResponseBody String sendRequestFromOrder(@RequestBody RequestUnitDto requestUnitDto) {
-	  
-	        requestService.sendRequestFromRequestUnitDto(requestUnitDto);
-	        return "success";
-	      
-	   
-	  
-	 }
 
-	 @RequestMapping(value = "/providers", method = RequestMethod.GET)
-		public @ResponseBody List<Provider> getProvidersByModule(
-				@RequestParam String text) {
-			List<Provider> providers = new ArrayList<Provider>();
-			if (text != null) {
-				providers = providerService.getProviders(moduleService
-						.findById(Integer.parseInt(text)));
-			}
-			return providers;
+	@RequestMapping(value = "/order/send", method = RequestMethod.POST)
+	public @ResponseBody String sendRequestFromOrder(
+			@RequestBody RequestUnitDto requestUnitDto) {
+
+		requestService.sendRequestFromRequestUnitDto(requestUnitDto);
+		return "success";
+
+	}
+
+	@RequestMapping(value = "/providers", method = RequestMethod.GET)
+	public @ResponseBody List<Provider> getProvidersByModule(
+			@RequestParam String text) {
+		List<Provider> providers = new ArrayList<Provider>();
+		if (text != null) {
+			providers = providerService.getProviders(moduleService
+					.findById(Integer.parseInt(text)));
 		}
-	 
+		return providers;
+	}
+
 	@RequestMapping(value = { "/order/{id}" }, method = RequestMethod.POST)
 	public String makeRequestForOrder(
 			@PathVariable(value = "id") Integer orderId, Model model) {

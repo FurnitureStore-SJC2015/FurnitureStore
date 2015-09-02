@@ -21,7 +21,8 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Shipment> getShipments(Provider provider)  throws HibernateException {
+	public List<Shipment> getShipments(Provider provider)
+			throws HibernateException {
 		Criteria criteria = getSession().createCriteria(Shipment.class).add(
 				Restrictions.eq("provider", provider));
 		return (List<Shipment>) criteria.list();
@@ -35,9 +36,13 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 	}
 
 	@Override
-	public Shipment getShipment(ShipmentUnit shipmentUnit) throws HibernateException {
-		Criteria criteria = getSession().createCriteria(Shipment.class).add(
-				Restrictions.eq("shipmentUnit", shipmentUnit));
+	public Shipment getShipment(ShipmentUnit shipmentUnit)
+			throws HibernateException {
+
+		Criteria criteria = getSession().createCriteria(Shipment.class)
+				.createAlias("shipmentUnits", "shUnit")
+				.add(Restrictions.eq("shUnit.id", shipmentUnit.getId()));
+
 		return (Shipment) criteria.uniqueResult();
 	}
 
@@ -47,10 +52,20 @@ public class ShipmentRepository extends AbstractHibernateDao<Shipment, Integer>
 			Date endDate, Provider provider) throws HibernateException {
 		Criteria criteria = getSession()
 				.createCriteria(Shipment.class)
-				.add(Restrictions.eq("provider", provider)).createAlias("waybill", "wbll")
+				.add(Restrictions.eq("provider", provider))
+				.createAlias("waybill", "wbll")
 				.add(Restrictions.isNotNull("wbll.confirmationDate"))
 				.add(Restrictions.between("wbll.confirmationDate",
 						beginningDate, endDate));
+		return (List<Shipment>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shipment> getNotConfirmedShipments() {
+		Criteria criteria = getSession().createCriteria(Shipment.class)
+				.createAlias("waybill", "wbll")
+				.add(Restrictions.isNull("wbll.confirmationDate"));
 		return (List<Shipment>) criteria.list();
 	}
 }

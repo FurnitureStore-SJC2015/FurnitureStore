@@ -1,5 +1,6 @@
 package com.exposit.service.zanevsky;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.exposit.domain.service.zanevsky.ProductCatalogUnitService;
 import com.exposit.domain.service.zanevsky.ProductTemplateService;
 import com.exposit.repository.dao.dobrilko.ProviderDao;
 import com.exposit.repository.dao.zanevsky.ModuleDao;
+import com.exposit.web.dto.dobrilko.ModuleDto;
 
 @Service
 @Transactional
@@ -46,8 +48,29 @@ public class ModuleServiceImpl implements ModuleService {
 	StorageModuleUnitService storageModuleUnitService;
 
 	@Override
+	public List<Module> findAll() {
+		return moduleRepository.findAll();
+	}
+
+	@Override
 	public Module findById(int id) {
 		return this.moduleRepository.findById(id);
+	}
+
+	@Override
+	public List<ModuleDto> getModulesByProvider(Provider provider) {
+		List<ModuleDto> modules = new ArrayList<ModuleDto>();
+
+		for (Module module : this.findAll()) {
+			if (!this.getModules(provider).contains(module)) {
+				ModuleDto moduleDto = new ModuleDto();
+				moduleDto.setId(module.getId());
+				moduleDto.setName(module.getModuleType().toString());
+				modules.add(moduleDto);
+			}
+
+		}
+		return modules;
 	}
 
 	@Override
@@ -147,5 +170,27 @@ public class ModuleServiceImpl implements ModuleService {
 		else
 			return true;
 
+	}
+
+	@Override
+	public void addModuleToProviderList(Integer id, Provider provider) {
+		Module module = this.findById(id);
+		Provider pr = providerRepository.findById(provider.getId());
+		List<Module> modules = this.getModules(pr);
+
+		List<Provider> providers = providerRepository.getProviders(module);
+
+		modules.add(module);
+
+		providers.add(pr);
+
+		module.setProvider(providers);
+		pr.setModules(modules);
+
+		providerRepository.update(pr);
+		moduleRepository.update(module);
+
+		return;
+		
 	}
 }

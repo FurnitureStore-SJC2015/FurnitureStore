@@ -30,11 +30,15 @@
 	<div class="col-md-3">
 		<div class="list-group">
 			<ul class="list-group">
-				<li class="list-group-item"><a href=<c:url value="/catalog"/>>CATALOG</a></li>
+				<li class="list-group-item"><a href='<c:url value="/catalog"/>'>CATALOG</a></li>
 				<li class="list-group-item"><a
-					href='<c:url value="/company/incoming"/>'>INCOMING ORDERS</a></li>
+					href='<c:url value="/company/incoming"/>' >INCOMING
+						ORDERS</a></li>
 				<li class="list-group-item"><a
 					href='<c:url value="/modules/catalog"/>'>MODULES CATALOG</a></li>
+				
+				<li class="list-group-item"><a
+					href='<c:url value="/shipments"/>'>SHIPMENTS</a></li>
 			</ul>
 		</div>
 	</div>
@@ -45,7 +49,7 @@
 		<div class="list-group">
 			<ul class="list-group">
 				<li class="list-group-item"><a
-					href=<c:url value="/provider/profile"/>>PROFILE</a></li>
+					href='<c:url value="/provider/profile"/>'>PROFILE</a></li>
 				<li class="list-group-item"><a
 					href='<c:url value="/requests"/>'>REQUESTS </a></li>
 				<li class="list-group-item"><a href='<c:url value="/reports"/>'>REPORTS

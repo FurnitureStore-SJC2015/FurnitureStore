@@ -1,36 +1,40 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="col-md-9 well right">
+<div class="col-md-9 right">
 
-	<div class="col-md-12">
-		<h2>
-			<strong>REQUEST #${request.id}</strong>
-		</h2>
-	</div>
-	<div class="col-md-12">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>MODULE NAME</th>
-					<th>MODULE COST</th>
-					<th>NUMBER OF UNITS</th>
-				</tr>
-			</thead>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="text-center">
+				<span class="glyphicon glyphicon-info-sign"></span><strong>REQUEST
+					#${request.id} </strong>
+			</h5>
+		</div>
+		<div class="panel-body">
 
-			<tbody>
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>MODULE NAME</th>
+							<th>MODULE COST</th>
+							<th>NUMBER OF UNITS</th>
+						</tr>
+					</thead>
 
-				<c:forEach items="${requestUnits}" var="requestUnit">
-					<tr>
-						<td>${requestUnit.id}</td>
-						<td>${requestUnit.moduleName}</td>
-						<td>${requestUnit.moduleCost}</td>
-						<td>${requestUnit.count}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+					<tbody>
+
+						<c:forEach items="${requestUnits}" var="requestUnit">
+							<tr>
+								<td>${requestUnit.moduleName}</td>
+								<td>${requestUnit.moduleCost}</td>
+								<td>${requestUnit.count}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
 
 
 
-		</table>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>

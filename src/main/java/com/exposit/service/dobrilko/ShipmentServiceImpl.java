@@ -58,6 +58,12 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Transactional
 	@Override
+	public List<Shipment> getNotConfirmesShipments() {
+		return shipmentDao.getNotConfirmedShipments();
+	}
+
+	@Transactional
+	@Override
 	public Shipment getShipment(Waybill waybill) {
 		return shipmentDao.getShipment(waybill);
 	}
@@ -173,13 +179,14 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public List<ShipmentUnitDto> convertShipmentUnitsToDto(
 			List<ShipmentUnit> ShipmentUnits) {
 		List<ShipmentUnitDto> dtos = new ArrayList<ShipmentUnitDto>();
-		for (ShipmentUnit ShipmentUnit : ShipmentUnits) {
-			Module module = moduleService.getModule(ShipmentUnit);
+		for (ShipmentUnit shipmentUnit : ShipmentUnits) {
+			Module module = moduleService.getModule(shipmentUnit);
 
 			ShipmentUnitDto dto = new ShipmentUnitDto.Builder(
-					ShipmentUnit.getId(), ShipmentUnit.getCount(), module
-							.getModuleType().toString(), module.getCost())
-					.build();
+					shipmentUnit.getId(), shipmentUnit.getCount(), module
+							.getModuleType().toString(), module.getCost(),
+					shipmentUnit.getCost()).build();
+
 			dtos.add(dto);
 		}
 		return dtos;

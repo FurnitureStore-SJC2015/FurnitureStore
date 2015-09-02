@@ -9,7 +9,7 @@
 function deleteModule(moduleId,i) {
 		
 	$.ajax({
-		url : "/modules/"+moduleId+"/delete",
+		url : "/FurnitureStore/modules/"+moduleId+"/delete",
 		type : "POST",
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");
@@ -17,13 +17,51 @@ function deleteModule(moduleId,i) {
 		},
 		success : function(obj) {
 			var temp=$("#record"+i);
-			temp.fadeOut(800, function(){
+			temp.fadeOut(1000, function(){
                 temp.remove();
             });
-			location.reload();
 		}
 	});
 }
+
+function getModulesToAdd(providerId){
+	
+	$.ajax({
+		url : "/FurnitureStore/modules/provider/"+providerId,
+		type : "GET",
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(modules) {
+			$('#selector').empty();	
+			$("#selector")[0].options.add( new Option("<-- Select -->","0"));
+			for (i=0;i<modules.length;i++){
+				var id=modules[i]["id"];
+				var value=modules[i]["name"];
+				$("#selector")[0].options.add( new Option(value,id));
+			}
+			
+		}
+	});
+}
+
+function addModule() {
+	var mdlId = $("#selector option:selected").val();
+	
+	$.ajax({
+		type : "POST",
+		url : "/FurnitureStore/modules/provider/add/"+mdlId, 
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+		},
+		success : function(obj) {
+			location.reload();
+            }
+		});
+}
+
 </script>
 
 <div class="col-md-9">
@@ -35,6 +73,16 @@ function deleteModule(moduleId,i) {
 			</h5>
 		</div>
 		<div class="panel-body">
+			<div class="col-md-3">
+				<select name="selector" class="form-control" id="selector"
+					onclick="getModulesToAdd(${providerId})">
+				</select>
+			</div>
+			<div class="col-md-3">
+				<button class="btn btn-success" onclick="addModule()">
+					Add modules
+				</button>
+			</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>

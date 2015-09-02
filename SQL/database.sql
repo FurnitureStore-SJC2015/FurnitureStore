@@ -228,6 +228,7 @@ CREATE TABLE IF NOT EXISTS `store`.`request` (
   `request_id` INT(11) NOT NULL AUTO_INCREMENT,
   `provider_id` INT(11) NULL DEFAULT NULL,
   `request_date` DATETIME NULL DEFAULT NULL,
+  `is_processed`TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`request_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2

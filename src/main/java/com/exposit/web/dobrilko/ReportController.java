@@ -1,6 +1,7 @@
 package com.exposit.web.dobrilko;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -51,32 +52,14 @@ public class ReportController {
 						.getPrincipal()).getUsername());
 		ModelAndView mav = new ModelAndView();
 
+		List<Shipment> shipments = shipmentService.getConfirmedShipments(
+				daterange, provider);
 		mav.addObject("shipments",
 				shipmentService.getConfirmedShipments(daterange, provider));
+		mav.addObject("gain", priceService.calculateGain(shipments));
 		mav.setViewName("report-management-page");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showRequest(@PathVariable("id") Shipment shipment,
-
-	Model model) {
-		model.addAttribute("shipment", shipment);
-		model.addAttribute("shipmentUnits", shipmentService
-				.convertShipmentUnitsToDto(shipmentService
-						.getShipmentUnitsByShipment(shipment)));
-		return "shipment-info";
-	}
-
-	@RequestMapping(value = "/{id}/waybill", method = RequestMethod.GET)
-	public String showWaybill(@PathVariable("id") Shipment shipment,
-
-	Model model) {
-
-		model.addAttribute("waybill",
-				waybillService.getWaybillByShipment(shipment));
-
-		return "waybill-info";
-	}
 }

@@ -13,6 +13,8 @@ import com.exposit.domain.model.dobrilko.StorageModuleUnit;
 import com.exposit.domain.model.dobrilko.Waybill;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.service.dobrilko.PriceService;
+import com.exposit.domain.service.dobrilko.ShipmentService;
+import com.exposit.domain.service.dobrilko.WaybillService;
 import com.exposit.repository.dao.dobrilko.ShipmentDao;
 import com.exposit.repository.dao.dobrilko.ShipmentUnitDao;
 import com.exposit.repository.dao.dobrilko.WaybillDao;
@@ -33,22 +35,26 @@ public class PriceServiceImpl implements PriceService {
 	@Autowired
 	private ProductCatalogUnitDao productCatalogUnitDao;
 
+	@Autowired
+	private WaybillService waybillService;
+	@Autowired
+	private ShipmentService shipmentService;
+
 	@Transactional
 	@Override
-	public double calculateGain(Date beginningDate, Date endDate) {
+	public double calculateGain(List<Shipment> shipments) {
 		double gain = 0;
 
-		for (Waybill waybill : waybillDao.getWaybills(beginningDate, endDate)) {
-			Shipment shipment = shipmentDao.getShipment(waybill);
-			for (ShipmentUnit shipmentUnit : shipmentUnitDao
-					.getShipmentUnits(shipment)) {
-
-				gain += shipmentUnit.getCost();
-
+		for (Shipment shipment : shipments) {
+			double shipmentGain = 0;
+			Waybill waybill = waybillService.getWaybillByShipment(shipment);
+			for (ShipmentUnit shipmentUnit : shipmentService
+					.getShipmentUnitsByShipment(shipment)) {
+				shipmentGain += shipmentUnit.getCost();
 			}
-			gain *= shipment.getProviderMarginPercent();
-			gain += waybill.getDeliveryCost();
-
+			shipmentGain *= shipment.getProviderMarginPercent()/100;
+			shipmentGain += waybill.getDeliveryCost();
+			gain+=shipmentGain;
 		}
 
 		return gain;
@@ -64,13 +70,14 @@ public class PriceServiceImpl implements PriceService {
 		return baseCost + fullMargin;
 	}
 
-	//TODO
+	// TODO
 	/*
-	@Transactional
-	@Override
-	public double calculateFullProductCatalogUnitPrice(
-			
-	}*/
+	 * @Transactional
+	 * 
+	 * @Override public double calculateFullProductCatalogUnitPrice(
+	 * 
+	 * }
+	 */
 
 	@Transactional
 	@Override

@@ -34,8 +34,6 @@ public interface RequestService {
 
 	public Module getModuleByRequestUnit(RequestUnit requestUnit);
 
-	public void processRequest(Request request, Date deliveryDate,
-			int providerMarginPercent, double deliveryCost);
 	
 	public List<Request> createRequests(List<RequestUnitDto> requestUnits);
 	
@@ -53,6 +51,11 @@ public interface RequestService {
 	public List<RequestUnitDto> createRequestUnitDtos(Integer orderId);
 
 	public void sendRequestFromRequestUnitDto(RequestUnitDto requestUnit);
+
+	public void processRequest(Request request, Date deliveryDate,
+			int providerMarginPercent, double deliveryCost, Provider provider);
+
+	public List<Request> getNotProcessedRequests(Provider provider);
 
 	
 

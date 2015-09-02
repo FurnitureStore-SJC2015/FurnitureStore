@@ -11,6 +11,7 @@ import com.exposit.domain.model.sorokin.Order;
 import com.exposit.domain.model.zanevsky.Module;
 import com.exposit.domain.model.zanevsky.ProductCatalogUnit;
 import com.exposit.domain.model.zanevsky.ProductTemplate;
+import com.exposit.web.dto.dobrilko.ModuleDto;
 
 public interface ModuleService {
 
@@ -35,5 +36,11 @@ public interface ModuleService {
 	public HashMap<Module, Integer> getModulesInOrder(Order order);
 
 	public Boolean isAllModulesPresented(Order order);
+
+	public List<Module> findAll();
+
+	public List<ModuleDto> getModulesByProvider(Provider provider);
+
+	public void addModuleToProviderList(Integer id, Provider provider);
 
 }
