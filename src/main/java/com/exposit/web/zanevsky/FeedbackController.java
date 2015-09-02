@@ -32,14 +32,21 @@ public class FeedbackController {
 			@RequestParam("productId") ProductCatalogUnit product,
 			Authentication auth, Model model) {
 		Client client = (Client) userService.findUserByName(auth.getName());
+		Feedback feedback = initializeFeedback(message, range, product,
+				client);
+		feedbackService.addNewFeedback(feedback);
+		return "redirect:/catalog/product/" + product.getId();
+	}
+
+	private Feedback initializeFeedback(String message, Integer range,
+			ProductCatalogUnit product, Client client) {
 		Feedback feedback = new Feedback();
 		feedback.setClient(client);
 		feedback.setDate(new Date());
 		feedback.setText(message);
 		feedback.setProductCatalogUnit(product);
 		feedback.setRange(range);
-		feedbackService.addNewFeedback(feedback);
-		return "redirect:/catalog/product/" + product.getId();
+		return feedback;
 	}
 
 }

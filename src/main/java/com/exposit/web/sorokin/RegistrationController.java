@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -85,8 +86,14 @@ public class RegistrationController {
 			throw new SuchUserRegisteredException(
 					"Invalid login or email. Try again!");
 		}
+		try {
+			mailService.sendRegistrationMail(client.getLogin(), password,
+					client.getEmail());
+		} catch (Exception e) {
+			Logger.getLogger(mailService.getClass()).info(
+					"Email sending error!");
+		}
+		Logger.getLogger(Client.class).error("New user registered!");
 
-		mailService.sendRegistrationMail(client.getLogin(), password,
-				client.getEmail());
 	}
 }

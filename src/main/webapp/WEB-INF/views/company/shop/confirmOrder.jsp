@@ -4,15 +4,15 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="timeZone" value="GMT+3" />
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_COMPANY')">
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5 class="text-center">
-					<strong>Orders to confirm</strong>
+					<strong><span class="glyphicon glyphicon-pencil"></span>Orders to confirm</strong>
 				</h5>
 			</div>
-
 			<div class="panel-body">
 				<div class="col-md-10 col-md-offset-1">
 					<c:if test="${empty orders}">
@@ -30,8 +30,8 @@
 							<c:forEach items="${orders}" var="item">
 								<tr>
 									<td>${item.id}</td>
-									<td><fmt:formatDate type="both" dateStyle="medium"
-											timeStyle="long" value="${item.orderDate}" /></td>
+									<td><fmt:formatDate type="both" timeZone="${timeZone}"
+											dateStyle="medium" timeStyle="long" value="${item.orderDate}" /></td>
 									<td>
 										<div class="row">
 											<div class="col-md-3">

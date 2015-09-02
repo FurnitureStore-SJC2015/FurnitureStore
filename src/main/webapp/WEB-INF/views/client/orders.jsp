@@ -17,6 +17,7 @@
 						<h2>No orders!</h2>
 					</c:if>
 					<c:if test="${not empty orderList}">
+					<c:set var="timeZone" value="GMT+3" />
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -29,10 +30,10 @@
 								<c:forEach items="${orderList}" var="order">
 									<c:if test="${empty order.assemblyDate}">
 										<tr class="active">
-
 											<td>#${order.id}</td>
-											<td><fmt:formatDate type="both" dateStyle="medium"
-													timeStyle="medium" value="${order.orderDate}" /></td>
+											<td><fmt:formatDate type="both" timeZone="${timeZone}"
+													dateStyle="medium" timeStyle="medium"
+													value="${order.orderDate}" /></td>
 											<td>Not confirmed</td>
 										</tr>
 									</c:if>
@@ -41,7 +42,7 @@
 											<c:url var="showOrder" value="/order/${order.id}"></c:url>
 											<td><a class="brn brn-link" href="${showOrder}">#${order.id}</a></td>
 											<td><fmt:formatDate type="both" dateStyle="medium"
-													timeStyle="medium" value="${order.orderDate}" /></td>
+													timeStyle="medium" timeZone="${timeZone}" value="${order.orderDate}" /></td>
 											<td>Confirmed</td>
 										</tr>
 									</c:if>

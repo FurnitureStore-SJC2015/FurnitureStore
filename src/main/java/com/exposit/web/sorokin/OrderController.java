@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.mail.MessagingException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -115,8 +116,9 @@ public class OrderController {
 		try {
 			mailService.sendConfirationMail(order.getClient());
 		} catch (Exception e) {
+			Logger.getLogger(Order.class).error("Error sending mail");
 		}
-
+		Logger.getLogger(Order.class).info("Order"+order.getId()+" confirmed!");
 		return "redirect:/company/incoming";
 	}
 

@@ -4,7 +4,6 @@
 	prefix="sec"%>
 <c:set var="i" value="1"></c:set>
 <c:set var="j" value="1"></c:set>
-
 <sec:authorize access="isAuthenticated() and hasRole('ROLE_CLIENT')">
 	<div class="col-md-9">
 
