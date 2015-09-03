@@ -17,12 +17,12 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>MODULE ID</th>
-						<th>MODULE NAME</th>
-						<th>COST</th>
-						<th>NUMBER OF UNITS</th>
-						<th>PICTURE</th>
-						<th>SEND A REPLY</th>
+						<th>Module ID</th>
+						<th>Module Name</th>
+						<th>Cost</th>
+						<th>Number Of Units</th>
+						<th>Picture</th>
+						<th>Send A Reply</th>
 					</tr>
 				</thead>
 
@@ -41,7 +41,7 @@
 									</div>
 								</c:if></td>
 
-							<td><c:set var="link" value="request/${module.moduleId}"></c:set>
+							<td><c:url var="link" value="/modules/request/${module.moduleId}"/>
 								<div align="center">
 									<button class="btn btn-default"
 										onclick="location.href='${link}'">

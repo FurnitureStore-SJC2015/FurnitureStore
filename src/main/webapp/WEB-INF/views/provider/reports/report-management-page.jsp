@@ -6,8 +6,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="text-center">
-				<span class="glyphicon glyphicon-lidt-alt"></span><strong>SHIPMENT
-					REPORTS</strong>
+				<span class="glyphicon glyphicon-lidt-alt"></span><strong>Shipment
+					Reports</strong>
 			</h5>
 		</div>
 		<div class="panel-body">
@@ -21,7 +21,7 @@
 				</div>
 				<div class="col-md-3">
 					<input name="submit" type="submit" class="btn btn-danger"
-						value="FILTER" />
+						value="Filter" />
 				</div>
 
 			</form:form>
@@ -50,7 +50,7 @@
 					<thead>
 						<tr>
 							<th>SHIPMENT ID</th>
-							<th>PROVIDER MARGIN PERCENT</th>
+							<th>Provider Margin Percent</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -62,15 +62,14 @@
 								<tr>
 									<td>${shipment.id}</td>
 									<td>${shipment.providerMarginPercent}</td>
-									<td><c:set var="link"
-											value="/FurnitureStore/shipments/${shipment.id}"></c:set>
-										<button class="btn btn-info" onclick="location.href='${link}'">SHOW
-											UNITS</button></td>
+									<td><c:url var="link" value="/shipments/${shipment.id}" />
+										<button class="btn btn-info" onclick="location.href='${link}'">Show
+											Units</button></td>
 
-									<td><c:set var="link"
-											value="/FurnitureStore/shipments/${shipment.id}/waybill"></c:set>
+									<td><c:url var="link"
+											value="/shipments/${shipment.id}/waybill" />
 										<button class="btn btn-success"
-											onclick="location.href='${link}'">SHOW WAYBILL</button></td>
+											onclick="location.href='${link}'">Show Waybill</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -19,7 +19,7 @@ public class WaybillServiceImpl implements WaybillService {
 	@Autowired
 	private WaybillDao waybillDao;
 
-	@Transactional
+	
 	@Override
 	public List<Waybill> getWaybills() {
 		return waybillDao.findAll();
@@ -38,25 +38,25 @@ public class WaybillServiceImpl implements WaybillService {
 
 	}
 
-	@Transactional
+	
 	@Override
 	public Waybill getWaybillById(int id) {
 		return waybillDao.findById(id);
 	}
 
-	@Transactional
+	
 	@Override
 	public Waybill getWaybillByShipment(Shipment shipment) {
 		return waybillDao.getWaybill(shipment);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Waybill> getWaybills(Date beginningDate, Date endDate) {
 		return waybillDao.getWaybills(beginningDate, endDate);
 	}
 
-	@Transactional
+	
 	@Override
 	public void setConfirmationDate(Date confirmationDate, Waybill waybill) {
 		waybill.setConfirmationDate(confirmationDate);

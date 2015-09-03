@@ -17,7 +17,7 @@ public interface RequestService {
 	public Request getRequestById(int id);
 
 	public List<Request> getAllRequests();
-	 
+
 	public List<Request> getRequestByProvider(Provider provider);
 
 	public void deleteRequest(int id);
@@ -34,14 +34,11 @@ public interface RequestService {
 
 	public Module getModuleByRequestUnit(RequestUnit requestUnit);
 
-	
-	public List<Request> createRequests(List<RequestUnitDto> requestUnits);
-	
 	public void sendRequest(Request request);
-	
 
-	public List<RequestUnitDto> convertRequestUnitsToDto(List<RequestUnit> requestUnits);
-	
+	public List<RequestUnitDto> convertRequestUnitsToDto(
+			List<RequestUnit> requestUnits);
+
 	public List<RequestUnitDto> convertOrderToRequestUnitsDto(Order order);
 
 	public void updateRequest(Request request);
@@ -56,7 +53,5 @@ public interface RequestService {
 			int providerMarginPercent, double deliveryCost, Provider provider);
 
 	public List<Request> getNotProcessedRequests(Provider provider);
-
-	
 
 }

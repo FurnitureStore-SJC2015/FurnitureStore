@@ -13,9 +13,9 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>MODULE NAME</th>
-							<th>COST</th>
-							<th>NUMBER OF UNITS</th>
+							<th>Module Name</th>
+							<th>Cost</th>
+							<th>Number Of Units</th>
 						</tr>
 					</thead>
 

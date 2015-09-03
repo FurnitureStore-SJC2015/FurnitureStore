@@ -9,7 +9,7 @@
 function deleteModule(moduleId,i) {
 		
 	$.ajax({
-		url : "/FurnitureStore/modules/"+moduleId+"/delete",
+		url : "modules/"+moduleId+"/delete",
 		type : "POST",
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");
@@ -27,7 +27,7 @@ function deleteModule(moduleId,i) {
 function getModulesToAdd(providerId){
 	
 	$.ajax({
-		url : "/FurnitureStore/modules/provider/"+providerId,
+		url : "modules/provider/"+providerId,
 		type : "GET",
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");
@@ -51,7 +51,7 @@ function addModule() {
 	
 	$.ajax({
 		type : "POST",
-		url : "/FurnitureStore/modules/provider/add/"+mdlId, 
+		url : "modules/provider/add/"+mdlId, 
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -79,16 +79,15 @@ function addModule() {
 				</select>
 			</div>
 			<div class="col-md-3">
-				<button class="btn btn-success" onclick="addModule()">
-					Add modules
-				</button>
+				<button class="btn btn-success" onclick="addModule()">Add
+					modules</button>
 			</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>MODULE</th>
-						<th>PICTURE</th>
-						<th>DELETE</th>
+						<th>Module</th>
+						<th>Picture</th>
+						<th>Delete</th>
 
 					</tr>
 				</thead>

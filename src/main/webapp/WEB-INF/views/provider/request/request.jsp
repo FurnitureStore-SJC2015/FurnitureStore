@@ -4,7 +4,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="text-center">
-				<span class="glyphicon glyphicon-info-sign"></span><strong>REQUEST
+				<span class="glyphicon glyphicon-info-sign"></span><strong>Request
 					#${request.id} </strong>
 			</h5>
 		</div>
@@ -14,9 +14,9 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>MODULE NAME</th>
-							<th>MODULE COST</th>
-							<th>NUMBER OF UNITS</th>
+							<th>Module Name</th>
+							<th>Module Cost</th>
+							<th>Number Of Units</th>
 						</tr>
 					</thead>
 

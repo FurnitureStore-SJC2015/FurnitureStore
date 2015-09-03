@@ -11,7 +11,9 @@
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#confirmationDate").datepicker({minDate: 0});
+		$("#confirmationDate").datepicker({
+			minDate : 0
+		});
 
 	});
 
@@ -165,9 +167,9 @@
 							<strong class="text-danger">Not enough modules!</strong>
 						</div>
 						<div class="col-md-4">
-							
-							<button class="btn btn-promary"
-								onclick="location.href='/FurnitureStore/requests/order/${order.id}'">Order
+
+							<c:url var="link" value="/requests/order/${order.id}" />
+							<button class="btn btn-promary" onclick="location.href=${link}">Order
 								modules</button>
 						</div>
 					</div>

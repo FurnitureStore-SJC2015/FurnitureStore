@@ -13,9 +13,9 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>REQUEST DATE</th>
-							<th>DETAILS</th>
-							<th>PROCESS REQUEST</th>
+							<th>Request Date</th>
+							<th>Details</th>
+							<th>Process Request</th>
 						</tr>
 					</thead>
 
@@ -25,14 +25,14 @@
 							<tr>
 								<td>${request.id}</td>
 								<td>${request.requestDate}</td>
-								<td><c:set var="link" value="requests/${request.id}"></c:set>
-									<button class="btn btn-info" onclick="location.href='${link}'">SHOW
-										DETAILS</button></td>
+								<td><c:url var="link" value="/requests/${request.id}" />
+									<button class="btn btn-info" onclick="location.href='${link}'">Show
+										Detalis</button></td>
 
-								<td><c:set var="link"
-										value="requests/${request.id}/processing_page"></c:set>
+								<td><c:url var="link"
+										value="/requests/${request.id}/processing_page" />
 									<button class="btn btn-success"
-										onclick="location.href='${link}'">PROCESS REQUEST</button></td>
+										onclick="location.href='${link}'">Process Request</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>

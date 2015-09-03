@@ -15,7 +15,7 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>MARGIN PERCENT</th>
+							<th>Margin Percent</th>
 							<th></th>
 							<th></th>
 							<th></th>
@@ -24,24 +24,28 @@
 
 					<tbody>
 
+
 						<c:forEach items="${shipments}" var="shipment">
+							<c:url value="/shipments/${shipment.id}" var="link1" />
+							<c:url value="/shipments/${shipment.id}/waybill" var="link2" />
+							<c:url value="/shipments/${shipment.id}/accept" var="link3" />
 							<tr>
 								<td>${shipment.id}</td>
 								<td>${shipment.providerMarginPercent}</td>
-								<td><c:set var="link1"
-										value="/FurnitureStore/shipments/${shipment.id}"></c:set>
-									<button class="btn btn-info" onclick="location.href='${link1}'">SHOW
-										UNITS</button></td>
-								<td><c:set var="link2"
-										value="/FurnitureStore/shipments/${shipment.id}/waybill"></c:set>
+								<td>
+									<button class="btn btn-info" onclick="location.href='${link1}'">Show
+										Units</button>
+								</td>
+								<td>
 									<button class="btn btn-default"
-										onclick="location.href='${link2}'">SHOW WAYBILL</button></td>
+										onclick="location.href='${link2}'">Show Waybill</button>
+								</td>
 
-								<td><c:set var="link3"
-										value="/FurnitureStore/shipments/${shipment.id}/accept"></c:set>
+								<td>
 									<button class="btn btn-success"
-										onclick="location.href='${link3}'">ACCEPT AND SIGN
-										WAYBILL</button></td>
+										onclick="location.href='${link3}'">Accept And Sign
+										Waybill</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

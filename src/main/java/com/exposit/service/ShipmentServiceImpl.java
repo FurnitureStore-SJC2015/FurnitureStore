@@ -56,31 +56,31 @@ public class ShipmentServiceImpl implements ShipmentService {
 		return shipmentDao.save(shipment);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Shipment> getNotConfirmesShipments() {
 		return shipmentDao.getNotConfirmedShipments();
 	}
 
-	@Transactional
+	
 	@Override
 	public Shipment getShipment(Waybill waybill) {
 		return shipmentDao.getShipment(waybill);
 	}
 
-	@Transactional
+  
 	@Override
 	public Shipment getShipmentById(int id) {
 		return shipmentDao.findById(id);
 	}
 
-	@Transactional
+
 	@Override
 	public List<Shipment> getShipments() {
 		return shipmentDao.findAll();
 	}
 
-	@Transactional
+
 	@Override
 	public List<Shipment> getShipments(Date beginningDate, Date endDate) {
 		List<Shipment> shipments = new ArrayList<Shipment>();
@@ -123,20 +123,19 @@ public class ShipmentServiceImpl implements ShipmentService {
 		}
 	}
 
-	@Transactional
+	
 	@Override
 	public Shipment getShipmentByWaybill(Waybill waybill) {
 		return shipmentDao.getShipment(waybill);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<ShipmentUnit> getShipmentUnitsByShipment(Shipment shipment) {
 		return shipmentUnitDao.getShipmentUnits(shipment);
 	}
 
 	@SuppressWarnings("deprecation")
-	@Transactional
 	@Override
 	public List<Date> parseDateRangeValue(String dateRangeValue) {
 		List<Date> dates = new ArrayList<Date>();

@@ -16,8 +16,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="text-center">
-				<span class="glyphicon glyphicon-send"></span><strong>SEND
-					SHIPMENT FOR REQUEST #${request.id} </strong>
+				<span class="glyphicon glyphicon-send"></span><strong>Send
+					Shipment For Request #${request.id} </strong>
 			</h5>
 		</div>
 		<div class="panel-body">
@@ -30,8 +30,8 @@
 					method="POST" class="form-horizontal" role="form">
 
 					<div class="form-group" align="center" class="col-md-12">
-						<label for="delivery-cost" class="col-sm-4 control-label">DELIVERY
-							COST</label>
+						<label for="delivery-cost" class="col-sm-4 control-label">Delivery
+							Cost</label>
 						<div class="col-sm-4 control-label">
 							<form:input type="text" path="deliveryCost" id="delivery-cost"
 								name="delivery-cost" class="form-control" />
@@ -44,7 +44,7 @@
 
 					<div class="form-group" align="center" class="col-md-12">
 						<label for="provider-margin-percent"
-							class="col-sm-4 control-label">PROVIDER MARGIN PERCENT</label>
+							class="col-sm-4 control-label">Provider Margin Percent</label>
 						<div class="col-sm-4 control-label">
 							<form:input type="text" id="provider-margin-percent"
 								path="providerMarginPercent" name="provider-margin-percent"
@@ -55,8 +55,8 @@
 
 
 					<div class="form-group" align="center" class="col-md-12">
-						<label for="delivery-date" class="col-sm-4 control-label">DELIVERY
-							DATE</label>
+						<label for="delivery-date" class="col-sm-4 control-label">Delivery
+							Date</label>
 						<div class="col-md-4 control-label">
 							<form:input type="text" id="deliveryDate" name="deliveryDate"
 								path="deliveryDate" class="form-control" />
@@ -67,8 +67,8 @@
 					<div class="form-group" align="center" class="col-md-12">
 						<div class=" col-md-12" align="center">
 							<input type="submit" class="btn btn-success"
-								value="SEND
-						SHIPMENT" />
+								value="Send
+						Shipment" />
 						</div>
 					</div>
 				</form:form>

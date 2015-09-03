@@ -7,7 +7,7 @@
 
 	<div class="col-md-12" align="center">
 		<h2 align="center">
-			<strong>NEW MODULES REQUEST</strong>
+			<strong>New Modules Request</strong>
 		</h2>
 	</div>
 	<div class="col-md-12">

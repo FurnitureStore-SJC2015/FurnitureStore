@@ -51,7 +51,8 @@
 
 								</div>
 								<div class="col-md-3">
-									<c:set var="link" value="providers/${requestUnit.moduleId}"></c:set>
+									<c:url var="link" value="providers/${requestUnit.moduleId}"/>
+									
 									<label for="providerSelector">Select Provider</label>
 									<form:select path="chosenProvider" name="providerSelector"
 										class="form-control" id="providerSelector">

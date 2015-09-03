@@ -6,7 +6,7 @@
 function getProviders(i , moduleId){
 	
 	$.ajax({
-		url : "/FurnitureStore/requests/providers",
+		url : "requests/providers",
 		type : "GET",
 		data: ({
 			   text: moduleId
@@ -58,7 +58,7 @@ function getProviders(i , moduleId){
 		$.ajax({
 			type : "POST",
 			contentType : 'application/json; charset=utf-8',
-			url : "/FurnitureStore/requests/order/send",
+			url : "requests/order/send",
 			data : JSON.stringify(requestValues), 
 			success : function(obj) {
 				var temp=$("#record"+i);
@@ -73,7 +73,7 @@ function getProviders(i , moduleId){
 
 	<div class="col-md-12" align="center">
 		<h2 align="center">
-			<strong>NEW MODULES REQUEST</strong>
+			<strong>New Modules Request</strong>
 		</h2>
 	</div>
 	<div class="col-md-12">
@@ -91,12 +91,12 @@ function getProviders(i , moduleId){
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>MODULE ID</th>
-							<th>MODULE NAME</th>
-							<th>MODULE COST</th>
-							<th>MODULE COUNT</th>
-							<th>PROVIDER NAME</th>
-							<th>SEND</th>
+							<th>Module ID</th>
+							<th>Module Name</th>
+							<th>Module Cost</th>
+							<th>Module Count</th>
+							<th>Provider Name</th>
+							<th>Send</th>
 						</tr>
 					</thead>
 
@@ -111,8 +111,8 @@ function getProviders(i , moduleId){
 										<td>${requestUnitDto.count}</td>
 										<td id="selecttd${i}"><button id="btn${i}"
 												class="btn btn-success"
-												onclick="getProviders(${i},${requestUnitDto.moduleId})">SHOW
-												PROVIDERS</button>
+												onclick="getProviders(${i},${requestUnitDto.moduleId})">Show
+												Providers</button>
 											<div align="center" id="attention${i}" style="display: none;">
 												<h5>
 													<strong>No providers!</strong>
@@ -120,8 +120,8 @@ function getProviders(i , moduleId){
 											</div></td>
 										<td><button id="sendButton${i}" class="btn btn-success"
 												style="display: none;"
-												onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count},'${requestUnitDto.moduleName}',${requestUnitDto.moduleCost})">PROCESS
-												REQUEST</button></td>
+												onclick="sendRequest(${i},${requestUnitDto.moduleId},${requestUnitDto.count},'${requestUnitDto.moduleName}',${requestUnitDto.moduleCost})">Process
+												Request</button></td>
 									</c:when>
 
 									<c:otherwise>

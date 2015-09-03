@@ -43,7 +43,7 @@ public class PriceServiceImpl implements PriceService {
 	@Autowired
 	private ShipmentService shipmentService;
 
-	@Transactional
+	
 	@Override
 	public double calculateGain(List<Shipment> shipments) {
 		double gain = 0;
@@ -63,7 +63,7 @@ public class PriceServiceImpl implements PriceService {
 		return gain;
 	}
 
-	@Transactional
+	
 	@Override
 	public double calculateGain(Shipment shipment) {
 
@@ -80,7 +80,6 @@ public class PriceServiceImpl implements PriceService {
 	}
 
 	@SuppressWarnings("deprecation")
-	@Transactional
 	@Override
 	public List<Double> calculateYearGain(Provider provider) {
 		shipmentService.getConfirmedShipments(provider);
@@ -96,7 +95,6 @@ public class PriceServiceImpl implements PriceService {
 		return  Arrays.asList(values);
 	}
 
-	@Transactional
 	@Override
 	public double calculateFullStorageModuleUnitPrice(
 			StorageModuleUnit storageModuleUnit) {
@@ -106,7 +104,7 @@ public class PriceServiceImpl implements PriceService {
 		return baseCost + fullMargin;
 	}
 
-	@Transactional
+	
 	@Override
 	public double calculateStorageModuleUnitMargin(ShipmentUnit shipmentUnit) {
 

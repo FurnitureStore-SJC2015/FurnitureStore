@@ -6,64 +6,69 @@
 <script src="//canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
 	    function showChart(values, year) {
+	    	var chartContainer = $("#chartContainer");
+	    	if (chartContainer.css('display') == 'none') {
+	    		var chart = new CanvasJS.Chart("chartContainer", {
+	    			theme : "theme2",
+	    			title : {
+	    				text : "Gain Statistics For " + year
+	    			},
+	    			animationEnabled : true, 
+	    			data : [ {
+	    				type : "column",
+	    				dataPoints : [ {
+	    					label : "jan",
+	    					y : values[0]
+	    				}, {
+	    					label : "feb",
+	    					y : values[1]
+	    				}, {
+	    					label : "mar",
+	    					y : values[2]
+	    				}, {
+	    					label : "apr",
+	    					y : values[3]
+	    				}, {
+	    					label : "may",
+	    					y : values[4]
+	    				},
+	    				   {
+	    					label : "jun",
+	    					y : values[5]
+	    				},
+	    				   {
+	    					label : "jul",
+	    					y : values[6]
+	    				},
+	    				   {
+	    					label : "aug",
+	    					y : values[7]
+	    				},
+	    				   {
+	    					label : "sep",
+	    					y : values[8]
+	    				},
+	    				   {
+	    					label : "oct",
+	    					y : values[9]
+	    				},
+	    				   {
+	    					label : "nov",
+	    					y : values[10]
+	    				},
+	    				   {
+	    					label : "dec",
+	    					y : values[11]
+	    				}
+	    				]
+	    			} ]
+	    		});
+	    		chart.render();
+	    		chartContainer.show(1000);
+			} else {
+				chartContainer.hide(1000);
+			}
 		
-		var chart = new CanvasJS.Chart("chartContainer", {
-			theme : "theme2",
-			title : {
-				text : "Gain Statistics For " + year
-			},
-			animationEnabled : true, 
-			data : [ {
-				type : "column",
-				dataPoints : [ {
-					label : "jan",
-					y : values[0]
-				}, {
-					label : "feb",
-					y : values[1]
-				}, {
-					label : "mar",
-					y : values[2]
-				}, {
-					label : "apr",
-					y : values[3]
-				}, {
-					label : "may",
-					y : values[4]
-				},
-				   {
-					label : "jun",
-					y : values[5]
-				},
-				   {
-					label : "jul",
-					y : values[6]
-				},
-				   {
-					label : "aug",
-					y : values[7]
-				},
-				   {
-					label : "sep",
-					y : values[8]
-				},
-				   {
-					label : "oct",
-					y : values[9]
-				},
-				   {
-					label : "nov",
-					y : values[10]
-				},
-				   {
-					label : "dec",
-					y : values[11]
-				}
-				]
-			} ]
-		});
-		chart.render();
-		$("#chartContainer").show(1000);
 	}
 </script>
 
@@ -122,9 +127,11 @@
 				</div>
 
 				<div class="col-md-12" align="center">
-				<button class="btn btn-primary"
-											onclick="showChart(${values},${year})">SHOW GAIN STATISTICS FOR ${year}</button>
-					<div id="chartContainer" style="display: none; height: 400px; width: 60%; display: none;"></div>
+					<button class="btn btn-primary"
+						onclick="showChart(${values},${year})">Show Gain
+						Statistics For ${year}</button>
+					<div id="chartContainer"
+						style="display: none; height: 400px; width: 60%; display: none;"></div>
 				</div>
 
 

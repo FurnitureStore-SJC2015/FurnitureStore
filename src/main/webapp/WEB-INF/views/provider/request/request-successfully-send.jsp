@@ -17,7 +17,7 @@
 		<div class="panel-heading">
 			<h5 class="text-center">
 				<span class="glyphicon glyphicon-send"></span><strong>SEND
-					SHIPMENT FOR REQUEST #${request.id} </strong>
+					Shipemnt For Request #${request.id} </strong>
 			</h5>
 		</div>
 		<div class="panel-body">

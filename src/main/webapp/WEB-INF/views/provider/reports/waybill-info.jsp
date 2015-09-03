@@ -3,8 +3,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="text-center">
-				<span class="glyphicon glyphicon-info-sign"></span><strong>WAYBILL
-					INFO</strong>
+				<span class="glyphicon glyphicon-info-sign"></span><strong>Waybill
+					Info</strong>
 			</h5>
 		</div>
 		<div class="panel-body">
@@ -20,19 +20,19 @@
 							<td>${waybill.id}</td>
 						</tr>
 						<tr>
-							<td><strong>DEPARTURE DATE:</strong></td>
+							<td><strong>Departure Date:</strong></td>
 							<td>${waybill.departureDate}</td>
 						</tr>
 						<tr>
-							<td><strong>DELIVERY DATE:</strong></td>
+							<td><strong>Delivery Date:</strong></td>
 							<td>${waybill.deliveryDate}</td>
 						</tr>
 						<tr>
-							<td><strong>CONFIRMATION DATE:</strong></td>
+							<td><strong>Confirmation Date:</strong></td>
 							<td>${waybill.confirmationDate}</td>
 						</tr>
 						<tr>
-							<td><strong>DELIVERY COST:</strong></td>
+							<td><strong>Delivery Cost:</strong></td>
 							<td>${waybill.deliveryCost}</td>
 						</tr>
 					</tbody>

@@ -66,30 +66,29 @@ public class RequestServiceImpl implements RequestService {
 	@Autowired
 	private OrderUnitService orderUnitService;
 
-	@Transactional
 	@Override
 	public Request getRequestById(int id) {
 		return requestDao.findById(id);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<RequestUnit> getRequestUnitsByRequest(Request request) {
 		return requestUnitDao.getRequestUnits(request);
 	}
 
-	@Transactional
+	
 	@Override
 	public Module getModuleByRequestUnit(RequestUnit requestUnit) {
 		return moduleDao.getModule(requestUnit);
 	}
 
+	@Transactional
 	@Override
 	public Integer saveRequest(Request request) {
 		return requestDao.save(request);
 	}
 
-	@Transactional
 	@Override
 	public List<Request> getAllRequests() {
 		return requestDao.findAll();
@@ -109,13 +108,13 @@ public class RequestServiceImpl implements RequestService {
 		return requestUnitDao.save(requestUnit);
 	}
 
-	@Transactional
+
 	@Override
 	public RequestUnit getRequestUnitById(int id) {
 		return requestUnitDao.findById(id);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<RequestUnit> getAllRequestUnits() {
 
@@ -136,7 +135,7 @@ public class RequestServiceImpl implements RequestService {
 
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Request> getNotProcessedRequests(Provider provider){
 		return requestDao.getNotProcessedRequests(provider);
@@ -181,17 +180,13 @@ public class RequestServiceImpl implements RequestService {
 
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Request> getRequestByProvider(Provider provider) {
 		return requestDao.getRequests(provider);
 	}
 
-	@Override
-	public List<Request> createRequests(List<RequestUnitDto> requestUnits) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<RequestUnitDto> convertRequestUnitsToDto(

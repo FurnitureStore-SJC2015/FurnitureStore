@@ -45,13 +45,13 @@ public class ProviderServiceImpl implements ProviderService {
 		return providerDao.getProviderByName(providerName);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Provider> getProviders() {
 		return providerDao.findAll();
 	}
 
-	@Transactional
+	
 	@Override
 	public Provider getProviderById(Integer id) {
 		return providerDao.findById(id);
@@ -63,13 +63,13 @@ public class ProviderServiceImpl implements ProviderService {
 		providerDao.update(provider);
 	}
 
-	@Transactional
+	
 	@Override
 	public Provider getProvider(Request request) {
 		return providerDao.getProvider(request);
 	}
 
-	@Transactional
+	
 	@Override
 	public Provider getProvider(Shipment shipment) {
 		return providerDao.getProvider(shipment);
