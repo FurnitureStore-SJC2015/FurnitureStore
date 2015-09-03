@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.exposit.domain.exceptions.SuchUserRegisteredException;
+import com.exposit.domain.exceptions.DuplicateUserAccountException;
 import com.exposit.domain.model.Client;
 import com.exposit.domain.model.RoleType;
 import com.exposit.domain.service.BonusService;
@@ -83,8 +83,8 @@ public class RegistrationController {
 		try {
 			userService.createNewUser(client);
 		} catch (Exception e) {
-			throw new SuchUserRegisteredException(
-					"Invalid login or email. Try again!");
+			throw new DuplicateUserAccountException(
+					"Such Login or Email exists in database! Try again");
 		}
 		try {
 			mailService.sendRegistrationMail(client.getLogin(), password,

@@ -15,7 +15,6 @@ import com.exposit.domain.model.User;
 import com.exposit.domain.service.ProductCatalogUnitService;
 import com.exposit.domain.service.ProductTemplateService;
 import com.exposit.repository.dao.ProductCatalogUnitDao;
-import com.exposit.web.dto.ProductSearchCriteria;
 
 @Service
 @Transactional
@@ -96,12 +95,6 @@ public class ProductCatalogUnitServiceImpl implements ProductCatalogUnitService 
 	@Override
 	public void removeById(int id) {
 		this.productDao.delete(id);
-	}
-
-	@Override
-	public List<ProductCatalogUnit> findByCriteria(
-			ProductSearchCriteria criteria) {
-		return this.productDao.getProductByCustomCriteria(criteria);
 	}
 
 	@Override

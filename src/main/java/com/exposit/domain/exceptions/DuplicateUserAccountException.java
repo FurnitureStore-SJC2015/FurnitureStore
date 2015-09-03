@@ -1,14 +1,14 @@
 package com.exposit.domain.exceptions;
 
-public class SuchUserRegisteredException extends RuntimeException {
+public class DuplicateUserAccountException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public SuchUserRegisteredException() {
+	public DuplicateUserAccountException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SuchUserRegisteredException(String arg0) {
+	public DuplicateUserAccountException(String arg0) {
 		super(arg0);
 	}
 

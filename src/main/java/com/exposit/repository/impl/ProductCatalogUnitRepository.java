@@ -13,7 +13,6 @@ import com.exposit.domain.model.ProductCatalogUnit;
 import com.exposit.domain.model.User;
 import com.exposit.repository.dao.ProductCatalogUnitDao;
 import com.exposit.repository.hibernate.AbstractHibernateDao;
-import com.exposit.web.dto.ProductSearchCriteria;
 
 @Repository()
 public class ProductCatalogUnitRepository extends
@@ -50,7 +49,6 @@ public class ProductCatalogUnitRepository extends
 				.createAlias("product.productTemplates", "template")
 				.add(Restrictions.eq("template.module", module))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		// .setProjection(Projections.distinct(Projections.property("product.id")));
 		return (List<ProductCatalogUnit>) criteria.list();
 	}
 
@@ -90,18 +88,4 @@ public class ProductCatalogUnitRepository extends
 		return (ProductCatalogUnit) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ProductCatalogUnit> getProductByCustomCriteria(
-			ProductSearchCriteria criteria) {
-		return (List<ProductCatalogUnit>) this.convert(criteria).list();
-	}
-
-	private Criteria convert(ProductSearchCriteria criteria) {
-		Criteria cr = this.getSession().createCriteria(
-				ProductCatalogUnit.class, "product");
-		cr.add(Restrictions.ge("cost", criteria.getMinCost())).add(
-				Restrictions.le("cost", criteria.getMaxCost()));
-		return cr;
-	}
 }

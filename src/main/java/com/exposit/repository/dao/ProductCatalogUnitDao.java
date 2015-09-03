@@ -8,7 +8,6 @@ import com.exposit.domain.model.Order;
 import com.exposit.domain.model.ProductCatalogUnit;
 import com.exposit.domain.model.User;
 import com.exposit.repository.base.GenericDao;
-import com.exposit.web.dto.ProductSearchCriteria;
 
 public interface ProductCatalogUnitDao extends
 		GenericDao<ProductCatalogUnit, Integer> {
@@ -27,6 +26,4 @@ public interface ProductCatalogUnitDao extends
 
 	public ProductCatalogUnit getProduct(Feedback feedback);
 
-	public List<ProductCatalogUnit> getProductByCustomCriteria(
-			ProductSearchCriteria criteria);
 }

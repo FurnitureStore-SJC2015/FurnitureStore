@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.exposit.domain.exceptions.SuchUserRegisteredException;
+import com.exposit.domain.exceptions.DuplicateUserAccountException;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
@@ -19,13 +19,13 @@ public class ExceptionControllerAdvice {
 	 * return mav; }
 	 */
 
-	@ExceptionHandler(SuchUserRegisteredException.class)
+	@ExceptionHandler(DuplicateUserAccountException.class)
 	public ModelAndView suchUserRegisteredExceptionHandler(
-			SuchUserRegisteredException ex) {
+			DuplicateUserAccountException ex) {
 		Logger logger = Logger.getLogger(ExceptionControllerAdvice.class);
 		logger.error(ex.getMessage(), ex);
 		ModelAndView mav = new ModelAndView("generic-error");
-		mav.addObject("name", "Such User Registered!");
+		mav.addObject("name", "Duplicate User Account!");
 		mav.addObject("message", ex.getMessage());
 		return mav;
 	}

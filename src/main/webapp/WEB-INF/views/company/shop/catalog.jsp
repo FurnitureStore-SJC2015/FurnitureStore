@@ -5,29 +5,6 @@
 	prefix="sec"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="col-md-9">
-	<sec:authorize access="isAuthenticated() and hasRole('ROLE_COMPANY')">
-		<c:if test="${not empty searchCriteria}">
-			<c:url var="action" value="/catalog/search/result"></c:url>
-			<form:form action="${action }" method="GET"
-				commandName="searchCriteria">
-				<fieldset>
-					<legend>Search Criteria</legend>
-					<table>
-						<tr>
-							<td><label> Minimum cost</label></td>
-							<td><form:input path="minCost" /></td>
-						</tr>
-						<tr>
-							<td><label> Maximum cost</label></td>
-							<td><form:input path="maxCost" /></td>
-						</tr>
-					</table>
-				</fieldset>
-				<input type="submit" value="Search" />
-			</form:form>
-		</c:if>
-	</sec:authorize>
-
 	<sec:authorize
 		access="isAuthenticated() and hasAnyRole('ROLE_CLIENT','ROLE_COMPANY') ">
 		<c:if test="${not empty products }">

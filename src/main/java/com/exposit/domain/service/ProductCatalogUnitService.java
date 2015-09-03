@@ -7,7 +7,6 @@ import com.exposit.domain.model.Module;
 import com.exposit.domain.model.Order;
 import com.exposit.domain.model.ProductCatalogUnit;
 import com.exposit.domain.model.User;
-import com.exposit.web.dto.ProductSearchCriteria;
 
 public interface ProductCatalogUnitService {
 
@@ -36,9 +35,6 @@ public interface ProductCatalogUnitService {
 	public void save(ProductCatalogUnit product);
 
 	public void removeById(int id);
-
-	public List<ProductCatalogUnit> findByCriteria(
-			ProductSearchCriteria criteria);
 
 	public void addNewProduct(ProductCatalogUnit product);
 }
