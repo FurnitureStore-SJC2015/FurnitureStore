@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -62,11 +63,13 @@ public class ModuleController {
 		return "modules-list";
 	}
 
+	@PreAuthorize("#provider.login==principal.username")
 	@RequestMapping(value = "/provider/{id}", method = RequestMethod.GET)
 	public @ResponseBody List<ModuleDto> getModulesProvider(
-			@PathVariable("id") String providerId) {
+			@PathVariable("id") Provider provider) {
 		List<ModuleDto> modules = new ArrayList<ModuleDto>();
-		modules=moduleService.getModulesByProvider(providerService.getProviderById(Integer.parseInt(providerId)));
+		modules = moduleService.getModulesByProvider(providerService
+				.getProviderById(provider.getId()));
 
 		return modules;
 	}

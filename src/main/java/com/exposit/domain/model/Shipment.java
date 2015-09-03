@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class Shipment {
 	@JoinColumn(name = "way_bill_id")
 	private Waybill waybill;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
@@ -51,6 +52,10 @@ public class Shipment {
 
 	public void setProvider(Provider provider) {
 		this.provider = provider;
+	}
+
+	public Provider getProvider() {
+		return provider;
 	}
 
 	public int getId() {

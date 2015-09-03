@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
 
 @Entity
 @Table(name = "request")
@@ -25,15 +28,15 @@ public class Request {
 	@Column(name = "request_date")
 	private Date requestDate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "provider_id", nullable = false)
 	private Provider provider;
 
 	@OneToMany
 	@JoinColumn(name = "request_id")
 	private List<RequestUnit> requestUnits;
-	
-	@Column(name="is_processed")
+
+	@Column(name = "is_processed")
 	private boolean isProcessed;
 
 	public Request() {
@@ -65,6 +68,10 @@ public class Request {
 
 	public Date getRequestDate() {
 		return requestDate;
+	}
+
+	public Provider getProvider() {
+		return provider;
 	}
 
 	public void setRequestDate(Date requestDate) {

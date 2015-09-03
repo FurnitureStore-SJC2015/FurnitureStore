@@ -1,10 +1,9 @@
 package com.exposit.web;
 
-
-
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,11 +34,13 @@ public class ShipmentController {
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String showShipmentsAcceptancePanel(Model model) {
-		model.addAttribute("shipments", shipmentService.getNotConfirmesShipments());
+		model.addAttribute("shipments",
+				shipmentService.getNotConfirmesShipments());
 
 		return "shipment-acceptance-panel";
 	}
 
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showShipment(@PathVariable("id") Shipment shipment,
 
@@ -51,6 +52,7 @@ public class ShipmentController {
 		return "shipment-info";
 	}
 
+	
 	@RequestMapping(value = "/{id}/waybill", method = RequestMethod.GET)
 	public String showWaybill(@PathVariable("id") Shipment shipment,
 
@@ -63,9 +65,11 @@ public class ShipmentController {
 	}
 
 	@RequestMapping(value = "/{id}/accept", method = RequestMethod.POST)
-	public String acceptShipment(@PathVariable("id") Shipment shipment, Model model) {
+	public String acceptShipment(@PathVariable("id") Shipment shipment,
+			Model model) {
 		shipmentService.acceptShipment(shipment, new Date());
-		model.addAttribute("shipments", shipmentService.getNotConfirmesShipments());
+		model.addAttribute("shipments",
+				shipmentService.getNotConfirmesShipments());
 		return "shipment-acceptance-panel";
 	}
 

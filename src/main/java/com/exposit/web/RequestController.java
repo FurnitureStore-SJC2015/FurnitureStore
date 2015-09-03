@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -83,6 +84,7 @@ public class RequestController {
 		return "shipment.success";
 	}
 
+	@PreAuthorize("#request.provider.login==principal.username")
 	@RequestMapping(value = { "/{id}/processing_page" },
 			method = RequestMethod.GET)
 	public String showProcessingPage(@PathVariable("id") Request request,
@@ -94,6 +96,7 @@ public class RequestController {
 		return "request-processing";
 	}
 
+	@PreAuthorize("#request.provider.login==principal.username")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showRequest(@PathVariable("id") Request request,
 

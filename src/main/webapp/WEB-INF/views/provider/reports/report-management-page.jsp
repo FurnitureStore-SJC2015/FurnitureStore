@@ -49,7 +49,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>SHIPMENT ID</th>
+							<th>Shipment ID</th>
 							<th>Provider Margin Percent</th>
 							<th></th>
 							<th></th>
