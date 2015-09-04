@@ -134,7 +134,7 @@ public class RequestController {
 
 	}
 
-	@RequestMapping(value = "/providers", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/providers", method = RequestMethod.GET)
 	public @ResponseBody List<Provider> getProvidersByModule(
 			@RequestParam String text) {
 		List<Provider> providers = new ArrayList<Provider>();

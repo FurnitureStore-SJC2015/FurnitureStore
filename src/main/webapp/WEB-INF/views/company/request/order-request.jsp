@@ -6,7 +6,7 @@
 function getProviders(i , moduleId){
 	
 	$.ajax({
-		url : "requests/providers",
+		url : "providers",
 		type : "GET",
 		data: ({
 			   text: moduleId
@@ -58,7 +58,7 @@ function getProviders(i , moduleId){
 		$.ajax({
 			type : "POST",
 			contentType : 'application/json; charset=utf-8',
-			url : "requests/order/send",
+			url : "send",
 			data : JSON.stringify(requestValues), 
 			success : function(obj) {
 				var temp=$("#record"+i);

@@ -169,7 +169,7 @@
 						<div class="col-md-4">
 
 							<c:url var="link" value="/requests/order/${order.id}" />
-							<button class="btn btn-promary" onclick="location.href=${link}">Order
+							<button class="btn btn-primary" onclick="location.href='${link}'">Order
 								modules</button>
 						</div>
 					</div>
@@ -177,6 +177,4 @@
 			</sec:authorize>
 		</div>
 	</div>
-	</div>
-	</div>
-</sec:authorize>
+	</sec:authorize>
