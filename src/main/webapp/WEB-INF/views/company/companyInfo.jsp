@@ -32,7 +32,7 @@
 					<td>${company.zip}</td>
 				</tr>
 				<tr>
-					<td>director</td>
+					<td>Director</td>
 					<td>${company.director}</td>
 				</tr>
 			</table>

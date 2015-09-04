@@ -20,16 +20,16 @@
 						<c:set var="timeZone" value="GMT+3" />
 						<table class="table table-bordered">
 							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Order date</th>
-									<th>Status</th>
+								<tr class="text-center">
+									<td><strong>ID</strong></td>
+									<td><strong>Order date</strong></td>
+									<td><strong>Status</strong></td>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${orderList}" var="order">
 									<c:if test="${empty order.assemblyDate}">
-										<tr class="active">
+										<tr class="active text-center">
 											<td>#${order.id}</td>
 											<td><fmt:formatDate type="both" timeZone="${timeZone}"
 													dateStyle="medium" timeStyle="long"
@@ -38,7 +38,7 @@
 										</tr>
 									</c:if>
 									<c:if test="${not empty order.assemblyDate}">
-										<tr class="success">
+										<tr class="success text-center">
 											<c:url var="showOrder" value="/order/${order.id}"></c:url>
 											<td><a class="brn brn-link" href="${showOrder}">#${order.id}</a></td>
 											<td><fmt:formatDate type="both" timeZone="${timeZone}"

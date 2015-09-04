@@ -29,4 +29,15 @@ public class ExceptionControllerAdvice {
 		mav.addObject("message", ex.getMessage());
 		return mav;
 	}
+
+	@ExceptionHandler(value = { NullPointerException.class,
+			IllegalArgumentException.class })
+	public ModelAndView nullPointerExceptionHandle(Exception ex) {
+		Logger logger = Logger.getLogger(Exception.class);
+		logger.error(ex.getMessage(), ex);
+		ModelAndView mav = new ModelAndView("generic-error");
+		mav.addObject("name", "Not found on this site!");
+		mav.addObject("message", "Check your request!");
+		return mav;
+	}
 }

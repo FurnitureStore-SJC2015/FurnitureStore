@@ -56,6 +56,12 @@
 					</table>
 				</c:if>
 			</div>
+			<div class="panel-footer clerfix">
+				<div class="text-left">
+					<c:url var="toProfile" value="/profile" />
+					<a href="${toProfile}">To profile</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </sec:authorize>

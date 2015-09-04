@@ -67,7 +67,7 @@ public class OrderController {
 
 	@PreAuthorize("#order.client.login==principal.username")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showOrder(@PathVariable(value = "id") Order order, Model model) {
+	public String showOrder(@PathVariable(value = "id") Order order, Model model) throws IllegalArgumentException {
 		order.setFullyPaid(orderService.isFullyPaid(order));
 		order.setOrderUnits(orderUnitService.getOrderUnitsList(order));
 		model.addAttribute("order", order);

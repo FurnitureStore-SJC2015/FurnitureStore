@@ -38,11 +38,11 @@ public class CatalogController {
 
 	@RequestMapping(value = { "product/{id}" }, method = RequestMethod.GET)
 	public String showProduct(
-			@PathVariable(value = "id") ProductCatalogUnit product, Model model) {
+			@PathVariable(value = "id") ProductCatalogUnit product, Model model)
+			throws NullPointerException {
 		product.setFeedbacks(feedbackService.getFeedbackList(product));
 		model.addAttribute("product", product);
 		return "shop.product";
-
 	}
 
 }
