@@ -19,7 +19,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-md-6 col-md-offset-3">
-					<form:form method="POST" modelAttribute="provider"
+					<form:form method="POST" modelAttribute="prvdr"
 						class="form-horizontal" enctype="multipart/form-data" role="form">
 						<div class="form-group">
 							<label for="email" class="col-sm-4 control-label">Email:</label>

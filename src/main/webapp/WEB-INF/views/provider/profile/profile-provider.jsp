@@ -90,7 +90,7 @@
 							class="img-thumbnail">
 					</div>
 				</c:if>
-				<div class="col-md-8">
+				<div class="col-md-12" >
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr>

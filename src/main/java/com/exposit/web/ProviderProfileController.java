@@ -55,7 +55,7 @@ public class ProviderProfileController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String showEditProvderProfileForm(Authentication auth, Model model) {
-		model.addAttribute("provider", new Provider());
+		model.addAttribute("prvdr", new Provider());
 		return "provider.profile.edit";
 	}
 

@@ -9,16 +9,16 @@
 		<div class="panel-body">
 
 
-			<div class="col-md-8">
+			<div class="col-md-12">
 
 				<table style="font-size: 100%" class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Margin Percent</th>
-							<th></th>
-							<th></th>
-							<th></th>
+							<th class="text-center">ID</th>
+							<th class="text-center">Margin Percent</th>
+							<th class="text-center"></th>
+							<th class="text-center"></th>
+							<th class="text-center"></th>
 						</tr>
 					</thead>
 
@@ -30,18 +30,18 @@
 							<c:url value="/shipments/${shipment.id}/waybill" var="link2" />
 							<c:url value="/shipments/${shipment.id}/accept" var="link3" />
 							<tr>
-								<td>${shipment.id}</td>
-								<td>${shipment.providerMarginPercent}</td>
-								<td>
+								<td class="text-center">${shipment.id}</td>
+								<td class="text-center">${shipment.providerMarginPercent}</td>
+								<td class="text-center">
 									<button class="btn btn-info" onclick="location.href='${link1}'">Show
 										Units</button>
 								</td>
-								<td>
+								<td class="text-center">
 									<button class="btn btn-default"
 										onclick="location.href='${link2}'">Show Waybill</button>
 								</td>
 
-								<td>
+								<td class="text-center">
 									<button class="btn btn-success"
 										onclick="location.href='${link3}'">Accept And Sign
 										Waybill</button>

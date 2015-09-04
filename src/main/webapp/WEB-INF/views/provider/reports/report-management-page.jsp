@@ -49,10 +49,10 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Shipment ID</th>
-							<th>Provider Margin Percent</th>
-							<th></th>
-							<th></th>
+							<th class="text-center">Shipment ID</th>
+							<th class="text-center">Provider Margin Percent</th>
+							<th class="text-center"></th>
+							<th class="text-center"></th>
 						</tr>
 					</thead>
 					<c:if test="${not empty shipments}">
@@ -60,13 +60,13 @@
 
 							<c:forEach items="${shipments}" var="shipment">
 								<tr>
-									<td>${shipment.id}</td>
-									<td>${shipment.providerMarginPercent}</td>
-									<td><c:url var="link" value="/shipments/${shipment.id}" />
+									<td class="text-center">${shipment.id}</td>
+									<td class="text-center">${shipment.providerMarginPercent}</td>
+									<td class="text-center"><c:url var="link" value="/shipments/${shipment.id}" />
 										<button class="btn btn-info" onclick="location.href='${link}'">Show
 											Units</button></td>
 
-									<td><c:url var="link"
+									<td class="text-center"><c:url var="link"
 											value="/shipments/${shipment.id}/waybill" />
 										<button class="btn btn-success"
 											onclick="location.href='${link}'">Show Waybill</button></td>

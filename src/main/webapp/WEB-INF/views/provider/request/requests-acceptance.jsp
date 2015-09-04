@@ -12,24 +12,24 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Request Date</th>
-							<th>Details</th>
-							<th>Process Request</th>
+							<th class="text-center">ID</th>
+							<th class="text-center">Request Date</th>
+							<th class="text-center">Details</th>
+							<th class="text-center">Process Request</th>
 						</tr>
 					</thead>
 
 					<tbody>
 
 						<c:forEach items="${requests}" var="request">
-							<tr>
-								<td>${request.id}</td>
-								<td>${request.requestDate}</td>
-								<td><c:url var="link" value="/requests/${request.id}" />
+							<tr >
+								<td class="text-center">${request.id}</td>
+								<td class="text-center">${request.requestDate}</td>
+								<td class="text-center"><c:url var="link" value="/requests/${request.id}" />
 									<button class="btn btn-info" onclick="location.href='${link}'">Show
 										Detalis</button></td>
 
-								<td><c:url var="link"
+								<td class="text-center"><c:url var="link"
 										value="/requests/${request.id}/processing_page" />
 									<button class="btn btn-success"
 										onclick="location.href='${link}'">Process Request</button></td>

@@ -17,12 +17,12 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Module ID</th>
-						<th>Module Name</th>
-						<th>Cost</th>
-						<th>Number Of Units</th>
-						<th>Picture</th>
-						<th>Send A Reply</th>
+						<th class="text-center">Module ID</th>
+						<th class="text-center">Module Name</th>
+						<th class="text-center">Cost</th>
+						<th class="text-center">Number Of Units</th>
+						<th class="text-center">Picture</th>
+						<th class="text-center">Send A Reply</th>
 					</tr>
 				</thead>
 
@@ -30,18 +30,18 @@
 
 					<c:forEach items="${modules}" var="module">
 						<tr id="record${i}">
-							<td>${module.moduleId}</td>
-							<td>${module.moduleName}</td>
-							<td>${module.moduleCost}</td>
-							<td>${module.count}</td>
-							<td><c:if test="${not empty module.image}">
+							<td class="text-center">${module.moduleId}</td>
+							<td class="text-center">${module.moduleName}</td>
+							<td class="text-center">${module.moduleCost}</td>
+							<td class="text-center">${module.count}</td>
+							<td class="text-center"><c:if test="${not empty module.image}">
 									<div class="col-md-4">
 										<img src="data:image/jpeg;base64,${module.image}"
 											class="img-thumbnail">
 									</div>
 								</c:if></td>
 
-							<td><c:url var="link" value="/modules/request/${module.moduleId}"/>
+							<td class="text-center"><c:url var="link" value="/modules/request/${module.moduleId}"/>
 								<div align="center">
 									<button class="btn btn-default"
 										onclick="location.href='${link}'">
