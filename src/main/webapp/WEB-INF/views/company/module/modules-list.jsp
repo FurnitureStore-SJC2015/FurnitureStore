@@ -35,8 +35,8 @@
 							<td class="text-center">${module.moduleCost}</td>
 							<td class="text-center">${module.count}</td>
 							<td class="text-center"><c:if test="${not empty module.image}">
-									<div class="col-md-4">
-										<img src="data:image/jpeg;base64,${module.image}"
+									<div>
+										<img src="data:image/jpeg;base64,${module.image}" width="175px"
 											class="img-thumbnail">
 									</div>
 								</c:if></td>

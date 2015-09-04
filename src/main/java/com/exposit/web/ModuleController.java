@@ -63,13 +63,13 @@ public class ModuleController {
 		return "modules-list";
 	}
 
-	@PreAuthorize("#provider.login==principal.username")
+	//@PreAuthorize("#provider.login==principal.username")
 	@RequestMapping(value = "/provider/{id}", method = RequestMethod.GET)
 	public @ResponseBody List<ModuleDto> getModulesProvider(
-			@PathVariable("id") Provider provider) {
+			@PathVariable("id") Integer providerId) {
 		List<ModuleDto> modules = new ArrayList<ModuleDto>();
 		modules = moduleService.getModulesByProvider(providerService
-				.getProviderById(provider.getId()));
+				.getProviderById(providerId));
 
 		return modules;
 	}
