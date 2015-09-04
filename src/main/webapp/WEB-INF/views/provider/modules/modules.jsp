@@ -98,9 +98,9 @@ function addModule() {
 						<tr id="record${i}">
 							<td>${module.moduleType}</td>
 							<td><c:if test="${not empty module.image}">
-									<div class="col-md-4">
+									<div>
 										<img src="data:image/jpeg;base64,${module.image}"
-											class="img-thumbnail">
+											class="img-thumbnail" width="175px">
 									</div>
 								</c:if></td>
 
